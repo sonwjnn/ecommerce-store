@@ -1,7 +1,7 @@
 import axios from 'axios'
 import queryString from 'query-string'
 
-const baseURL = 'http://localhost:8017/api/v1/'
+const baseURL = 'http://localhost:8017/api/'
 
 const privateClient = axios.create({
   baseURL,
