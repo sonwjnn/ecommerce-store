@@ -8,7 +8,11 @@ export default {
   plugins: [require('tw-elements/dist/plugin.cjs')],
   darkMode: 'class',
   theme: {
-    extend: {}
+    extend: {
+      colors: {
+        primary: '#fb5533'
+      }
+    }
   },
   plugins: []
 }

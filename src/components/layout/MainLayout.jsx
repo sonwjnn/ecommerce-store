@@ -12,6 +12,8 @@ import { setListCarts, setUser } from '../../redux/features/userSlice.js'
 
 // Layout use for all pages
 const MainLayout = () => {
+  const { authModalOpen } = useSelector(state => state.authModal)
+
   // const dispatch = useDispatch()
 
   // const { user } = useSelector(state => state.user)
@@ -57,7 +59,7 @@ const MainLayout = () => {
 
       <div className="flex min-h-screen">
         {/* header */}
-        <Appbar />
+        {!authModalOpen ? <Appbar /> : null}
         {/* header */}
 
         {/* main */}

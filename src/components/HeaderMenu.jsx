@@ -1,6 +1,16 @@
-import React from "react";
+import { useDispatch, useSelector } from 'react-redux'
+import { setAuthModalOpen } from '../redux/features/authModelSlice'
+import { setSignState } from '../redux/features/signStateSlice'
 
+const actionState = {
+  signin: 'signin',
+  signup: 'signup'
+}
 const HeaderMenu = () => {
+  const dispatch = useDispatch()
+  const { user } = useSelector(state => state.user)
+
+  const { signState } = useSelector(state => state.signState)
   return (
     <ul className="nav-list">
       <li className="nav-list-item">
@@ -144,28 +154,56 @@ const HeaderMenu = () => {
                         <li className="nav-list-item nav-list-item--strong nav-list-item--separate">Đăng nhập</li>  */}
       <li className="nav-list-item nav-list-item-user">
         <div className="nav-list-item-user-add"></div>
-        <span className="nav-list-item-user-img-wrap">
-          <img
-            src="src/assets/img/user-avt.jpg"
-            alt="#"
-            className="nav-list-item-user-img"
-          />
-        </span>
-        <span className="nav-list-item-user-name">Nguyễn Lê Hoàng Sơn</span>
-        <ul className="nav-list-item-user-menu">
-          <li className="nav-list-item-user-menu-item">
-            <a href="">Tài khoản của tôi</a>
-          </li>
-          <li className="nav-list-item-user-menu-item">
-            <a href="">Đơn mua</a>
-          </li>
-          <li className="nav-list-item-user-menu-item">
-            <a href="">Đăng xuất</a>
-          </li>
-        </ul>
+
+        {user ? (
+          <>
+            <span className="nav-list-item-user-img-wrap">
+              <img
+                src="src/assets/img/user-avt.jpg"
+                alt="#"
+                className="nav-list-item-user-img"
+              />
+            </span>
+            <span className="nav-list-item-user-name">Nguyễn Lê Hoàng Sơn</span>
+            <ul className="nav-list-item-user-menu">
+              <li className="nav-list-item-user-menu-item">
+                <a href="">Tài khoản của tôi</a>
+              </li>
+              <li className="nav-list-item-user-menu-item">
+                <a href="!#">Đơn mua</a>
+              </li>
+              <li className="nav-list-item-user-menu-item">
+                <a href="!#" onClick={() => dispatch(setAuthModalOpen(true))}>
+                  Đăng xuất
+                </a>
+              </li>
+            </ul>
+          </>
+        ) : (
+          <>
+            <button
+              className="signup-btn hover:text-sky-300 mr-5 "
+              onClick={() => {
+                dispatch(setAuthModalOpen(true))
+                dispatch(setSignState(actionState.signup))
+              }}
+            >
+              Đăng kí
+            </button>
+            <button
+              className="signin-btn hover:text-sky-300 "
+              onClick={() => {
+                dispatch(setAuthModalOpen(true))
+                dispatch(setSignState(actionState.signin))
+              }}
+            >
+              Đăng nhập
+            </button>
+          </>
+        )}
       </li>
     </ul>
-  );
-};
+  )
+}
 
-export default HeaderMenu;
+export default HeaderMenu
