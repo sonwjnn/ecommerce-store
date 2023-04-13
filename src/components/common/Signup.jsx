@@ -58,12 +58,30 @@ const SignupForm = ({ switchAuthState }) => {
         htmlFor="first-name"
         className="block   text-[16px] leading-6 text-gray-900"
       >
-        Tên đăng nhập
+        Tên user
       </label>
-      <div className="mt-2 mb-6">
+      <div className="mt-2 mb-5">
         <input
           type="text"
           name="first-name"
+          placeholder="display name"
+          id="first-name"
+          autoComplete="given-name"
+          className="block w-full border-2 border-gray-300 rounded-md px-5  py-4 text-2xl"
+        />
+      </div>
+
+      <label
+        htmlFor="first-name"
+        className="block   text-[16px] leading-6 text-gray-900"
+      >
+        Tên đăng nhập
+      </label>
+      <div className="mt-2 mb-5">
+        <input
+          type="text"
+          name="first-name"
+          placeholder="user name"
           id="first-name"
           autoComplete="given-name"
           className="block w-full border-2 border-gray-300 rounded-md px-5  py-4 text-2xl"
@@ -76,9 +94,10 @@ const SignupForm = ({ switchAuthState }) => {
       >
         Mật khẩu
       </label>
-      <div className="mt-2 mb-6">
+      <div className="mt-2 mb-5">
         <input
           type="text"
+          placeholder="password"
           name="first-name"
           id="first-name"
           autoComplete="given-name"
@@ -95,6 +114,7 @@ const SignupForm = ({ switchAuthState }) => {
       <div className="mt-2">
         <input
           type="text"
+          placeholder="confirm password"
           name="first-name"
           id="first-name"
           autoComplete="given-name"
@@ -102,7 +122,7 @@ const SignupForm = ({ switchAuthState }) => {
         />
       </div>
 
-      <div className="mt-6 flex flex-col gap-6">
+      <div className="mt-6 flex flex-col gap-4">
         <button
           type="submit"
           className=" w-full uppercase rounded-md bg-primary px-6 py-4 text-[14px] font-semibold text-white shadow-sm hover:brightness-125 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"

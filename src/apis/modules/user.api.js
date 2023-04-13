@@ -8,9 +8,7 @@ const userEndpoints = {
   getInfo: 'permisson/getMaintainUser',
   addUser: 'permisson/add',
   update: 'permisson/user/update',
-  passwordUpdate: 'permisson/user/updatePassword',
-  getCarts: 'permisson/cart/list',
-  addCart: 'permisson/cart/add'
+  passwordUpdate: 'permisson/user/updatePassword'
 }
 
 const userApi = {

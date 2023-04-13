@@ -73,7 +73,7 @@ const AuthModal = () => {
                 </h1>
               </div>
             </div>
-            <div className="w-[400px] h-[486px] bg-white rounded-md py-8 px-12 absolute right-[10%] top-[50%] translate-y-[-59%] ">
+            <div className="w-[400px] h-[492px] bg-white rounded-md py-8 px-12 absolute right-[10%] top-[50%] translate-y-[-59%] ">
               {action === actionState.signin && (
                 <SigninForm
                   switchAuthState={() => switchAuthState(actionState.signup)}
@@ -86,7 +86,7 @@ const AuthModal = () => {
                 />
               )}
 
-              <div className="absolute right-12 bottom-6 mt-4">
+              {/* <div className="absolute right-12 bottom-6 mt-4">
                 <button
                   onClick={onHandleClose}
                   className="relative block p-8 w-6 h-6 border-primary text-primary font-bold rounded-md border-2"
@@ -106,7 +106,7 @@ const AuthModal = () => {
                     />
                   </svg>
                 </button>
-              </div>
+              </div> */}
             </div>
           </main>
         </div>

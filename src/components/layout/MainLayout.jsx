@@ -6,46 +6,44 @@ import AuthModal from '../common/AuthModal.jsx'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
-// import userApi from '../../api/modules/user.api.js'
-// import favoriteApi from '../../api/modules/favorite.api'
+import userApi from '../../apis/modules/user.api.js'
+import cartApi from '../../apis/modules/cart.api'
 import { setListCarts, setUser } from '../../redux/features/userSlice.js'
 
 // Layout use for all pages
 const MainLayout = () => {
   const { authModalOpen } = useSelector(state => state.authModal)
 
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
-  // const { user } = useSelector(state => state.user)
-  // const { themeMode } = useSelector(state => state.themeMode)
+  const { user } = useSelector(state => state.user)
 
-  // //get user from redux store with JWT
-  // useEffect(() => {
-  //   const authUser = async () => {
-  //     const { response, err } = await userApi.getInfo()
+  //get user from redux store with JWT
+  useEffect(() => {
+    const authUser = async () => {
+      const { response, err } = await userApi.getInfo()
 
-  //     if (response) dispatch(setUser(response))
-  //     if (err) dispatch(setUser(null))
-  //   }
+      if (response) dispatch(setUser(response))
+      if (err) dispatch(setUser(null))
+    }
 
-  //   authUser()
-  // }, [dispatch])
+    authUser()
+  }, [dispatch])
 
-  // useEffect(() => {
-  //   const getProducts = async () => {
-  //     const { response, err } = await productApi.getList()
-  //     if (response) dispatch(setListProducts(response))
+  useEffect(() => {
+    const getCarts = async () => {
+      // const { response, err } = await productApi.getList()
+      if (response) dispatch(setListCarts(response))
 
-  //     if (err) toast.error(err.message)
-  //   }
+      if (err) toast.error(err.message)
+    }
 
-  //   if (user) {
-  //     localStorage.setItem('theme', themeMode)
-  //     getProducts()
-  //   }
+    if (user) {
+      getCarts()
+    }
 
-  //   if (!user) dispatch(setListProducts([]))
-  // }, [user, dispatch])
+    if (!user) dispatch(setListCarts([]))
+  }, [user, dispatch])
 
   return (
     <>

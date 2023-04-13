@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux'
+import { useState } from 'react'
 import { setAuthModalOpen } from '../redux/features/authModelSlice'
 import { setSignState } from '../redux/features/signStateSlice'
+import { setUser } from '../redux/features/userSlice'
 
 const actionState = {
   signin: 'signin',
@@ -9,8 +11,8 @@ const actionState = {
 const HeaderMenu = () => {
   const dispatch = useDispatch()
   const { user } = useSelector(state => state.user)
-
-  const { signState } = useSelector(state => state.signState)
+  const [anchorEl, setAnchorEl] = useState(null)
+  const toggleMenu = e => setAnchorEl(e.currentTarget)
   return (
     <ul className="nav-list">
       <li className="nav-list-item">
@@ -173,7 +175,7 @@ const HeaderMenu = () => {
                 <a href="!#">Đơn mua</a>
               </li>
               <li className="nav-list-item-user-menu-item">
-                <a href="!#" onClick={() => dispatch(setAuthModalOpen(true))}>
+                <a href="!#" onClick={() => dispatch(setUser(null))}>
                   Đăng xuất
                 </a>
               </li>

@@ -27,9 +27,9 @@ const SigninForm = ({ switchAuthState }) => {
     }),
     onSubmit: async values => {
       setErrorMessage(undefined)
-      setIsLoginRequest(true)
+      // setIsLoginRequest(true)
       const { response, err } = await userApi.signin(values)
-      setIsLoginRequest(false)
+      // setIsLoginRequest(false)
 
       if (response) {
         signinForm.resetForm()
@@ -41,6 +41,7 @@ const SigninForm = ({ switchAuthState }) => {
       if (err) setErrorMessage(err.message)
     }
   })
+  console.log(signinForm.values.username)
   return (
     <form onSubmit={signinForm.handleSubmit}>
       <h1 className="text-[22px] mb-6">Đăng Nhập</h1>
@@ -51,19 +52,21 @@ const SigninForm = ({ switchAuthState }) => {
       >
         Tên đăng nhập
       </label>
-      <div className="mt-2 mb-6">
+      <div className="mt-2 mb-5">
         <input
           type="text"
           name="first-name"
+          placeholder="username"
           id="first-name"
-          autoComplete="given-name"
           className="block w-full border-2 border-gray-300 rounded-md px-5  py-4 text-2xl"
+          value={signinForm.values.username}
+          onChange={signinForm.handleChange}
         />
       </div>
 
       <label
         htmlFor="first-name"
-        className="block   text-[16px] leading-6 text-gray-900 "
+        className="block text-[16px] leading-6 text-gray-900 "
       >
         Mật khẩu
       </label>
@@ -71,13 +74,16 @@ const SigninForm = ({ switchAuthState }) => {
         <input
           type="text"
           name="first-name"
+          placeholder="password"
           id="first-name"
           autoComplete="given-name"
           className="block w-full border-2 border-gray-300 rounded-md px-5 py-4 text-2xl"
+          value={signinForm.values.password}
+          onChange={signinForm.handleChange}
         />
       </div>
 
-      <div className="mt-6 flex flex-col gap-6">
+      <div className="mt-6 flex flex-col gap-4">
         <button
           type="submit"
           className=" w-full uppercase rounded-md bg-primary px-6 py-4 text-[14px] font-semibold text-white shadow-sm hover:brightness-125 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
@@ -93,6 +99,8 @@ const SigninForm = ({ switchAuthState }) => {
           đăng kí
         </button>
       </div>
+
+      {errorMessage && errorMessage}
     </form>
   )
 }
