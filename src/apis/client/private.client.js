@@ -1,7 +1,7 @@
 import axios from 'axios'
 import queryString from 'query-string'
 
-const baseURL = 'http://localhost:8017/api/'
+const baseURL = 'http://localhost:8017/'
 
 const privateClient = axios.create({
   baseURL,
@@ -14,15 +14,15 @@ privateClient.interceptors.request.use(async config => {
   return {
     ...config,
     headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('actkn')}`
+      'Content-Type': 'application/json'
+      // Authorization: `Bearer ${localStorage.getItem('actkn')}`
     }
   }
 })
 
 privateClient.interceptors.response.use(
   response => {
-    if (response && response.data) return response.data
+    if (response && response.data && response.kq) return response.data
     return response
   },
   err => {

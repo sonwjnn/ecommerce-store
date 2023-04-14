@@ -6,6 +6,7 @@ import ProductSearch from '../pages/ProductSearch'
 import PasswordUpdate from '../pages/PasswordUpdate'
 import ReviewList from '../pages/ReviewList'
 import ProtectedPage from '../components/common/ProtectedPage'
+import AuthUser from '../pages/AuthUser'
 
 export const routesGen = {
   home: '/',
@@ -64,6 +65,14 @@ const routes = [
   {
     path: '/:productType/:productId',
     element: <ProductDetail />
+  },
+  {
+    path: '/authUser/signin',
+    element: <AuthUser signin={'signin'} />
+  },
+  {
+    path: '/authUser/signup',
+    element: <AuthUser signup={'signup'} />
   }
 ]
 

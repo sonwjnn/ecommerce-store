@@ -1,7 +1,10 @@
-import React from 'react'
-
+import BoardContent from '../components/BoardContent'
 const HomePage = () => {
-  return <div>HomePage</div>
+  return (
+    <>
+      <BoardContent />
+    </>
+  )
 }
 
 export default HomePage

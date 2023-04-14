@@ -2,13 +2,13 @@ import privateClient from '../client/private.client.js'
 import publicClient from '../client/public.client.js'
 
 const userEndpoints = {
-  signin: 'permisson/processLogin',
-  signout: 'permisson/logout',
-  signup: 'user/signup',
-  getInfo: 'permisson/getMaintainUser',
-  addUser: 'permisson/add',
-  update: 'permisson/user/update',
-  passwordUpdate: 'permisson/user/updatePassword'
+  signin: 'admin/processLogin',
+  signout: 'permission/logout',
+  signup: 'users/signup',
+  getInfo: 'admin/users/showDetail',
+  addUser: 'permission/add',
+  update: 'permission/users/update',
+  passwordUpdate: 'permission/users/updatePassword'
 }
 
 const userApi = {
@@ -18,7 +18,6 @@ const userApi = {
         username,
         password
       })
-
       return { response }
     } catch (error) {
       return { error }

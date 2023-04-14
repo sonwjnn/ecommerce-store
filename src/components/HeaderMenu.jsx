@@ -3,12 +3,18 @@ import { useState } from 'react'
 import { setAuthModalOpen } from '../redux/features/authModelSlice'
 import { setSignState } from '../redux/features/signStateSlice'
 import { setUser } from '../redux/features/userSlice'
+import { useNavigate } from 'react-router-dom'
 
 const actionState = {
   signin: 'signin',
   signup: 'signup'
 }
 const HeaderMenu = () => {
+  const history = useNavigate()
+
+  const authUserPage = value => {
+    history(`/authUser/${value}`)
+  }
   const dispatch = useDispatch()
   const { user } = useSelector(state => state.user)
   const [anchorEl, setAnchorEl] = useState(null)
@@ -166,18 +172,20 @@ const HeaderMenu = () => {
                 className="nav-list-item-user-img"
               />
             </span>
-            <span className="nav-list-item-user-name">Nguyễn Lê Hoàng Sơn</span>
+            <span className="nav-list-item-user-name">
+              {user.name ? user.name : 'null'}
+            </span>
             <ul className="nav-list-item-user-menu">
               <li className="nav-list-item-user-menu-item">
-                <a href="">Tài khoản của tôi</a>
+                <button>Tài khoản của tôi</button>
               </li>
               <li className="nav-list-item-user-menu-item">
-                <a href="!#">Đơn mua</a>
+                <button href="!#">Đơn mua</button>
               </li>
               <li className="nav-list-item-user-menu-item">
-                <a href="!#" onClick={() => dispatch(setUser(null))}>
+                <button href="!#" onClick={() => dispatch(setUser(null))}>
                   Đăng xuất
-                </a>
+                </button>
               </li>
             </ul>
           </>
@@ -186,6 +194,7 @@ const HeaderMenu = () => {
             <button
               className="signup-btn hover:text-sky-300 mr-5 "
               onClick={() => {
+                authUserPage(actionState.signup)
                 dispatch(setAuthModalOpen(true))
                 dispatch(setSignState(actionState.signup))
               }}
@@ -195,6 +204,7 @@ const HeaderMenu = () => {
             <button
               className="signin-btn hover:text-sky-300 "
               onClick={() => {
+                authUserPage(actionState.signin)
                 dispatch(setAuthModalOpen(true))
                 dispatch(setSignState(actionState.signin))
               }}

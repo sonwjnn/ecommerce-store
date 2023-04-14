@@ -6,12 +6,15 @@ import * as Yup from 'yup'
 // import userApi from '../../api/modules/user.api'
 import { setAuthModalOpen } from '../../redux/features/authModelSlice'
 import { setUser } from '../../redux/features/userSlice'
-
+import { useNavigate } from 'react-router-dom'
 const SignupForm = ({ switchAuthState }) => {
   const dispatch = useDispatch()
   const [isLoginRequest, setIsLoginRequest] = useState(false)
   const [errorMessage, setErrorMessage] = useState()
-
+  const history = useNavigate()
+  const authUserPage = value => {
+    history(`/authUser/${value}`)
+  }
   const signupForm = useFormik({
     initialValues: {
       password: '',
@@ -80,9 +83,9 @@ const SignupForm = ({ switchAuthState }) => {
       <div className="mt-2 mb-5">
         <input
           type="text"
-          name="first-name"
+          name="Username"
           placeholder="user name"
-          id="first-name"
+          id="Username"
           autoComplete="given-name"
           className="block w-full border-2 border-gray-300 rounded-md px-5  py-4 text-2xl"
         />
@@ -96,11 +99,10 @@ const SignupForm = ({ switchAuthState }) => {
       </label>
       <div className="mt-2 mb-5">
         <input
-          type="text"
+          type="password"
           placeholder="password"
-          name="first-name"
-          id="first-name"
-          autoComplete="given-name"
+          name="Password"
+          id="Password"
           className="block w-full border-2 border-gray-300 rounded-md px-5 py-4 text-2xl"
         />
       </div>
@@ -113,11 +115,10 @@ const SignupForm = ({ switchAuthState }) => {
       </label>
       <div className="mt-2">
         <input
-          type="text"
+          type="password"
           placeholder="confirm password"
-          name="first-name"
-          id="first-name"
-          autoComplete="given-name"
+          name="confirm-password"
+          id="confirm-password"
           className="block w-full border-2 border-gray-300 rounded-md px-5 py-4 text-2xl"
         />
       </div>
@@ -133,7 +134,7 @@ const SignupForm = ({ switchAuthState }) => {
         <button
           type="button"
           className=" w-full uppercase rounded-md bg-white border-primary border-2 px-6 py-3 text-[14px] font-semibold text-primary shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          onClick={() => switchAuthState('signin')}
+          onClick={() => authUserPage('signin')}
         >
           đăng nhập
         </button>

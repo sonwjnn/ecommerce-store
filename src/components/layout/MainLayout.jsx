@@ -2,7 +2,6 @@ import { Outlet } from 'react-router-dom'
 import GlobalLoading from '../common/GlobalLoading.jsx'
 import Footer from '../common/Footer.jsx'
 import Appbar from '../common/Appbar.jsx'
-import AuthModal from '../common/AuthModal.jsx'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
@@ -17,32 +16,28 @@ const MainLayout = () => {
   const dispatch = useDispatch()
 
   const { user } = useSelector(state => state.user)
-
   //get user from redux store with JWT
   useEffect(() => {
     const authUser = async () => {
       const { response, err } = await userApi.getInfo()
 
-      if (response) dispatch(setUser(response))
-      if (err) dispatch(setUser(null))
+      if (response.kq) dispatch(setUser(response))
+      else dispatch(setUser(null))
     }
 
     authUser()
   }, [dispatch])
 
   useEffect(() => {
-    const getCarts = async () => {
-      // const { response, err } = await productApi.getList()
-      if (response) dispatch(setListCarts(response))
-
-      if (err) toast.error(err.message)
-    }
-
-    if (user) {
-      getCarts()
-    }
-
-    if (!user) dispatch(setListCarts([]))
+    // const getCarts = async () => {
+    //   const { response, err } = await productApi.getList()
+    //   if (response) dispatch(setListCarts(response))
+    //   if (err) toast.error(err.message)
+    // }
+    // if (user) {
+    //   getCarts()
+    // }
+    // if (!user) dispatch(setListCarts([]))
   }, [user, dispatch])
 
   return (
@@ -52,7 +47,7 @@ const MainLayout = () => {
       {/* global loading*/}
 
       {/* login loading*/}
-      <AuthModal />
+      {/* <AuthModal /> */}
       {/* login loading*/}
 
       <div className="flex min-h-screen">

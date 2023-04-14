@@ -315,7 +315,7 @@
   width: 200px;
   position: absolute;
   right: 0;
-  top: 130%;
+  top: 93%;
   background-color: #fff;
   border-radius: 2px;
   border: 2px solid #f3f3f3;
@@ -350,10 +350,12 @@
   color: #333;
   display: block;
   padding: 12px;
+  transition: 0.3s ease;
 }
 
 .language-item:hover {
-  color: #f7422e;
+  background-color: #fafafa;
+  color: #00bfa5;
 }
 
 .nav-list-item-user {
@@ -380,7 +382,7 @@
 
 .nav-list-item-user-menu {
   position: absolute;
-  top: calc(100% + 8px);
+  top: calc(76% + 8px);
   right: 0;
   background-color: var(--white-color);
   color: var(--text-color);
@@ -418,17 +420,19 @@
   font-size: 1.4rem;
 }
 
-.nav-list-item-user-menu-item a:hover {
+.nav-list-item-user-menu-item button:hover {
   color: #00bfa5;
   background-color: #fafafa;
 }
 
-.nav-list-item-user-menu-item a {
+.nav-list-item-user-menu-item button {
   width: 100%;
   padding: 8px 16px;
   text-decoration: none;
   color: var(--text-color);
   display: inline-block;
+  text-align: left;
+  transition: 0.3s ease;
 }
 
 .auth-form {
