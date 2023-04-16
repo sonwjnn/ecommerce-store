@@ -10,7 +10,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#fb5533'
+        primary: '#fb5533',
+        bg_page: '#f5f5f5'
       }
     }
   },

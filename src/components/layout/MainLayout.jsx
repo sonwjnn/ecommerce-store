@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom'
 import GlobalLoading from '../common/GlobalLoading.jsx'
 import Footer from '../common/Footer.jsx'
-import Appbar from '../common/Appbar.jsx'
+import Appbar from '../common/AppBar.jsx'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
@@ -50,9 +50,9 @@ const MainLayout = () => {
       {/* <AuthModal /> */}
       {/* login loading*/}
 
-      <div className="flex min-h-screen">
+      <div className="flex flex-col min-h-screen">
         {/* header */}
-        {!authModalOpen ? <Appbar /> : null}
+        <Appbar />
         {/* header */}
 
         {/* main */}

@@ -9,6 +9,7 @@ const categoryApi = {
   getList: async () => {
     try {
       const response = await privateClient.get(categoryEndpoints.list)
+      console.log({ response })
       return { response }
     } catch (error) {
       return { error }

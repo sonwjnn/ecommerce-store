@@ -5,7 +5,7 @@ import HeaderNavigate from '../HeaderNavigate'
 const AppBar = () => {
   return (
     <>
-      <div className="header">
+      <div className="header w-full fixed">
         <div className="grid wide">
           <HeaderNavigate />
           <SearchMain />

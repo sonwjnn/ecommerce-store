@@ -11,7 +11,6 @@ const Category = ({ productCategory }) => {
   useEffect(() => {
     const getCategories = async () => {
       const { response, err } = await categoryApi.getList()
-      console.log({ response })
       if (response.kq) setCategories(response.data)
       if (response.msg) toast.error(response.msg)
       dispatch(setGlobalLoading(false))

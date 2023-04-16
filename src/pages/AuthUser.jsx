@@ -31,12 +31,26 @@ const AuthUser = ({ signin, signup }) => {
     }
   }, [authModalOpen])
 
+  useEffect(() => {
+    const handleHeader = () => {
+      const header = document.querySelector('.header')
+      if (header.classList.contains('fixed')) {
+        header.classList.remove('fixed')
+        header.classList.add('hidden')
+      } else if (header.classList.contains('relative')) {
+        header.classList.remove('relative')
+        header.classList.add('hidden')
+      }
+    }
+    handleHeader()
+  }, [])
+
   const onHandleClose = () => dispatch(setAuthModalOpen(false))
 
   const switchAuthState = state => setAction(state)
   return (
     <div className="absolute h-screen w-screen overflow-hidden top-0 left-0 right-0 bottom-0 ">
-      <header className="flex items-center justify-between py-3 px-24 bg-slate-100 h-[85px]">
+      <header className="flex items-center justify-between py-3 px-24 bg-white h-[85px]">
         <div className="flex ">
           <button onClick={toHomePage} className=" inline-block max-w-[200px]">
             <svg
@@ -55,7 +69,7 @@ const AuthUser = ({ signin, signup }) => {
           Bạn cần giúp đỡ ?
         </div>
       </header>
-      <main className="bg-primary h-full relative">
+      <main className="bg-primary h-full relative min-w-[1200px]">
         <div className="flex ">
           <div className="left-[10%] top-[22%] absolute ">
             <a href="!#" className=" inline-block pointer-events-none">
