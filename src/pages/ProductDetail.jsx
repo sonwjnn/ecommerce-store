@@ -2,6 +2,7 @@ import DetailImage from '../components/common/DetailImage'
 import imgDemo from '../assets/img/product-case-2.webp'
 import { useEffect, useState } from 'react'
 import { setAuthModalOpen } from '../redux/features/authModelSlice'
+import { relative } from '../utilities/constants'
 const cartState = {
   increase: 'increase',
   decrease: 'decrease'
@@ -33,14 +34,8 @@ const ProductDetail = () => {
   ]
 
   useEffect(() => {
-    const handleHeader = () => {
-      const header = document.querySelector('.header')
-      if (header.classList.contains('fixed')) {
-        header.classList.remove('fixed')
-        header.classList.add('relative')
-      }
-    }
-    handleHeader()
+    const header = document.querySelector('.header')
+    relative(header)
   }, [])
 
   return (

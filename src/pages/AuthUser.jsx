@@ -5,6 +5,7 @@ import { setAuthModalOpen } from '../redux/features/authModelSlice'
 import SigninForm from '../components/common/SigninForm'
 import SignupForm from '../components/common/Signup'
 import { useNavigate } from 'react-router-dom'
+import { hidden } from '../utilities/constants'
 
 const actionState = {
   signin: 'signin',
@@ -32,17 +33,8 @@ const AuthUser = ({ signin, signup }) => {
   }, [authModalOpen])
 
   useEffect(() => {
-    const handleHeader = () => {
-      const header = document.querySelector('.header')
-      if (header.classList.contains('fixed')) {
-        header.classList.remove('fixed')
-        header.classList.add('hidden')
-      } else if (header.classList.contains('relative')) {
-        header.classList.remove('relative')
-        header.classList.add('hidden')
-      }
-    }
-    handleHeader()
+    const header = document.querySelector('.header')
+    hidden(header)
   }, [])
 
   const onHandleClose = () => dispatch(setAuthModalOpen(false))
@@ -86,7 +78,7 @@ const AuthUser = ({ signin, signup }) => {
             </h1>
           </div>
         </div>
-        <div className="w-[400px] h-[492px] bg-white rounded-md py-8 px-12 absolute right-[10%] top-[50%] translate-y-[-59%] ">
+        <div className="w-[400px] h-[492px] bg-white rounded-md py-6 px-12 absolute right-[10%] top-[50%] translate-y-[-59%] ">
           {signin && (
             <SigninForm
               switchAuthState={() => switchAuthState(actionState.signup)}
