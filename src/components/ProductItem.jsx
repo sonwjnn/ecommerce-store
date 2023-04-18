@@ -1,10 +1,21 @@
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
 const ProductItem = props => {
-  const { title, origin, info, date, price, imageName } = props
+  const { id, title, origin, info, date, price, imageName, cateName } = props
+  const urlImgage = `/src/assets/img/products/${imageName}`
+
+  const history = useNavigate()
+
+  const productDetail = () => {
+    history(`products/${cateName}/${id}`)
+  }
   return (
     <div className="col l-2-4 c-6">
-      <div className="home-product-item cursor-pointer">
+      <div className="home-product-item cursor-pointer" onClick={productDetail}>
         <div
-          className={`home-product-item__img bg-[url('/src/assets/img/products/${imageName}')]`}
+          className="home-product-item__img bg-no-repeat bg-center bg-cover"
+          style={{ backgroundImage: `url(${urlImgage})` }}
         ></div>
         <h2 className="home-product-item__title">{title}</h2>
         <div className="home-product-item__tag-red">Mua 3 & giảm 5%</div>

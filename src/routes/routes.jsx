@@ -7,6 +7,8 @@ import PasswordUpdate from '../pages/PasswordUpdate'
 import ReviewList from '../pages/ReviewList'
 import ProtectedPage from '../components/common/ProtectedPage'
 import AuthUser from '../pages/AuthUser'
+import { useEffect } from 'react'
+import BoardContent from '../components/BoardContent'
 
 export const routesGen = {
   home: '/',
@@ -18,6 +20,22 @@ export const routesGen = {
   reviewList: '/reviews',
   passwordUpdate: 'password-update'
 }
+
+export const productType = [
+  'Tất cả sản phẩm',
+  'Chuột + Lót chuột',
+  'Màn hình',
+  'Tai nghe + Loa',
+  'Laptop',
+  'Laptop gaming',
+  'Apple',
+  'Bàn phím'
+]
+
+const pathProduct = productType.map((item, index) => ({
+  path: `products/${item}`,
+  element: <BoardContent productType={item} />
+}))
 
 const routes = [
   {
@@ -63,7 +81,7 @@ const routes = [
     element: <ProductList />
   },
   {
-    path: '/:productType/:productId',
+    path: 'products/:cateType/:productId',
     element: <ProductDetail />
   },
   {
@@ -73,7 +91,8 @@ const routes = [
   {
     path: '/authUser/signup',
     element: <AuthUser signup={'signup'} />
-  }
+  },
+  ...pathProduct
 ]
 
 export default routes

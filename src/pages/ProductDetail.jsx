@@ -1,15 +1,52 @@
 import DetailImage from '../components/common/DetailImage'
 import imgDemo from '../assets/img/product-case-2.webp'
-import { useEffect, useState } from 'react'
-import { setAuthModalOpen } from '../redux/features/authModelSlice'
 import { relative } from '../utilities/constants'
+
+import { useEffect, useState, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import productApi from '../apis/modules/product.api'
+import { setGlobalLoading } from '../redux/features/globalLoadingSlice'
 const cartState = {
   increase: 'increase',
   decrease: 'decrease'
 }
 
 const ProductDetail = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [cartValue, setCartValue] = useState(1)
+  const { cateType, productId } = useParams()
+  const [product, setProduct] = useState([])
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+    const getProduct = async () => {
+      dispatch(setGlobalLoading(true))
+      const { response, err } = await productApi.getDetail({
+        productId
+      })
+      dispatch(setGlobalLoading(false))
+
+      if (response) {
+        setProduct(response)
+        // setIsFavorite(response.isFavorite)
+      }
+
+      if (err) toast.error(err.message)
+    }
+
+    getProduct()
+  }, [cateType, productId, dispatch])
+
+  useEffect(() => {
+    const header = document.querySelector('.header')
+
+    relative(header)
+  }, [])
+
   const handleValueCart = state => {
     if (cartState.increase == state) {
       setCartValue(cartValue + 1)
@@ -33,10 +70,22 @@ const ProductDetail = () => {
     'có ảnh / video (3)'
   ]
 
-  useEffect(() => {
-    const header = document.querySelector('.header')
-    relative(header)
-  }, [])
+  let realPrice =
+    product.price &&
+    (+product.price * 2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+  let price =
+    product.price && product.price.replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+
+  const {
+    title = product.name,
+    imageName = product.imageName,
+    info = product.info,
+    date = product.dateOfM,
+    origin = product.origin,
+    cateName = product.cateName
+  } = product
+
+  const urlImage = `/src/assets/img/products/${imageName}`
 
   return (
     <div className="bg-bg_page px-[136px] py-[56px] min-w-[1220px] h-full">
@@ -46,15 +95,15 @@ const ProductDetail = () => {
             <div
               className="pt-[450px] bg-center bg-cover m-1.5"
               style={{
-                backgroundImage: `url(${imgDemo})`
+                backgroundImage: `url(${urlImage})`
               }}
             ></div>
 
             <div className="flex gap-4 overflow-x-scroll ">
-              <DetailImage />
-              <DetailImage />
-              <DetailImage />
-              <DetailImage />
+              <DetailImage urlImage={urlImage} />
+              <DetailImage urlImage={urlImage} />
+              <DetailImage urlImage={urlImage} />
+              <DetailImage urlImage={urlImage} />
             </div>
 
             <div className="p-4 flex text-2xl items-center justify-center">
@@ -86,10 +135,7 @@ const ProductDetail = () => {
                 Yêu thích
               </span>
 
-              <span className="text-[20px]">
-                Bình Giữ Nhiệt Cao Cấp 500ML Lõi Inox 304 Tặng Kèm 2 Cốc Cách
-                Nhiệt, Fullbox Làm Quà Tặng Sang Trọng
-              </span>
+              <span className="text-[20px]">{title}</span>
 
               <div className="flex gap-4">
                 <span className="flex relative items-center border-right-ab after:right-[-2rem]">
@@ -126,11 +172,11 @@ const ProductDetail = () => {
             <div className="p-6 bg-[#fafafa] mt-5">
               <div className="flex gap-4">
                 <span className="text-[16px] line-through font-normal text-neutral-400">
-                  50.000 - 165.000
+                  {realPrice}
                 </span>
 
-                <span className="text-5xl line-through font-normal text-primary">
-                  50.000 - 100.000
+                <span className="text-5xl font-normal text-primary">
+                  {price}
                 </span>
 
                 <div className="flex items-center">
@@ -349,7 +395,7 @@ const ProductDetail = () => {
                   danh mục
                 </span>
                 <span className=" text-blue-600 font-normal text-[14px]">
-                  shopee {'>'} linh kiện điện tử {'>'} case máy tính
+                  shopee {'>'} {cateName}
                 </span>
               </div>
 
@@ -378,17 +424,7 @@ const ProductDetail = () => {
               </div>
 
               <div className="flex gap-4 capitalize px-6 py-5">
-                <span className=" text-gray-600 font-normal text-[14px]">
-                  ÁO PHÔNG 3158, đa dạng hình siêu xinh dành cho các nàng đây
-                  nè, chất áo cotton khô siêu đẹp. Sản phẩm: Áo thun cotton
-                  unisex. Chất liệu: Thun Cotton khô, dày mịn, co giãn tốt, thấm
-                  hút mồ hôi. Áo có rất nhiều màu: Đen, trắng, hồng, nâu, xám,
-                  xanh dương, rêu, xanh than, nâu, vàng, ... Các bạn thích màu
-                  nào vui lòng inbox cho shop nhé! SHOP IN THEO YÊU CẦU: Cung
-                  cấp và gia công các sản phẩm in theo yêu cầu như: áo thời
-                  trang các mùa, áo nhóm BTS, Blackpink, Twice, bigbang,... Kết
-                  bạn zalo để được hỗ trợ nhanh nhất 0389973018
-                </span>
+                <div dangerouslySetInnerHTML={{ __html: info }} />
               </div>
             </div>
           </div>

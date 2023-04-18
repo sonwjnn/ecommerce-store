@@ -3,10 +3,11 @@ import { useDispatch } from 'react-redux'
 import categoryApi from '../apis/modules/category.api'
 import { setGlobalLoading } from '../redux/features/globalLoadingSlice'
 import { toast } from 'react-toastify'
+import { Link } from 'react-router-dom'
+import { productType } from '../routes/routes'
 
 const Category = ({ productCategory }) => {
   const dispatch = useDispatch()
-
   const [categories, setCategories] = useState([])
 
   useEffect(() => {
@@ -21,6 +22,8 @@ const Category = ({ productCategory }) => {
     getCategories()
   }, [productCategory, dispatch])
 
+  useEffect(() => {}, [])
+
   return (
     <>
       <nav className="category">
@@ -28,7 +31,12 @@ const Category = ({ productCategory }) => {
         <ul className="category-list">
           {categories.map((cate, index) => (
             <li className="category-item" key={cate._id}>
-              <button className="category-item__link">{cate.name}</button>
+              <Link
+                to={`/products/${productType[index]}`}
+                className="category-item__link"
+              >
+                {cate.name}
+              </Link>
             </li>
           ))}
         </ul>

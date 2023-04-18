@@ -1105,6 +1105,11 @@
   color: var(--primary-color);
 }
 
+.category-item__link.active {
+  right: -4px;
+  color: var(--primary-color);
+}
+
 /* Mobile Category */
 .mobile-category {
   display: none;

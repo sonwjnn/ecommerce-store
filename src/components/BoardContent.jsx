@@ -5,7 +5,7 @@ import ProductList from './ProductList'
 import Pagination from './Pagination'
 import productConfigs from '../configs/product.configs'
 
-const BoardContent = () => {
+const BoardContent = ({ productType }) => {
   return (
     <div className="app__container">
       <div className="grid wide">
@@ -17,7 +17,7 @@ const BoardContent = () => {
           <div className="col l-10 c-12">
             <BoardBar />
 
-            <ProductList />
+            <ProductList productType={productType} />
 
             <Pagination />
           </div>

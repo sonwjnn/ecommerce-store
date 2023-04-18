@@ -20,6 +20,9 @@ const styleHeaderSwitch = {
     if (header.classList.contains('hidden')) {
       header.classList.remove('hidden')
       header.classList.add('fixed')
+    } else if (header.classList.contains('relative')) {
+      header.classList.remove('relative')
+      header.classList.add('fixed')
     }
   }
 }
