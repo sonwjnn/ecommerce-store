@@ -1,26 +1,19 @@
-import React from 'react'
-
-const ProductItem = () => {
+const ProductItem = props => {
+  const { title, origin, info, date, price, imageName } = props
   return (
     <div className="col l-2-4 c-6">
-      <div className="home-product-item">
-        <div className="home-product-item__img"></div>
-        <h2 className="home-product-item__title">
-          Best Of Custom PC Gaming Computer Case 2020
-        </h2>
+      <div className="home-product-item cursor-pointer">
+        <div
+          className={`home-product-item__img bg-[url('/src/assets/img/products/${imageName}')]`}
+        ></div>
+        <h2 className="home-product-item__title">{title}</h2>
         <div className="home-product-item__tag-red">Mua 3 & giảm 5%</div>
         <div className="home-product-item__price">
-          <span className="home-product-item__real-price">
-            <a href="" className="currency">
-              đ
-            </a>
-            6.898.000
-          </span>
           <span className="home-product-item__sale-price">
             <a href="" className="currency">
               đ
             </a>
-            5.555.555
+            {price.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
           </span>
           <span className="home-product-item__freeship">
             <svg

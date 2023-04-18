@@ -17,7 +17,7 @@ const BoardContent = () => {
           <div className="col l-10 c-12">
             <BoardBar />
 
-            {/* <ProductList /> */}
+            <ProductList />
 
             <Pagination />
           </div>
