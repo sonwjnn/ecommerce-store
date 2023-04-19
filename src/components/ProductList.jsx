@@ -1,20 +1,25 @@
 import ProductItem from './ProductItem'
 import productApi from '../apis/modules/product.api'
 import { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setGlobalLoading } from '../redux/features/globalLoadingSlice'
 import { toast } from 'react-toastify'
-import { productType } from '../routes/routes'
-import { useLocation } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { cloneDeep } from 'lodash'
-const ProductList = ({ productType }) => {
+import { setProductsStore } from '../redux/features/productSlice'
+const ProductList = () => {
   const dispatch = useDispatch()
-  const location = useLocation()
+  const { productType } = useParams()
+  const { productsStore } = useSelector(state => state.products)
+
   const [products, setProducts] = useState([])
+
   useEffect(() => {
     const getProducts = async () => {
       const { response, err } = await productApi.getList()
-      if (response.kq) setProducts(response.msg)
+      if (response.kq) {
+        setProducts(response.msg)
+      }
       // if (response.msg) toast.error(response.msg)
     }
 
@@ -34,35 +39,40 @@ const ProductList = ({ productType }) => {
         cate.classList.toggle('active')
       })
     })
-  }, [location])
+  }, [productType])
 
   useEffect(() => {
-    let cloneProduct = cloneDeep(products)
-
-    let cateFilter = document.querySelector('.category-item__link.active')
-
-    cloneProduct.filter(
-      (item, index) => item.cateName === cateFilter.textContent
-    )
-  }, [location])
+    window.scrollTo(0, 0)
+    if (products.length) {
+      dispatch(
+        setProductsStore(
+          cloneDeep(products).filter(
+            (item, index) => item.cateName === productType
+          )
+        )
+      )
+    }
+  }, [dispatch, productType])
 
   return (
     <div className="home-product home-product--spacing-bottom">
       <div className="row sm-gutter">
         {/* <!-- Product item --> */}
-        {cloneProduct.map((product, index) => (
-          <ProductItem
-            key={product._id}
-            id={product._id}
-            title={product.name}
-            price={product.price}
-            imageName={product.imageName}
-            info={product.info}
-            date={product.dateOfM}
-            origin={product.origin}
-            cateName={product.cateName}
-          />
-        ))}
+        {(productsStore.length ? productsStore : products).map(
+          (product, index) => (
+            <ProductItem
+              key={product._id}
+              id={product._id}
+              title={product.name}
+              price={product.price}
+              imageName={product.imageName}
+              info={product.info}
+              date={product.dateOfM}
+              origin={product.origin}
+              cateName={product.cateName}
+            />
+          )
+        )}
       </div>
     </div>
   )

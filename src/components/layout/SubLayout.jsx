@@ -1,10 +1,10 @@
-import Category from './Category'
-import BoardBar from './BoardBar'
-import ProductList from './ProductList'
-import Pagination from './Pagination'
-import productConfigs from '../configs/product.configs'
+import Category from '../Category'
+import BoardBar from '../BoardBar'
+import Pagination from '../Pagination'
+import productConfigs from '../../configs/product.configs'
+import { Outlet } from 'react-router-dom'
 
-const BoardContent = () => {
+const SubLayout = ({ children }) => {
   return (
     <div className="app__container">
       <div className="grid wide">
@@ -16,8 +16,8 @@ const BoardContent = () => {
           <div className="col l-10 c-12">
             <BoardBar />
 
-            <ProductList />
-
+            {/* <ProductList /> */}
+            {children}
             <Pagination />
           </div>
         </div>
@@ -26,4 +26,4 @@ const BoardContent = () => {
   )
 }
 
-export default BoardContent
+export default SubLayout

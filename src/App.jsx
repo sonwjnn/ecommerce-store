@@ -6,15 +6,22 @@ import './assets/css/responsive.css'
 
 import { useSelector } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Outlet
+} from 'react-router-dom'
 import PageWrapper from './components/common/PageWrapper'
 import MainLayout from './components/layout/MainLayout'
+import SubLayout from './components/layout/SubLayout'
 import routes from './routes/routes'
 import NotFound from './components/common/NotFound'
 import 'react-toastify/dist/ReactToastify.css'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
+import ProductList from './components/ProductList'
 
 const App = () => {
   return (

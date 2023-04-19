@@ -1,7 +1,7 @@
 import HomePage from '../pages/HomePage'
 import CartList from '../pages/CartList'
 import ProductDetail from '../pages/ProductDetail'
-import ProductList from '../pages/ProductList'
+import ProductList from '../components/ProductList'
 import ProductSearch from '../pages/ProductSearch'
 import PasswordUpdate from '../pages/PasswordUpdate'
 import ReviewList from '../pages/ReviewList'
@@ -31,11 +31,6 @@ export const productType = [
   'Apple',
   'Bàn phím'
 ]
-
-const pathProduct = productType.map((item, index) => ({
-  path: `products/${item}`,
-  element: <BoardContent productType={item} />
-}))
 
 const routes = [
   {
@@ -92,7 +87,10 @@ const routes = [
     path: '/authUser/signup',
     element: <AuthUser signup={'signup'} />
   },
-  ...pathProduct
+  {
+    path: '/products/:productType',
+    element: <BoardContent />
+  }
 ]
 
 export default routes
