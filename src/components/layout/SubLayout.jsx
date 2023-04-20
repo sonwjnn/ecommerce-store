@@ -4,7 +4,7 @@ import Pagination from '../Pagination'
 import productConfigs from '../../configs/product.configs'
 import { Outlet } from 'react-router-dom'
 
-const SubLayout = ({ children }) => {
+const SubLayout = () => {
   return (
     <div className="app__container">
       <div className="grid wide">
@@ -17,7 +17,7 @@ const SubLayout = ({ children }) => {
             <BoardBar />
 
             {/* <ProductList /> */}
-            {children}
+            <Outlet />
             <Pagination />
           </div>
         </div>

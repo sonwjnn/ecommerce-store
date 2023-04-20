@@ -195,8 +195,6 @@ const HeaderMenu = () => {
               className="signup-btn hover:text-sky-300 mr-5 "
               onClick={() => {
                 authUserPage(actionState.signup)
-                dispatch(setAuthModalOpen(true))
-                dispatch(setSignState(actionState.signup))
               }}
             >
               Đăng kí
@@ -205,8 +203,6 @@ const HeaderMenu = () => {
               className="signin-btn hover:text-sky-300 "
               onClick={() => {
                 authUserPage(actionState.signin)
-                dispatch(setAuthModalOpen(true))
-                dispatch(setSignState(actionState.signin))
               }}
             >
               Đăng nhập

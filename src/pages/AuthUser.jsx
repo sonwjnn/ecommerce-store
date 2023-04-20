@@ -1,18 +1,16 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { useRef, useState, useEffect } from 'react'
-
+import { useDispatch } from 'react-redux'
 import { setAuthModalOpen } from '../redux/features/authModelSlice'
 import SigninForm from '../components/common/SigninForm'
 import SignupForm from '../components/common/Signup'
-import { useNavigate } from 'react-router-dom'
-import { hidden } from '../utilities/constants'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const actionState = {
   signin: 'signin',
   signup: 'signup'
 }
 
-const AuthUser = ({ signin, signup }) => {
+const AuthUser = () => {
+  const { sign } = useParams()
   const dispatch = useDispatch()
 
   const history = useNavigate()
@@ -20,26 +18,9 @@ const AuthUser = ({ signin, signup }) => {
     history('/')
     dispatch(setAuthModalOpen(false))
   }
-  const { authModalOpen } = useSelector(state => state.authModal)
-  const { signState } = useSelector(state => state.signState)
-
-  const [action, setAction] = useState(signState)
-
-  useEffect(() => {
-    window.scrollTo(0, 0)
-    if (authModalOpen) {
-      setAction(signState)
-    }
-  }, [authModalOpen])
-
-  useEffect(() => {
-    const header = document.querySelector('.header')
-    hidden(header)
-  }, [])
-
-  const onHandleClose = () => dispatch(setAuthModalOpen(false))
 
   const switchAuthState = state => setAction(state)
+
   return (
     <div className="absolute h-screen w-screen overflow-hidden top-0 left-0 right-0 bottom-0 ">
       <header className="flex items-center justify-between py-3 px-24 bg-white h-[85px]">
@@ -61,6 +42,7 @@ const AuthUser = ({ signin, signup }) => {
           Bạn cần giúp đỡ ?
         </div>
       </header>
+
       <main className="bg-primary h-full relative min-w-[1200px]">
         <div className="flex ">
           <div className="left-[10%] top-[22%] absolute ">
@@ -79,39 +61,17 @@ const AuthUser = ({ signin, signup }) => {
           </div>
         </div>
         <div className="w-[400px] h-[492px] bg-white rounded-md py-6 px-12 absolute right-[10%] top-[50%] translate-y-[-59%] ">
-          {signin && (
+          {sign === actionState.signin && (
             <SigninForm
               switchAuthState={() => switchAuthState(actionState.signup)}
             />
           )}
 
-          {signup && (
+          {sign === actionState.signup && (
             <SignupForm
               switchAuthState={() => switchAuthState(actionState.signin)}
             />
           )}
-
-          {/* <div className="absolute right-12 bottom-6 mt-4">
-                <button
-                  onClick={onHandleClose}
-                  className="relative block p-8 w-6 h-6 border-primary text-primary font-bold rounded-md border-2"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-8 h-8 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75"
-                    />
-                  </svg>
-                </button>
-              </div> */}
         </div>
       </main>
     </div>

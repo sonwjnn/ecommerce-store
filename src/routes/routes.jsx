@@ -35,7 +35,7 @@ export const productType = [
 const routes = [
   {
     index: true,
-    element: <HomePage />,
+    element: <ProductList />,
     state: 'home'
   },
 
@@ -79,17 +79,10 @@ const routes = [
     path: 'products/:cateType/:productId',
     element: <ProductDetail />
   },
+
   {
-    path: '/authUser/signin',
-    element: <AuthUser signin={'signin'} />
-  },
-  {
-    path: '/authUser/signup',
-    element: <AuthUser signup={'signup'} />
-  },
-  {
-    path: '/products/:productType',
-    element: <BoardContent />
+    path: '/authUser/:sign',
+    element: <AuthUser />
   }
 ]
 

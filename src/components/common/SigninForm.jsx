@@ -39,7 +39,6 @@ const SigninForm = ({ switchAuthState }) => {
       if (response.kq) {
         signinForm.resetForm()
         dispatch(setUser(response.kq))
-        dispatch(setAuthModalOpen(false))
         history('/')
         toast.success('Sign in success')
       } else {

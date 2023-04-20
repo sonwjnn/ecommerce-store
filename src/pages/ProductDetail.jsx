@@ -1,7 +1,4 @@
 import DetailImage from '../components/common/DetailImage'
-import imgDemo from '../assets/img/product-case-2.webp'
-import { relative } from '../utilities/constants'
-
 import { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -40,12 +37,6 @@ const ProductDetail = () => {
 
     getProduct()
   }, [cateType, productId, dispatch])
-
-  useEffect(() => {
-    const header = document.querySelector('.header')
-
-    relative(header)
-  }, [])
 
   const handleValueCart = state => {
     if (cartState.increase == state) {

@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import categoryApi from '../apis/modules/category.api'
 import { setGlobalLoading } from '../redux/features/globalLoadingSlice'
 import { toast } from 'react-toastify'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { productType } from '../routes/routes'
 
 const Category = ({ productCategory }) => {
   const dispatch = useDispatch()
   const [categories, setCategories] = useState([])
-
+  const [activeLink, setActiveLink] = useState(null)
   useEffect(() => {
     const getCategories = async () => {
       const { response, err } = await categoryApi.getList()
@@ -22,8 +22,6 @@ const Category = ({ productCategory }) => {
     getCategories()
   }, [productCategory, dispatch])
 
-  useEffect(() => {}, [])
-
   return (
     <>
       <nav className="category">
@@ -33,7 +31,10 @@ const Category = ({ productCategory }) => {
             <li className="category-item" key={cate._id}>
               <Link
                 to={`/products/${productType[index]}`}
-                className="category-item__link"
+                className={`category-item__link ${
+                  activeLink === index ? 'active' : ''
+                }`}
+                onClick={() => setActiveLink(index)}
               >
                 {cate.name}
               </Link>

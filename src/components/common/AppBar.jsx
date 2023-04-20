@@ -1,11 +1,19 @@
 import React from 'react'
 import SearchMain from '../SearchMain'
 import HeaderNavigate from '../HeaderNavigate'
+import { useParams, useLocation } from 'react-router-dom'
 
 const AppBar = () => {
+  const location = useLocation()
+  const { sign, productId } = useParams()
   return (
     <>
-      <div className="header w-full fixed">
+      <div
+        className={`header w-full ${sign ? 'hidden' : ''} ${
+          productId ? 'relative' : ''
+        } ${!sign && !productId ? 'fixed' : ''}
+        `}
+      >
         <div className="grid wide">
           <HeaderNavigate />
           <SearchMain />
