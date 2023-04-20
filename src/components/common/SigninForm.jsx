@@ -8,11 +8,11 @@ import { setAuthModalOpen } from '../../redux/features/authModelSlice'
 import { setUser } from '../../redux/features/userSlice'
 import { useNavigate } from 'react-router-dom'
 
-const SigninForm = ({ switchAuthState }) => {
+const SigninForm = () => {
   const dispatch = useDispatch()
-  const history = useNavigate()
+  const navigate = useNavigate()
   const authUserPage = value => {
-    history(`/authUser/${value}`)
+    navigate(`/authUser/${value}`)
   }
   const [isLoginRequest, setIsLoginRequest] = useState(false)
   const [errorMessage, setErrorMessage] = useState()
@@ -39,7 +39,9 @@ const SigninForm = ({ switchAuthState }) => {
       if (response.kq) {
         signinForm.resetForm()
         dispatch(setUser(response.kq))
-        history('/')
+        setTimeout(() => {
+          navigate('/')
+        }, 2000)
         toast.success('Sign in success')
       } else {
         if (err) setErrorMessage(err.message)

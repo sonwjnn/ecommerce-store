@@ -17,7 +17,10 @@ const ProductList = () => {
 
   useEffect(() => {
     const getProducts = async () => {
+      dispatch(setGlobalLoading(true))
       const { response, err } = await productApi.getList()
+      dispatch(setGlobalLoading(false))
+
       if (response.kq) {
         setProducts(response.msg)
       }
@@ -28,7 +31,6 @@ const ProductList = () => {
   }, [dispatch])
 
   useEffect(() => {
-    window.scrollTo(0, 0)
     if (products.length) {
       dispatch(
         setProductsStore(

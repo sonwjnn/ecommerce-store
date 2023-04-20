@@ -1,6 +1,14 @@
 import { useSelector } from 'react-redux'
-import Logo from './Logo.jsx'
 import { useState, useEffect } from 'react'
+import { PulseLoader } from 'react-spinners'
+import { css } from '@emotion/react'
+import AppBar from '../common/AppBar.jsx'
+
+const override = css`
+  display: 'block';
+  margin: '0 auto';
+  bordercolor: 'red';
+`
 
 const GlobalLoading = () => {
   const { globalLoading } = useSelector(state => state.globalLoading)
@@ -19,14 +27,19 @@ const GlobalLoading = () => {
   return (
     <>
       {isLoading ? (
-        <div className="h-screen w-screen z-50 fixed transition-all bg-slate-300">
-          <div className="h-1 w-full bg-neutral-200 dark:bg-neutral-600">
-            <div className="h-1 bg-primary" style={{ width: '45%' }}></div>
+        <>
+          <div className=" h-screen w-screen z-50 fixed transition-all bg-white">
+            <AppBar className="z-51" />
+            <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+              <PulseLoader
+                color={'#888888'}
+                loading={isLoading}
+                // cssOverride={override}
+                // size={150}
+              />
+            </div>
           </div>
-          <div className="absolute top-[50%] left-[50%] translate-x-[50%] translate-y-[50%]">
-            <Logo />
-          </div>
-        </div>
+        </>
       ) : null}
     </>
   )
