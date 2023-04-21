@@ -1,8 +1,9 @@
 import { useDispatch } from 'react-redux'
-import { setAuthModalOpen } from '../redux/features/authModelSlice'
 import SigninForm from '../components/common/SigninForm'
 import SignupForm from '../components/common/Signup'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useEffect } from 'react'
+import { setGlobalLoading } from '../redux/features/globalLoadingSlice'
 
 const actionState = {
   signin: 'signin',
@@ -12,6 +13,13 @@ const actionState = {
 const AuthUser = () => {
   const { sign } = useParams()
   const dispatch = useDispatch()
+  useEffect(() => {
+    window.scrollTo(0, 0)
+    dispatch(setGlobalLoading(true))
+    setTimeout(() => {
+      dispatch(setGlobalLoading(false))
+    }, 1000)
+  }, [])
 
   const history = useNavigate()
   const toHomePage = () => {
@@ -53,7 +61,7 @@ const AuthUser = () => {
               </svg>
             </a>
 
-            <h1 className="text-center text-[28px] mt-10 text-white">
+            <h1 className="text-center text-[28px] mt-10 text-white select-none">
               Nền tảng thương mại điện tử <br /> yêu thích ở Đông Nam Á & Đài
               Loan
             </h1>

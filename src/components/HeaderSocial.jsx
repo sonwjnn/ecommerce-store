@@ -1,4 +1,5 @@
-import React from "react";
+import { BsFacebook } from 'react-icons/bs'
+import { AiFillInstagram } from 'react-icons/ai'
 
 const HeaderSocial = () => {
   return (
@@ -40,15 +41,15 @@ const HeaderSocial = () => {
       </li>
       <li className="nav-list-item nav-list-item--separate">
         <span className="header__nav-title--no-pointer">Kết nối</span>
-        <a href="" className="nav-item-link">
-          <i className="nav-icon fa-brands fa-facebook-square ml-8"></i>
-        </a>
-        <a href="" className="nav-item-link">
-          <i className="nav-icon fa-brands fa-instagram ml-8"></i>
-        </a>
+        <button className="nav-item-link">
+          <BsFacebook className="text-white ml-3 text-[16px]" />
+        </button>
+        <button className="nav-item-link ml-2 text-[20px]">
+          <AiFillInstagram className="text-white" />
+        </button>
       </li>
     </ul>
-  );
-};
+  )
+}
 
-export default HeaderSocial;
+export default HeaderSocial

@@ -4,6 +4,7 @@ import { setAuthModalOpen } from '../redux/features/authModelSlice'
 import { setSignState } from '../redux/features/signStateSlice'
 import { setUser } from '../redux/features/userSlice'
 import { useNavigate } from 'react-router-dom'
+import { RiGlobalLine } from 'react-icons/ri'
 
 const actionState = {
   signin: 'signin',
@@ -144,7 +145,7 @@ const HeaderMenu = () => {
       </li>
       <li className="nav-list-item">
         <a href="#" className="nav-item-link">
-          <i className="nav-icon fa-solid fa-globe mr-4"></i>
+          <RiGlobalLine className="text-[20px] mr-2" />
           Tiếng Việt
           <i className="nav-icon fa-solid fa-angle-down ml-4 mr-4"></i>
         </a>
@@ -172,7 +173,7 @@ const HeaderMenu = () => {
                 className="nav-list-item-user-img"
               />
             </span>
-            <span className="nav-list-item-user-name">
+            <span className="nav-list-item-user-name text-[16px]">
               {user.name ? user.name : 'null'}
             </span>
             <ul className="nav-list-item-user-menu">

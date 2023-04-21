@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import productApi from '../apis/modules/product.api'
 import { setGlobalLoading } from '../redux/features/globalLoadingSlice'
+import { BsCartPlus, BsTruck } from 'react-icons/bs'
 const cartState = {
   increase: 'increase',
   decrease: 'decrease'
@@ -17,6 +18,7 @@ const ProductDetail = () => {
   const [cartValue, setCartValue] = useState(1)
   const { cateType, productId } = useParams()
   const [product, setProduct] = useState([])
+  const [activeReview, setActiveReview] = useState(null)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -285,7 +287,7 @@ const ProductDetail = () => {
                     </p>
                   </div>
                   <div className="capitalize flex gap-4">
-                    <span className="fa-solid fa-truck text-3xl text-neutral-400 mr-1 mt-2"></span>
+                    <BsTruck className="fa-solid fa-truck text-[20px] mr-1 mt-2" />
                     <span className="flex flex-col">
                       <div className="flex items-center gap-4 py-2">
                         <span className="text-gray-500 ">vận chuyển tới</span>
@@ -351,9 +353,9 @@ const ProductDetail = () => {
               </div>
 
               <div className="flex mt-8 gap-4">
-                <button className="hover:bg-[#fff5f1] rounded-[2px] capitalize py-4 px-8 text-[16px] bg-[#ffeee8] font-normal border border-primary text-primary">
-                  <i className="ti-shopping-cart-full mr-2 "></i>
-                  thêm vào giỏ hàng
+                <button className="flex items-center hover:bg-[#fff5f1] rounded-[2px] capitalize py-4 px-8 text-[16px] bg-[#ffeee8] font-normal border border-primary text-primary">
+                  <BsCartPlus className="mr-2" />
+                  <span>thêm vào giỏ hàng</span>
                 </button>
 
                 <button className="btn-primary">mua ngay</button>
@@ -361,7 +363,7 @@ const ProductDetail = () => {
 
               <div className="flex p-8 gap-4 border-t border-gray-200 mt-[40px] capitalize text-[14px] items-center">
                 <img
-                  src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/83e10a1f95cb083579c089448ef8dd3b.png"
+                  src="/src/assets/img/logos/logo_defense.png"
                   className="w-[20px] h-[20px]"
                 />
                 <span>shopee đảm bảo</span>
@@ -443,8 +445,11 @@ const ProductDetail = () => {
                 <div className="p-8 flex gap-3   items-center justify-start flex-wrap">
                   {reviewFilter.map((item, index) => (
                     <span
-                      className="select-type-btn px-10 py-2 review-filter-item"
+                      className={`select-type-btn px-10 py-2 review-filter-item  ${
+                        activeReview === index ? 'active' : ''
+                      }`}
                       key={index}
+                      onClick={() => setActiveReview(index)}
                     >
                       {item}
                     </span>

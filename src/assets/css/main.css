@@ -682,7 +682,7 @@
   display: flex;
   list-style: none;
   padding: 0;
-  margin: 8px 0 2px 0;
+  margin: 6px 0 3px 0;
 }
 
 .header__search-decription-list-item a {
@@ -970,6 +970,7 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  transition: 0.3s ease;
 }
 
 .header__search-btn:hover {
@@ -1552,4 +1553,9 @@ i.home-product-item__icon-heart-fill {
 
 .home-product--spacing-bottom {
   margin-bottom: 36px;
+}
+
+.review-filter-item.active {
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
 }

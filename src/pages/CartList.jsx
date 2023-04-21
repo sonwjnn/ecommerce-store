@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import CartItem from '../components/CartItem'
-
 const CartList = () => {
   return (
     <div className="bg-bg_page">
@@ -51,9 +50,9 @@ const CartList = () => {
           <div className="sticky bottom-0 rounded-md h-full w-full bg-white mt-4 mb-20">
             <div className="flex items-center justify-between p-8">
               <div className="flex items-center text-[17px] gap-4">
-                <button className="btn-cart-solid">Chọn Tất Cả (2)</button>
+                <button className="btn-cart-solid">Chọn tất cả (2)</button>
                 <button className="btn-cart-solid">Xoá</button>
-                <button className="btn-cart-solid">Yêu thích</button>
+                <button className="btn-cart-solid">Thêm đã thích</button>
               </div>
 
               <div className="flex gap-8 items-center ">

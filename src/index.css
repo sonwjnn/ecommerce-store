@@ -16,7 +16,7 @@
   }
 
   .select-type-btn {
-    @apply bg-white cursor-pointer select-none hover:border-primary hover:text-primary  px-6 py-1 text-[14px] text-gray-600 border border-gray-300;
+    @apply transition-all bg-white cursor-pointer select-none hover:border-primary hover:text-primary  px-6 py-1 text-[14px] text-gray-600 border border-gray-300;
   }
 
   .select-type-dis-btn {
@@ -28,6 +28,6 @@
   }
 
   .btn-cart-solid {
-    @apply py-2 transition-all px-8 hover:text-[#00bfa5] hover:border-[#00bfa5] text-gray-500 border border-gray-200 rounded-md;
+    @apply py-2 transition-all px-8 hover:text-primary  text-gray-500  rounded-md;
   }
 }

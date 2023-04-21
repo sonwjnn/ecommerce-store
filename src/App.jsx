@@ -36,7 +36,7 @@ const App = () => {
         pauseOnFocusLoss
         pauseOnHover
         theme="light"
-        className="text-[18px]"
+        className="text-[16px]"
       />
 
       {/* app routes */}

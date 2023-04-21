@@ -1,6 +1,23 @@
-import { Link } from 'react-router-dom'
-
+import { Link, useNavigate } from 'react-router-dom'
+import { AiOutlineShoppingCart } from 'react-icons/ai'
+import { BiSearch } from 'react-icons/bi'
+import { CgShoppingCart } from 'react-icons/cg'
+import { useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 const SearchMain = () => {
+  const { user } = useSelector(state => state.user)
+  const navigate = useNavigate()
+  const handleCarts = () => {
+    if (user) {
+      navigate('/carts')
+    } else {
+      toast.error('You must login first!', { toastId: 'warning-login' })
+      setTimeout(() => {
+        navigate('/authUser/signin')
+      }, 2000)
+    }
+  }
+
   return (
     <div className="header-with-search">
       <label htmlFor="mobile-search-checkbox" className="header__mobile-search">
@@ -63,34 +80,8 @@ const SearchMain = () => {
             </div>
           </div>
           <div className="header__search-option">
-            <span className="header__search-select">
-              Trong shop
-              <i className="header__search-select-icon ti-angle-down"></i>
-              <div className="header__search-select-list">
-                <ul className="header__search-select-items">
-                  <li className="header__search-select-item">
-                    Trong shop
-                    <i className="header__search-select-item-icon fa-solid fa-check"></i>
-                  </li>
-                  <li className="header__search-select-item">Ngoài shop</li>
-                </ul>
-              </div>
-            </span>
             <span className="header__search-btn">
-              <svg
-                className="header__search-btn-icon h-6 w-6"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
+              <BiSearch className="text-[20px] text-white mt-1" />
             </span>
           </div>
         </div>
@@ -124,22 +115,11 @@ const SearchMain = () => {
         </div>
       </div>
       <div className="header__cart">
-        <span className="header__cart-wrap">
-          <svg
-            className="header__cart-icon h-6 w-6"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-            />
-          </svg>
-          <span className="header__cart-length">3</span>
+        <buttun onClick={handleCarts} className="header__cart-wrap">
+          <CgShoppingCart className="text-[30px] text-white" />
+          <span className="header__cart-length pointer-events-none select-none">
+            3
+          </span>
           <div className="header__cart-list">
             {/* <!-- No-cart:header__cart-list--no-items -->
                                     <!-- Have-cart:header__cart-list--have-items --> */}
@@ -223,7 +203,7 @@ const SearchMain = () => {
               </div>
             </div>
           </div>
-        </span>
+        </buttun>
       </div>
     </div>
   )
