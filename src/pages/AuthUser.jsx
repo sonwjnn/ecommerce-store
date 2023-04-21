@@ -16,7 +16,6 @@ const AuthUser = () => {
   const history = useNavigate()
   const toHomePage = () => {
     history('/')
-    dispatch(setAuthModalOpen(false))
   }
 
   const switchAuthState = state => setAction(state)

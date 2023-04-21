@@ -6,10 +6,11 @@ import { useParams, useLocation } from 'react-router-dom'
 const AppBar = () => {
   const location = useLocation()
   const { sign, productId } = useParams()
+  const carts = location.pathname === '/carts'
   return (
     <>
       <div
-        className={`header w-full ${sign ? 'hidden' : ''} ${
+        className={`header w-full ${sign || carts ? 'hidden' : ''} ${
           productId ? 'relative' : ''
         } ${!sign && !productId ? 'fixed' : ''}
         `}

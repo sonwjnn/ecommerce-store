@@ -5,7 +5,7 @@ import appStateSlice from './features/appStateSlice'
 import globalLoadingSlice from './features/globalLoadingSlice'
 import signStateSlice from './features/signStateSlice'
 import productSlice from './features/productSlice'
-
+import productLoadingSlice from './features/productLoading'
 import {
   persistStore,
   persistReducer,
@@ -30,7 +30,8 @@ const rootReducer = combineReducers({
   globalLoading: globalLoadingSlice,
   signState: signStateSlice,
   products: productSlice,
-  filterState: filterStateSlice
+  filterState: filterStateSlice,
+  productLoading: productLoadingSlice
 })
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 

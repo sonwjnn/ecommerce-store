@@ -10,27 +10,24 @@ const override = css`
   bordercolor: 'red';
 `
 
-const GlobalLoading = () => {
-  const { globalLoading } = useSelector(state => state.globalLoading)
+const ProductLoading = () => {
+  const { productLoading } = useSelector(state => state.productLoading)
   const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
-    if (globalLoading) {
+    if (productLoading) {
       setLoading(true)
     } else {
-      setTimeout(() => {
-        setLoading(false)
-      }, 1000)
+      setLoading(false)
     }
-  }, [globalLoading])
+  }, [productLoading])
 
   return (
     <>
       {isLoading ? (
         <>
-          <div className=" h-screen w-full z-50 fixed transition-all bg-white">
-            <AppBar className="z-51" />
-            <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+          <div className="mt-[10px] h-full w-full z-50 relative bg-white">
+            <div className="absolute top-[25%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
               <PulseLoader
                 color={'#888888'}
                 loading={isLoading}
@@ -45,4 +42,4 @@ const GlobalLoading = () => {
   )
 }
 
-export default GlobalLoading
+export default ProductLoading

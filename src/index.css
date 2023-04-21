@@ -24,6 +24,10 @@
   }
 
   .btn-primary {
-    @apply hover:brightness-125 rounded-[2px] capitalize py-4 px-8 text-[16px] bg-primary font-normal  text-white;
+    @apply transition-all hover:brightness-125 rounded-[2px] capitalize py-4 px-8 text-[16px] bg-primary font-normal  text-white;
+  }
+
+  .btn-cart-solid {
+    @apply py-2 transition-all px-8 hover:text-[#00bfa5] hover:border-[#00bfa5] text-gray-500 border border-gray-200 rounded-md;
   }
 }

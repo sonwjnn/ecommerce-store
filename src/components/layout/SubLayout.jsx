@@ -3,6 +3,7 @@ import BoardBar from '../BoardBar'
 import Pagination from '../Pagination'
 import productConfigs from '../../configs/product.configs'
 import { Outlet } from 'react-router-dom'
+import ProductLoading from '../common/ProductLoading'
 
 const SubLayout = () => {
   return (
@@ -13,9 +14,9 @@ const SubLayout = () => {
             <Category productCategory={productConfigs.electronic} />
           </div>
 
-          <div className="col l-10 c-12">
+          <div className="col l-10 c-12 overflow-hidden">
             <BoardBar />
-
+            <ProductLoading />
             {/* <ProductList /> */}
             <Outlet />
             <Pagination />

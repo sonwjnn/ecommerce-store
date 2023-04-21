@@ -2,7 +2,7 @@ import ProductItem from './ProductItem'
 import productApi from '../apis/modules/product.api'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setGlobalLoading } from '../redux/features/globalLoadingSlice'
+import { setProductLoading } from '../redux/features/productLoading'
 import { toast } from 'react-toastify'
 import { useParams, useLocation } from 'react-router-dom'
 import { cloneDeep } from 'lodash'
@@ -17,9 +17,9 @@ const ProductList = () => {
 
   useEffect(() => {
     const getProducts = async () => {
-      dispatch(setGlobalLoading(true))
+      dispatch(setProductLoading(true))
       const { response, err } = await productApi.getList()
-      dispatch(setGlobalLoading(false))
+      dispatch(setProductLoading(false))
 
       if (response.kq) {
         setProducts(response.msg)
