@@ -1,9 +1,9 @@
 import privateClient from '../client/private.client'
 
 const cartEndpoints = {
-  list: 'permisson/carts',
-  add: 'permisson/carts',
-  remove: ({ cartId }) => `permisson/carts/${cartId}`
+  list: 'user/carts',
+  add: 'user/carts',
+  remove: ({ cartId }) => `carts/${cartId}`
 }
 
 const cartApi = {
@@ -15,14 +15,13 @@ const cartApi = {
       return { error }
     }
   },
-  add: async ({ mediaId, mediaType, mediaTitle, mediaPoster, mediaRate }) => {
+  add: async ({ productId, productTitle, productPrice, productType }) => {
     try {
       const response = await privateClient.post(cartEndpoints.add, {
-        mediaId,
-        mediaType,
-        mediaTitle,
-        mediaPoster,
-        mediaRate
+        productId,
+        productType,
+        productTitle,
+        productPrice
       })
       return { response }
     } catch (error) {

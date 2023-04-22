@@ -5,8 +5,10 @@ import { useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import productApi from '../apis/modules/product.api'
+import cartApi from '../apis/modules/cart.api'
 import { setGlobalLoading } from '../redux/features/globalLoadingSlice'
 import { BsCartPlus, BsTruck } from 'react-icons/bs'
+import { addCart } from '../redux/features/userSlice'
 const cartState = {
   increase: 'increase',
   decrease: 'decrease'
@@ -19,6 +21,9 @@ const ProductDetail = () => {
   const { cateType, productId } = useParams()
   const [product, setProduct] = useState([])
   const [activeReview, setActiveReview] = useState(null)
+  const { listCarts, user } = useSelector(state => state.user)
+  const [isCart, setIsCart] = useState(false)
+  const [onRequest, setOnRequest] = useState(false)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -52,6 +57,38 @@ const ProductDetail = () => {
       setCartValue(cartValue - 1)
     }
   }
+
+  const onCartClick = async () => {
+    console.log(product)
+    if (!user) {
+      return
+    }
+
+    // if (onRequest) return
+
+    // setOnRequest(true)
+
+    const body = {
+      productId: product.id,
+      productTitle: product.title || product.name,
+      productType: product.cateName,
+      productPrice: product.price
+    }
+
+    const { response, err } = await cartApi.add(body)
+    if (err) toast.error(err.message)
+
+    // setOnRequest(false)
+
+    if (response) {
+      dispatch(addCart(response))
+      console.log(listCarts)
+      setIsCart(true)
+
+      toast.success('Add cart success')
+    }
+  }
+
   const reviewFilter = [
     'tất cả',
     '5 sao (7)',
@@ -353,7 +390,10 @@ const ProductDetail = () => {
               </div>
 
               <div className="flex mt-8 gap-4">
-                <button className="flex items-center hover:bg-[#fff5f1] rounded-[2px] capitalize py-4 px-8 text-[16px] bg-[#ffeee8] font-normal border border-primary text-primary">
+                <button
+                  onClick={onCartClick}
+                  className="flex items-center hover:bg-[#fff5f1] rounded-[2px] capitalize py-4 px-8 text-[16px] bg-[#ffeee8] font-normal border border-primary text-primary"
+                >
                   <BsCartPlus className="mr-2" />
                   <span>thêm vào giỏ hàng</span>
                 </button>

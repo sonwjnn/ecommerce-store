@@ -7,7 +7,7 @@ import userApi from '../../apis/modules/user.api'
 import { setAuthModalOpen } from '../../redux/features/authModelSlice'
 import { setUser } from '../../redux/features/userSlice'
 import { useNavigate } from 'react-router-dom'
-
+import { useCookies } from 'react-cookie'
 const SigninForm = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -16,6 +16,7 @@ const SigninForm = () => {
   }
   const [isLoginRequest, setIsLoginRequest] = useState(false)
   const [errorMessage, setErrorMessage] = useState()
+  const [cookie, setCookie] = useCookies(['actkn'])
 
   const signinForm = useFormik({
     initialValues: {
@@ -32,13 +33,17 @@ const SigninForm = () => {
     }),
     onSubmit: async values => {
       setErrorMessage(undefined)
-      // setIsLoginRequest(true)
       const { response, err } = await userApi.signin(values)
-      // setIsLoginRequest(false)
 
       if (response.kq) {
         signinForm.resetForm()
         dispatch(setUser(response.kq))
+
+        //set access token to cookie
+        const expires = new Date()
+        expires.setFullYear(expires.getFullYear() + 1)
+        setCookie('actkn', response.token, { expires })
+
         setTimeout(() => {
           navigate('/')
         }, 2000)

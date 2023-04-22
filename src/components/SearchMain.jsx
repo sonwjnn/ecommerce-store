@@ -115,7 +115,7 @@ const SearchMain = () => {
         </div>
       </div>
       <div className="header__cart">
-        <buttun onClick={handleCarts} className="header__cart-wrap">
+        <button onClick={handleCarts} className="header__cart-wrap">
           <CgShoppingCart className="text-[30px] text-white" />
           <span className="header__cart-length pointer-events-none select-none">
             3
@@ -203,7 +203,7 @@ const SearchMain = () => {
               </div>
             </div>
           </div>
-        </buttun>
+        </button>
       </div>
     </div>
   )
