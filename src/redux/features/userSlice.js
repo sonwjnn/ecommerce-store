@@ -21,11 +21,9 @@ const userSlice = createSlice({
       state.listCarts = action.payload
     },
     removeCart: (state, action) => {
-      const { mediaId } = action.payload
+      const { cartId } = action.payload
 
-      state.listCarts = [...state.listCarts].filter(
-        e => e.mediaId.toString() !== mediaId.toString()
-      )
+      state.listCarts = [...state.listCarts].filter(e => e._id !== cartId)
     },
     addCart: (state, action) => {
       state.listCarts = [action.payload, ...state.listCarts]

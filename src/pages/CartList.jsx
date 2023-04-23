@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setListCarts } from '../redux/features/userSlice'
+import { setListCarts, removeCart } from '../redux/features/userSlice'
 import cartApi from '../apis/modules/cart.api'
+import { toast } from 'react-toastify'
 
 const cartState = {
   increase: 'increase',
@@ -10,7 +11,9 @@ const cartState = {
 }
 const CartItem = props => {
   let price = props.price && props.price.replace(/\B(?=(\d{3})+(?!\d))/g, '.')
-  const { title, imageName, type, quantity, id, user } = props
+  const { title, imageName, type, quantity, id, onRemoved } = props
+
+  const dispatch = useDispatch()
 
   const [cartValue, setCartValue] = useState(1)
   useEffect(() => {
@@ -18,6 +21,23 @@ const CartItem = props => {
   }, [quantity])
 
   useEffect(() => {}, [cartValue])
+
+  const onRemove = async () => {
+    // if (onRequest) return
+    // setOnRequest(true)
+
+    const { response, err } = await cartApi.remove({
+      cartId: id
+    })
+    // setOnRequest(false)
+
+    if (err) toast.error(err.message)
+    if (response) {
+      dispatch(removeCart({ cartId: id }))
+      onRemoved(id)
+      toast.success('Remove favorite success!')
+    }
+  }
 
   const handleValueCart = state => {
     if (cartState.increase == state) {
@@ -79,7 +99,9 @@ const CartItem = props => {
 
           <div className="text-primary text-[16px] px-12">₫{price}</div>
 
-          <button className="btn-primary py-2">Xoá</button>
+          <button className="btn-primary py-2" onClick={onRemove}>
+            Xoá
+          </button>
         </div>
       </div>
     </div>
@@ -87,7 +109,7 @@ const CartItem = props => {
 }
 
 const CartList = () => {
-  const { user } = useSelector(state => state.user)
+  const { user, listCarts } = useSelector(state => state.user)
   const dispatch = useDispatch()
   const [carts, setCarts] = useState([])
 
@@ -101,7 +123,14 @@ const CartList = () => {
       }
     }
     getListCartUser()
-  }, [dispatch])
+  }, [dispatch, carts])
+
+  const onRemoved = id => {
+    const newCarts = [...carts].filter(e => e._id !== id)
+    setCarts(newCarts)
+    // setFilteredMedias([...newCarts].splice(0, page * skip))
+    // setCount(page - 1)
+  }
 
   return (
     <div className="bg-bg_page">
@@ -144,6 +173,7 @@ const CartList = () => {
           <div className="rounded-md h-full w-full bg-white mt-4">
             {carts.map((cart, index) => (
               <CartItem
+                id={cart._id}
                 key={cart.productId}
                 userId={cart.user}
                 productId={cart.productId}
@@ -152,6 +182,7 @@ const CartList = () => {
                 type={cart.cateName}
                 imageName={cart.productImage}
                 quantity={cart.quantity}
+                onRemoved={onRemoved}
               />
             ))}
           </div>

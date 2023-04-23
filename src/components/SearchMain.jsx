@@ -1,11 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { AiOutlineShoppingCart } from 'react-icons/ai'
 import { BiSearch } from 'react-icons/bi'
 import { CgShoppingCart } from 'react-icons/cg'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 const SearchMain = () => {
-  const { user } = useSelector(state => state.user)
+  const { user, listCarts } = useSelector(state => state.user)
   const navigate = useNavigate()
   const handleCarts = () => {
     if (user) {
@@ -118,7 +117,7 @@ const SearchMain = () => {
         <button onClick={handleCarts} className="header__cart-wrap">
           <CgShoppingCart className="text-[30px] text-white" />
           <span className="header__cart-length pointer-events-none select-none">
-            3
+            {listCarts.length}
           </span>
           <div className="header__cart-list">
             {/* <!-- No-cart:header__cart-list--no-items -->
