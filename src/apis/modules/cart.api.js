@@ -15,24 +15,33 @@ const cartApi = {
       return { error }
     }
   },
-  add: async ({ productId, productTitle, productPrice, productType }) => {
+  add: async ({
+    productId,
+    productTitle,
+    productPrice,
+    cateName,
+    productImage,
+    quantity
+  }) => {
     try {
       const response = await privateClient.post(cartEndpoints.add, {
         productId,
-        productType,
+        cateName,
         productTitle,
-        productPrice
+        productPrice,
+        productImage,
+        quantity
       })
       return { response }
     } catch (error) {
       return { error }
     }
   },
-  remove: async ({ cartId }) => {
+  remove: async ({ productId }) => {
     try {
       const response = await privateClient.delete(
         cartEndpoints.remove({
-          cartId
+          productId
         })
       )
       return { response }

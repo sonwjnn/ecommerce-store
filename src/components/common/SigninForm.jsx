@@ -16,7 +16,7 @@ const SigninForm = () => {
   }
   const [isLoginRequest, setIsLoginRequest] = useState(false)
   const [errorMessage, setErrorMessage] = useState()
-  const [cookie, setCookie] = useCookies(['actkn'])
+  const [cookie, setCookie, removeCookie] = useCookies([])
 
   const signinForm = useFormik({
     initialValues: {
@@ -34,15 +34,9 @@ const SigninForm = () => {
     onSubmit: async values => {
       setErrorMessage(undefined)
       const { response, err } = await userApi.signin(values)
-
-      if (response.kq) {
+      if (response) {
         signinForm.resetForm()
-        dispatch(setUser(response.kq))
-
-        //set access token to cookie
-        const expires = new Date()
-        expires.setFullYear(expires.getFullYear() + 1)
-        setCookie('actkn', response.token, { expires })
+        dispatch(setUser(response))
 
         setTimeout(() => {
           navigate('/')
@@ -50,7 +44,7 @@ const SigninForm = () => {
         toast.success('Sign in success')
       } else {
         if (err) setErrorMessage(err.message)
-        toast.error(response.msg)
+        toast.error(err)
       }
     }
   })

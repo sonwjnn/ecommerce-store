@@ -17,7 +17,6 @@ import {
   REGISTER
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import filterStateSlice from './features/filterStateSlice'
 const persistConfig = {
   key: 'root',
   version: 1,
@@ -30,7 +29,6 @@ const rootReducer = combineReducers({
   globalLoading: globalLoadingSlice,
   signState: signStateSlice,
   products: productSlice,
-  filterState: filterStateSlice,
   productLoading: productLoadingSlice
 })
 const persistedReducer = persistReducer(persistConfig, rootReducer)

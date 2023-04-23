@@ -59,7 +59,6 @@ const ProductDetail = () => {
   }
 
   const onCartClick = async () => {
-    console.log(product)
     if (!user) {
       return
     }
@@ -69,20 +68,22 @@ const ProductDetail = () => {
     // setOnRequest(true)
 
     const body = {
-      productId: product.id,
+      productId: product._id,
       productTitle: product.title || product.name,
-      productType: product.cateName,
-      productPrice: product.price
+      cateName: product.cateName,
+      productPrice: product.price,
+      productImage: product.imageName,
+      quantity: cartValue
     }
 
     const { response, err } = await cartApi.add(body)
+
     if (err) toast.error(err.message)
 
     // setOnRequest(false)
 
     if (response) {
       dispatch(addCart(response))
-      console.log(listCarts)
       setIsCart(true)
 
       toast.success('Add cart success')

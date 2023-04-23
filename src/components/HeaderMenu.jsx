@@ -5,7 +5,6 @@ import { setSignState } from '../redux/features/signStateSlice'
 import { setUser } from '../redux/features/userSlice'
 import { useNavigate } from 'react-router-dom'
 import { RiGlobalLine } from 'react-icons/ri'
-import { useCookies } from 'react-cookie'
 
 const actionState = {
   signin: 'signin',
@@ -20,7 +19,6 @@ const HeaderMenu = () => {
   const dispatch = useDispatch()
   const { user } = useSelector(state => state.user)
   const [anchorEl, setAnchorEl] = useState(null)
-  const [removeCookie] = useCookies(['actkn'])
 
   const toggleMenu = e => setAnchorEl(e.currentTarget)
   return (
@@ -191,7 +189,6 @@ const HeaderMenu = () => {
                   href="!#"
                   onClick={() => {
                     dispatch(setUser(null))
-                    removeCookie('actkn')
                   }}
                 >
                   Đăng xuất

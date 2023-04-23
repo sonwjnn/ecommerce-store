@@ -1,7 +1,108 @@
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
-import CartItem from '../components/CartItem'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { setListCarts } from '../redux/features/userSlice'
+import cartApi from '../apis/modules/cart.api'
+
+const cartState = {
+  increase: 'increase',
+  decrease: 'decrease'
+}
+const CartItem = props => {
+  let price = props.price && props.price.replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+  const { title, imageName, type, quantity, id, user } = props
+
+  const [cartValue, setCartValue] = useState(1)
+  useEffect(() => {
+    setCartValue(+quantity)
+  }, [quantity])
+
+  useEffect(() => {}, [cartValue])
+
+  const handleValueCart = state => {
+    if (cartState.increase == state) {
+      setCartValue(cartValue + 1)
+    }
+    if (cartState.decrease == state) {
+      if (cartValue - 1 < 1) {
+        setCartValue(1)
+        return
+      }
+      setCartValue(cartValue - 1)
+    }
+  }
+
+  const urlImage = `/src/assets/img/products/${imageName}`
+
+  return (
+    <div className="p-8 w-full">
+      <div className="p-6 flex items-center justify-between  border-b-gray-200 border-b">
+        <div className="flex items-center gap-8 flex-grow">
+          <input type="checkbox" name="" id="" className="w-6 h-6" />
+          <div
+            className="w-[80px] h-[80px] bg-no-repeat bg-center bg-cover "
+            style={{
+              backgroundImage: `url(${urlImage})`
+            }}
+          ></div>
+          <div className="flex flex-col justify-center items-start ">
+            <div className="text-[16px] text-gray-500">{title}</div>
+            <div className="text-[14px]">{type}</div>
+          </div>
+        </div>
+
+        <div className="flex gap-[60px] items-center">
+          <div className="text-primary text-[16px] px-12">₫{price}</div>
+
+          <div className=" font-normal">
+            <div className="flex gap-4 items-center">
+              <span className="flex items-center">
+                <span
+                  className="flex items-center select-none px-5 h-12  text-[20px] text-gray-600 border border-gray-300 cursor-pointer"
+                  onClick={() => handleValueCart(cartState.decrease)}
+                >
+                  <span>-</span>
+                </span>
+                <span className="select-none px-5 h-12 py-1 text-[16px] text-gray-600 border border-gray-300">
+                  {cartValue}
+                </span>
+                <span
+                  className="flex items-center select-none h-12 px-4 text-[20px] text-gray-600 border border-gray-300 
+                      cursor-pointer"
+                  onClick={() => handleValueCart(cartState.increase)}
+                >
+                  <span>+</span>
+                </span>
+              </span>
+            </div>
+          </div>
+
+          <div className="text-primary text-[16px] px-12">₫{price}</div>
+
+          <button className="btn-primary py-2">Xoá</button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 const CartList = () => {
+  const { user } = useSelector(state => state.user)
+  const dispatch = useDispatch()
+  const [carts, setCarts] = useState([])
+
+  useEffect(() => {
+    const getListCartUser = async () => {
+      const { response, err } = await cartApi.getList()
+
+      if (response) {
+        setCarts(response)
+        dispatch(setListCarts(carts))
+      }
+    }
+    getListCartUser()
+  }, [dispatch])
+
   return (
     <div className="bg-bg_page">
       <header className="flex items-center justify-between py-6 px-24 bg-white h-[85px]">
@@ -41,10 +142,18 @@ const CartList = () => {
           </div>
 
           <div className="rounded-md h-full w-full bg-white mt-4">
-            <CartItem />
-            <CartItem />
-            <CartItem />
-            <CartItem />
+            {carts.map((cart, index) => (
+              <CartItem
+                key={cart.productId}
+                userId={cart.user}
+                productId={cart.productId}
+                price={cart.productPrice}
+                title={cart.productTitle}
+                type={cart.cateName}
+                imageName={cart.productImage}
+                quantity={cart.quantity}
+              />
+            ))}
           </div>
 
           <div className="sticky bottom-0 rounded-md h-full w-full bg-white mt-4 mb-20">

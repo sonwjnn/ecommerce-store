@@ -2,6 +2,7 @@ import privateClient from '../client/private.client.js'
 import publicClient from '../client/public.client.js'
 
 const userEndpoints = {
+  // signin: 'admin/processLogin',
   signin: 'user/signin',
   signout: 'permission/logout',
   signup: 'users/signup',
