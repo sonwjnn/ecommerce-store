@@ -67,9 +67,9 @@ const CartItem = props => {
   const urlImage = `/src/assets/img/products/${imageName}`
 
   return (
-    <div className="p-8 w-full">
-      <div className="p-6 flex items-center justify-between  border-b-gray-200 border-b">
-        <div className="flex items-center gap-8 flex-grow">
+    <div className="p-8 w-full pb-0 pt-0">
+      <div className="p-6 flex flex-col lg:flex-row items-center justify-between  border-b-gray-200 border-b">
+        <div className="flex items-center gap-8 self-start flex-grow">
           <input
             type="checkbox"
             checked={onCheckedAll}
@@ -79,19 +79,19 @@ const CartItem = props => {
             className="w-6 h-6"
           />
           <div
-            className="w-[80px] h-[80px] bg-no-repeat bg-center bg-cover "
+            className="min-w-[80px] h-[80px] bg-no-repeat bg-center bg-cover "
             style={{
               backgroundImage: `url(${urlImage})`
             }}
           ></div>
-          <div className="flex flex-col justify-center items-start ">
+          <div className="flex flex-col justify-center self-start lg:self-center">
             <div className="text-[16px] text-gray-500">{title}</div>
             <div className="text-[14px]">{type}</div>
           </div>
         </div>
 
-        <div className="flex gap-[60px] items-center">
-          <div className="text-primary text-[16px] px-12">₫{price}</div>
+        <div className="flex relative flex-col lg:flex-row self-start ml-[132px] lg:self-center lg:ml-0  gap-[14px] lg:gap-[60px] md:items-center">
+          <div className="text-primary text-[16px] lg:px-12">₫{price}</div>
 
           <div className=" font-normal">
             <div className="flex gap-4 items-center">
@@ -116,9 +116,14 @@ const CartItem = props => {
             </div>
           </div>
 
-          <div className="text-primary text-[16px] px-12">₫{price}</div>
+          <div className="hidden lg:block text-primary text-[16px] px-12">
+            ₫{price}
+          </div>
 
-          <button className="btn-primary py-2" onClick={onRemove}>
+          <button
+            className="btn-primary py-2 lg:relative lg:right-0 absolute right-[-86%] top-[50%]"
+            onClick={onRemove}
+          >
             Xoá
           </button>
         </div>
@@ -167,7 +172,7 @@ const CartList = () => {
   return (
     <div className="bg-bg_page">
       <header className="flex items-center justify-between py-6 px-24 bg-white h-[85px]">
-        <div className="flex ">
+        <div className="flex items-center mx-auto md:mx-0">
           <Link to={'/'} className=" inline-block max-w-[200px]">
             <svg
               fill="#fb5533"
@@ -179,16 +184,20 @@ const CartList = () => {
               </g>
             </svg>
           </Link>
+
+          <span className="text-[22px] h-full mt-4 text-gray-400 font-normal ml-4">
+            Giỏ Hàng
+          </span>
         </div>
 
-        <div className="help text-2xl text-primary underline cursor-pointer">
+        <div className="hidden md:block help text-2xl text-primary underline cursor-pointer">
           Bạn cần giúp đỡ ?
         </div>
       </header>
 
       <div className="w-full min-h-screen ">
         <div className=" max-w-[1200px] h-full mx-auto overflow-hidden ">
-          <div className="rounded-md  min-h-[40px] px-6 py-4 w-full  bg-white mt-12 flex justify-between text-[16px]">
+          <div className="rounded-md  min-h-[40px] px-6 py-4 w-full  bg-white mt-12 hidden lg:flex justify-between text-[16px]">
             <div className="flex ml-8 items-center">
               <input type="checkbox" className=" w-6 h-6" />
               <div className="py-4 px-8 text-gray-500">Tất cả sản phẩm</div>
@@ -221,9 +230,9 @@ const CartList = () => {
             ))}
           </div>
 
-          <div className="sticky bottom-0 rounded-md h-full w-full bg-white mt-4 mb-20">
-            <div className="flex items-center justify-between p-8">
-              <div className="flex items-center text-[17px] gap-4">
+          <div className="sticky hidden md:block bottom-0 rounded-md h-full w-full bg-white mt-4 mb-20">
+            <div className="flex items-center justify-between p-4 lg:p-8">
+              <div className="flex items-center text-[14px] lg:text-[17px] gap-4">
                 <button className="btn-cart-solid" onClick={onCheckedAll}>
                   Chọn tất cả (2)
                 </button>
@@ -232,13 +241,35 @@ const CartList = () => {
               </div>
 
               <div className="flex gap-8 items-center ">
-                <span className="text-[17px] text-gray-500">
+                <span className="text-[14px] lg:text-[17px] text-gray-500">
                   Tổng thanh toán (0 sản phẩm):
                 </span>
-                <span className="text-primary font-semibold text-[24px]">
+                <span className="text-primary font-semibold text-[20px] lg:text-[24px]">
                   ₫52.000
                 </span>
-                <button className="btn-primary py-4 px-16">mua hàng</button>
+                <button className="btn-primary py-3 px-12 lg:py-4 lg:px-16 min-w-[152px]">
+                  mua hàng
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="md:hidden bottom-0 rounded-md h-full w-full bg-white mt-4 mb-20">
+            <div className="flex items-center justify-between  pl-2">
+              <div className="flex items-center text-[14px]">
+                <button className="btn-cart-solid p-0" onClick={onCheckedAll}>
+                  Tất cả
+                </button>
+              </div>
+
+              <div className="flex gap-2 items-center ">
+                <span className="text-[13px] text-gray-500">
+                  Tổng thanh toán:
+                </span>
+                <span className="text-primary font-semibold text-[16px]">
+                  ₫52.000
+                </span>
+                <button className="btn-primary rounded-l-none">mua hàng</button>
               </div>
             </div>
           </div>

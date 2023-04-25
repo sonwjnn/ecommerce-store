@@ -120,25 +120,25 @@ const ProductDetail = () => {
   const urlImage = `/src/assets/img/products/${imageName}`
 
   return (
-    <div className="bg-bg_page px-[136px] py-[56px] min-w-[1220px] h-full">
-      <div className="bg-white h-full rounded-md">
-        <div className="flex">
+    <div className="bg-bg_page px-0 xl:px-[136px] py-0 sm:py-[56px]   h-full">
+      <div className="bg-white h-full rounded-md max-w-[1220px]">
+        <div className="flex flex-col sm:flex-row ">
           <div className="flex-[33%] p-4">
             <div
-              className="pt-[450px] bg-center bg-cover m-1.5"
+              className="pt-[450px] bg-center bg-cover m-1.5 w-full"
               style={{
                 backgroundImage: `url(${urlImage})`
               }}
             ></div>
 
-            <div className="flex gap-4 overflow-x-scroll ">
+            <div className="hidden md:flex gap-4 overflow-x-scroll ">
               <DetailImage urlImage={urlImage} />
               <DetailImage urlImage={urlImage} />
               <DetailImage urlImage={urlImage} />
               <DetailImage urlImage={urlImage} />
             </div>
 
-            <div className="p-4 flex text-2xl items-center justify-center">
+            <div className="p-4 md:flex text-2xl hidden items-center justify-center">
               <h3>Chia sẻ: </h3>
               <div className="text-4xl ml-4 flex gap-4 relative border-right-ab after:right-[-2rem]">
                 <button className="text-[#0384ff]">
@@ -162,47 +162,78 @@ const ProductDetail = () => {
             </div>
           </div>
           <div className="flex-[66%] p-4">
-            <div className="">
-              <span className="tag-shopee bg-primary text-white">
-                Yêu thích
-              </span>
+            <div className="flex flex-col gap-10">
+              <div className="flex items-center">
+                <span className="self-start mt-2 text-[12px] sm:text-[14px] min-w-[66px] tag-shopee bg-primary text-white">
+                  Yêu thích
+                </span>
 
-              <span className="text-[20px]">{title}</span>
+                <span className="text-[16px] sm:text-[20px]">{title}</span>
+              </div>
 
-              <div className="flex gap-4">
+              <div className="flex sm:hidden gap-4">
+                <span className="text-[13px] line-through font-normal text-neutral-400">
+                  {realPrice}
+                </span>
+
+                <span className="text-3xl sm:text-5xl font-normal text-primary">
+                  {price}
+                </span>
+
+                <div className="flex items-center">
+                  <span className="tag-shopee text-[10px] sm:text-[12px] py-0  bg-primary text-white uppercase font-bold">
+                    50% giảm
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap gap-4 items-center">
                 <span className="flex relative items-center border-right-ab after:right-[-2rem]">
-                  <span className="mr-2 text-primary text-[18px] relative  after:bg-primary border-bottom-ab">
+                  <span className="mr-2 text-primary text-[16px] sm:text-[18px] relative  after:bg-primary border-bottom-ab">
                     4.0
                   </span>
                   <span className="flex gap-1">
-                    <i className="fa-solid fa-star text-primary text-[16px]"></i>
-                    <i className="fa-solid fa-star text-primary text-[16px]"></i>
-                    <i className="fa-solid fa-star text-primary text-[16px]"></i>
-                    <i className="fa-solid fa-star text-primary text-[16px]"></i>
-                    <i className="fa-regular fa-star text-primary text-[16px]"></i>
+                    <i className="fa-solid fa-star text-primary  text-[14px] sm:text-[16px]"></i>
+                    <i className="fa-solid fa-star text-primary  text-[14px] sm:text-[16px]"></i>
+                    <i className="fa-solid fa-star text-primary  text-[14px] sm:text-[16px]"></i>
+                    <i className="fa-solid fa-star text-primary  text-[14px] sm:text-[16px]"></i>
+                    <i className="fa-regular fa-star text-primary  text-[14px] sm:text-[16px]"></i>
                   </span>
                 </span>
 
-                <span className="flex relative ml-[3rem] items-center border-right-ab after:right-[-2rem]">
-                  <span className="mr-2  text-[18px] relative after:bg-gray-500 border-bottom-ab">
+                <span className="sm:flex hidden relative ml-[3rem] items-center border-right-ab after:right-[-2rem]">
+                  <span className="mr-2  text-[16px] sm:text-[18px] relative after:bg-gray-500 border-bottom-ab">
                     532
                   </span>
-                  <span className="text-[16px] text-gray-500">Đánh giá</span>
+                  <span className="text-[14px] sm:text-[16px] text-gray-500">
+                    Đánh giá
+                  </span>
                 </span>
 
                 <span className="flex ml-[3rem] items-center ">
-                  <span className="mr-2  text-[18px] relative after:bg-gray-500 border-bottom-ab">
+                  <span className="mr-2  text-[16px] sm:text-[18px] relative after:bg-gray-500 border-bottom-ab">
                     2,3k
                   </span>
-                  <span className="text-[16px] text-gray-500">Đã bán</span>
+                  <span className="text-[14px] sm:text-[16px] text-gray-500">
+                    Đã bán
+                  </span>
                 </span>
 
                 <span className="ti-help-alt flex items-center text-xl mt-1 ml-[-2px] text-gray-500"></span>
+
+                <span className="flex gap-8 items-center sm:hidden ml-4">
+                  <button className="text-[#0384ff] text-3xl">
+                    <i className="fa-brands fa-facebook-messenger"></i>
+                  </button>
+                  <button>
+                    <i className="fa-regular fa-heart text-primary  text-3xl"></i>
+                  </button>
+                </span>
               </div>
             </div>
 
-            <div className="p-6 bg-[#fafafa] mt-5">
-              <div className="flex gap-4">
+            <div className="p-6 hidden sm:block bg-[#fafafa] mt-5">
+              <div className="flex gap-4 flex-wrap">
                 <span className="text-[16px] line-through font-normal text-neutral-400">
                   {realPrice}
                 </span>
@@ -286,7 +317,7 @@ const ProductDetail = () => {
                   </svg>
                 </div>
 
-                <div className="flex flex-col justify-center items-start">
+                <div className="flex flex-wrap flex-col justify-center items-start">
                   <div className="flex gap-4">
                     <span className="text-primary text-2xl font-normal">
                       Gì cũng rẻ
@@ -303,7 +334,7 @@ const ProductDetail = () => {
 
             <div className="p-4 ">
               <div className="flex gap-4 capitalize py-3">
-                <span className="text-[14px] text-gray-500 w-[120px]">
+                <span className="hidden md:block text-[14px] text-gray-500 w-[120px]">
                   deal sốc
                 </span>
                 <span className="tag-shopee text-primary font-normal bg-[#ffeee8]">
@@ -311,8 +342,8 @@ const ProductDetail = () => {
                 </span>
               </div>
 
-              <div className="flex gap-4 text-[14px] py-3 ">
-                <span className="capitalize text-gray-500 mt-1 w-[120px]">
+              <div className="flex gap-4 text-[14px] py-3 flex-wrap">
+                <span className="hidden md:block capitalize text-gray-500 mt-1 w-[120px]">
                   vận chuyển
                 </span>
                 <span>
@@ -328,7 +359,7 @@ const ProductDetail = () => {
                   <div className="capitalize flex gap-4">
                     <BsTruck className="fa-solid fa-truck text-[20px] mr-1 mt-2" />
                     <span className="flex flex-col">
-                      <div className="flex items-center gap-4 py-2">
+                      <div className="hidden md:flex items-center gap-4 py-2">
                         <span className="text-gray-500 ">vận chuyển tới</span>
                         <span>
                           phường tràng tiền, quận hoàn kiếm
@@ -337,9 +368,14 @@ const ProductDetail = () => {
                       </div>
 
                       <div className="flex items-center gap-4 py-2">
-                        <span className="text-gray-500">phí vận chuyển</span>
+                        <span className="text-gray-500 text-[14px]">
+                          phí vận chuyển
+                        </span>
                         <span>
-                          0<i className="ti-angle-down ml-2"></i>
+                          ₫0
+                          <span className="ml-2 hidden md:block">
+                            <i className="ti-angle-down"></i>
+                          </span>
                         </span>
                       </div>
                     </span>
@@ -347,12 +383,12 @@ const ProductDetail = () => {
                 </span>
               </div>
 
-              <div className="flex gap-4 capitalize py-3">
+              <div className="flex flex-col md:flex-row gap-4 capitalize py-3 flex-wrap">
                 <span className="text-[14px] text-gray-500 w-[120px]">
                   chọn màu
                 </span>
                 <span className=" font-normal">
-                  <div className="flex gap-4">
+                  <div className="flex gap-4 flex-wap">
                     <span className="select-type-btn">trắng</span>
                     <span className="select-type-dis-btn">xám bạc</span>
                     <span className="select-type-btn">đen</span>
@@ -360,7 +396,7 @@ const ProductDetail = () => {
                 </span>
               </div>
 
-              <div className="flex gap-4 capitalize py-3 mt-4">
+              <div className="flex flex-wrap flex-col md:flex-row gap-4 capitalize py-3 mt-4">
                 <span className="text-[14px] text-gray-500 w-[120px]">
                   số lượng
                 </span>
@@ -384,7 +420,7 @@ const ProductDetail = () => {
                         +
                       </span>
                     </span>
-                    <span className="px-6 py-1 text-[14px] text-gray-500">
+                    <span className="hidden md:block px-6 py-1 text-[14px] text-gray-500">
                       322 sảm phẩm có sẵn
                     </span>
                   </div>
@@ -419,7 +455,7 @@ const ProductDetail = () => {
       </div>
 
       <div className=" h-full  mt-8 flex">
-        <div className="flex-[80%]  mr-4">
+        <div className="flex-[80%]  md:mr-4">
           <div className="p-10 rounded-md bg-white">
             <div className="">
               <div className="uppercase px-6 py-5 text-[20px] bg-[#fafafa] w-full rounded-md">
@@ -464,7 +500,7 @@ const ProductDetail = () => {
             </div>
           </div>
 
-          <div className="p-10 rounded-md bg-white mt-8">
+          <div className="p-10 rounded-md bg-white">
             <div className="">
               <div className="uppercase text-[20px] bg-white w-full rounded-md">
                 đánh giá sản phẩm
@@ -484,7 +520,7 @@ const ProductDetail = () => {
                   </span>
                 </div>
 
-                <div className="p-8 flex gap-3   items-center justify-start flex-wrap">
+                <div className="hidden md:flex p-8 gap-3   items-center justify-start flex-wrap">
                   {reviewFilter.map((item, index) => (
                     <span
                       className={`select-type-btn px-10 py-2 review-filter-item  ${
@@ -501,14 +537,14 @@ const ProductDetail = () => {
             </div>
           </div>
         </div>
-        <div className="flex-[20%] h-full rounded-md bg-white ml-4 px-6 py-8">
+        <div className="hidden md:block flex-[20%] h-full rounded-md bg-white ml-4 px-6 py-8">
           <div>
             <span className="text-[14px] text-gray-500 w-[120px] ">
               Mã giảm giá của shop
             </span>
 
             <div className="py-8 px-2">
-              <span className="px-2 py-8 flex gap-4 items-center justify-center bg-[#fff4f4] border border-[#fbc9c0]">
+              <span className="px-2 py-8 flex flex-wrap gap-4 items-center justify-center bg-[#fff4f4] border border-[#fbc9c0]">
                 <div>
                   <div className="text-primary capitalize mb-4 font-medium">
                     <div className="text-[14px]">giảm 10%</div>

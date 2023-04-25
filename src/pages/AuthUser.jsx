@@ -50,9 +50,9 @@ const AuthUser = () => {
         </div>
       </header>
 
-      <main className="bg-primary h-full relative min-w-[1200px]">
+      <main className="bg-primary h-full relative w-full">
         <div className="flex ">
-          <div className="left-[10%] top-[22%] absolute ">
+          <div className="left-[10%] top-[22%] absolute hidden auth:block">
             <a href="!#" className=" inline-block pointer-events-none">
               <svg fill="#ffffff" viewBox="0 0 192 65" className="w-[500px]">
                 <g fillRule="evenodd">
@@ -67,7 +67,7 @@ const AuthUser = () => {
             </h1>
           </div>
         </div>
-        <div className="w-[400px] h-[492px] bg-white rounded-md py-6 px-12 absolute right-[10%] top-[50%] translate-y-[-59%] ">
+        <div className="w-[400px] h-[492px] mx-auto  auth:mx-0 block bg-white rounded-md mt-[8%] auth:mt-0 py-6 px-12 auth:absolute auth:right-[10%] auth:top-[50%] auth:translate-y-[-59%] ">
           {sign === actionState.signin && (
             <SigninForm
               switchAuthState={() => switchAuthState(actionState.signup)}

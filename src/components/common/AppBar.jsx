@@ -10,9 +10,9 @@ const AppBar = () => {
   return (
     <>
       <div
-        className={`header w-full ${sign || carts ? 'hidden' : ''} ${
-          productId ? 'relative' : ''
-        } ${!sign && !productId ? 'fixed' : ''}
+        className={`header bg-gradient-to-b from-bg_header_t to-bg_header_b  w-full ${
+          sign || carts ? 'hidden' : ''
+        } ${productId ? 'relative' : ''} ${!sign && !productId ? 'fixed' : ''}
         `}
       >
         <div className="grid wide">
