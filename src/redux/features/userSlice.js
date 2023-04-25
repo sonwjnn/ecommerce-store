@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { forEach } from 'lodash'
 import { useCookies } from 'react-cookie'
 
 const userSlice = createSlice({
@@ -26,7 +27,14 @@ const userSlice = createSlice({
       state.listCarts = [...state.listCarts].filter(e => e._id !== cartId)
     },
     addCart: (state, action) => {
-      state.listCarts = [action.payload, ...state.listCarts]
+      let flag = 0
+      state.listCarts.forEach(cart => {
+        if (cart._id === action.payload._id) {
+          flag++
+          return
+        }
+      })
+      if (!flag) state.listCarts = [action.payload, ...state.listCarts]
     }
   }
 })

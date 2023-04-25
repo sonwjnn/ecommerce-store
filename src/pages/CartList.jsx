@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setListCarts, removeCart } from '../redux/features/userSlice'
 import cartApi from '../apis/modules/cart.api'
 import { toast } from 'react-toastify'
+import { useRef } from 'react'
 
 const cartState = {
   increase: 'increase',
@@ -11,10 +12,19 @@ const cartState = {
 }
 const CartItem = props => {
   let price = props.price && props.price.replace(/\B(?=(\d{3})+(?!\d))/g, '.')
-  const { title, imageName, type, quantity, id, onRemoved } = props
+  const {
+    title,
+    imageName,
+    type,
+    quantity,
+    id,
+    onRemoved,
+    onCheckedAll,
+    onCheckRemoved
+  } = props
 
   const dispatch = useDispatch()
-
+  const inputRef = useRef()
   const [cartValue, setCartValue] = useState(1)
   useEffect(() => {
     setCartValue(+quantity)
@@ -39,6 +49,8 @@ const CartItem = props => {
     }
   }
 
+  const onCheckRemove = () => {}
+
   const handleValueCart = state => {
     if (cartState.increase == state) {
       setCartValue(cartValue + 1)
@@ -58,7 +70,14 @@ const CartItem = props => {
     <div className="p-8 w-full">
       <div className="p-6 flex items-center justify-between  border-b-gray-200 border-b">
         <div className="flex items-center gap-8 flex-grow">
-          <input type="checkbox" name="" id="" className="w-6 h-6" />
+          <input
+            type="checkbox"
+            checked={onCheckedAll}
+            name=""
+            id=""
+            ref={inputRef}
+            className="w-6 h-6"
+          />
           <div
             className="w-[80px] h-[80px] bg-no-repeat bg-center bg-cover "
             style={{
@@ -112,6 +131,7 @@ const CartList = () => {
   const { user, listCarts } = useSelector(state => state.user)
   const dispatch = useDispatch()
   const [carts, setCarts] = useState([])
+  const [checkedAll, setCheckedAll] = useState(false)
 
   useEffect(() => {
     const getListCartUser = async () => {
@@ -130,6 +150,18 @@ const CartList = () => {
     setCarts(newCarts)
     // setFilteredMedias([...newCarts].splice(0, page * skip))
     // setCount(page - 1)
+  }
+
+  const onCheckedAll = () => {
+    setCheckedAll(!checkedAll)
+  }
+
+  const onCheckRemoved = ids => {
+    let newCarts = [...carts]
+    ids.forEach(id => {
+      newCarts.filter(e => e._id !== id)
+    })
+    setCarts(newCarts)
   }
 
   return (
@@ -183,6 +215,8 @@ const CartList = () => {
                 imageName={cart.productImage}
                 quantity={cart.quantity}
                 onRemoved={onRemoved}
+                onCheckedAll={checkedAll}
+                onCheckRemoved={onCheckRemoved}
               />
             ))}
           </div>
@@ -190,7 +224,9 @@ const CartList = () => {
           <div className="sticky bottom-0 rounded-md h-full w-full bg-white mt-4 mb-20">
             <div className="flex items-center justify-between p-8">
               <div className="flex items-center text-[17px] gap-4">
-                <button className="btn-cart-solid">Chọn tất cả (2)</button>
+                <button className="btn-cart-solid" onClick={onCheckedAll}>
+                  Chọn tất cả (2)
+                </button>
                 <button className="btn-cart-solid">Xoá</button>
                 <button className="btn-cart-solid">Thêm đã thích</button>
               </div>
