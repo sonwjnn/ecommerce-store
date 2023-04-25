@@ -17,6 +17,7 @@ import {
   REGISTER
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
+import cateSlice from './features/cateSlice'
 const persistConfig = {
   key: 'root',
   version: 1,
@@ -29,7 +30,8 @@ const rootReducer = combineReducers({
   globalLoading: globalLoadingSlice,
   signState: signStateSlice,
   products: productSlice,
-  productLoading: productLoadingSlice
+  productLoading: productLoadingSlice,
+  cates: cateSlice
 })
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 

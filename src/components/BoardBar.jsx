@@ -1,6 +1,11 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { productType } from '../routes/routes'
 
 const BoardBar = () => {
+  const { cates } = useSelector(state => state.cates)
+
   return (
     <>
       <div className="home-filter hide-on-mobile-tablet">
@@ -46,66 +51,15 @@ const BoardBar = () => {
       </div>
       <nav className="mobile-category">
         <ul className="mobile-category__list">
-          <li className="mobile-category__item">
-            <a href="" className="mobile-category__link">
-              Dụng cụ & Thiết bị tiện ích
-            </a>
-          </li>
-          <li className="mobile-category__item">
-            <a href="" className="mobile-category__link">
-              Dụng cụ & Thiết bị tiện ích
-            </a>
-          </li>
-          <li className="mobile-category__item">
-            <a href="" className="mobile-category__link">
-              Dụng cụ & Thiết bị tiện ích
-            </a>
-          </li>
-          <li className="mobile-category__item">
-            <a href="" className="mobile-category__link">
-              Dụng cụ & Thiết bị tiện ích
-            </a>
-          </li>
-          <li className="mobile-category__item">
-            <a href="" className="mobile-category__link">
-              Dụng cụ & Thiết bị tiện ích
-            </a>
-          </li>
-          <li className="mobile-category__item">
-            <a href="" className="mobile-category__link">
-              Dụng cụ & Thiết bị tiện ích
-            </a>
-          </li>
-          <li className="mobile-category__item">
-            <a href="" className="mobile-category__link">
-              Dụng cụ & Thiết bị tiện ích
-            </a>
-          </li>
-          <li className="mobile-category__item">
-            <a href="" className="mobile-category__link">
-              Dụng cụ & Thiết bị tiện ích
-            </a>
-          </li>
-          <li className="mobile-category__item">
-            <a href="" className="mobile-category__link">
-              Dụng cụ & Thiết bị tiện ích
-            </a>
-          </li>
-          <li className="mobile-category__item">
-            <a href="" className="mobile-category__link">
-              Dụng cụ & Thiết bị tiện ích
-            </a>
-          </li>
-          <li className="mobile-category__item">
-            <a href="" className="mobile-category__link">
-              Dụng cụ & Thiết bị tiện ích
-            </a>
-          </li>
-          <li className="mobile-category__item">
-            <a href="" className="mobile-category__link">
-              Dụng cụ & Thiết bị tiện ích
-            </a>
-          </li>
+          {cates.map((item, index) => (
+            <Link
+              to={`/products/${productType[index]}`}
+              className="mobile-category__item"
+              key={item._id}
+            >
+              <button className="mobile-category__link">{item.name}</button>
+            </Link>
+          ))}
         </ul>
       </nav>
     </>

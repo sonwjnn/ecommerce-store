@@ -11,7 +11,7 @@ const ProductItem = props => {
     history(`/products/${cateName}/${id}`)
   }
   return (
-    <div className="col l-2-4 c-6">
+    <div className="col sm:flex-[33%] md:max-w-[33%] lg:flex-[20%] lg:max-w-[20%] c-6">
       <div className="home-product-item cursor-pointer" onClick={productDetail}>
         <div
           className="home-product-item__img bg-no-repeat bg-center bg-cover"

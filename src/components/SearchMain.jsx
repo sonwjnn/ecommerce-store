@@ -3,6 +3,7 @@ import { BiSearch } from 'react-icons/bi'
 import { CgShoppingCart } from 'react-icons/cg'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
+
 const SearchMain = () => {
   const { user, listCarts } = useSelector(state => state.user)
   const navigate = useNavigate()
@@ -19,22 +20,6 @@ const SearchMain = () => {
 
   return (
     <div className="header-with-search">
-      <label htmlFor="mobile-search-checkbox" className="header__mobile-search">
-        <svg
-          className="header__mobile-search-icon h-6 w-6"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-          />
-        </svg>
-      </label>
       <div className="header__logo hide-on-tablet">
         <Link to="/" className="header__logo-link">
           <svg fill="#fff" viewBox="0 0 192 65" className="header__logo-img">
@@ -49,16 +34,18 @@ const SearchMain = () => {
         hidden
         type="checkbox"
         className="header__search-checkbox"
-        name=""
         id="mobile-search-checkbox"
       />
 
       <div className="header__search-wrap">
         <div className="header__search">
           <div className="header__search-input-wrap">
+            <span className="header__seach-mobile  hidden absolute left-[20px] top-[25%] z-20">
+              <BiSearch className="h-8 text-[20px] text-gray-500 mt-1 " />
+            </span>
             <input
               type="text"
-              className="header__search-input"
+              className="header__search-input relative"
               placeholder="Nhập sản phẩm để tìm kiếm"
             />
             <div className="header__search-history">
@@ -116,9 +103,10 @@ const SearchMain = () => {
       <div className="header__cart">
         <button onClick={handleCarts} className="header__cart-wrap">
           <CgShoppingCart className="text-[30px] text-white" />
-          <span className="header__cart-length pointer-events-none select-none">
+          <span className="header__cart-length  pointer-events-none select-none">
             {listCarts.length}
           </span>
+
           <div className="header__cart-list">
             {/* <!-- No-cart:header__cart-list--no-items -->
                                     <!-- Have-cart:header__cart-list--have-items --> */}

@@ -7,8 +7,8 @@ import productConfigs from '../configs/product.configs'
 const BoardContent = () => {
   return (
     <div className="app__container">
-      <div className="grid wide">
-        <div className="row sm-gutter app__content">
+      <div className="wide">
+        <div className="row sm-gutter app__content w-full">
           <div className="col l-2 m-0 c-0">
             <Category productCategory={productConfigs.electronic} />
           </div>

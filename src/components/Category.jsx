@@ -6,24 +6,34 @@ import { toast } from 'react-toastify'
 import { Link, useParams } from 'react-router-dom'
 import { productType } from '../routes/routes'
 import { BiCategory } from 'react-icons/bi'
+import { setCates } from '../redux/features/cateSlice'
 
-const Category = ({ productCategory }) => {
+const Category = () => {
   const dispatch = useDispatch()
   const [categories, setCategories] = useState([])
   const [activeLink, setActiveLink] = useState(null)
+  const { cates } = useSelector(state => state.cates)
+
   useEffect(() => {
     const getCategories = async () => {
       const { response, err } = await categoryApi.getList()
 
-      if (response.kq) setCategories(response.data)
+      if (response.kq) {
+        setCategories(response.data)
+      }
     }
 
     getCategories()
-  }, [productCategory, dispatch])
+  }, [productType, dispatch])
+
+  useEffect(() => {
+    dispatch(setCates(categories))
+    console.log(cates)
+  }, [categories])
 
   return (
     <>
-      <nav className="category">
+      <nav className="category  w-[200px]">
         <header className="category__heading pointer-events-none select-none flex items-center">
           <BiCategory className="text-[18px] mr-2" />
           DANH MỤC

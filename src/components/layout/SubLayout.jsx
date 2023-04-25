@@ -8,13 +8,13 @@ import ProductLoading from '../common/ProductLoading'
 const SubLayout = () => {
   return (
     <div className="app__container">
-      <div className="grid wide">
-        <div className="row sm-gutter app__content">
-          <div className="col l-2 m-0 c-0">
+      <div className="max-w-[1200px] mx-auto">
+        <div className="flex sm-gutter pt-0 lg:pt-[36px] app__content">
+          <div className="col hidden md:block">
             <Category productCategory={productConfigs.electronic} />
           </div>
 
-          <div className="col l-10 c-12 overflow-hidden">
+          <div className="col col-span-10 overflow-hidden">
             <BoardBar />
             <ProductLoading />
             {/* <ProductList /> */}

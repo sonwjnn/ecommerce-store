@@ -3,7 +3,7 @@
 }
 
 .header {
-  height: var(--header-height);
+  min-height: var(--header-height);
   background-image: linear-gradient(0, #ff6533, #f53f2d);
   z-index: 51;
   left: 0;
@@ -714,8 +714,8 @@
   padding: 0px 7px;
   position: absolute;
   border-radius: 10px;
-  top: -2px;
-  left: 26px;
+  top: 2px;
+  left: 24px;
   border: 2px solid #ee4d2d;
   color: var(--primary-color);
   font-weight: 500;
