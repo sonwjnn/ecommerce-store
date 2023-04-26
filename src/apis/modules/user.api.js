@@ -5,7 +5,7 @@ const userEndpoints = {
   // signin: 'admin/processLogin',
   signin: 'user/signin',
   signout: 'permission/logout',
-  signup: 'users/signup',
+  signup: 'user/signup',
   getInfo: 'admin/users/showDetail',
   addUser: 'permission/add',
   update: 'permission/users/update',

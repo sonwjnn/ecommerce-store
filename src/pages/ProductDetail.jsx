@@ -83,7 +83,6 @@ const ProductDetail = () => {
     // setOnRequest(false)
 
     if (response) {
-      console.log(listCarts.length)
       dispatch(addCart(response))
       setIsCart(true)
 

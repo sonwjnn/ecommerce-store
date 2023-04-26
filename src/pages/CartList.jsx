@@ -5,7 +5,7 @@ import { setListCarts, removeCart } from '../redux/features/userSlice'
 import cartApi from '../apis/modules/cart.api'
 import { toast } from 'react-toastify'
 import { useRef } from 'react'
-
+import { setGlobalLoading } from '../redux/features/globalLoadingSlice'
 const cartState = {
   increase: 'increase',
   decrease: 'decrease'
@@ -77,6 +77,7 @@ const CartItem = props => {
             id=""
             ref={inputRef}
             className="w-6 h-6"
+            onChange={() => {}}
           />
           <div
             className="min-w-[80px] h-[80px] bg-no-repeat bg-center bg-cover "
@@ -140,15 +141,20 @@ const CartList = () => {
 
   useEffect(() => {
     const getListCartUser = async () => {
+      dispatch(setGlobalLoading(true))
       const { response, err } = await cartApi.getList()
+      dispatch(setGlobalLoading(false))
 
       if (response) {
         setCarts(response)
-        dispatch(setListCarts(carts))
       }
     }
     getListCartUser()
-  }, [dispatch, carts])
+  }, [dispatch])
+
+  useEffect(() => {
+    dispatch(setListCarts(carts))
+  }, [carts])
 
   const onRemoved = id => {
     const newCarts = [...carts].filter(e => e._id !== id)

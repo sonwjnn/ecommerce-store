@@ -28,7 +28,6 @@ const Category = () => {
 
   useEffect(() => {
     dispatch(setCates(categories))
-    console.log(cates)
   }, [categories])
 
   return (

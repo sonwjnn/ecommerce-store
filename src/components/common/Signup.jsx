@@ -3,12 +3,13 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import * as Yup from 'yup'
-// import userApi from '../../api/modules/user.api'
-import { setAuthModalOpen } from '../../redux/features/authModelSlice'
 import { setUser } from '../../redux/features/userSlice'
 import { useNavigate } from 'react-router-dom'
-const SignupForm = ({ switchAuthState }) => {
+import userApi from '../../apis/modules/user.api'
+
+const SignupForm = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [isLoginRequest, setIsLoginRequest] = useState(false)
   const [errorMessage, setErrorMessage] = useState()
   const history = useNavigate()
@@ -17,27 +18,28 @@ const SignupForm = ({ switchAuthState }) => {
   }
   const signupForm = useFormik({
     initialValues: {
-      password: '',
-      username: '',
       displayName: '',
+      username: '',
+      password: '',
       confirmPassword: ''
     },
     validationSchema: Yup.object({
+      displayName: Yup.string()
+        .min(8, 'displayName minimum 8 character')
+        .required('displayName is required'),
       username: Yup.string()
         .min(8, 'username minimum 8 character')
         .required('username is required'),
       password: Yup.string()
         .min(8, 'password minimum 8 character')
         .required('password is required'),
-      displayName: Yup.string()
-        .min(8, 'displayName minimum 8 character')
-        .required('displayName is required'),
       confirmPassword: Yup.string()
         .oneOf([Yup.ref('password')], 'confirmNewPassword not match')
         .min(8, 'confirmPassword minimum 8 character')
         .required('confirmPassword is required')
     }),
     onSubmit: async values => {
+      console.log(123)
       setErrorMessage(undefined)
       setIsLoginRequest(true)
       const { response, err } = await userApi.signup(values)
@@ -46,8 +48,11 @@ const SignupForm = ({ switchAuthState }) => {
       if (response) {
         signupForm.resetForm()
         dispatch(setUser(response))
-        dispatch(setAuthModalOpen(false))
-        toast.success('Sign in success')
+
+        setTimeout(() => {
+          navigate('/')
+        }, 2000)
+        toast.success('Sign up success')
       }
 
       if (err) setErrorMessage(err.message)
@@ -58,7 +63,7 @@ const SignupForm = ({ switchAuthState }) => {
       <h1 className="text-[22px] mb-6">Đăng Kí</h1>
 
       <label
-        htmlFor="first-name"
+        htmlFor="display-name"
         className="block   text-[16px] leading-6 text-gray-900"
       >
         Tên user
@@ -66,11 +71,12 @@ const SignupForm = ({ switchAuthState }) => {
       <div className="mt-2 mb-5">
         <input
           type="text"
-          name="first-name"
+          name="displayName"
           placeholder="display name"
-          id="first-name"
-          autoComplete="given-name"
+          id="displayName"
           className="block w-full border-2 border-gray-300 rounded-md px-5  py-4 text-2xl"
+          value={signupForm.values.displayName}
+          onChange={signupForm.handleChange}
         />
       </div>
 
@@ -83,11 +89,13 @@ const SignupForm = ({ switchAuthState }) => {
       <div className="mt-2 mb-5">
         <input
           type="text"
-          name="Username"
+          name="username"
           placeholder="user name"
-          id="Username"
+          id="username"
           autoComplete="given-name"
           className="block w-full border-2 border-gray-300 rounded-md px-5  py-4 text-2xl"
+          value={signupForm.values.username}
+          onChange={signupForm.handleChange}
         />
       </div>
 
@@ -101,9 +109,11 @@ const SignupForm = ({ switchAuthState }) => {
         <input
           type="password"
           placeholder="password"
-          name="Password"
-          id="Password"
+          name="password"
+          id="password"
           className="block w-full border-2 border-gray-300 rounded-md px-5 py-4 text-2xl"
+          value={signupForm.values.password}
+          onChange={signupForm.handleChange}
         />
       </div>
 
@@ -117,9 +127,11 @@ const SignupForm = ({ switchAuthState }) => {
         <input
           type="password"
           placeholder="confirm password"
-          name="confirm-password"
-          id="confirm-password"
+          name="confirmPassword"
+          id="confirmPassword"
           className="block w-full border-2 border-gray-300 rounded-md px-5 py-4 text-2xl"
+          value={signupForm.values.confirmPassword}
+          onChange={signupForm.handleChange}
         />
       </div>
 

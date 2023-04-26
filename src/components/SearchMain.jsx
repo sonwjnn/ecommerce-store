@@ -107,10 +107,10 @@ const SearchMain = () => {
             {listCarts.length}
           </span>
 
-          <div className="header__cart-list">
+          <div className="header__cart-list rounded-md">
             {/* <!-- No-cart:header__cart-list--no-items -->
                                     <!-- Have-cart:header__cart-list--have-items --> */}
-            <div className="header__cart-list-container  header__cart-list--have-items cursor-default">
+            <div className="header__cart-list-container overflow-hidden mx-0 px-[12px]  header__cart-list--have-items cursor-default">
               <img
                 src="/src/assets/img/no-items.png"
                 alt=""
@@ -119,21 +119,30 @@ const SearchMain = () => {
               <div className="header__cart-list--no-items-decription">
                 Bạn chưa có sản phẩm nào.
               </div>
-              <div className="header__cart-list--have-items-header select-none ">
+              <div className="header__cart-list--have-items-header py-4 select-none ">
                 <h3 className="header__cart-list--have-items-title">
                   Sản phẩm mới thêm
                 </h3>
               </div>
-              <div className="header__cart-list--have-items-body">
+              <div className="header__cart-list--have-items-body max-h-[50vh] overflow-hidden">
                 <ul className="header__cart-list--have-items-items">
                   {listCarts.map(cart => {
                     const urlImage = `/src/assets/img/products/${cart.productImage}`
+                    const maxLength = 28
+                    let shorterTitle
+                    if (cart.productTitle.length > maxLength) {
+                      shorterTitle =
+                        cart.productTitle.substring(0, maxLength) + '...'
+                    }
                     let price =
                       cart.productPrice &&
                       cart.productPrice.replace(/\B(?=(\d{3})+(?!\d))/g, '.')
                     return (
-                      <li className="header__cart-list--have-items-item cursor-pointer hover:bg-bg_page transition-all p-2 pr-3">
-                        <span className="header__cart-list--have-items-item-wrap gap-4">
+                      <li
+                        key={cart.productId}
+                        className="header__cart-list--have-items-item cursor-pointer hover:bg-bg_page transition-all p-2 pr-3"
+                      >
+                        <span className="header__cart-list--have-items-item-wrap gap-2">
                           <span className="header__cart-list--have-items-img ">
                             <div
                               className="min-w-[50px] h-[50px] bg-no-repeat bg-center bg-cover "
@@ -143,7 +152,7 @@ const SearchMain = () => {
                             ></div>
                           </span>
                           <span className="header__cart-list--have-items-decription">
-                            {cart.productTitle}
+                            {shorterTitle}
                           </span>
                         </span>
                         <span className="header__cart-list--have-items-price">
@@ -155,12 +164,12 @@ const SearchMain = () => {
                 </ul>
               </div>
               <div className="header__cart-list--have-items-footer mt-2">
-                <button
+                <span
                   onClick={handleCarts}
-                  className="header__cart-list--have-items-btn auth-form__form-btn px-1 py-3 w-[120px] btn-primary"
+                  className="header__cart-list--have-items-btn auth-form__form-btn cursor-pointer px-1 py-3 w-[120px] btn-primary"
                 >
                   Xem giỏ hàng
-                </button>
+                </span>
                 <div className="clear"></div>
               </div>
             </div>
