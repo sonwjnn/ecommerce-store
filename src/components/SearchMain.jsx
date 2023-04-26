@@ -110,7 +110,7 @@ const SearchMain = () => {
           <div className="header__cart-list">
             {/* <!-- No-cart:header__cart-list--no-items -->
                                     <!-- Have-cart:header__cart-list--have-items --> */}
-            <div className="header__cart-list-container header__cart-list--have-items">
+            <div className="header__cart-list-container  header__cart-list--have-items cursor-default">
               <img
                 src="/src/assets/img/no-items.png"
                 alt=""
@@ -119,73 +119,48 @@ const SearchMain = () => {
               <div className="header__cart-list--no-items-decription">
                 Bạn chưa có sản phẩm nào.
               </div>
-              <div className="header__cart-list--have-items-header">
+              <div className="header__cart-list--have-items-header select-none ">
                 <h3 className="header__cart-list--have-items-title">
                   Sản phẩm mới thêm
                 </h3>
               </div>
               <div className="header__cart-list--have-items-body">
                 <ul className="header__cart-list--have-items-items">
-                  <li className="header__cart-list--have-items-item">
-                    <span className="header__cart-list--have-items-item-wrap">
-                      <span className="header__cart-list--have-items-img">
-                        <img
-                          src="/src/assets/img/header-cart-item1.jfif"
-                          alt=""
-                        />
-                      </span>
-                      <span className="header__cart-list--have-items-decription">
-                        Giày Derby JOG04 ( Bộ sưu tập 2022 )
-                      </span>
-                    </span>
-                    <span className="header__cart-list--have-items-price">
-                      3.000.000đ
-                    </span>
-                  </li>
-                  <li className="header__cart-list--have-items-item">
-                    <span className="header__cart-list--have-items-item-wrap">
-                      <span className="header__cart-list--have-items-img">
-                        <img
-                          src="/src/assets/img/header-cart-item1.jfif"
-                          alt=""
-                        />
-                      </span>
-                      <span className="header__cart-list--have-items-decription">
-                        Giày Derby JOG04 ( Bộ sưu tập 2022 )
-                      </span>
-                    </span>
-                    <span className="header__cart-list--have-items-price">
-                      2.000.000đ
-                    </span>
-                  </li>
-                  <li className="header__cart-list--have-items-item">
-                    <span className="header__cart-list--have-items-item-wrap">
-                      <span className="header__cart-list--have-items-img">
-                        <img
-                          src="/src/assets/img/header-cart-item1.jfif"
-                          alt=""
-                        />
-                      </span>
-                      <span className="header__cart-list--have-items-decription">
-                        Giày Derby JOG04 ( Bộ sưu tập 2022 )
-                      </span>
-                    </span>
-                    <span className="header__cart-list--have-items-price">
-                      2.500.000đ
-                    </span>
-                  </li>
+                  {listCarts.map(cart => {
+                    const urlImage = `/src/assets/img/products/${cart.productImage}`
+                    let price =
+                      cart.productPrice &&
+                      cart.productPrice.replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                    return (
+                      <li className="header__cart-list--have-items-item cursor-pointer hover:bg-bg_page transition-all p-2 pr-3">
+                        <span className="header__cart-list--have-items-item-wrap gap-4">
+                          <span className="header__cart-list--have-items-img ">
+                            <div
+                              className="min-w-[50px] h-[50px] bg-no-repeat bg-center bg-cover "
+                              style={{
+                                backgroundImage: `url(${urlImage})`
+                              }}
+                            ></div>
+                          </span>
+                          <span className="header__cart-list--have-items-decription">
+                            {cart.productTitle}
+                          </span>
+                        </span>
+                        <span className="header__cart-list--have-items-price">
+                          đ{price}
+                        </span>
+                      </li>
+                    )
+                  })}
                 </ul>
               </div>
-              <div className="header__cart-list--have-items-footer">
-                <span className="header__cart-list--have-items-footer-decription">
-                  10 thêm vào giỏ hàng
-                </span>
-                <a
-                  href="#"
-                  className="header__cart-list--have-items-btn auth-form__form-btn btn-primary"
+              <div className="header__cart-list--have-items-footer mt-2">
+                <button
+                  onClick={handleCarts}
+                  className="header__cart-list--have-items-btn auth-form__form-btn px-1 py-3 w-[120px] btn-primary"
                 >
                   Xem giỏ hàng
-                </a>
+                </button>
                 <div className="clear"></div>
               </div>
             </div>

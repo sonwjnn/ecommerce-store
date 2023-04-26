@@ -34,6 +34,11 @@ const MainLayout = () => {
   }, [dispatch])
 
   useEffect(() => {
+    const cartsOfUser = async () => {
+      const { response, err } = await cartApi.getList()
+      if (response) dispatch(setListCarts(response))
+    }
+    cartsOfUser()
     if (!user) dispatch(setListCarts([]))
   }, [user, dispatch])
 

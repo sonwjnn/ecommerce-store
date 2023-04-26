@@ -748,7 +748,6 @@
 }
 
 .header__cart-list::after {
-  cursor: pointer;
   content: '';
   border-style: solid;
   border-width: 20px 30px;
@@ -858,7 +857,7 @@
 
 .header__cart-list--have-items-footer {
   display: flex;
-  height: 48px;
+  height: 44px;
   align-items: center;
   justify-content: space-between;
 }
