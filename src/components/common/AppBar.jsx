@@ -5,15 +5,14 @@ import { useParams, useLocation } from 'react-router-dom'
 
 const AppBar = () => {
   const location = useLocation()
-  const { sign, productId } = useParams()
-  const carts = location.pathname === '/carts'
-  const account = location.pathname === '/user/account'
+  const { sign, productId, accountType } = useParams()
+  const carts = location.pathname === 'user/carts'
   return (
     <>
       <div
         className={`header bg-gradient-to-b from-bg_header_t to-bg_header_b  w-full ${
           sign || carts ? 'hidden' : ''
-        } ${productId || account ? 'relative' : ''} ${
+        } ${productId || accountType ? 'relative' : ''} ${
           !sign && !productId ? 'fixed' : ''
         }
         `}

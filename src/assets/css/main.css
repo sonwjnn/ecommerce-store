@@ -1557,3 +1557,7 @@ i.home-product-item__icon-heart-fill {
   color: var(--primary-color);
   border: 1px solid var(--primary-color);
 }
+
+.action-account.active {
+  color: var(--primary-color);
+}

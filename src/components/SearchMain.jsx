@@ -9,7 +9,7 @@ const SearchMain = () => {
   const navigate = useNavigate()
   const handleCarts = () => {
     if (user) {
-      navigate('/carts')
+      navigate('user/carts')
     } else {
       toast.error('You must login first!', { toastId: 'warning-login' })
       setTimeout(() => {

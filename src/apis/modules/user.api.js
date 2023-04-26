@@ -4,12 +4,9 @@ import publicClient from '../client/public.client.js'
 const userEndpoints = {
   // signin: 'admin/processLogin',
   signin: 'user/signin',
-  signout: 'permission/logout',
   signup: 'user/signup',
-  getInfo: 'admin/users/showDetail',
-  addUser: 'permission/add',
-  update: 'permission/users/update',
-  passwordUpdate: 'permission/users/updatePassword'
+  passwordUpdate: 'user/update-password',
+  getInfo: 'admin/users/showDetail'
 }
 
 const userApi = {

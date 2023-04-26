@@ -55,7 +55,7 @@ const routes = [
     state: 'password.update'
   },
   {
-    path: '/carts',
+    path: 'user/carts',
     element: (
       <ProtectedPage>
         <CartList />
@@ -86,7 +86,7 @@ const routes = [
     element: <AuthUser />
   },
   {
-    path: '/user/account',
+    path: '/user/account/:accountType',
     element: <AccountPage />
   }
 ]

@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { setAuthModalOpen } from '../redux/features/authModelSlice'
 import { setSignState } from '../redux/features/signStateSlice'
 import { setUser } from '../redux/features/userSlice'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { RiGlobalLine } from 'react-icons/ri'
 
 const actionState = {
@@ -12,6 +12,7 @@ const actionState = {
 }
 const HeaderMenu = () => {
   const history = useNavigate()
+  const location = useLocation()
 
   const authUserPage = value => {
     history(`/authUser/${value}`)
@@ -21,6 +22,8 @@ const HeaderMenu = () => {
   const [anchorEl, setAnchorEl] = useState(null)
 
   const toggleMenu = e => setAnchorEl(e.currentTarget)
+
+  const checkUserRoute = location.pathname.includes('user')
   return (
     <ul className="nav-list">
       <li className="nav-list-item">
@@ -179,20 +182,23 @@ const HeaderMenu = () => {
             </span>
             <ul className="nav-list-item-user-menu">
               <li className="nav-list-item-user-menu-item">
-                <button>Tài khoản của tôi</button>
+                <button>
+                  <Link to={'/user/account/profile'}>Tài khoản của tôi</Link>
+                </button>
               </li>
               <li className="nav-list-item-user-menu-item">
                 <button href="!#">Đơn mua</button>
               </li>
               <li className="nav-list-item-user-menu-item">
-                <button
-                  href="!#"
-                  onClick={() => {
-                    dispatch(setUser(null))
-                  }}
-                >
-                  Đăng xuất
-                </button>
+                <Link to={checkUserRoute ? '/' : null}>
+                  <button
+                    onClick={() => {
+                      dispatch(setUser(null))
+                    }}
+                  >
+                    Đăng xuất
+                  </button>
+                </Link>
               </li>
             </ul>
           </>
