@@ -7,6 +7,7 @@ import PasswordUpdate from '../pages/PasswordUpdate'
 import ReviewList from '../pages/ReviewList'
 import ProtectedPage from '../components/common/ProtectedPage'
 import AuthUser from '../pages/AuthUser'
+import AccountPage from '../pages/AccountPage'
 import { useEffect } from 'react'
 import BoardContent from '../components/BoardContent'
 
@@ -83,6 +84,10 @@ const routes = [
   {
     path: '/authUser/:sign',
     element: <AuthUser />
+  },
+  {
+    path: '/user/account',
+    element: <AccountPage />
   }
 ]
 

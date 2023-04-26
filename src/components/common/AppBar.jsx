@@ -7,12 +7,15 @@ const AppBar = () => {
   const location = useLocation()
   const { sign, productId } = useParams()
   const carts = location.pathname === '/carts'
+  const account = location.pathname === '/user/account'
   return (
     <>
       <div
         className={`header bg-gradient-to-b from-bg_header_t to-bg_header_b  w-full ${
           sign || carts ? 'hidden' : ''
-        } ${productId ? 'relative' : ''} ${!sign && !productId ? 'fixed' : ''}
+        } ${productId || account ? 'relative' : ''} ${
+          !sign && !productId ? 'fixed' : ''
+        }
         `}
       >
         <div className="grid wide">
