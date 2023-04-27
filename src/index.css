@@ -30,4 +30,8 @@
   .btn-cart-solid {
     @apply py-2 transition-all px-8 hover:text-primary  text-gray-500  rounded-md;
   }
+
+  .errMsg {
+    @apply text-red-500 text-[12px];
+  }
 }

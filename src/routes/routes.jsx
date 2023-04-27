@@ -88,6 +88,10 @@ const routes = [
   {
     path: '/user/account/:accountType',
     element: <AccountPage />
+  },
+  {
+    path: '/user/purchase',
+    element: <AccountPage />
   }
 ]
 

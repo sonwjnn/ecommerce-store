@@ -25,8 +25,8 @@ const SigninForm = () => {
     },
     validationSchema: Yup.object({
       username: Yup.string()
-        .min(8, 'username minimum 8 character')
-        .required('username is required'),
+        .min(8, 'user name minimum 8 character')
+        .required('user name is required'),
       password: Yup.string()
         .min(8, 'password minimum 8 character')
         .required('password is required')
@@ -52,40 +52,34 @@ const SigninForm = () => {
     <form onSubmit={signinForm.handleSubmit}>
       <h1 className="text-[22px] mb-6">Đăng Nhập</h1>
 
-      <label
-        htmlFor="first-name"
-        className="block   text-[16px] leading-6 text-gray-900"
-      >
-        Tên đăng nhập
-      </label>
       <div className="mt-2 mb-5">
         <input
           type="text"
           name="username"
-          placeholder="user name"
+          placeholder="User name"
           id="username"
           className="block w-full border-2 border-gray-300 rounded-md px-5  py-4 text-2xl"
           value={signinForm.values.username}
           onChange={signinForm.handleChange}
         />
+        {signinForm.errors.username && (
+          <p className="errMsg ">{signinForm.errors.username}</p>
+        )}
       </div>
 
-      <label
-        htmlFor="first-name"
-        className="block text-[16px] leading-6 text-gray-900 "
-      >
-        Mật khẩu
-      </label>
       <div className="mt-2">
         <input
           type="password"
           name="password"
-          placeholder="password"
+          placeholder="Password"
           id="password"
           className="block w-full border-2 border-gray-300 rounded-md px-5 py-4 text-2xl"
           value={signinForm.values.password}
           onChange={signinForm.handleChange}
         />
+        {signinForm.errors.password && (
+          <p className="errMsg">{signinForm.errors.password}</p>
+        )}
       </div>
 
       <div className="mt-6 flex flex-col gap-4">

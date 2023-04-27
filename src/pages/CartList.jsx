@@ -19,13 +19,22 @@ const CartItem = props => {
     quantity,
     id,
     onRemoved,
-    onCheckedAll,
-    onCheckRemoved
+    onCheckRemoved,
+    handleCheckedCart,
+    isCheckedAll,
+    setCheckedAll
   } = props
 
   const dispatch = useDispatch()
   const inputRef = useRef()
   const [cartValue, setCartValue] = useState(1)
+  const [isChecked, setIsChecked] = useState(false)
+
+  const handleCheckCart = () => {
+    setIsChecked(!isChecked)
+    handleCheckedCart(id, !isChecked)
+  }
+
   useEffect(() => {
     setCartValue(+quantity)
   }, [quantity])
@@ -72,12 +81,12 @@ const CartItem = props => {
         <div className="flex items-center gap-8 self-start flex-grow">
           <input
             type="checkbox"
-            checked={onCheckedAll}
+            checked={isChecked || isCheckedAll}
             name=""
             id=""
             ref={inputRef}
             className="w-6 h-6"
-            onChange={() => {}}
+            onChange={handleCheckCart}
           />
           <div
             className="min-w-[80px] h-[80px] bg-no-repeat bg-center bg-cover "
@@ -137,7 +146,8 @@ const CartList = () => {
   const { user, listCarts } = useSelector(state => state.user)
   const dispatch = useDispatch()
   const [carts, setCarts] = useState([])
-  const [checkedAll, setCheckedAll] = useState(false)
+  const [isCheckedAll, setCheckedAll] = useState(false)
+  const [checkedCarts, setCheckedCarts] = useState([])
 
   useEffect(() => {
     const getListCartUser = async () => {
@@ -152,10 +162,6 @@ const CartList = () => {
     getListCartUser()
   }, [dispatch])
 
-  useEffect(() => {
-    dispatch(setListCarts(carts))
-  }, [carts])
-
   const onRemoved = id => {
     const newCarts = [...carts].filter(e => e._id !== id)
     setCarts(newCarts)
@@ -163,8 +169,24 @@ const CartList = () => {
     // setCount(page - 1)
   }
 
+  useEffect(() => {
+    if (isCheckedAll) {
+      setCheckedCarts(carts.map(cart => cart._id))
+    } else {
+      setCheckedCarts([])
+    }
+  }, [isCheckedAll])
+
+  const handleCheckedCart = (cartId, isChecked) => {
+    if (isChecked) {
+      setCheckedCarts([...checkedCarts, cartId])
+    } else {
+      setCheckedCarts(checkedCarts.filter(id => id !== cartId))
+    }
+  }
+
   const onCheckedAll = () => {
-    setCheckedAll(!checkedAll)
+    setCheckedAll(!isCheckedAll)
   }
 
   const onCheckRemoved = ids => {
@@ -174,6 +196,10 @@ const CartList = () => {
     })
     setCarts(newCarts)
   }
+
+  useEffect(() => {
+    console.log(checkedCarts)
+  }, [checkedCarts])
 
   return (
     <div className="bg-bg_page">
@@ -230,8 +256,9 @@ const CartList = () => {
                 imageName={cart.productImage}
                 quantity={cart.quantity}
                 onRemoved={onRemoved}
-                onCheckedAll={checkedAll}
                 onCheckRemoved={onCheckRemoved}
+                handleCheckedCart={handleCheckedCart}
+                isCheckedAll={isCheckedAll}
               />
             ))}
           </div>
@@ -240,7 +267,7 @@ const CartList = () => {
             <div className="flex items-center justify-between p-4 lg:p-8">
               <div className="flex items-center text-[14px] lg:text-[17px] gap-4">
                 <button className="btn-cart-solid" onClick={onCheckedAll}>
-                  Chọn tất cả (2)
+                  Chọn tất cả ({carts.length})
                 </button>
                 <button className="btn-cart-solid">Xoá</button>
                 <button className="btn-cart-solid">Thêm đã thích</button>

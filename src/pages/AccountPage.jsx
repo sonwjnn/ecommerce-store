@@ -5,7 +5,7 @@ import { AiOutlineTags } from 'react-icons/ai'
 import { useSelector } from 'react-redux'
 import * as Yup from 'yup'
 import { useEffect, useState } from 'react'
-import { Link, useParams, useNavigate } from 'react-router-dom'
+import { Link, useParams, useNavigate, useLocation } from 'react-router-dom'
 import { useFormik } from 'formik'
 import userApi from '../apis/modules/user.api'
 import { setUser } from '../redux/features/userSlice'
@@ -16,13 +16,14 @@ const AccountPage = () => {
   const { user } = useSelector(state => state.user)
   const [activeAccount, setActiveAccount] = useState(null)
   const { accountType } = useParams()
-
-  useEffect(() => {}, [])
+  const location = useLocation()
 
   const maxLength = 10
   let shorterName
   if (user.name.length > maxLength) {
     shorterName = user.name.substring(0, maxLength) + '...'
+  } else {
+    shorterName = user.name
   }
 
   const actionsAccount = [
@@ -90,7 +91,9 @@ const AccountPage = () => {
               <div className="flex gap-3 items-center">
                 <FaRegUser className="self-start text-[22px] text-blue-600" />
                 <div className="flex flex-col capitalize gap-3">
-                  <span className="text-[16px]">tài khoản của tôi</span>
+                  <span className="text-[16px]">
+                    <Link to={'/user/account/profile'}>tài khoản của tôi</Link>
+                  </span>
                   <div className="gap-2 flex flex-col">
                     {actionsAccount.map((action, index) => (
                       <Link
@@ -110,7 +113,9 @@ const AccountPage = () => {
 
               <button className="flex gap-3 items-center">
                 <SiReacthookform className="text-[22px] text-orange-700" />
-                <span className="text-[16px] capitalize">đơn mua</span>
+                <span className="text-[16px] capitalize">
+                  <Link to={'/user/purchase'}>đơn mua</Link>
+                </span>
               </button>
 
               <button className="flex gap-3 items-center">
@@ -130,6 +135,8 @@ const AccountPage = () => {
                 ? 'đổi mật khẩu'
                 : accountType === 'profile'
                 ? 'hồ sơ'
+                : location.pathname === '/user/purchase'
+                ? 'đơn hàng'
                 : ''}
             </div>
             {accountType === 'password' && (

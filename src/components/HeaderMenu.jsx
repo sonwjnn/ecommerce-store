@@ -187,7 +187,9 @@ const HeaderMenu = () => {
                 </button>
               </li>
               <li className="nav-list-item-user-menu-item">
-                <button href="!#">Đơn mua</button>
+                <Link to={'/user/purchase'}>
+                  <button>Đơn mua</button>
+                </Link>
               </li>
               <li className="nav-list-item-user-menu-item">
                 <Link to={checkUserRoute ? '/' : null}>

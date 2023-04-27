@@ -15,6 +15,7 @@ const cartApi = {
       return { error }
     }
   },
+
   add: async ({
     productId,
     productTitle,
@@ -37,6 +38,7 @@ const cartApi = {
       return { error }
     }
   },
+
   remove: async ({ cartId }) => {
     try {
       const response = await privateClient.delete(

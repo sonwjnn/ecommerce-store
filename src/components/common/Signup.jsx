@@ -25,18 +25,18 @@ const SignupForm = () => {
     },
     validationSchema: Yup.object({
       displayName: Yup.string()
-        .min(8, 'displayName minimum 8 character')
-        .required('displayName is required'),
+        .min(8, 'display name minimum 8 character')
+        .required('display name is required'),
       username: Yup.string()
-        .min(8, 'username minimum 8 character')
-        .required('username is required'),
+        .min(8, 'user name minimum 8 character')
+        .required('user name is required'),
       password: Yup.string()
         .min(8, 'password minimum 8 character')
         .required('password is required'),
       confirmPassword: Yup.string()
-        .oneOf([Yup.ref('password')], 'confirmNewPassword not match')
-        .min(8, 'confirmPassword minimum 8 character')
-        .required('confirmPassword is required')
+        .oneOf([Yup.ref('password')], 'confirm new password not match')
+        .min(8, 'confirm password minimum 8 character')
+        .required('confirm password is required')
     }),
     onSubmit: async values => {
       console.log(123)
@@ -62,77 +62,65 @@ const SignupForm = () => {
     <form onSubmit={signupForm.handleSubmit}>
       <h1 className="text-[22px] mb-6">Đăng Kí</h1>
 
-      <label
-        htmlFor="display-name"
-        className="block   text-[16px] leading-6 text-gray-900"
-      >
-        Tên user
-      </label>
       <div className="mt-2 mb-5">
         <input
           type="text"
           name="displayName"
-          placeholder="display name"
+          placeholder="Display name"
           id="displayName"
           className="block w-full border-2 border-gray-300 rounded-md px-5  py-4 text-2xl"
           value={signupForm.values.displayName}
           onChange={signupForm.handleChange}
         />
+        {signupForm.errors.displayName && (
+          <p className="errMsg ">{signupForm.errors.displayName}</p>
+        )}
       </div>
 
-      <label
-        htmlFor="first-name"
-        className="block   text-[16px] leading-6 text-gray-900"
-      >
-        Tên đăng nhập
-      </label>
       <div className="mt-2 mb-5">
         <input
           type="text"
           name="username"
-          placeholder="user name"
+          placeholder="User name"
           id="username"
           autoComplete="given-name"
           className="block w-full border-2 border-gray-300 rounded-md px-5  py-4 text-2xl"
           value={signupForm.values.username}
           onChange={signupForm.handleChange}
         />
+        {signupForm.errors.username && (
+          <p className="errMsg ">{signupForm.errors.username}</p>
+        )}
       </div>
 
-      <label
-        htmlFor="first-name"
-        className="block   text-[16px] leading-6 text-gray-900 "
-      >
-        Mật khẩu
-      </label>
       <div className="mt-2 mb-5">
         <input
           type="password"
-          placeholder="password"
+          placeholder="Password"
           name="password"
           id="password"
           className="block w-full border-2 border-gray-300 rounded-md px-5 py-4 text-2xl"
           value={signupForm.values.password}
           onChange={signupForm.handleChange}
         />
+        {signupForm.errors.password && (
+          <p className="errMsg ">{signupForm.errors.password}</p>
+        )}
       </div>
 
-      <label
-        htmlFor="first-name"
-        className="block   text-[16px] leading-6 text-gray-900 "
-      >
-        Nhập lại mật khẩu
-      </label>
       <div className="mt-2">
         <input
           type="password"
-          placeholder="confirm password"
+          placeholder="Confirm password"
           name="confirmPassword"
           id="confirmPassword"
           className="block w-full border-2 border-gray-300 rounded-md px-5 py-4 text-2xl"
           value={signupForm.values.confirmPassword}
           onChange={signupForm.handleChange}
         />
+        {signupForm.errors.confirmPassword && (
+          <p className="errMsg ">{signupForm.errors.confirmPassword}</p>
+        )}
       </div>
 
       <div className="mt-6 flex flex-col gap-4">
