@@ -35,6 +35,10 @@ const AccountPage = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   const form = useFormik({
     initialValues: {
       password: '',

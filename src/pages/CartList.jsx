@@ -22,7 +22,7 @@ const CartItem = props => {
     onCheckRemoved,
     handleCheckedCart,
     isCheckedAll,
-    setCheckedAll
+    checkedCarts
   } = props
 
   const dispatch = useDispatch()
@@ -259,6 +259,7 @@ const CartList = () => {
                 onCheckRemoved={onCheckRemoved}
                 handleCheckedCart={handleCheckedCart}
                 isCheckedAll={isCheckedAll}
+                checkedCarts={checkedCarts}
               />
             ))}
           </div>

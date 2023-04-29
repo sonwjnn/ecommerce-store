@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { productType } from '../routes/routes'
 
-const BoardBar = () => {
+const BoardBar = props => {
   const { cates } = useSelector(state => state.cates)
-
+  const { handleSortPriceDownUp, handleSortPriceUpDown } = props
   return (
     <>
       <div className="home-filter hide-on-mobile-tablet">
@@ -19,13 +19,19 @@ const BoardBar = () => {
           <i className="select-input__icon ti-angle-down"></i>
           <ul className="select-input__menu top-[110%]">
             <li className="select-input__item">
-              <button className="select-input__link ">
+              <button
+                className="select-input__link "
+                onClick={handleSortPriceDownUp}
+              >
                 <i className="select-input__icon ti-arrow-down"></i>
                 <span className="ml-2">Thấp đến cao</span>
               </button>
             </li>
             <li className="select-input__item">
-              <button className="select-input__link ">
+              <button
+                className="select-input__link "
+                onClick={handleSortPriceUpDown}
+              >
                 <i className="select-input__icon ti-arrow-up"></i>
                 <span className="ml-2">Cao đến thấp</span>
               </button>

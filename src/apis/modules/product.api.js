@@ -3,8 +3,8 @@ import privateClient from '../client/private.client'
 const productEndpoints = {
   list: 'products/list',
   detail: ({ productId }) => `products/detail/${productId}`,
-  add: 'user/products',
-  remove: ({ productId }) => `user/products/${productId}`
+  search: ({ productType, query, page }) =>
+    `${productType}/search?query=${query}&page=${page}}`
 }
 
 const productApi = {
@@ -20,6 +20,19 @@ const productApi = {
     try {
       const response = await privateClient.get(
         productEndpoints.detail({ productId })
+      )
+      return { response }
+    } catch (error) {
+      return { error }
+    }
+  },
+  search: async ({ query, page }) => {
+    try {
+      const response = await privateClient.get(
+        productEndpoints.search({
+          query,
+          page
+        })
       )
       return { response }
     } catch (error) {

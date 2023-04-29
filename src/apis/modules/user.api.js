@@ -6,7 +6,7 @@ const userEndpoints = {
   signin: 'user/signin',
   signup: 'user/signup',
   passwordUpdate: 'user/update-password',
-  getInfo: 'admin/users/showDetail'
+  getInfo: 'user/info'
 }
 
 const userApi = {

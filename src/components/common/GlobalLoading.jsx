@@ -28,7 +28,7 @@ const GlobalLoading = () => {
     <>
       {isLoading ? (
         <>
-          <div className=" h-screen w-full z-50 fixed transition-all bg-white">
+          <div className=" h-screen top-0 left-0 w-full z-50 fixed transition-all bg-white">
             <AppBar className="z-51" />
             <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
               <PulseLoader

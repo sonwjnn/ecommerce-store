@@ -1,4 +1,3 @@
-import HomePage from '../pages/HomePage'
 import CartList from '../pages/CartList'
 import ProductDetail from '../pages/ProductDetail'
 import ProductList from '../components/ProductList'
@@ -8,8 +7,6 @@ import ReviewList from '../pages/ReviewList'
 import ProtectedPage from '../components/common/ProtectedPage'
 import AuthUser from '../pages/AuthUser'
 import AccountPage from '../pages/AccountPage'
-import { useEffect } from 'react'
-import BoardContent from '../components/BoardContent'
 
 export const routesGen = {
   home: '/',
@@ -40,11 +37,6 @@ const routes = [
     state: 'home'
   },
 
-  {
-    path: '/search',
-    element: <ProductSearch />,
-    state: 'search'
-  },
   {
     path: '/password-update',
     element: (
@@ -92,6 +84,11 @@ const routes = [
   {
     path: '/user/purchase',
     element: <AccountPage />
+  },
+  {
+    path: '/search/:keyword',
+    element: <ProductSearch />,
+    state: 'search'
   }
 ]
 

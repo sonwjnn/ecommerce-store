@@ -41,7 +41,7 @@ const HeaderMenu = () => {
               <span className="notify-container-img-box">
                 <img
                   className="notify-container-img"
-                  src="src/assets/img/notify-product.jfif"
+                  src="/src/assets/img/notify-product.jfif"
                   alt="img"
                 />
               </span>
@@ -60,7 +60,7 @@ const HeaderMenu = () => {
               <span className="notify-container-img-box">
                 <img
                   className="notify-container-img"
-                  src="src/assets/img/notify-product.jfif"
+                  src="/src/assets/img/notify-product.jfif"
                   alt="img"
                 />
               </span>
@@ -80,7 +80,7 @@ const HeaderMenu = () => {
               <span className="notify-container-img-box">
                 <img
                   className="notify-container-img"
-                  src="src/assets/img/notify-product.jfif"
+                  src="/src/assets/img/notify-product.jfif"
                   alt="img"
                 />
               </span>
@@ -99,7 +99,7 @@ const HeaderMenu = () => {
               <span className="notify-container-img-box">
                 <img
                   className="notify-container-img"
-                  src="src/assets/img/notify-product.jfif"
+                  src="/src/assets/img/notify-product.jfif"
                   alt="img"
                 />
               </span>
@@ -118,7 +118,7 @@ const HeaderMenu = () => {
               <span className="notify-container-img-box">
                 <img
                   className="notify-container-img"
-                  src="src/assets/img/notify-product.jfif"
+                  src="/src/assets/img/notify-product.jfif"
                   alt="img"
                 />
               </span>
@@ -172,7 +172,7 @@ const HeaderMenu = () => {
           <>
             <span className="nav-list-item-user-img-wrap">
               <img
-                src="src/assets/img/user-avt.jpg"
+                src="/src/assets/img/user-avt.jpg"
                 alt="#"
                 className="nav-list-item-user-img"
               />

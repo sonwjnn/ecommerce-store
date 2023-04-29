@@ -10,28 +10,28 @@ const HeaderSocial = () => {
         <div className="nav-qr-add"></div>
         <div className="nav-qr-code">
           <img
-            src="src/assets/img/qr-code.png"
+            src="/src/assets/img/qr-code.png"
             alt="img"
             className="nav-qr-code__img"
           />
           <div className="nav-qr-code__link">
             <a href="#" className="nav-qr-code__link-item">
               <img
-                src="src/assets/img/google-play.png"
+                src="/src/assets/img/google-play.png"
                 alt="img"
                 className="nav-qr-code__link-img"
               />
             </a>
             <a href="#" className="nav-qr-code__link-item">
               <img
-                src="src/assets/img/app-store.png"
+                src="/src/assets/img/app-store.png"
                 alt="img"
                 className="nav-qr-code__link-img"
               />
             </a>
             <a href="#" className="nav-qr-code__link-item">
               <img
-                src="src/assets/img/app-galerry.png"
+                src="/src/assets/img/app-galerry.png"
                 alt="img"
                 className="nav-qr-code__link-img"
               />

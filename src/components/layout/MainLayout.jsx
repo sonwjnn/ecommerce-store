@@ -22,15 +22,12 @@ const MainLayout = () => {
 
   //get user from redux store with JWT
   useEffect(() => {
-    // const authUser = async () => {
-    //   const { response, err } = await userApi.getInfo()
-    //   if (response.kq) dispatch(setUser(response))
-    //   else dispatch(setUser(null))
-    // }
-    // authUser()
-    if (!user) {
-      removeCookie('actkn')
+    const authUser = async () => {
+      const { response, err } = await userApi.getInfo()
+      if (response) dispatch(setUser(response))
+      else dispatch(setUser(null))
     }
+    authUser()
   }, [dispatch])
 
   useEffect(() => {
@@ -39,7 +36,9 @@ const MainLayout = () => {
       if (response) dispatch(setListCarts(response))
     }
     cartsOfUser()
-    if (!user) dispatch(setListCarts([]))
+    if (!user) {
+      dispatch(setListCarts([]))
+    }
   }, [user, dispatch])
 
   return (

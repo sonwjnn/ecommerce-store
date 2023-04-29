@@ -1,12 +1,26 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { BiSearch } from 'react-icons/bi'
 import { CgShoppingCart } from 'react-icons/cg'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
+import { useEffect, useRef, useState } from 'react'
 
 const SearchMain = () => {
   const { user, listCarts } = useSelector(state => state.user)
   const navigate = useNavigate()
+  const location = useLocation()
+
+  // useEffect(() => {
+  //   setKeyword('')
+  // }, [location])
+
+  const [keyword, setKeyword] = useState('')
+
+  const handleSubmitSearch = e => {
+    e.preventDefault()
+    navigate(`/search/${encodeURIComponent(keyword)}`)
+  }
+
   const handleCarts = () => {
     if (user) {
       navigate('user/carts')
@@ -43,11 +57,15 @@ const SearchMain = () => {
             <span className="header__seach-mobile  hidden absolute left-[20px] top-[25%] z-20">
               <BiSearch className="h-8 text-[20px] text-gray-500 mt-1 " />
             </span>
-            <input
-              type="text"
-              className="header__search-input relative"
-              placeholder="Nhập sản phẩm để tìm kiếm"
-            />
+            <form onSubmit={handleSubmitSearch} className="h-full">
+              <input
+                type="text"
+                className="header__search-input relative"
+                placeholder="Nhập sản phẩm để tìm kiếm"
+                value={keyword}
+                onChange={event => setKeyword(event.target.value)}
+              />
+            </form>
             <div className="header__search-history">
               <div className="header__search-history-heading">
                 Lịch sử tìm kiếm
@@ -66,7 +84,7 @@ const SearchMain = () => {
             </div>
           </div>
           <div className="header__search-option">
-            <span className="header__search-btn">
+            <span className="header__search-btn" onClick={handleSubmitSearch}>
               <BiSearch className="text-[20px] text-white mt-1" />
             </span>
           </div>
