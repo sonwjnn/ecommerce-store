@@ -116,7 +116,10 @@ const ProductDetail = () => {
     cateName = product.cateName
   } = product
 
-  const urlImage = `/src/assets/img/products/${imageName}`
+  const urlImage = new URL(
+    `../assets/img/products/${imageName}`,
+    import.meta.url
+  ).href
 
   return (
     <div className="bg-bg_page px-0 xl:px-[136px] py-0 sm:py-[56px]   h-full">

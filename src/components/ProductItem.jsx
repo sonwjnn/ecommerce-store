@@ -3,7 +3,10 @@ import { useNavigate } from 'react-router-dom'
 
 const ProductItem = props => {
   const { id, title, origin, info, date, price, imageName, cateName } = props
-  const urlImgage = `/src/assets/img/products/${imageName}`
+  const urlImage = new URL(
+    `../assets/img/products/${imageName}`,
+    import.meta.url
+  ).href
 
   const history = useNavigate()
 
@@ -15,7 +18,7 @@ const ProductItem = props => {
       <div className="home-product-item cursor-pointer" onClick={productDetail}>
         <div
           className="home-product-item__img bg-no-repeat bg-center bg-cover"
-          style={{ backgroundImage: `url(${urlImgage})` }}
+          style={{ backgroundImage: `url(${urlImage})` }}
         ></div>
         <h2 className="home-product-item__title">{title}</h2>
         <div className="home-product-item__tag-red">Mua 3 & giảm 5%</div>

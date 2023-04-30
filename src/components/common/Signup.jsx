@@ -41,7 +41,6 @@ const SignupForm = () => {
     onSubmit: async values => {
       setErrorMessage(undefined)
       setIsLoginRequest(true)
-      console.log(values)
       const { response, err } = await userApi.signup(values)
       setIsLoginRequest(false)
 

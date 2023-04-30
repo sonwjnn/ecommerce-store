@@ -1,6 +1,7 @@
 import { BsFacebook } from 'react-icons/bs'
 import { AiFillInstagram } from 'react-icons/ai'
-
+const urlSocial = new URL('../assets/img/notify-product.jfif', import.meta.url)
+  .href
 const HeaderSocial = () => {
   return (
     <ul className="nav-list">
@@ -10,28 +11,34 @@ const HeaderSocial = () => {
         <div className="nav-qr-add"></div>
         <div className="nav-qr-code">
           <img
-            src="/src/assets/img/qr-code.png"
+            src={new URL('../assets/img/qr-code.png', import.meta.url).href}
             alt="img"
             className="nav-qr-code__img"
           />
           <div className="nav-qr-code__link">
             <a href="#" className="nav-qr-code__link-item">
               <img
-                src="/src/assets/img/google-play.png"
+                src={
+                  new URL('../assets/img/google-play.png', import.meta.url).href
+                }
                 alt="img"
                 className="nav-qr-code__link-img"
               />
             </a>
             <a href="#" className="nav-qr-code__link-item">
               <img
-                src="/src/assets/img/app-store.png"
+                src={
+                  new URL('../assets/img/app-store.png', import.meta.url).href
+                }
                 alt="img"
                 className="nav-qr-code__link-img"
               />
             </a>
             <a href="#" className="nav-qr-code__link-item">
               <img
-                src="/src/assets/img/app-galerry.png"
+                src={
+                  new URL('../assets/img/app-galerry.png', import.meta.url).href
+                }
                 alt="img"
                 className="nav-qr-code__link-img"
               />

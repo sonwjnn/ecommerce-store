@@ -24,6 +24,13 @@ const HeaderMenu = () => {
   const toggleMenu = e => setAnchorEl(e.currentTarget)
 
   const checkUserRoute = location.pathname.includes('user')
+
+  const urlAvar = new URL('../assets/img/user-avt.jpg', import.meta.url).href
+
+  const urlNotify = new URL(
+    '../assets/img/notify-product.jfif',
+    import.meta.url
+  ).href
   return (
     <ul className="nav-list">
       <li className="nav-list-item">
@@ -41,7 +48,7 @@ const HeaderMenu = () => {
               <span className="notify-container-img-box">
                 <img
                   className="notify-container-img"
-                  src="/src/assets/img/notify-product.jfif"
+                  src={`${urlNotify}`}
                   alt="img"
                 />
               </span>
@@ -60,7 +67,7 @@ const HeaderMenu = () => {
               <span className="notify-container-img-box">
                 <img
                   className="notify-container-img"
-                  src="/src/assets/img/notify-product.jfif"
+                  src={`${urlNotify}`}
                   alt="img"
                 />
               </span>
@@ -80,7 +87,7 @@ const HeaderMenu = () => {
               <span className="notify-container-img-box">
                 <img
                   className="notify-container-img"
-                  src="/src/assets/img/notify-product.jfif"
+                  src={`${urlNotify}`}
                   alt="img"
                 />
               </span>
@@ -99,7 +106,7 @@ const HeaderMenu = () => {
               <span className="notify-container-img-box">
                 <img
                   className="notify-container-img"
-                  src="/src/assets/img/notify-product.jfif"
+                  src={`${urlNotify}`}
                   alt="img"
                 />
               </span>
@@ -118,7 +125,7 @@ const HeaderMenu = () => {
               <span className="notify-container-img-box">
                 <img
                   className="notify-container-img"
-                  src="/src/assets/img/notify-product.jfif"
+                  src={`${urlNotify}`}
                   alt="img"
                 />
               </span>
@@ -172,7 +179,7 @@ const HeaderMenu = () => {
           <>
             <span className="nav-list-item-user-img-wrap">
               <img
-                src="/src/assets/img/user-avt.jpg"
+                src={`${urlAvar}`}
                 alt="#"
                 className="nav-list-item-user-img"
               />
