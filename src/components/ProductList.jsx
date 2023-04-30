@@ -3,17 +3,20 @@ import productApi from '../apis/modules/product.api'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setProductLoading } from '../redux/features/productLoading'
-import { toast } from 'react-toastify'
 import { useParams, useLocation } from 'react-router-dom'
-import { cloneDeep } from 'lodash'
-import { setProductsStore } from '../redux/features/productSlice'
+import {
+  setProductsSortPrice,
+  setProductsStore
+} from '../redux/features/productSlice'
 const ProductList = () => {
   const dispatch = useDispatch()
   const location = useLocation()
   const { productType } = useParams()
-  const { productsStore } = useSelector(state => state.products)
-
+  const { productsStore, productsSortPrice } = useSelector(
+    state => state.products
+  )
   const [products, setProducts] = useState([])
+  const [productsSort, setProductsSort] = useState([])
 
   useEffect(() => {
     const getProducts = async () => {
@@ -24,7 +27,6 @@ const ProductList = () => {
       if (response.kq) {
         setProducts(response.msg)
       }
-      // if (response.msg) toast.error(response.msg)
     }
 
     getProducts()
@@ -33,33 +35,41 @@ const ProductList = () => {
   useEffect(() => {
     if (products.length) {
       dispatch(
-        setProductsStore(
-          products.filter((item, index) => item.cateName === productType)
-        )
+        setProductsStore(products.filter(item => item.cateName === productType))
       )
+      setProductsSort(products)
     }
   }, [dispatch, productType, products])
 
-  const handleProductsRender = () => {
-    if (location.pathname === '/') {
-      let cates = document.querySelectorAll('.category-item__link')
-      cates = Array.from(cates)
-      cates.forEach(cate => {
-        if (cate.classList.contains('active')) {
-          cate.classList.remove('active')
-        }
-      })
-      return products
-    } else {
-      return productsStore.length ? productsStore : products
+  useEffect(() => {
+    if (productsSortPrice) {
+      if (productsStore.length) {
+        dispatch(
+          setProductsStore(
+            productsSortPrice === 'upToDown'
+              ? [...productsStore].sort((a, b) => +b.price - +a.price)
+              : [...productsStore].sort((a, b) => +a.price - +b.price)
+          )
+        )
+      } else {
+        setProductsSort(
+          productsSortPrice === 'upToDown'
+            ? [...products].sort((a, b) => +b.price - +a.price)
+            : [...products].sort((a, b) => +a.price - +b.price)
+        )
+      }
     }
-  }
+  }, [productsSortPrice])
+
+  useEffect(() => {
+    dispatch(setProductsSortPrice(null))
+  }, [location])
 
   return (
     <div className="home-product home-product--spacing-bottom">
       <div className="row sm-gutter">
         {/* <!-- Product item --> */}
-        {handleProductsRender().map((product, index) => (
+        {(productsStore.length ? productsStore : productsSort).map(product => (
           <ProductItem
             key={product._id}
             id={product._id}

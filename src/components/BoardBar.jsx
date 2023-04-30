@@ -14,7 +14,7 @@ const BoardBar = props => {
         <button className="home-filter__btn btn btn-primary">Mới nhất</button>
         <button className="home-filter__btn btn">Bán chạy</button>
 
-        <div className="select-input">
+        <div className="select-input ">
           <span className="select-input__lable">Giá</span>
           <i className="select-input__icon ti-angle-down"></i>
           <ul className="select-input__menu top-[110%]">

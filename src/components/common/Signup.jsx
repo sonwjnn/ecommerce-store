@@ -39,9 +39,9 @@ const SignupForm = () => {
         .required('confirm password is required')
     }),
     onSubmit: async values => {
-      console.log(123)
       setErrorMessage(undefined)
       setIsLoginRequest(true)
+      console.log(values)
       const { response, err } = await userApi.signup(values)
       setIsLoginRequest(false)
 

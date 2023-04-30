@@ -4,7 +4,7 @@ import categoryApi from '../apis/modules/category.api'
 import { setGlobalLoading } from '../redux/features/globalLoadingSlice'
 import { toast } from 'react-toastify'
 import { Link, useParams } from 'react-router-dom'
-import { productType } from '../routes/routes'
+import { productType as productTypes } from '../routes/routes'
 import { BiCategory } from 'react-icons/bi'
 import { setCates } from '../redux/features/cateSlice'
 
@@ -13,7 +13,7 @@ const Category = () => {
   const [categories, setCategories] = useState([])
   const [activeLink, setActiveLink] = useState(null)
   const { cates } = useSelector(state => state.cates)
-
+  const { productType } = useParams()
   useEffect(() => {
     const getCategories = async () => {
       const { response, err } = await categoryApi.getList()
@@ -24,7 +24,7 @@ const Category = () => {
     }
 
     getCategories()
-  }, [productType, dispatch])
+  }, [productTypes, dispatch])
 
   useEffect(() => {
     dispatch(setCates(categories))
@@ -41,9 +41,9 @@ const Category = () => {
           {categories.map((cate, index) => (
             <li className="category-item select-none" key={cate._id}>
               <Link
-                to={`/products/${productType[index]}`}
+                to={`/products/${productTypes[index]}`}
                 className={`category-item__link ${
-                  activeLink === index ? 'active' : ''
+                  activeLink === index && productType ? 'active' : ''
                 }`}
                 onClick={() => setActiveLink(index)}
               >

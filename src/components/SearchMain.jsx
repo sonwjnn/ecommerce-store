@@ -10,9 +10,11 @@ const SearchMain = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  // useEffect(() => {
-  //   setKeyword('')
-  // }, [location])
+  useEffect(() => {
+    if (!location.pathname.includes('search')) {
+      setKeyword('')
+    }
+  }, [location])
 
   const [keyword, setKeyword] = useState('')
 
@@ -23,12 +25,10 @@ const SearchMain = () => {
 
   const handleCarts = () => {
     if (user) {
-      navigate('user/carts')
+      navigate('/user/carts')
     } else {
       toast.error('You must login first!', { toastId: 'warning-login' })
-      setTimeout(() => {
-        navigate('/authUser/signin')
-      }, 2000)
+      navigate('/authUser/signin')
     }
   }
 
@@ -90,7 +90,7 @@ const SearchMain = () => {
           </div>
         </div>
         <div className="header__search-decription hide-on-mobile-tablet">
-          <ul className="header__search-decription-list">
+          <ul className="header__search-decription-list pointer-events-none">
             <li className="header__search-decription-list-item">
               <a href="">Túi xách nữ</a>
             </li>
