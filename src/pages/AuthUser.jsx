@@ -30,7 +30,7 @@ const AuthUser = () => {
 
   return (
     <div className="absolute h-screen w-screen overflow-hidden top-0 left-0 right-0 bottom-0 ">
-      <header className="flex items-center justify-between py-3 px-24 bg-white h-[85px]">
+      <header className="flex items-center justify-center sm:justify-between py-3 px-24 bg-white h-[85px]">
         <div className="flex ">
           <button onClick={toHomePage} className=" inline-block max-w-[200px]">
             <svg
@@ -45,7 +45,7 @@ const AuthUser = () => {
           </button>
         </div>
 
-        <div className="help text-2xl text-primary underline cursor-pointer">
+        <div className="help text-2xl hidden sm:block text-primary underline cursor-pointer">
           Bạn cần giúp đỡ ?
         </div>
       </header>
@@ -61,7 +61,7 @@ const AuthUser = () => {
         <div className="flex ">
           <div className="left-[10%] top-[22%] absolute hidden auth:block"></div>
         </div>
-        <div className="w-[400px] h-[492px] mx-auto  auth:mx-0 block bg-white rounded-md mt-[8%] auth:mt-0 py-6 px-12 auth:absolute auth:right-[10%] auth:top-[50%] auth:translate-y-[-50%] ">
+        <div className="sm:w-[400px] w-full h-[492px] sm:mx-auto  auth:mx-0 block bg-white rounded-md mt-[8%] auth:mt-0 py-6 px-12 auth:absolute auth:right-[10%] auth:top-[50%] auth:translate-y-[-50%] ">
           {sign === actionState.signin && (
             <SigninForm
               switchAuthState={() => switchAuthState(actionState.signup)}

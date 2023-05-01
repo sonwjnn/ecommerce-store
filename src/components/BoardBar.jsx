@@ -2,10 +2,13 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { productType } from '../routes/routes'
+import { useLocation } from 'react-router-dom'
 
 const BoardBar = props => {
   const { cates } = useSelector(state => state.cates)
   const { handleSortPriceDownUp, handleSortPriceUpDown } = props
+  const location = useLocation()
+  const search = location.pathname.includes('search')
   return (
     <>
       <div className="home-filter hide-on-mobile-tablet">
@@ -55,7 +58,7 @@ const BoardBar = props => {
           </div>
         </div>
       </div>
-      <nav className="mobile-category">
+      <nav className={`mobile-category ${search ? 'hidden' : ''}`}>
         <ul className="mobile-category__list">
           {cates.map((item, index) => (
             <Link

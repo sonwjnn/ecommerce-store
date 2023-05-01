@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { PulseLoader } from 'react-spinners'
 import { css } from '@emotion/react'
 import AppBar from '../common/AppBar.jsx'
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 
 const override = css`
   display: 'block';
@@ -16,10 +17,12 @@ const GlobalLoading = () => {
 
   useEffect(() => {
     if (globalLoading) {
+      disableBodyScroll(document)
       setLoading(true)
     } else {
       setTimeout(() => {
         setLoading(false)
+        enableBodyScroll(document)
       }, 1000)
     }
   }, [globalLoading])

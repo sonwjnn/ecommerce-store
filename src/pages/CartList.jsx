@@ -73,7 +73,10 @@ const CartItem = props => {
     }
   }
 
-  const urlImage = `/src/assets/img/products/${imageName}`
+  const urlImage = new URL(
+    `../assets/img/products/${imageName}`,
+    import.meta.url
+  ).href
 
   return (
     <div className="p-8 w-full pb-0 pt-0">
@@ -203,7 +206,7 @@ const CartList = () => {
 
   return (
     <div className="bg-bg_page">
-      <header className="flex items-center justify-between py-6 px-24 bg-white h-[85px]">
+      <header className="flex items-center justify-between py-6 px-16 sm:px-24 bg-white h-[85px]">
         <div className="flex items-center mx-auto md:mx-0">
           <Link to={'/'} className=" inline-block max-w-[200px]">
             <svg

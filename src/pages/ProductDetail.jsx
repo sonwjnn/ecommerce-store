@@ -443,7 +443,12 @@ const ProductDetail = () => {
 
               <div className="flex p-8 gap-4 border-t border-gray-200 mt-[40px] capitalize text-[14px] items-center">
                 <img
-                  src="/src/assets/img/logos/logo_defense.png"
+                  src={
+                    new URL(
+                      '../assets/img/logos/logo_defense.png',
+                      import.meta.url
+                    ).href
+                  }
                   className="w-[20px] h-[20px]"
                 />
                 <span>shopee đảm bảo</span>

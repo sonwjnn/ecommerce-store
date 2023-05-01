@@ -31,7 +31,7 @@
     display: none;
   }
   .app__container {
-    padding-top: calc(var(--header-height) + var(--header-sort-bar-height));
+    padding-top: calc(var(--header-height) + 20px);
   }
   .header__sort-bar {
     display: flex;
@@ -77,7 +77,7 @@
   }
 
   .header {
-    padding-top: 30px;
+    padding-top: 10px;
     min-height: var(--header-height);
   }
   .hide-on-mobile {
