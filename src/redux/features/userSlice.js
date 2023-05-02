@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { forEach } from 'lodash'
-import { useCookies } from 'react-cookie'
 
 const userSlice = createSlice({
   name: 'user',

@@ -7,7 +7,6 @@ import userApi from '../../apis/modules/user.api'
 import { setAuthModalOpen } from '../../redux/features/authModelSlice'
 import { setUser } from '../../redux/features/userSlice'
 import { useNavigate } from 'react-router-dom'
-import { useCookies } from 'react-cookie'
 const SigninForm = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -16,7 +15,6 @@ const SigninForm = () => {
   }
   const [isLoginRequest, setIsLoginRequest] = useState(false)
   const [errorMessage, setErrorMessage] = useState()
-  const [cookie, setCookie, removeCookie] = useCookies([])
 
   const signinForm = useFormik({
     initialValues: {

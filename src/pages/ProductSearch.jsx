@@ -1,14 +1,13 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useParams } from 'react-router-dom'
 import BoardBar from '../components/BoardBar'
-import GlobalLoading from '../components/common/GlobalLoading'
 import Pagination from '../components/Pagination'
 import ProductItem from '../components/ProductItem'
 import Category from '../components/Category'
 import productApi from '../apis/modules/product.api'
 import { useDispatch } from 'react-redux'
-import { setProductLoading } from '../redux/features/productLoading'
 import productConfigs from '../configs/product.configs'
+import { setGlobalLoading } from '../redux/features/globalLoadingSlice'
 
 const ProductSearch = () => {
   const { keyword } = useParams()
@@ -35,9 +34,9 @@ const ProductSearch = () => {
 
   useEffect(() => {
     const getProducts = async () => {
-      dispatch(setProductLoading(true))
+      dispatch(setGlobalLoading(true))
       const { response, err } = await productApi.getList()
-      dispatch(setProductLoading(false))
+      dispatch(setGlobalLoading(false))
 
       if (response) {
         if (keyword.trim().length === 0) {
@@ -76,7 +75,6 @@ const ProductSearch = () => {
 
   return (
     <>
-      <GlobalLoading />
       <div className="app__container pt-0">
         <div className="max-w-[1200px] mx-auto">
           <div className="flex sm-gutter pt-0 lg:pt-[36px] app__content">

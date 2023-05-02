@@ -18,9 +18,6 @@ import SubLayout from './components/layout/SubLayout'
 import routes from './routes/routes'
 import NotFound from './components/common/NotFound'
 import 'react-toastify/dist/ReactToastify.css'
-import 'swiper/css'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
 import ProductList from './components/ProductList'
 
 const App = () => {

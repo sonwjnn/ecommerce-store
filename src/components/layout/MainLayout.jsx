@@ -8,7 +8,6 @@ import { toast } from 'react-toastify'
 import userApi from '../../apis/modules/user.api.js'
 import cartApi from '../../apis/modules/cart.api'
 import { setListCarts, setUser } from '../../redux/features/userSlice.js'
-import { useCookies } from 'react-cookie'
 
 // Layout use for all pages
 const MainLayout = () => {
@@ -17,8 +16,6 @@ const MainLayout = () => {
   const dispatch = useDispatch()
 
   const { user } = useSelector(state => state.user)
-
-  const [cookie, setCookie, removeCookie] = useCookies()
 
   //get user from redux store with JWT
   useEffect(() => {

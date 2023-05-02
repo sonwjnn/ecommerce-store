@@ -60,6 +60,8 @@ const ProductDetail = () => {
 
   const onCartClick = async () => {
     if (!user) {
+      toast.warning('You must login first!', { toastId: 'warning-login' })
+      navigate('/authUser/signin')
       return
     }
 

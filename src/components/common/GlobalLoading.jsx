@@ -16,6 +16,7 @@ const GlobalLoading = () => {
   const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     if (globalLoading) {
       disableBodyScroll(document)
       setLoading(true)
