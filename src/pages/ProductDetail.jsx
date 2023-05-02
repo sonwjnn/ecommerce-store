@@ -9,6 +9,7 @@ import cartApi from '../apis/modules/cart.api'
 import { setGlobalLoading } from '../redux/features/globalLoadingSlice'
 import { BsCartPlus, BsTruck } from 'react-icons/bs'
 import { addCart } from '../redux/features/userSlice'
+import ProductReview from '../components/common/ProductReview'
 const cartState = {
   increase: 'increase',
   decrease: 'decrease'
@@ -18,7 +19,7 @@ const ProductDetail = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [cartValue, setCartValue] = useState(1)
-  const { cateType, productId } = useParams()
+  const { productType, productId } = useParams()
   const [product, setProduct] = useState([])
   const [activeReview, setActiveReview] = useState(null)
   const { listCarts, user } = useSelector(state => state.user)
@@ -43,7 +44,7 @@ const ProductDetail = () => {
     }
 
     getProduct()
-  }, [cateType, productId, dispatch])
+  }, [productType, productId, dispatch])
 
   const handleValueCart = state => {
     if (cartState.increase == state) {
@@ -72,7 +73,7 @@ const ProductDetail = () => {
     const body = {
       productId: product._id,
       productTitle: product.title || product.name,
-      cateName: product.cateName,
+      productType: product.cateName,
       productPrice: product.price,
       productImage: product.imageName,
       quantity: cartValue
@@ -543,6 +544,12 @@ const ProductDetail = () => {
                   ))}
                 </div>
               </div>
+              {console.log(product)}
+              <ProductReview
+                reviews={product.reviews || []}
+                product={product}
+                productType={productType}
+              />
             </div>
           </div>
         </div>

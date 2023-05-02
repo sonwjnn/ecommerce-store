@@ -16,7 +16,7 @@ export const routesGen = {
   person: id => `/person/${id}`,
   favoriteList: '/favorites',
   reviewList: '/reviews',
-  passwordUpdate: 'password-update'
+  passwordUpdate: '/password-update'
 }
 
 export const productType = [
@@ -69,7 +69,7 @@ const routes = [
     element: <ProductList />
   },
   {
-    path: 'products/:cateType/:productId',
+    path: 'products/:productType/:productId',
     element: <ProductDetail />
   },
 
@@ -89,6 +89,15 @@ const routes = [
     path: '/search/:keyword',
     element: <ProductSearch />,
     state: 'search'
+  },
+  {
+    path: '/reviews',
+    element: (
+      <ProtectedPage>
+        <ReviewList />
+      </ProtectedPage>
+    ),
+    state: 'reviews'
   }
 ]
 

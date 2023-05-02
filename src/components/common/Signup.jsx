@@ -41,7 +41,7 @@ const SignupForm = () => {
     onSubmit: async values => {
       setErrorMessage(undefined)
       setIsLoginRequest(true)
-      const { response, err } = await userApi.signup(values)
+      const { response, error } = await userApi.signup(values)
       setIsLoginRequest(false)
 
       if (response) {
@@ -54,7 +54,7 @@ const SignupForm = () => {
         toast.success('Sign up success')
       }
 
-      if (err) setErrorMessage(err.message)
+      if (error) setErrorMessage(error.message)
     }
   })
   return (
@@ -87,9 +87,10 @@ const SignupForm = () => {
           value={signupForm.values.username}
           onChange={signupForm.handleChange}
         />
-        {signupForm.errors.username && (
+        {(signupForm.errors.username && (
           <p className="errMsg ">{signupForm.errors.username}</p>
-        )}
+        )) ||
+          (errorMessage && <p className="errMsg ">{errorMessage}</p>)}
       </div>
 
       <div className="mt-2 mb-5">

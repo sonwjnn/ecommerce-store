@@ -31,7 +31,7 @@ const SigninForm = () => {
     }),
     onSubmit: async values => {
       setErrorMessage(undefined)
-      const { response, err } = await userApi.signin(values)
+      const { response, error } = await userApi.signin(values)
       if (response) {
         signinForm.resetForm()
         dispatch(setUser(response))
@@ -40,10 +40,8 @@ const SigninForm = () => {
           navigate('/')
         }, 2000)
         toast.success('Sign in success')
-      } else {
-        if (err) setErrorMessage(err.message)
-        toast.error(err)
       }
+      if (error) setErrorMessage(error.message)
     }
   })
   return (
@@ -60,9 +58,12 @@ const SigninForm = () => {
           value={signinForm.values.username}
           onChange={signinForm.handleChange}
         />
-        {signinForm.errors.username && (
+        {(signinForm.errors.username && (
           <p className="errMsg ">{signinForm.errors.username}</p>
-        )}
+        )) ||
+          (errorMessage && errorMessage.includes('User') && (
+            <p className="errMsg ">{errorMessage}</p>
+          ))}
       </div>
 
       <div className="mt-2">
@@ -75,9 +76,12 @@ const SigninForm = () => {
           value={signinForm.values.password}
           onChange={signinForm.handleChange}
         />
-        {signinForm.errors.password && (
+        {(signinForm.errors.password && (
           <p className="errMsg">{signinForm.errors.password}</p>
-        )}
+        )) ||
+          (errorMessage && errorMessage.includes('password') && (
+            <p className="errMsg ">{errorMessage}</p>
+          ))}
       </div>
 
       <div className="mt-6 flex flex-col gap-4">
@@ -96,8 +100,6 @@ const SigninForm = () => {
           đăng kí
         </button>
       </div>
-
-      {errorMessage && errorMessage}
     </form>
   )
 }

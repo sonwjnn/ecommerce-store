@@ -1,0 +1,164 @@
+import { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
+import dayjs from 'dayjs'
+import { useSelector } from 'react-redux'
+import reviewApi from '../../apis/modules/review.api'
+import TextAvatar from './TextAvatar'
+import { RiDeleteBin5Line } from 'react-icons/ri'
+import { FiSend } from 'react-icons/fi'
+
+const ReviewItem = ({ review, onRemoved }) => {
+  const { user } = useSelector(state => state.user)
+
+  const [onRequest, setOnRequest] = useState(false)
+
+  const onRemove = async () => {
+    if (onRequest) return
+    setOnRequest(true)
+
+    const { response, err } = await reviewApi.remove({ reviewId: review._id })
+
+    setOnRequest(false)
+    if (err) toast.error(err.message)
+    if (response) onRemoved(review._id)
+  }
+
+  return (
+    <div className="p-2 rounded-md relative hover:bg-bg_page">
+      <div className="flex flex-row gap-2">
+        {/* avatar */}
+        <TextAvatar text={review.user.displayName} />
+        {/* avatar */}
+
+        <div className="gap-2 grow">
+          <div className="gap-1">
+            <h6 className="font-bold">{review.user.displayName}</h6>
+            <p>{dayjs(review.createdAt).format('DD-MM-YYYY HH:mm:ss')}</p>
+          </div>
+          <div className="flex justify-center">{review.content}</div>
+          {user && user.id === review.user.id && (
+            <button
+              onClick={onRemove}
+              className="sm:relative md:absolute sm:right-0 md:right-2 w-full"
+            >
+              <RiDeleteBin5Line className="mr-2" />
+              remove
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+const ProductReview = ({ reviews, product, productType }) => {
+  const { user } = useSelector(state => state.user)
+
+  const [listReviews, setListReviews] = useState([])
+  const [filteredReviews, setFilteredReviews] = useState([])
+  const [page, setPage] = useState(1)
+  const [onRequest, setOnRequest] = useState(false)
+  const [content, setContent] = useState('')
+  const [reviewCount, setReviewCount] = useState(0)
+
+  const skip = 4
+
+  useEffect(() => {
+    setListReviews([...reviews])
+    setFilteredReviews([...reviews].splice(0, skip))
+    setReviewCount(reviews.length)
+  }, [reviews])
+
+  const onAddReview = async () => {
+    if (onRequest) return
+    setOnRequest(true)
+    const body = {
+      content,
+      productId: product._id,
+      productType,
+      productTitle: product.title || product.name,
+      productImage: product.imageName
+    }
+
+    const { response, err } = await reviewApi.add(body)
+    setOnRequest(false)
+
+    if (err) toast.error(err.message)
+    if (response) {
+      toast.success('Post review success')
+
+      setFilteredReviews([...filteredReviews, response])
+      setReviewCount(reviewCount + 1)
+      setContent('')
+    }
+  }
+
+  const onLoadMore = () => {
+    setFilteredReviews([
+      ...filteredReviews,
+      ...[...listReviews].splice(page * skip, skip),
+      ,
+    ])
+    setPage(page + 1)
+  }
+
+  const onRemoved = id => {
+    if (listReviews.findIndex(e => e.id === id) !== -1) {
+      const newListReviews = [...listReviews].filter(e => e.id !== id)
+      setListReviews(newListReviews)
+      setFilteredReviews([...newListReviews].splice(0, page * skip))
+    } else {
+      setFilteredReviews([...filteredReviews].filter(e => e.id !== id))
+    }
+
+    setReviewCount(reviewCount - 1)
+
+    toast.success('Remove review success')
+  }
+
+  return (
+    <>
+      <div>
+        <div className="text-2xl font-semibold">Reviews ({reviewCount})</div>
+        <div className="gap-4 mb-2">
+          {filteredReviews.map(item => (
+            <div key={item._id}>
+              <ReviewItem review={item} onRemoved={onRemoved} />
+            </div>
+          ))}
+          {filteredReviews.length < listReviews.length && (
+            <button onClick={onLoadMore}>load more</button>
+          )}
+        </div>
+        {user && (
+          <>
+            <div className="flex flex-row gap-2">
+              <TextAvatar text={user.name} />
+              <div className="flex gap-4 flex-col w-full">
+                <h6 className="font-bold text-[16px]">{user.name}</h6>
+                <div className="flex gap-3">
+                  <textarea
+                    value={content}
+                    onChange={e => setContent(e.target.value)}
+                    rows={4}
+                    placeholder="Write your review"
+                    className="grow p-4 border border-gray-300 resize-none text-[14px]"
+                  />
+                  <button
+                    onClick={onAddReview}
+                    className="flex items-center btn-primary py-2 px-4 h-[4rem]"
+                  >
+                    <FiSend className="mr-2" />
+                    post
+                  </button>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+    </>
+  )
+}
+
+export default ProductReview
