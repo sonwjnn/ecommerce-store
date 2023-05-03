@@ -145,7 +145,10 @@ const SearchMain = () => {
               <div className="header__cart-list--have-items-body max-h-[50vh] overflow-hidden">
                 <ul className="header__cart-list--have-items-items">
                   {listCarts.map(cart => {
-                    const urlImage = `/src/assets/img/products/${cart.productImage}`
+                    const urlImage = new URL(
+                      `../assets/img/products/${cart.productImage}`,
+                      import.meta.url
+                    ).href
                     const maxLength = 28
                     let shorterTitle
                     if (cart.productTitle.length > maxLength) {
