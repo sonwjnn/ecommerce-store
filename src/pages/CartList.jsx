@@ -11,18 +11,19 @@ const cartState = {
   decrease: 'decrease'
 }
 const CartItem = props => {
-  let price = props.price && props.price.replace(/\B(?=(\d{3})+(?!\d))/g, '.')
   const {
     title,
     imageName,
     type,
     quantity,
     id,
+    price,
     onRemoved,
     onCheckRemoved,
     handleCheckedCart,
     isCheckedAll,
-    checkedCarts
+    checkedCarts,
+    handleDotPrice
   } = props
 
   const dispatch = useDispatch()
@@ -30,14 +31,22 @@ const CartItem = props => {
   const [cartValue, setCartValue] = useState(1)
   const [isChecked, setIsChecked] = useState(false)
 
-  const handleCheckCart = () => {
-    setIsChecked(!isChecked)
-    handleCheckedCart(id, !isChecked)
-  }
-
   useEffect(() => {
     setCartValue(+quantity)
   }, [quantity])
+
+  useEffect(() => {
+    if (isChecked) {
+      const currPrice = +price * cartValue
+      handleCheckedCart({ id, currPrice, isCartValue: true })
+    }
+  }, [cartValue])
+
+  const handleCheckCart = () => {
+    setIsChecked(!isChecked)
+    const currPrice = +price * cartValue
+    handleCheckedCart({ id, currPrice }, !isChecked)
+  }
 
   useEffect(() => {}, [cartValue])
 
@@ -78,6 +87,8 @@ const CartItem = props => {
     import.meta.url
   ).href
 
+  let prevPrice = price && handleDotPrice(price)
+  let currPrice = price && handleDotPrice((+price * cartValue).toString())
   return (
     <div className="p-8 w-full pb-0 pt-0">
       <div className="p-6 flex flex-col lg:flex-row items-center justify-between  border-b-gray-200 border-b">
@@ -104,7 +115,7 @@ const CartItem = props => {
         </div>
 
         <div className="flex relative flex-col lg:flex-row self-start ml-[132px] lg:self-center lg:ml-0  gap-[14px] lg:gap-[60px] md:items-center">
-          <div className="text-primary text-[16px] lg:px-12">₫{price}</div>
+          <div className="text-primary text-[16px] lg:px-12">₫{prevPrice}</div>
 
           <div className=" font-normal">
             <div className="flex gap-4 items-center">
@@ -130,7 +141,7 @@ const CartItem = props => {
           </div>
 
           <div className="hidden lg:block text-primary text-[16px] px-12">
-            ₫{price}
+            ₫{currPrice}
           </div>
 
           <button
@@ -180,11 +191,21 @@ const CartList = () => {
     }
   }, [isCheckedAll])
 
-  const handleCheckedCart = (cartId, isChecked) => {
+  const handleCheckedCart = ({ id, currPrice, isCartValue }, isChecked) => {
+    if (isCartValue) {
+      let checkedCartChange = checkedCarts.find(item => item.id === id)
+      if (checkedCartChange) {
+        checkedCartChange.currPrice = currPrice
+        let newCheckedCarts = checkedCarts.slice()
+
+        setCheckedCarts(newCheckedCarts)
+      }
+      return
+    }
     if (isChecked) {
-      setCheckedCarts([...checkedCarts, cartId])
+      setCheckedCarts([...checkedCarts, { id, currPrice }])
     } else {
-      setCheckedCarts(checkedCarts.filter(id => id !== cartId))
+      setCheckedCarts(checkedCarts.filter(item => item.id !== id))
     }
   }
 
@@ -199,8 +220,13 @@ const CartList = () => {
     })
     setCarts(newCarts)
   }
+  const handleDotPrice = price => {
+    return price.replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+  }
 
-  useEffect(() => {}, [listCarts])
+  // useEffect(() => {
+  //   console.log(checkedCarts)
+  // }, [checkedCarts])
 
   return (
     <div className="bg-bg_page">
@@ -232,8 +258,7 @@ const CartList = () => {
         <div className=" max-w-[1200px] h-full mx-auto overflow-hidden ">
           <div className="rounded-md  min-h-[40px] px-6 py-4 w-full  bg-white mt-12 hidden lg:flex justify-between text-[16px]">
             <div className="flex ml-8 items-center">
-              <input type="checkbox" className=" w-6 h-6" />
-              <div className="py-4 px-8 text-gray-500">Tất cả sản phẩm</div>
+              <div className="py-4 px-4 text-gray-500">Tất cả sản phẩm</div>
             </div>
 
             <div className="flex gap-x-[70px] text-gray-500">
@@ -261,6 +286,7 @@ const CartList = () => {
                 handleCheckedCart={handleCheckedCart}
                 isCheckedAll={isCheckedAll}
                 checkedCarts={checkedCarts}
+                handleDotPrice={handleDotPrice}
               />
             ))}
           </div>
@@ -268,7 +294,10 @@ const CartList = () => {
           <div className="sticky hidden md:block bottom-0 rounded-md h-full w-full bg-white mt-4 mb-20">
             <div className="flex items-center justify-between p-4 lg:p-8">
               <div className="flex items-center text-[14px] lg:text-[17px] gap-4">
-                <button className="btn-cart-solid" onClick={onCheckedAll}>
+                <button
+                  className="btn-cart-solid pointer-events-none select-none"
+                  onClick={onCheckedAll}
+                >
                   Chọn tất cả ({carts.length})
                 </button>
                 <button className="btn-cart-solid">Xoá</button>
@@ -277,10 +306,18 @@ const CartList = () => {
 
               <div className="flex gap-8 items-center ">
                 <span className="text-[14px] lg:text-[17px] text-gray-500">
-                  Tổng thanh toán (0 sản phẩm):
+                  Tổng thanh toán ({checkedCarts.length} sản phẩm):
                 </span>
-                <span className="text-primary font-semibold text-[20px] lg:text-[24px]">
-                  ₫52.000
+                <span className="text-primary font-semibold text-[20px] flex items-start  lg:text-[24px]">
+                  <span className="text-[16px] mt-2">₫</span>
+                  {handleDotPrice(
+                    checkedCarts
+                      .reduce(
+                        (currValue, item) => item.currPrice + currValue,
+                        0
+                      )
+                      .toString()
+                  )}
                 </span>
                 <button className="btn-primary py-3 px-12 lg:py-4 lg:px-16 min-w-[152px]">
                   mua hàng
