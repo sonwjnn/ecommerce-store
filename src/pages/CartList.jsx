@@ -200,9 +200,7 @@ const CartList = () => {
     setCarts(newCarts)
   }
 
-  useEffect(() => {
-    console.log(checkedCarts)
-  }, [checkedCarts])
+  useEffect(() => {}, [listCarts])
 
   return (
     <div className="bg-bg_page">

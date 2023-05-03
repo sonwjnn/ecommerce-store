@@ -111,13 +111,18 @@ const ProductDetail = () => {
     product.price && product.price.replace(/\B(?=(\d{3})+(?!\d))/g, '.')
 
   const {
-    title = product.name,
+    title = product.name || product.title,
     imageName = product.imageName,
     info = product.info,
     date = product.dateOfM,
     origin = product.origin,
-    cateName = product.cateName
+    cateName = product.cateName,
+    reviews = product.reviews
   } = product
+
+  useEffect(() => {
+    console.log(product.reviews)
+  }, [])
 
   const urlImage = new URL(
     `../assets/img/products/${imageName}`,
@@ -544,9 +549,8 @@ const ProductDetail = () => {
                   ))}
                 </div>
               </div>
-              {console.log(product)}
               <ProductReview
-                reviews={product.reviews || []}
+                reviews={reviews || []}
                 product={product}
                 productType={productType}
               />

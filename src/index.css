@@ -27,6 +27,10 @@
     @apply transition-all hover:brightness-125 rounded-[2px] capitalize py-4 px-8 text-[16px] bg-primary font-normal  text-white;
   }
 
+  .btn-remove {
+    @apply transition-all hover:brightness-125 rounded-[2px] capitalize py-4 px-8 text-[16px] bg-red-600 font-normal  text-white;
+  }
+
   .btn-cart-solid {
     @apply py-2 transition-all px-8 hover:text-primary  text-gray-500  rounded-md;
   }

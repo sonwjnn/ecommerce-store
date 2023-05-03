@@ -2,7 +2,6 @@ import { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { ClipLoader } from 'react-spinners'
 import { css } from '@emotion/react'
-import AppBar from '../common/AppBar.jsx'
 
 const override = css`
   display: 'block';
@@ -27,7 +26,7 @@ const ProductLoading = () => {
     <>
       {isLoading ? (
         <>
-          <div className="mt-[10px] h-full w-full z-49 relative bg-white">
+          <div className=" mt-[10px] min-h-[65vh] w-full z-49 relative bg-white">
             <div className="absolute top-[25%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
               <ClipLoader
                 color={'#00bfa5'}

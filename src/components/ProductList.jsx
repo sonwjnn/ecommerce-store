@@ -22,8 +22,8 @@ const ProductList = () => {
     const getProducts = async () => {
       dispatch(setProductLoading(true))
       const { response, err } = await productApi.getList()
-      dispatch(setProductLoading(false))
 
+      dispatch(setProductLoading(false))
       if (response.kq) {
         setProducts(response.msg)
       }
@@ -66,7 +66,7 @@ const ProductList = () => {
   }, [location])
 
   return (
-    <div className="home-product home-product--spacing-bottom">
+    <div className="home-product home-product--spacing-bottom ">
       <div className="row sm-gutter">
         {/* <!-- Product item --> */}
         {(productsStore.length ? productsStore : productsSort).map(product => (

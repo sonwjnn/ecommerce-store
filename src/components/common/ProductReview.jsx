@@ -24,25 +24,30 @@ const ReviewItem = ({ review, onRemoved }) => {
   }
 
   return (
-    <div className="p-2 rounded-md relative hover:bg-bg_page">
-      <div className="flex flex-row gap-2">
+    <div className="p-2 rounded-md relative hover:bg-bg_page mb-2">
+      <div className="flex flex-row gap-4">
         {/* avatar */}
-        <TextAvatar text={review.user.displayName} />
+        <TextAvatar text={review.user.name} />
         {/* avatar */}
 
-        <div className="gap-2 grow">
+        <div className="gap-2 flex flex-col grow justify-center">
           <div className="gap-1">
-            <h6 className="font-bold">{review.user.displayName}</h6>
-            <p>{dayjs(review.createdAt).format('DD-MM-YYYY HH:mm:ss')}</p>
+            <h6 className="font-bold text-[16px]">{review.user.name}</h6>
+            <p className="text-[11px] text-gray-500">
+              {dayjs(review.createdAt).format('DD-MM-YYYY HH:mm:ss')}
+            </p>
           </div>
-          <div className="flex justify-center">{review.content}</div>
+          <div className=" gap-4 flex flex-row justify-between">
+            <div className="flex justify-center text-[14px]">
+              {review.content}
+            </div>
+          </div>
           {user && user.id === review.user.id && (
             <button
               onClick={onRemove}
-              className="sm:relative md:absolute sm:right-0 md:right-2 w-full"
+              className="text-red-600 mr-2 text-[22px] flex items-center px-3 py-2 justify-center sm:relative md:absolute sm:right-0 md:right-2"
             >
-              <RiDeleteBin5Line className="mr-2" />
-              remove
+              <RiDeleteBin5Line />
             </button>
           )}
         </div>
@@ -119,7 +124,9 @@ const ProductReview = ({ reviews, product, productType }) => {
   return (
     <>
       <div>
-        <div className="text-2xl font-semibold">Reviews ({reviewCount})</div>
+        <div className="text-2xl  p-4 text-[18px]">
+          Số lượng đánh giá ({reviewCount})
+        </div>
         <div className="gap-4 mb-2">
           {filteredReviews.map(item => (
             <div key={item._id}>
@@ -132,7 +139,7 @@ const ProductReview = ({ reviews, product, productType }) => {
         </div>
         {user && (
           <>
-            <div className="flex flex-row gap-2">
+            <div className="flex flex-row gap-2 mt-2">
               <TextAvatar text={user.name} />
               <div className="flex gap-4 flex-col w-full">
                 <h6 className="font-bold text-[16px]">{user.name}</h6>
@@ -146,10 +153,10 @@ const ProductReview = ({ reviews, product, productType }) => {
                   />
                   <button
                     onClick={onAddReview}
-                    className="flex items-center btn-primary py-2 px-4 h-[4rem]"
+                    className="flex items-center justify-center btn-primary py-2 px-4 h-[4rem]"
                   >
-                    <FiSend className="mr-2" />
-                    post
+                    đăng
+                    <FiSend className="ml-2 mt-1" />
                   </button>
                 </div>
               </div>

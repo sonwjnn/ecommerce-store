@@ -151,6 +151,8 @@ const SearchMain = () => {
                     if (cart.productTitle.length > maxLength) {
                       shorterTitle =
                         cart.productTitle.substring(0, maxLength) + '...'
+                    } else {
+                      shorterTitle = cart.productTitle
                     }
                     let price =
                       cart.productPrice &&
