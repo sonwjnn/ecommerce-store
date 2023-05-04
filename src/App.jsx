@@ -19,6 +19,9 @@ import routes from './routes/routes'
 import NotFound from './components/common/NotFound'
 import 'react-toastify/dist/ReactToastify.css'
 import ProductList from './components/ProductList'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
 
 const App = () => {
   return (
@@ -42,7 +45,7 @@ const App = () => {
           <Route path="/" element={<MainLayout />}>
             {routes.map((route, index) =>
               route.index ? (
-                <Route key="sublayout" path="/" element={<SubLayout />}>
+                <>
                   <Route
                     index
                     key={index}
@@ -56,12 +59,14 @@ const App = () => {
                       )
                     }
                   />
-                  <Route
-                    key="products/:productType"
-                    path="/products/:productType"
-                    element={<ProductList />}
-                  />
-                </Route>
+                  <Route key="sublayout" path="/" element={<SubLayout />}>
+                    <Route
+                      key="products/:productType"
+                      path="/products/:cateType/:productType"
+                      element={<ProductList />}
+                    />
+                  </Route>
+                </>
               ) : (
                 <Route
                   path={route.path}

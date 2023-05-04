@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const ProductItem = props => {
   const { id, title, origin, info, date, price, imageName, cateName } = props
+  const { cateType, productType } = useParams()
   const urlImage = new URL(
     `../assets/img/products/${imageName}`,
     import.meta.url
@@ -11,7 +12,7 @@ const ProductItem = props => {
   const history = useNavigate()
 
   const productDetail = () => {
-    history(`/products/${cateName}/${id}`)
+    history(`/products/${cateType}/${productType}/${id}`)
   }
   return (
     <div className="col sm:flex-[33%] md:max-w-[33%] lg:flex-[20%] lg:max-w-[20%] c-6">

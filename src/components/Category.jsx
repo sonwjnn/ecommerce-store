@@ -9,8 +9,10 @@ import { BiCategory } from 'react-icons/bi'
 import { setCates } from '../redux/features/cateSlice'
 import { setProductLoading } from '../redux/features/productLoading'
 import ProductLoading from './common/ProductLoading'
+import productConfigs from '../configs/product.configs'
 
 const Category = () => {
+  const { cateType } = useParams()
   const dispatch = useDispatch()
   const [categories, setCategories] = useState([])
   const [activeLink, setActiveLink] = useState(null)
@@ -46,9 +48,9 @@ const Category = () => {
           {categories.map((cate, index) => (
             <li className="category-item select-none" key={cate._id}>
               <Link
-                to={`/products/${productTypes[index]}`}
+                to={`/products/${cateType}/${productTypes[index]}`}
                 className={`category-item__link ${
-                  activeLink === index && productType ? 'active' : ''
+                  activeLink === index ? 'active' : ''
                 }`}
                 onClick={() => setActiveLink(index)}
               >

@@ -1,7 +1,5 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import { resolve } from 'path'
-import { copy } from 'fs-extra'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -11,17 +9,9 @@ export default defineConfig({
     port: '3000'
   },
   optimizeDeps: {
-    exclude: ['react-spinners']
+    exclude: ['react-spinners', 'swiper', 'swiper-react']
   },
   build: {
-    rollupOptions: {
-      output: {
-        assetFileNames: '[name][extname]'
-      }
-    },
-    afterWrite: [
-      () =>
-        copy(resolve(process.cwd(), 'assets'), resolve(process.cwd(), 'dist'))
-    ]
+    cssCodeSplit: true
   }
 })

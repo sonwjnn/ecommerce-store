@@ -32,7 +32,6 @@ const SubLayout = () => {
                 handleSortPriceUpDown={handleSortPriceUpDown}
                 handleSortPriceDownUp={handleSortPriceDownUp}
               />
-              <ProductLoading />
               {/* <ProductList /> */}
               <Outlet />
               <Pagination />

@@ -6,7 +6,6 @@ import ProductItem from '../components/ProductItem'
 import Category from '../components/Category'
 import productApi from '../apis/modules/product.api'
 import { useDispatch } from 'react-redux'
-import productConfigs from '../configs/product.configs'
 import { setGlobalLoading } from '../redux/features/globalLoadingSlice'
 
 const ProductSearch = () => {
@@ -79,7 +78,7 @@ const ProductSearch = () => {
         <div className="max-w-[1200px] mx-auto">
           <div className="flex sm-gutter pt-0 lg:pt-[36px] app__content">
             <div className="col hidden md:block">
-              <Category productCategory={productConfigs.electronic} />
+              <Category />
             </div>
 
             <div className="col col-span-10 overflow-hidden grow">

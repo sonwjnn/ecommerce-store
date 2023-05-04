@@ -7,6 +7,7 @@ import ReviewList from '../pages/ReviewList'
 import ProtectedPage from '../components/common/ProtectedPage'
 import AuthUser from '../pages/AuthUser'
 import AccountPage from '../pages/AccountPage'
+import HomePage from '../pages/HomePage'
 
 export const routesGen = {
   home: '/',
@@ -33,7 +34,7 @@ export const productType = [
 const routes = [
   {
     index: true,
-    element: <ProductList />,
+    element: <HomePage />,
     state: 'home'
   },
 
@@ -65,11 +66,7 @@ const routes = [
     state: 'reviews'
   },
   {
-    path: '/:productType',
-    element: <ProductList />
-  },
-  {
-    path: 'products/:productType/:productId',
+    path: '/products/:cateType/:productType/:productId',
     element: <ProductDetail />
   },
 

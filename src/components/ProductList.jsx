@@ -5,9 +5,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setProductLoading } from '../redux/features/productLoading'
 import { useParams, useLocation } from 'react-router-dom'
 import {
+  clearProductsStore,
   setProductsSortPrice,
   setProductsStore
 } from '../redux/features/productSlice'
+import { setGlobalLoading } from '../redux/features/globalLoadingSlice'
 const ProductList = () => {
   const dispatch = useDispatch()
   const location = useLocation()
@@ -20,10 +22,11 @@ const ProductList = () => {
 
   useEffect(() => {
     const getProducts = async () => {
-      dispatch(setProductLoading(true))
+      dispatch(setGlobalLoading(true))
+      dispatch(clearProductsStore())
       const { response, err } = await productApi.getList()
 
-      dispatch(setProductLoading(false))
+      dispatch(setGlobalLoading(false))
       if (response.kq) {
         setProducts(response.msg)
       }
@@ -66,8 +69,8 @@ const ProductList = () => {
   }, [location])
 
   return (
-    <div className="home-product home-product--spacing-bottom ">
-      <div className="row sm-gutter">
+    <div className="home-product home-product--spacing-bottom min-h-screen">
+      <div className="row sm-gutter relative">
         {/* <!-- Product item --> */}
         {(productsStore.length ? productsStore : productsSort).map(product => (
           <ProductItem
