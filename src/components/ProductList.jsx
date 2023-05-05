@@ -22,13 +22,21 @@ const ProductList = () => {
 
   useEffect(() => {
     const getProducts = async () => {
-      dispatch(setGlobalLoading(true))
-      dispatch(clearProductsStore())
-      const { response, err } = await productApi.getList()
+      if (location.pathname === '/') {
+        dispatch(clearProductsStore())
+        const { response, err } = await productApi.getList()
+        if (response.kq) {
+          setProducts(response.msg)
+        }
+      } else {
+        dispatch(setGlobalLoading(true))
+        dispatch(clearProductsStore())
+        const { response, err } = await productApi.getList()
 
-      dispatch(setGlobalLoading(false))
-      if (response.kq) {
-        setProducts(response.msg)
+        dispatch(setGlobalLoading(false))
+        if (response.kq) {
+          setProducts(response.msg)
+        }
       }
     }
 

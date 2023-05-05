@@ -1,51 +1,51 @@
-import React from "react";
+import React from 'react'
 
 const Pagination = () => {
   return (
     <>
       <ul className="pagination">
         <li className="pagination-item">
-          <a href="" className="pagination-item__link">
+          <button href="" className="pagination-item__link">
             <i className="pagination-item__icon ti-angle-left"></i>
-          </a>
+          </button>
         </li>
         <li className="pagination-item">
-          <a
+          <button
             href="#"
             className="pagination-item__link pagination-item__link--active"
           >
             1
-          </a>
+          </button>
         </li>
         <li className="pagination-item">
-          <a href="#" className="pagination-item__link">
+          <button href="#" className="pagination-item__link">
             2
-          </a>
+          </button>
         </li>
         <li className="pagination-item">
-          <a href="#" className="pagination-item__link">
+          <button href="#" className="pagination-item__link">
             3
-          </a>
+          </button>
         </li>
         <li className="pagination-item">
-          <a href="#" className="pagination-item__link">
+          <button href="#" className="pagination-item__link">
             4
-          </a>
+          </button>
         </li>
         <li className="pagination-item">
-          <a href="#" className="pagination-item__link">
+          <button href="#" className="pagination-item__link">
             5
-          </a>
+          </button>
         </li>
 
         <li className="pagination-item">
-          <a href="" className="pagination-item__link">
+          <button href="" className="pagination-item__link">
             <i className="pagination-item__icon ti-angle-right"></i>
-          </a>
+          </button>
         </li>
       </ul>
     </>
-  );
-};
+  )
+}
 
-export default Pagination;
+export default Pagination

@@ -77,16 +77,14 @@ const ProductSearch = () => {
       <div className="app__container pt-0">
         <div className="max-w-[1200px] mx-auto">
           <div className="flex sm-gutter pt-0 lg:pt-[36px] app__content">
-            <div className="col hidden md:block">
-              <Category />
-            </div>
+            <div className="col hidden md:block"></div>
 
             <div className="col col-span-10 overflow-hidden grow">
               <BoardBar
                 handleSortPriceDownUp={handleSortPriceDownUp}
                 handleSortPriceUpDown={handleSortPriceUpDown}
               />
-              <div className="home-product home-product--spacing-bottom">
+              <div className="home-product min-h-screen home-product--spacing-bottom">
                 <div className="row sm-gutter">
                   {/* <!-- Product item --> */}
                   {products.map((product, index) => (

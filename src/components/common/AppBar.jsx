@@ -11,7 +11,7 @@ const AppBar = () => {
   return (
     <>
       <div
-        className={`header bg-gradient-to-b from-bg_header_t to-bg_header_b  w-full ${
+        className={`header bg-gradient-to-b  from-bg_header_b to-bg_header_t  w-full ${
           sign || carts ? 'hidden' : ''
         } ${
           productId || accountType || purchase || keyword ? 'relative' : ''

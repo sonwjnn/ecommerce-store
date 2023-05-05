@@ -12,7 +12,7 @@ const ProductItem = props => {
   const history = useNavigate()
 
   const productDetail = () => {
-    history(`/products/${cateType}/${productType}/${id}`)
+    history(`/products/detail/${id}`)
   }
   return (
     <div className="col sm:flex-[33%] md:max-w-[33%] lg:flex-[20%] lg:max-w-[20%] c-6">

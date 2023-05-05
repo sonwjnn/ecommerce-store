@@ -34,18 +34,18 @@ const HeaderMenu = () => {
   return (
     <ul className="nav-list">
       <li className="nav-list-item">
-        <a href="" className="nav-item-link">
+        <button href="" className="nav-item-link">
           <i className="nav-icon fa-regular fa-bell mr-4"></i>
           Thông báo
-        </a>
+        </button>
         <div className="nav-notify-add"></div>
         <div className="nav-notify">
           <div className="notify-header">
             <h3 className="notify-header-info">Thông báo mới nhận</h3>
           </div>
           <div className="notify-container">
-            <a href="#" className="notify-container-ptn">
-              <span className="notify-container-img-box">
+            <button className="notify-container-ptn">
+              <span className="notify-container-img-box w-[100px]">
                 <img
                   className="notify-container-img"
                   src={`${urlNotify}`}
@@ -62,9 +62,9 @@ const HeaderMenu = () => {
                   ngay!
                 </p>
               </span>
-            </a>
-            <a href="#" className="notify-container-ptn">
-              <span className="notify-container-img-box">
+            </button>
+            <button className="notify-container-ptn">
+              <span className="notify-container-img-box w-[100px]">
                 <img
                   className="notify-container-img"
                   src={`${urlNotify}`}
@@ -81,10 +81,10 @@ const HeaderMenu = () => {
                   ngay!
                 </p>
               </span>
-            </a>
+            </button>
             3
-            <a href="#" className="notify-container-ptn">
-              <span className="notify-container-img-box">
+            <button className="notify-container-ptn">
+              <span className="notify-container-img-box w-[100px]">
                 <img
                   className="notify-container-img"
                   src={`${urlNotify}`}
@@ -101,9 +101,9 @@ const HeaderMenu = () => {
                   ngay!
                 </p>
               </span>
-            </a>
-            <a href="#" className="notify-container-ptn">
-              <span className="notify-container-img-box">
+            </button>
+            <button className="notify-container-ptn">
+              <span className="notify-container-img-box w-[100px]">
                 <img
                   className="notify-container-img"
                   src={`${urlNotify}`}
@@ -120,9 +120,9 @@ const HeaderMenu = () => {
                   ngay!
                 </p>
               </span>
-            </a>
-            <a href="#" className="notify-container-ptn">
-              <span className="notify-container-img-box">
+            </button>
+            <button className="notify-container-ptn">
+              <span className="notify-container-img-box w-[100px]">
                 <img
                   className="notify-container-img"
                   src={`${urlNotify}`}
@@ -139,35 +139,29 @@ const HeaderMenu = () => {
                   ngay!
                 </p>
               </span>
-            </a>
+            </button>
           </div>
           <div className="notify-footer">
-            <a href="#" className="notify-footer-btn">
-              Xem tất cả
-            </a>
+            <button className="notify-footer-btn">Xem tất cả</button>
           </div>
         </div>
       </li>
       <li className="nav-list-item ">
-        <a href="#" className="nav-item-link">
+        <button className="nav-item-link">
           <i className="nav-icon fa-regular fa-circle-question mr-4"></i>
           Trợ giúp
-        </a>
+        </button>
       </li>
-      <li className="nav-list-item">
-        <a href="#" className="nav-item-link">
+      <li className="nav-list-item ">
+        <button className="nav-item-link">
           <RiGlobalLine className="text-[20px] mr-2" />
           Tiếng Việt
           <i className="nav-icon fa-solid fa-angle-down ml-4 mr-4"></i>
-        </a>
+        </button>
         <div className="language-item-add"></div>
         <div className="nav-language">
-          <a href="#" className="language-item">
-            Tiếng Việt
-          </a>
-          <a href="#" className="language-item">
-            English
-          </a>
+          <button className="language-item w-full text-left">Tiếng Việt</button>
+          <button className="language-item w-full text-left">English</button>
         </div>
       </li>
       {/* <li className="nav-list-item nav-list-item--strong">Đăng ký</li>

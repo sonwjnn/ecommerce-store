@@ -61,7 +61,7 @@ const App = () => {
                   />
                   <Route key="sublayout" path="/" element={<SubLayout />}>
                     <Route
-                      key="products/:productType"
+                      key="products/:cateType/:productType"
                       path="/products/:cateType/:productType"
                       element={<ProductList />}
                     />

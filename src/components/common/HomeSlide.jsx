@@ -20,9 +20,10 @@ const HomeSlide = () => {
             <div
               className="bg-no-repeat bg-cover bg-center h-full w-full"
               style={{
-                backgroundImage: `url(${handleLinkImage(
-                  `../assets/img/banners/${link}`
-                )})`
+                backgroundImage: `url(${
+                  new URL(`../../assets/img/banners/${link}`, import.meta.url)
+                    .href
+                })`
               }}
             ></div>
           </SwiperSlide>

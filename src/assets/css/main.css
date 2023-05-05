@@ -197,7 +197,7 @@
   position: absolute;
   /* max-height: 1000px;   */
   right: 0;
-  top: 130%;
+  top: 90%;
   border-radius: 2px;
   background-color: #fff;
   display: none;
@@ -347,7 +347,7 @@
   text-decoration: none;
   color: #333;
   display: block;
-  padding: 12px;
+  padding: 8px 12px;
   transition: 0.3s ease;
 }
 

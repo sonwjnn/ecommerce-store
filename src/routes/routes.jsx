@@ -66,7 +66,7 @@ const routes = [
     state: 'reviews'
   },
   {
-    path: '/products/:cateType/:productType/:productId',
+    path: '/products/detail/:productId',
     element: <ProductDetail />
   },
 
