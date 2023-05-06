@@ -183,11 +183,11 @@ const ProductDetail = () => {
 
               <div className="flex sm:hidden gap-4">
                 <span className="text-[13px] line-through font-normal text-neutral-400">
-                  {realPrice}
+                  ₫{realPrice}
                 </span>
 
                 <span className="text-3xl sm:text-5xl font-normal text-primary">
-                  {price}
+                  ₫{price}
                 </span>
 
                 <div className="flex items-center">
@@ -244,11 +244,13 @@ const ProductDetail = () => {
 
             <div className="p-6 hidden sm:block bg-[#fafafa] mt-5">
               <div className="flex gap-4 flex-wrap">
-                <span className="text-[16px] line-through font-normal text-neutral-400">
+                <span className="text-[16px] line-through font-normal text-neutral-400 flex">
+                  <span className="text-[11px] mt-1 mr-1">₫</span>
                   {realPrice}
                 </span>
 
-                <span className="text-5xl font-normal text-primary">
+                <span className="text-5xl font-normal text-primary flex">
+                  <span className="text-[18px] mt-1">₫</span>
                   {price}
                 </span>
 

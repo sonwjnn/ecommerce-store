@@ -4,6 +4,9 @@ export default {
   darkMode: 'class',
   theme: {
     extend: {
+      fontFamily: {
+        roboto: ['Roboto', 'sans-serif']
+      },
       colors: {
         primary: '#fb5533',
         bg_page: '#f5f5f5',

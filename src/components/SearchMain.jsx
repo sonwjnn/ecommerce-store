@@ -27,7 +27,7 @@ const SearchMain = () => {
     if (user) {
       navigate('/user/carts')
     } else {
-      toast.error('You must login first!', { toastId: 'warning-login' })
+      toast.warning('You must login first!', { toastId: 'warning-login' })
       navigate('/authUser/signin')
     }
   }
