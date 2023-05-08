@@ -22,26 +22,38 @@ const bannerLogos = [
 let indexGlobal = 0
 
 const HomePage = () => {
+  const [cates, setCates] = useState([])
   useEffect(() => {
     window.scrollTo(0, 0)
+    setCates(productConfigs.productCategory)
   }, [])
   const disableCategories = productConfigs.productCategory.filter(
     item => item !== 'Thiết Bị Điện Tử'
   )
-  useEffect(() => {
-    console.log(disableCategories)
-  }, [])
+
+  // Gộp các phần tử thành các cặp
+  const catePairs = productConfigs.productCategory.reduce(
+    (acc, cateType, index) => {
+      if (index % 2 === 0) {
+        acc.push([{ cateType, index }])
+      } else {
+        acc[acc.length - 1].push({ cateType, index })
+      }
+      return acc
+    },
+    []
+  )
 
   return (
     <>
-      <div className="bg-bg_page mt-[150px] ">
+      <div className="bg-bg_page mt-[64px] lg:mt-[150px] ">
         <div className=" mb-8 w-full bg-white ">
           <div className="max-w-[1200px] min-h-[235px] mx-auto gap-2 flex">
-            <div className="flex-[66%] rounded-sm">
+            <div className="flex-wrap mx-0 sm:mx-14 lg:mx-0   lg:flex-nowrap flex-[66%] rounded-sm">
               <HomeSlide />
             </div>
 
-            <div className="flex-[33%] gap-2 flex flex-col ">
+            <div className="lg:flex-[33%] gap-2 flex flex-col ">
               <div
                 className="h-1/2 bg-no-repeat bg-cover rounded-sm"
                 style={{
@@ -66,10 +78,10 @@ const HomePage = () => {
               ></div>
             </div>
           </div>
-          <div className="max-w-[1200px] min-h-[108px] mx-auto gap-2 flex justify-around mt-8">
+          <div className="max-w-[1200px]   px-12 min-h-[108px] flex-wrap lg:flex-nowrap lg:mx-auto gap-2 flex justify-around mt-8">
             {bannerLogos.map((item, index) => (
               <div
-                className="w-[100px]  flex flex-col gap-2 items-center justify-start cursor-pointer "
+                className="min-w-[100px]  flex flex-col gap-2 items-center justify-start cursor-pointer "
                 key={index}
               >
                 <div
@@ -93,18 +105,19 @@ const HomePage = () => {
             <div className="p-8 uppercase text-gray-500 text-[18px]">
               danh mục
             </div>
-            <div className="grid grid-cols-14 grid-rows-2 ">
-              {productConfigs.productCategory.map((cateType, index) => {
-                if (index > 19) return null
-                return (
-                  <CategoryItem
-                    key={index}
-                    index={index}
-                    cateType={cateType}
-                    disable={disableCategories.includes(cateType)}
-                  />
-                )
-              })}
+            <div className="flex  overflow-x-auto flex-nowrap">
+              {catePairs.map(catePair => (
+                <div className="flex flex-col min-w-[120px]">
+                  {catePair.map((cate, index) => (
+                    <CategoryItem
+                      key={index}
+                      index={cate.index}
+                      cateType={cate.cateType}
+                      disable={disableCategories.includes(cate.cateType)}
+                    />
+                  ))}
+                </div>
+              ))}
             </div>
           </div>
         </div>

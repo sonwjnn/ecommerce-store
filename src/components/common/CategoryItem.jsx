@@ -5,13 +5,9 @@ const CategoryItem = ({ index, cateType, disable }) => {
     <Link
       className={`cursor-pointer ${
         disable && 'cate-disable select-none pointer-events-none'
-      } relative hover:border-gray-200 hover:shadow-sm flex flex-col items-center  px-2 py-4  col-span-1 w-[120px] border border-gray-100  row-span-${
+      } relative hover:border-gray-200 hover:shadow-sm flex flex-col items-center h-[50%]  px-2 py-4  border border-gray-100  row-span-${
         (index + 1) % 2 ? 1 : 2
       }`}
-      style={{
-        gridColumnStart: `${Math.round((index + 1) / 2)}`,
-        gridRow: `${(index + 1) % 2 ? 1 : 2}`
-      }}
       to={`/products/${cateType.replace(/ /g, '-')}/${'Tất cả sản phẩm'.replace(
         / /g,
         '-'

@@ -8,6 +8,7 @@ import { toast } from 'react-toastify'
 import userApi from '../../apis/modules/user.api.js'
 import cartApi from '../../apis/modules/cart.api'
 import { setListCarts, setUser } from '../../redux/features/userSlice.js'
+import NavigateMobile from '../common/NavigateMobile.jsx'
 
 // Layout use for all pages
 const MainLayout = () => {
@@ -48,7 +49,7 @@ const MainLayout = () => {
       {/* <AuthModal /> */}
       {/* login loading*/}
 
-      <div className="flex flex-col min-h-screen font-roboto">
+      <div className="flex flex-col min-h-screen font-roboto relative">
         {/* header */}
         <Appbar />
         {/* header */}
@@ -58,6 +59,9 @@ const MainLayout = () => {
           <Outlet />
         </main>
         {/* main */}
+        <div className=" md:hidden h-[64px] fixed bottom-0 left-0 right-0 z-100">
+          <NavigateMobile />
+        </div>
       </div>
 
       {/* footer */}

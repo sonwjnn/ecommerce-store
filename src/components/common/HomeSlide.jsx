@@ -18,7 +18,9 @@ const HomeSlide = () => {
         return (
           <SwiperSlide key={index}>
             <div
-              className="bg-no-repeat bg-cover bg-center h-full w-full"
+              className={`bg-no-repeat bg-cover ${
+                index === 0 || index === 1 ? 'bg-center' : 'bg-left'
+              }  md:bg-center h-full w-full`}
               style={{
                 backgroundImage: `url(${
                   new URL(`../../assets/img/banners/${link}`, import.meta.url)

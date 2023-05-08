@@ -120,10 +120,6 @@ const ProductDetail = () => {
     reviews = product.reviews
   } = product
 
-  useEffect(() => {
-    console.log(product.reviews)
-  }, [])
-
   const urlImage = new URL(
     `../assets/img/products/${imageName}`,
     import.meta.url
