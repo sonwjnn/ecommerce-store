@@ -1,7 +1,11 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setListCarts, removeCart } from '../redux/features/userSlice'
+import {
+  setListCarts,
+  removeCart,
+  removeCarts
+} from '../redux/features/userSlice'
 import cartApi from '../apis/modules/cart.api'
 import { toast } from 'react-toastify'
 import { useRef } from 'react'
@@ -62,8 +66,8 @@ const CartItem = props => {
     if (err) toast.error(err.message)
     if (response) {
       dispatch(removeCart({ cartId: id }))
-      onRemoved(id)
-      toast.success('Remove favorite success!')
+      onRemoved({ id })
+      toast.success('Remove cart success!')
     }
   }
 
@@ -176,9 +180,14 @@ const CartList = () => {
     getListCartUser()
   }, [dispatch])
 
-  const onRemoved = id => {
-    const newCarts = [...carts].filter(e => e._id !== id)
-    setCarts(newCarts)
+  const onRemoved = ({ id, ids }) => {
+    if (id) {
+      const newCarts = [...carts].filter(e => e._id !== id)
+      setCarts(newCarts)
+    } else if (ids) {
+      let newCarts = [...carts].filter(e => !ids.includes(e._id))
+      setCarts(newCarts)
+    }
     // setFilteredMedias([...newCarts].splice(0, page * skip))
     // setCount(page - 1)
   }
@@ -222,6 +231,22 @@ const CartList = () => {
   }
   const handleDotPrice = price => {
     return price.replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+  }
+
+  const handleRemoveCarts = async () => {
+    if (!checkedCarts.length) return
+    const newCheckedCarts = checkedCarts.map(item => item.id)
+    const { response, err } = await cartApi.removeCarts({
+      cartIds: newCheckedCarts
+    })
+    // setOnRequest(false)
+
+    if (err) toast.error(err.message)
+    if (response) {
+      dispatch(removeCarts({ cartIds: newCheckedCarts }))
+      onRemoved({ ids: newCheckedCarts })
+      toast.success('Remove carts success!')
+    }
   }
 
   // useEffect(() => {
@@ -300,7 +325,9 @@ const CartList = () => {
                 >
                   Chọn tất cả ({carts.length})
                 </button>
-                <button className="btn-cart-solid">Xoá</button>
+                <button className="btn-cart-solid" onClick={handleRemoveCarts}>
+                  Xoá đã chọn
+                </button>
                 <button className="btn-cart-solid">Thêm đã thích</button>
               </div>
 

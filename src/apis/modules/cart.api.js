@@ -3,7 +3,8 @@ import privateClient from '../client/private.client'
 const cartEndpoints = {
   list: 'user/carts',
   add: 'user/carts',
-  remove: ({ cartId }) => `user/carts/${cartId}`
+  remove: ({ cartId }) => `user/carts/${cartId}`,
+  removeCarts: `user/carts`
 }
 
 const cartApi = {
@@ -46,6 +47,16 @@ const cartApi = {
           cartId
         })
       )
+      return { response }
+    } catch (error) {
+      return { error }
+    }
+  },
+  removeCarts: async ({ cartIds }) => {
+    try {
+      const response = await privateClient.delete(cartEndpoints.removeCarts, {
+        data: cartIds
+      })
       return { response }
     } catch (error) {
       return { error }

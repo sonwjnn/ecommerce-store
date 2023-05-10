@@ -106,11 +106,11 @@ const HomePage = () => {
               danh mục
             </div>
             <div className="flex  overflow-x-auto flex-nowrap">
-              {catePairs.map(catePair => (
-                <div className="flex flex-col min-w-[120px]">
-                  {catePair.map((cate, index) => (
+              {catePairs.map((catePair, index) => (
+                <div className="flex flex-col min-w-[120px]" key={index}>
+                  {catePair.map(cate => (
                     <CategoryItem
-                      key={index}
+                      key={cate.index}
                       index={cate.index}
                       cateType={cate.cateType}
                       disable={disableCategories.includes(cate.cateType)}

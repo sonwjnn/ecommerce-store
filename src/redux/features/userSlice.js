@@ -25,6 +25,10 @@ const userSlice = createSlice({
 
       state.listCarts = [...state.listCarts].filter(e => e._id !== cartId)
     },
+    removeCarts: (state, action) => {
+      const { cartIds } = action.payload
+      state.listCarts = state.listCarts.filter(e => !cartIds.includes(e._id))
+    },
     addCart: (state, action) => {
       let flag = 0
       state.listCarts.forEach(cart => {
@@ -38,6 +42,7 @@ const userSlice = createSlice({
   }
 })
 
-export const { setUser, setListCarts, removeCart, addCart } = userSlice.actions
+export const { setUser, setListCarts, removeCart, removeCarts, addCart } =
+  userSlice.actions
 
 export default userSlice.reducer

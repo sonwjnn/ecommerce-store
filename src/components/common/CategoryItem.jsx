@@ -8,10 +8,7 @@ const CategoryItem = ({ index, cateType, disable }) => {
       } relative hover:border-gray-200 hover:shadow-sm flex flex-col items-center h-[50%]  px-2 py-4  border border-gray-100  row-span-${
         (index + 1) % 2 ? 1 : 2
       }`}
-      to={`/products/${cateType.replace(/ /g, '-')}/${'Tất cả sản phẩm'.replace(
-        / /g,
-        '-'
-      )}`}
+      to={`/products/${cateType}/Tất cả sản phẩm`}
     >
       <div
         className="bg-no-repeat mx-auto self-start bg-cover w-[70%] h-[80px]"
