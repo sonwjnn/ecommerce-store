@@ -7,6 +7,7 @@ import Category from '../components/Category'
 import productApi from '../apis/modules/product.api'
 import { useDispatch } from 'react-redux'
 import { setGlobalLoading } from '../redux/features/globalLoadingSlice'
+import { TbFileSearch } from 'react-icons/tb'
 
 const ProductSearch = () => {
   const { keyword } = useParams()
@@ -80,10 +81,12 @@ const ProductSearch = () => {
             <div className="col hidden md:block"></div>
 
             <div className="col col-span-10 overflow-hidden grow">
-              <BoardBar
-                handleSortPriceDownUp={handleSortPriceDownUp}
-                handleSortPriceUpDown={handleSortPriceUpDown}
-              />
+              {products.length && (
+                <BoardBar
+                  handleSortPriceDownUp={handleSortPriceDownUp}
+                  handleSortPriceUpDown={handleSortPriceUpDown}
+                />
+              )}
               <div className="home-product min-h-screen home-product--spacing-bottom">
                 <div className="row sm-gutter">
                   {/* <!-- Product item --> */}
@@ -100,9 +103,25 @@ const ProductSearch = () => {
                       cateName={product.cateName}
                     />
                   ))}
+                  {!products.length && (
+                    <div className="h-[50vh] w-full flex items-center justify-center ">
+                      <div className="flex flex-col gap-8 items-center justify-center">
+                        <TbFileSearch className="text-[150px] text-gray-300" />
+                        <div className="gap-4 text-[20px] text-center">
+                          <div className="text-gray-600">
+                            Không tìm thấy kết quả nào
+                          </div>
+                          <div className="text-gray-500">
+                            {' '}
+                            Hãy thử sử dụng các từ khóa chung chung hơn
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
-              <Pagination />
+              {products.length && <Pagination />}
             </div>
           </div>
         </div>

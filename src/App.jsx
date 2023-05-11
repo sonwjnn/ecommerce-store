@@ -22,6 +22,7 @@ import ProductList from './components/ProductList'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 
 const App = () => {
   return (

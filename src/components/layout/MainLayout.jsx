@@ -7,8 +7,13 @@ import { useEffect } from 'react'
 import { toast } from 'react-toastify'
 import userApi from '../../apis/modules/user.api.js'
 import cartApi from '../../apis/modules/cart.api'
-import { setListCarts, setUser } from '../../redux/features/userSlice.js'
+import {
+  setListCarts,
+  setListFavorites,
+  setUser
+} from '../../redux/features/userSlice.js'
 import NavigateMobile from '../common/NavigateMobile.jsx'
+import favoriteApi from '../../apis/modules/favorite.api.js'
 
 // Layout use for all pages
 const MainLayout = () => {
@@ -16,7 +21,7 @@ const MainLayout = () => {
 
   const dispatch = useDispatch()
 
-  const { user } = useSelector(state => state.user)
+  const { user, listFavorites } = useSelector(state => state.user)
 
   //get user from redux store with JWT
   useEffect(() => {
@@ -39,6 +44,17 @@ const MainLayout = () => {
     }
   }, [user, dispatch])
 
+  useEffect(() => {
+    const favoritesOfUser = async () => {
+      const { response, err } = await favoriteApi.getList()
+      if (response) dispatch(setListFavorites(response))
+    }
+    favoritesOfUser()
+    if (!user) {
+      dispatch(setListFavorites([]))
+    }
+  }, [user, dispatch])
+
   return (
     <>
       {/* global loading*/}
@@ -55,7 +71,7 @@ const MainLayout = () => {
         {/* header */}
 
         {/* main */}
-        <main className="flex-grow overflow-hidden min-h-screen ">
+        <main className="flex-grow overflow-hidden ">
           <Outlet />
         </main>
         {/* main */}

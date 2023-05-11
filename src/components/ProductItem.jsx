@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import favoriteUtils from '../utilities/favorite.utils'
+import { useSelector } from 'react-redux'
+import { AiFillHeart } from 'react-icons/ai'
 
 const ProductItem = props => {
   const { id, title, origin, info, date, price, imageName, cateName } = props
   const { cateType, productType } = useParams()
+  const { listFavorites } = useSelector(state => state.user)
   const urlImage = new URL(
     `../assets/img/products/${imageName}`,
     import.meta.url
@@ -85,18 +89,20 @@ const ProductItem = props => {
             </svg>
           </span>
         </div>
-        <div className="home-product-item__action">
+        <div className="home-product-item__action items-center">
           <span className="home-product-item__favorite home-product-item__favorite--liked">
-            <i className="home-product-item__icon-heart-empty fa-solid fa-heart"></i>
-            <i className="home-product-item__icon-heart-fill fa-solid fa-heart"></i>
+            {favoriteUtils.check({
+              listFavorites,
+              productId: id
+            }) && <AiFillHeart className="text-red-600 text-[13px]" />}
           </span>
-          <span className="home-product-item__rate">
-            <i className="home-product-item__icon-star--gold fa-solid fa-star"></i>
-            <i className="home-product-item__icon-star--gold fa-solid fa-star"></i>
-            <i className="home-product-item__icon-star--gold fa-solid fa-star"></i>
-            <i className="home-product-item__icon-star--gold fa-solid fa-star"></i>
-            <i className="home-product-item__icon-star fa-solid fa-star"></i>
-            <span className="home-product-item__buy-num">Đã bán 989</span>
+          <span className="home-product-item__rate flex items-center">
+            <i className="home-product-item__icon-star--gold  fa-solid fa-star text-[10px]"></i>
+            <i className="home-product-item__icon-star--gold fa-solid fa-star text-[10px]"></i>
+            <i className="home-product-item__icon-star--gold fa-solid fa-star text-[10px]"></i>
+            <i className="home-product-item__icon-star--gold fa-solid fa-star text-[10px]"></i>
+            <i className="home-product-item__icon-star fa-solid fa-star text-[10px]"></i>
+            <span className="home-product-item__buy-num ">Đã bán 989</span>
           </span>
         </div>
         <div className="home-product-item__location">TP. Hồ Chí Minh</div>

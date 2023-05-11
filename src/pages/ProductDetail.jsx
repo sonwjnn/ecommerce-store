@@ -8,8 +8,14 @@ import productApi from '../apis/modules/product.api'
 import cartApi from '../apis/modules/cart.api'
 import { setGlobalLoading } from '../redux/features/globalLoadingSlice'
 import { BsCartPlus, BsTruck } from 'react-icons/bs'
-import { addCart } from '../redux/features/userSlice'
+import { MdOutlineFavoriteBorder, MdOutlineFavorite } from 'react-icons/md'
+import {
+  addCart,
+  addFavorite,
+  removeFavorite
+} from '../redux/features/userSlice'
 import ProductReview from '../components/common/ProductReview'
+import favoriteApi from '../apis/modules/favorite.api'
 const cartState = {
   increase: 'increase',
   decrease: 'decrease'
@@ -22,8 +28,8 @@ const ProductDetail = () => {
   const { productType, productId } = useParams()
   const [product, setProduct] = useState([])
   const [activeReview, setActiveReview] = useState(null)
-  const { listCarts, user } = useSelector(state => state.user)
-  const [isCart, setIsCart] = useState(false)
+  const { listCarts, listFavorites, user } = useSelector(state => state.user)
+  const [isFavorite, setIsFavorite] = useState(false)
   const [onRequest, setOnRequest] = useState(false)
 
   useEffect(() => {
@@ -37,7 +43,7 @@ const ProductDetail = () => {
 
       if (response) {
         setProduct(response)
-        // setIsFavorite(response.isFavorite)
+        setIsFavorite(response.isFavorite)
       }
 
       if (err) toast.error(err.message)
@@ -87,9 +93,63 @@ const ProductDetail = () => {
 
     if (response) {
       dispatch(addCart(response))
-      setIsCart(true)
 
       toast.success('Add cart success')
+    }
+  }
+
+  const onFavoriteClick = async () => {
+    if (!user) {
+      toast.warning('You must login first!', { toastId: 'warning-login' })
+      navigate('/authUser/signin')
+      return
+    }
+    if (onRequest) return
+    if (isFavorite) {
+      onRemoveFavorite()
+      return
+    }
+
+    setOnRequest(true)
+
+    const body = {
+      productId: product._id,
+      productTitle: product.title || product.name,
+      productType: product.cateName,
+      productPrice: product.price,
+      productImage: product.imageName
+    }
+    const { response, err } = await favoriteApi.add(body)
+    if (err) toast.error(err.message)
+
+    setOnRequest(false)
+
+    if (response) {
+      dispatch(addFavorite(response))
+      setIsFavorite(true)
+      toast.success('Add favorite success')
+    }
+  }
+
+  const onRemoveFavorite = async () => {
+    if (onRequest) return
+
+    setOnRequest(true)
+
+    const favorite = listFavorites.find(e => e.productId === product._id)
+    const { response, err } = await favoriteApi.remove({
+      favoriteId: favorite._id
+    })
+
+    setOnRequest(false)
+
+    if (err) toast.error(err.message)
+
+    if (response) {
+      dispatch(removeFavorite(favorite))
+      setIsFavorite(false)
+
+      toast.success('Remove favorite success')
     }
   }
 
@@ -127,7 +187,7 @@ const ProductDetail = () => {
 
   return (
     <div className="bg-bg_page px-0 xl:px-[136px] py-0 sm:py-[56px]   h-full">
-      <div className="bg-white h-full rounded-md max-w-[1220px]">
+      <div className="bg-white h-full rounded-md max-w-[1220px] mx-auto">
         <div className="flex flex-col sm:flex-row ">
           <div className="flex-[33%] p-4">
             <div
@@ -161,9 +221,22 @@ const ProductDetail = () => {
                 </button>
               </div>
 
-              <div className="capitalize">
-                <i className="fa-regular fa-heart text-primary ml-[4rem] mr-3 text-3xl"></i>
-                đã thích (94)
+              <div
+                className="capitalize flex items-center cursor-pointer select-none"
+                onClick={onFavoriteClick}
+              >
+                {!isFavorite ? (
+                  <MdOutlineFavoriteBorder
+                    className="text-red-600 ml-[4rem] mr-3 text-4xl"
+                    onClick={() => setIsFavorite(!isFavorite)}
+                  />
+                ) : (
+                  <MdOutlineFavorite
+                    className="text-red-600 ml-[4rem] mr-3 text-4xl"
+                    onClick={() => setIsFavorite(!isFavorite)}
+                  />
+                )}
+                <span>đã thích (94)</span>
               </div>
             </div>
           </div>
@@ -467,7 +540,7 @@ const ProductDetail = () => {
         </div>
       </div>
 
-      <div className=" h-full  mt-8 flex">
+      <div className=" h-full max-w-[1220px]  mt-8 flex mx-auto">
         <div className="flex-[80%]  md:mr-4">
           <div className="p-10 rounded-md bg-white">
             <div className="">
@@ -555,7 +628,7 @@ const ProductDetail = () => {
             </div>
           </div>
         </div>
-        <div className="hidden md:block flex-[20%] h-full rounded-md bg-white ml-4 px-6 py-8">
+        <div className="hidden md:block flex-[20%]  h-full rounded-md bg-white ml-4 px-6 py-8">
           <div>
             <span className="text-[14px] text-gray-500 w-[120px] ">
               Mã giảm giá của shop
@@ -570,6 +643,48 @@ const ProductDetail = () => {
                   </div>
 
                   <div className="text-gray-500">HSD 04.06.2023</div>
+                </div>
+
+                <div className="flex items-center">
+                  <button className="btn-primary text-[14px] py-1 px-4">
+                    lưu
+                  </button>
+                </div>
+              </span>
+            </div>
+          </div>
+
+          <div>
+            <div className="py-8 px-2">
+              <span className="px-2 py-8 flex flex-wrap gap-4 items-center justify-center bg-[#fff4f4] border border-[#fbc9c0]">
+                <div>
+                  <div className="text-primary capitalize mb-4 font-medium">
+                    <div className="text-[14px]">giảm 15%</div>
+                    <div className="text-[12px]">đơn tối thiểu 150k</div>
+                  </div>
+
+                  <div className="text-gray-500">HSD 04.08.2023</div>
+                </div>
+
+                <div className="flex items-center">
+                  <button className="btn-primary text-[14px] py-1 px-4">
+                    lưu
+                  </button>
+                </div>
+              </span>
+            </div>
+          </div>
+
+          <div>
+            <div className="py-8 px-2">
+              <span className="px-2 py-8 flex flex-wrap gap-4 items-center justify-center bg-[#fff4f4] border border-[#fbc9c0]">
+                <div>
+                  <div className="text-primary capitalize mb-4 font-medium">
+                    <div className="text-[14px]">giảm 20%</div>
+                    <div className="text-[12px]">đơn tối thiểu 299k</div>
+                  </div>
+
+                  <div className="text-gray-500">HSD 15.08.2023</div>
                 </div>
 
                 <div className="flex items-center">

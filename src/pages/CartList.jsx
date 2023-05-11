@@ -245,6 +245,7 @@ const CartList = () => {
     if (response) {
       dispatch(removeCarts({ cartIds: newCheckedCarts }))
       onRemoved({ ids: newCheckedCarts })
+      setCheckedCarts([])
       toast.success('Remove carts success!')
     }
   }

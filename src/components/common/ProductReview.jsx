@@ -4,7 +4,7 @@ import dayjs from 'dayjs'
 import { useSelector } from 'react-redux'
 import reviewApi from '../../apis/modules/review.api'
 import TextAvatar from './TextAvatar'
-import { RiDeleteBin5Line } from 'react-icons/ri'
+import { MdDelete } from 'react-icons/md'
 import { FiSend } from 'react-icons/fi'
 
 const ReviewItem = ({ review, onRemoved }) => {
@@ -45,9 +45,9 @@ const ReviewItem = ({ review, onRemoved }) => {
           {user && user.id === review.user.id && (
             <button
               onClick={onRemove}
-              className="text-red-600 mr-2 text-[22px] flex items-center px-3 py-2 justify-center sm:relative md:absolute sm:right-0 md:right-2"
+              className="text-red-600 mr-2 text-[24px] flex items-center px-3 py-2 justify-center sm:relative md:absolute sm:right-0 md:right-2"
             >
-              <RiDeleteBin5Line />
+              <MdDelete />
             </button>
           )}
         </div>
@@ -153,10 +153,9 @@ const ProductReview = ({ reviews, product, productType }) => {
                   />
                   <button
                     onClick={onAddReview}
-                    className="flex items-center justify-center btn-primary py-2 px-4 h-[4rem]"
+                    className="flex items-center justify-center btn-primary py-2 px-12 h-[4rem]"
                   >
-                    đăng
-                    <FiSend className="ml-2 mt-1" />
+                    <FiSend className=" mt-1 text-[20px]" />
                   </button>
                 </div>
               </div>

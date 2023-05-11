@@ -193,6 +193,11 @@ const HeaderMenu = () => {
                 </Link>
               </li>
               <li className="nav-list-item-user-menu-item">
+                <Link to={'/user/favorite'}>
+                  <button>Yêu thích</button>
+                </Link>
+              </li>
+              <li className="nav-list-item-user-menu-item">
                 <Link to={checkUserRoute ? '/' : null}>
                   <button
                     onClick={() => {

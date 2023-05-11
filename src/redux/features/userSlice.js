@@ -5,7 +5,8 @@ const userSlice = createSlice({
   name: 'user',
   initialState: {
     user: null,
-    listCarts: []
+    listCarts: [],
+    listFavorites: []
   },
   reducers: {
     setUser: (state, action) => {
@@ -17,6 +18,8 @@ const userSlice = createSlice({
       }
       state.user = action.payload
     },
+
+    //carts
     setListCarts: (state, action) => {
       state.listCarts = action.payload
     },
@@ -38,11 +41,48 @@ const userSlice = createSlice({
         }
       })
       if (!flag) state.listCarts = [action.payload, ...state.listCarts]
+    },
+
+    //favorites
+    setListFavorites: (state, action) => {
+      state.listFavorites = action.payload
+    },
+    removeFavorite: (state, action) => {
+      const { favoriteId } = action.payload
+
+      state.listFavorites = [...state.listFavorites].filter(
+        e => e._id !== favoriteId
+      )
+    },
+    removeFavorites: (state, action) => {
+      const { favoriteIds } = action.payload
+      state.listFavorites = state.listFavorites.filter(
+        e => !favoriteIds.includes(e._id)
+      )
+    },
+    addFavorite: (state, action) => {
+      if (Array.isArray(state.listFavorites)) {
+        const favoriteIds = new Set(
+          state.listFavorites.map(favorite => favorite._id)
+        )
+        if (!favoriteIds.has(action.payload._id)) {
+          state.listFavorites = [action.payload, ...state.listFavorites]
+        }
+      }
     }
   }
 })
 
-export const { setUser, setListCarts, removeCart, removeCarts, addCart } =
-  userSlice.actions
+export const {
+  setUser,
+  setListCarts,
+  removeCart,
+  removeCarts,
+  addCart,
+  setListFavorites,
+  removeFavorite,
+  removeFavorites,
+  addFavorite
+} = userSlice.actions
 
 export default userSlice.reducer

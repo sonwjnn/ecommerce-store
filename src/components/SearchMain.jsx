@@ -4,6 +4,7 @@ import { CgShoppingCart } from 'react-icons/cg'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { useEffect, useRef, useState } from 'react'
+import { shorterString } from '../utilities/constants'
 
 const SearchMain = () => {
   const { user, listCarts } = useSelector(state => state.user)
@@ -149,14 +150,9 @@ const SearchMain = () => {
                       `../assets/img/products/${cart.productImage}`,
                       import.meta.url
                     ).href
-                    const maxLength = 28
-                    let shorterTitle
-                    if (cart.productTitle.length > maxLength) {
-                      shorterTitle =
-                        cart.productTitle.substring(0, maxLength) + '...'
-                    } else {
-                      shorterTitle = cart.productTitle
-                    }
+
+                    const shorterTitle = shorterString(cart.productTitle, 28)
+
                     let price =
                       cart.productPrice &&
                       cart.productPrice.replace(/\B(?=(\d{3})+(?!\d))/g, '.')

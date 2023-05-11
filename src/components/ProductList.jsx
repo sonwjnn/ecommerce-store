@@ -91,6 +91,7 @@ const ProductList = () => {
             date={product.dateOfM}
             origin={product.origin}
             cateName={product.cateName}
+            isFavorite={product.isFavorite}
           />
         ))}
       </div>

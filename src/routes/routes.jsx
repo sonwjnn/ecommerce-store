@@ -79,7 +79,7 @@ const routes = [
     element: <AccountPage />
   },
   {
-    path: '/user/purchase',
+    path: '/user/:authCate',
     element: <AccountPage />
   },
   {
