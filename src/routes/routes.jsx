@@ -1,13 +1,13 @@
 import CartList from '../pages/CartList'
 import ProductDetail from '../pages/ProductDetail'
-import ProductList from '../components/ProductList'
+import ProductList from '../components/common/ProductList'
 import ProductSearch from '../pages/ProductSearch'
-import PasswordUpdate from '../pages/PasswordUpdate'
 import ReviewList from '../pages/ReviewList'
 import ProtectedPage from '../components/common/ProtectedPage'
 import AuthUser from '../pages/AuthUser'
 import AccountPage from '../pages/AccountPage'
 import HomePage from '../pages/HomePage'
+import PasswordUpdate from '../components/common/PasswordUpdate'
 
 export const routesGen = {
   home: '/',
@@ -76,11 +76,19 @@ const routes = [
   },
   {
     path: '/user/account/:accountType',
-    element: <AccountPage />
+    element: (
+      <ProtectedPage>
+        <AccountPage />
+      </ProtectedPage>
+    )
   },
   {
     path: '/user/:authCate',
-    element: <AccountPage />
+    element: (
+      <ProtectedPage>
+        <AccountPage />
+      </ProtectedPage>
+    )
   },
   {
     path: '/search/:keyword',

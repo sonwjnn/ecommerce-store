@@ -8,6 +8,8 @@ import { useEffect, useState } from 'react'
 import { Link, useParams, useLocation } from 'react-router-dom'
 import PasswordUpdate from '../components/common/PasswordUpdate'
 import FavoriteList from '../components/common/FavoriteList'
+import TextAvatar from '../components/common/TextAvatar'
+import ProfileUpdate from '../components/common/ProfileUpdate'
 
 const AccountPage = () => {
   const { user } = useSelector(state => state.user)
@@ -41,8 +43,8 @@ const AccountPage = () => {
           <div className="bg-bg_page col-span-1 p-4">
             <div className="flex flex-col gap-6">
               <div className="flex gap-4 p-4">
-                <div>
-                  <FaUserCircle className=" text-[50px] text-gray-400" />
+                <div className="w-[50px] h-[50px]">
+                  <TextAvatar text={user.name} />
                 </div>
                 <div className="text-[16px] text-gray-600 font-semibold">
                   {shorterName}
@@ -109,6 +111,7 @@ const AccountPage = () => {
                 ? 'yêu thích'
                 : ''}
             </div>
+            {accountType === 'profile' && <ProfileUpdate />}
             {accountType === 'password' && <PasswordUpdate />}
             {authCate === 'favorite' && <FavoriteList />}
           </div>

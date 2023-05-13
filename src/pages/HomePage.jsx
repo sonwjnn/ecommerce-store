@@ -1,10 +1,10 @@
-import BoardContent from '../components/BoardContent'
+import BoardContent from '../components/common/BoardContent'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import productConfigs from '../configs/product.configs'
 import { handleLinkImage } from '../utilities/constants'
 import HomeSlide from '../components/common/HomeSlide'
-import ProductList from '../components/ProductList'
+import ProductList from '../components/common/ProductList'
 import CategoryItem from '../components/common/CategoryItem'
 
 const bannerLogos = [

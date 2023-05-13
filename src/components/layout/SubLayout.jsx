@@ -1,10 +1,8 @@
-import Category from '../Category'
-import BoardBar from '../BoardBar'
-import Pagination from '../Pagination'
+import Category from '../common/Category'
+import BoardBar from '../common/BoardBar'
+import Pagination from '../common/Pagination'
 import productConfigs from '../../configs/product.configs'
 import { Outlet } from 'react-router-dom'
-import ProductLoading from '../common/ProductLoading'
-import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { setProductsSortPrice } from '../../redux/features/productSlice'
 

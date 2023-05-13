@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import favoriteUtils from '../utilities/favorite.utils'
+import favoriteUtils from '../../utilities/favorite.utils'
 import { useSelector } from 'react-redux'
 import { AiFillHeart } from 'react-icons/ai'
 
@@ -9,7 +9,7 @@ const ProductItem = props => {
   const { cateType, productType } = useParams()
   const { listFavorites } = useSelector(state => state.user)
   const urlImage = new URL(
-    `../assets/img/products/${imageName}`,
+    `../../assets/img/products/${imageName}`,
     import.meta.url
   ).href
 

@@ -1,6 +1,6 @@
-import React from "react";
-import HeaderSocial from "./HeaderSocial";
-import HeaderMenu from "./HeaderMenu";
+import React from 'react'
+import HeaderSocial from './HeaderSocial'
+import HeaderMenu from './HeaderMenu'
 
 const HeaderNavigate = () => {
   return (
@@ -8,7 +8,7 @@ const HeaderNavigate = () => {
       <HeaderSocial />
       <HeaderMenu />
     </nav>
-  );
-};
+  )
+}
 
-export default HeaderNavigate;
+export default HeaderNavigate

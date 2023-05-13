@@ -1,6 +1,6 @@
 import React from 'react'
-import SearchMain from '../SearchMain'
-import HeaderNavigate from '../HeaderNavigate'
+import SearchMain from '../common/SearchMain'
+import HeaderNavigate from '../common/HeaderNavigate'
 import { useParams, useLocation } from 'react-router-dom'
 
 const AppBar = () => {

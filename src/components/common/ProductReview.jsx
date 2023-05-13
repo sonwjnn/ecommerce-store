@@ -27,7 +27,9 @@ const ReviewItem = ({ review, onRemoved }) => {
     <div className="p-2 rounded-md relative hover:bg-bg_page mb-2">
       <div className="flex flex-row gap-4">
         {/* avatar */}
-        <TextAvatar text={review.user.name} />
+        <div className="h-[30px] w-[30px]">
+          <TextAvatar text={review.user.name} />
+        </div>
         {/* avatar */}
 
         <div className="gap-2 flex flex-col grow justify-center">
@@ -140,7 +142,9 @@ const ProductReview = ({ reviews, product, productType }) => {
         {user && (
           <>
             <div className="flex flex-row gap-2 mt-2">
-              <TextAvatar text={user.name} />
+              <div className="w-[40px] h-[40px]">
+                <TextAvatar text={user.name} />
+              </div>
               <div className="flex gap-4 flex-col w-full">
                 <h6 className="font-bold text-[16px]">{user.name}</h6>
                 <div className="flex gap-3">

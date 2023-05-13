@@ -4,7 +4,7 @@ import { CgShoppingCart } from 'react-icons/cg'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { useEffect, useRef, useState } from 'react'
-import { shorterString } from '../utilities/constants'
+import { shorterString } from '../../utilities/constants'
 
 const SearchMain = () => {
   const { user, listCarts } = useSelector(state => state.user)
@@ -147,7 +147,7 @@ const SearchMain = () => {
                 <ul className="header__cart-list--have-items-items">
                   {listCarts.map(cart => {
                     const urlImage = new URL(
-                      `../assets/img/products/${cart.productImage}`,
+                      `../../assets/img/products/${cart.productImage}`,
                       import.meta.url
                     ).href
 

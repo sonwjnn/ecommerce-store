@@ -1,15 +1,15 @@
 import ProductItem from './ProductItem'
-import productApi from '../apis/modules/product.api'
+import productApi from '../../apis/modules/product.api'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setProductLoading } from '../redux/features/productLoading'
+import { setProductLoading } from '../../redux/features/productLoading'
 import { useParams, useLocation } from 'react-router-dom'
 import {
   clearProductsStore,
   setProductsSortPrice,
   setProductsStore
-} from '../redux/features/productSlice'
-import { setGlobalLoading } from '../redux/features/globalLoadingSlice'
+} from '../../redux/features/productSlice'
+import { setGlobalLoading } from '../../redux/features/globalLoadingSlice'
 const ProductList = () => {
   const dispatch = useDispatch()
   const location = useLocation()

@@ -1,8 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { productType } from '../routes/routes'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+import { productType } from '../../routes/routes'
 
 const BoardBar = props => {
   const { cates } = useSelector(state => state.cates)

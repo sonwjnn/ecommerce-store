@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
-import { setAuthModalOpen } from '../redux/features/authModelSlice'
-import { setSignState } from '../redux/features/signStateSlice'
-import { setUser } from '../redux/features/userSlice'
+import { setAuthModalOpen } from '../../redux/features/authModelSlice'
+import { setSignState } from '../../redux/features/signStateSlice'
+import { setUser } from '../../redux/features/userSlice'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { RiGlobalLine } from 'react-icons/ri'
+import TextAvatar from './TextAvatar'
 
 const actionState = {
   signin: 'signin',
@@ -171,12 +172,8 @@ const HeaderMenu = () => {
 
         {user ? (
           <>
-            <span className="nav-list-item-user-img-wrap">
-              <img
-                src={`${urlAvar}`}
-                alt="#"
-                className="nav-list-item-user-img"
-              />
+            <span className="h-[30px] w-[30px] ">
+              <TextAvatar text={user.name} />
             </span>
             <span className="nav-list-item-user-name text-[16px]">
               {user.name ? user.name : 'null'}

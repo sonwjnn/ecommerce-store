@@ -61,7 +61,7 @@ const PasswordUpdate = () => {
             <input
               type="password"
               name="password"
-              className=" block w-full border-2 border-gray-300 rounded-md px-5  py-4 text-2xl"
+              className=" block w-full border-2 border-gray-300 rounded-md px-5  py-2 text-2xl"
               id="password"
               value={form.values.password}
               onChange={form.handleChange}
@@ -78,7 +78,7 @@ const PasswordUpdate = () => {
             <input
               type="password"
               name="newPassword"
-              className=" block w-full border-2 border-gray-300 rounded-md px-5  py-4 text-2xl"
+              className=" block w-full border-2 border-gray-300 rounded-md px-5  py-2 text-2xl"
               id="newPassword"
               value={form.values.newPassword}
               onChange={form.handleChange}
@@ -93,7 +93,7 @@ const PasswordUpdate = () => {
               xác nhận mật khẩu
             </label>
             <input
-              className=" block w-full border-2 border-gray-300 rounded-md px-5  py-4 text-2xl"
+              className=" block w-full border-2 border-gray-300 rounded-md px-5  py-2 text-2xl"
               type="password"
               name="confirmNewPassword"
               id="confirmNewPassword"
@@ -106,9 +106,9 @@ const PasswordUpdate = () => {
             <div className="w-[266px]"></div>
             <button
               type="submit"
-              className="mb-4 transition-all w-full uppercase rounded-md  bg-primary px-6 py-4 text-[14px] font-semibold text-white shadow-sm hover:brightness-125 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="mb-4 transition-all w-[25%] ml-auto uppercase rounded-md  bg-primary px-4 py-4 text-[14px] font-semibold text-white shadow-sm hover:brightness-125 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
-              xác nhận
+              lưu
             </button>
           </div>
         </form>

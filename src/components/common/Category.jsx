@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import categoryApi from '../apis/modules/category.api'
+import categoryApi from '../../apis/modules/category.api'
 import { Link, useParams } from 'react-router-dom'
-import { productType as productTypes } from '../routes/routes'
+import { productType as productTypes } from '../../routes/routes'
 import { BiCategory } from 'react-icons/bi'
-import { setCates } from '../redux/features/cateSlice'
-import { setProductLoading } from '../redux/features/productLoading'
-import ProductLoading from './common/ProductLoading'
+import { setCates } from '../../redux/features/cateSlice'
+import { setProductLoading } from '../../redux/features/productLoading'
+import ProductLoading from './ProductLoading'
 
 const Category = () => {
   const { cateType, productType } = useParams()

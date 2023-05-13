@@ -2,7 +2,7 @@ import Category from './Category'
 import BoardBar from './BoardBar'
 import ProductList from './ProductList'
 import Pagination from './Pagination'
-import productConfigs from '../configs/product.configs'
+import productConfigs from '../../configs/product.configs'
 
 const BoardContent = () => {
   return (
