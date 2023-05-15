@@ -2,7 +2,7 @@ import privateClient from '../client/private.client.js'
 import publicClient from '../client/public.client.js'
 
 const userEndpoints = {
-  // signin: 'admin/processLogin',
+  profileUpdate: 'user/update-profile',
   signin: 'user/signin',
   signup: 'user/signup',
   passwordUpdate: 'user/update-password',
@@ -48,6 +48,32 @@ const userApi = {
         password,
         newPassword,
         confirmNewPassword
+      })
+      return { response }
+    } catch (error) {
+      return { error }
+    }
+  },
+  profileUpdate: async ({
+    displayName,
+    email,
+    phone,
+    address,
+    city,
+    district,
+    sex,
+    birthday
+  }) => {
+    try {
+      const response = await privateClient.put(userEndpoints.profileUpdate, {
+        displayName,
+        email,
+        phone,
+        address,
+        city,
+        district,
+        sex,
+        birthday
       })
       return { response }
     } catch (error) {

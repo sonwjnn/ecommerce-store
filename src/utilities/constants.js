@@ -5,7 +5,8 @@ export const shorterString = (str, len) => {
   return str.length > len ? str.substring(0, len) + '...' : str
 }
 
-export const maskedEmail = (email, hiddenChars) => {
+export const maskedEmail = email => {
+  const hiddenChars = '***********'
   const visibleChars = email.substring(0, 2)
   const maskedEmail =
     visibleChars + hiddenChars + email.substring(email.indexOf('@'))

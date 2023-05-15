@@ -51,7 +51,7 @@ const AuthUser = () => {
       </header>
 
       <main
-        className="bg-primary h-[600px] relative w-full bg-no-repeat bg-contain bg-center"
+        className="bg-primary h-[600px] relative w-full bg-no-repeat bg-contain bg-center "
         style={{
           backgroundImage: `url(
             'https://down-vn.img.susercontent.com/file/sg-11134004-7qvd5-lfuyd509f57p08'

@@ -18,7 +18,9 @@ const userSlice = createSlice({
       }
       state.user = action.payload
     },
-
+    updateUser: (state, action) => {
+      state.user = { ...state.user, ...action.payload }
+    },
     //carts
     setListCarts: (state, action) => {
       state.listCarts = action.payload
@@ -75,6 +77,7 @@ const userSlice = createSlice({
 
 export const {
   setUser,
+  updateUser,
   setListCarts,
   removeCart,
   removeCarts,

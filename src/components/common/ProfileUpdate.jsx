@@ -1,32 +1,35 @@
 import userApi from '../../apis/modules/user.api'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
-import { setUser } from '../../redux/features/userSlice'
 import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
+import { maskedEmail } from '../../utilities/constants'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
+import { useDispatch } from 'react-redux'
 
 const ProfileUpdate = () => {
   const { user } = useSelector(state => state.user)
-  const navigate = useNavigate()
+  const [onRequest, setOnRequest] = useState(false)
+  const [originalEmail, setOriginalEmail] = useState('')
   const dispatch = useDispatch()
+  const phoneRegex = /(84|0[3|5|7|8|9])+([0-9]{8})\b/
 
-  const [maskedEmail, setMaskedEmail] = useState('')
-
-  useEffect(() => {
-    console.log(user)
-  }, [])
+  const initialValues = {
+    username: user.username,
+    displayName: user.name,
+    email: user.email ? maskedEmail(user.email) : '',
+    phone: user.phone ? user.phone : '',
+    address: user.address ? user.address : '',
+    city: user.city ? user.city : '',
+    district: user.district ? user.district : '',
+    sex: user.sex ? user.sex : '',
+    birthday: user.birthday ? new Date(user.birthday) : null
+  }
 
   const form = useFormik({
-    initialValues: {
-      username: user.username,
-      displayName: user.name,
-      email: user.email ? user.email : '',
-      phone: user.phone ? user.phone : '',
-      sex: user.sex ? user.sex : '',
-      birthday: user.birthday ? user.birthday : ''
-    },
+    initialValues: initialValues,
     validationSchema: Yup.object({
       username: Yup.string()
         .min(8, 'username minimum 8 character')
@@ -36,10 +39,12 @@ const ProfileUpdate = () => {
         .required('display name is required'),
       email: Yup.string()
         .min(8, 'email minimum 8 character')
-        .required('email is required'),
+        .required('email is required')
+        .email('invalid email'),
       phone: Yup.string()
         .min(10, 'phone minimum 10 character')
-        .required('phone is required'),
+        .required('phone is required')
+        .matches(phoneRegex, 'invalid phone number'),
       address: Yup.string()
         .min(10, 'address minimum 10 character')
         .required('address is required'),
@@ -47,33 +52,41 @@ const ProfileUpdate = () => {
         .min(10, 'city minimum 10 character')
         .required('city is required'),
       district: Yup.string()
-        .min(10, 'district minimum 10 character')
+        .min(4, 'district minimum 4 character')
         .required('district is required'),
       sex: Yup.string()
         .min(3, 'sex minimum 3 character')
         .required('sex is required'),
       birthday: Yup.string()
-        .min(8, 'birthday minimum 8 character')
+        .min(10, 'birthday minimum 10 character')
         .required('birthday is required')
     }),
     onSubmit: async values => onUpdate(values)
   })
 
   const onUpdate = async values => {
-    // if (onRequest) return
-    // setOnRequest(true)
+    if (onRequest) return
+    setOnRequest(true)
+    if (JSON.stringify(values) === JSON.stringify(initialValues)) return
+    const { response, err } = await userApi.profileUpdate({
+      ...values,
+      email: originalEmail ? originalEmail : user.email
+    })
 
-    const { response, err } = await userApi.passwordUpdate(values)
-
-    // setOnRequest(false)
+    setOnRequest(false)
 
     if (err) toast.error(err.message)
     if (response) {
-      form.resetForm()
-      navigate('/')
-      dispatch(setUser(null))
-      toast.success('Update password success! Please re-login')
+      setOriginalEmail(response.email)
+
+      toast.success('Update profile success!')
     }
+  }
+
+  const handleEmailChange = e => {
+    const email = e.target.value
+    setOriginalEmail(email)
+    form.setFieldValue('email', email)
   }
 
   return (
@@ -87,14 +100,19 @@ const ProfileUpdate = () => {
             >
               tên đăng nhập
             </label>
-            <input
-              type="username"
-              name="username"
-              className=" block w-full border-2 border-gray-300 rounded-sm px-5  py-2 text-2xl"
-              id="username"
-              value={form.values.username}
-              onChange={form.handleChange}
-            />
+            <div className="flex flex-col w-full">
+              <input
+                type="username"
+                name="username"
+                className=" block w-full border-2 border-gray-300 rounded-sm px-5  py-2 text-2xl"
+                id="username"
+                value={form.values.username}
+                onChange={form.handleChange}
+              />
+              {form.errors.username && (
+                <p className="errMsg ">{form.errors.username}</p>
+              )}
+            </div>
           </div>
 
           <div className="flex gap-2  items-center">
@@ -104,14 +122,19 @@ const ProfileUpdate = () => {
             >
               tên
             </label>
-            <input
-              type="displayName"
-              name="displayName"
-              className=" block w-full border-2 border-gray-300 rounded-sm px-5  py-2 text-2xl"
-              id="displayName"
-              value={form.values.displayName}
-              onChange={form.handleChange}
-            />
+            <div className="flex flex-col w-full">
+              <input
+                type="text"
+                name="displayName"
+                className=" block w-full border-2 border-gray-300 rounded-sm px-5  py-2 text-2xl"
+                id="displayName"
+                value={form.values.displayName}
+                onChange={form.handleChange}
+              />
+              {form.errors.displayName && (
+                <p className="errMsg ">{form.errors.displayName}</p>
+              )}
+            </div>
           </div>
 
           <div className="flex gap-2 items-center">
@@ -121,14 +144,19 @@ const ProfileUpdate = () => {
             >
               email
             </label>
-            <input
-              className=" block w-full border-2 border-gray-300 rounded-sm px-5  py-2 text-2xl"
-              type="email"
-              name="email"
-              id="email"
-              value={form.values.email}
-              onChange={form.handleChange}
-            />
+            <div className="flex flex-col w-full">
+              <input
+                className=" block w-full border-2 border-gray-300 rounded-sm px-5  py-2 text-2xl"
+                type="text"
+                name="email"
+                id="email"
+                value={form.values.email}
+                onChange={handleEmailChange}
+              />
+              {form.errors.email && (
+                <p className="errMsg ">{form.errors.email}</p>
+              )}
+            </div>
           </div>
 
           <div className="flex gap-2 items-center">
@@ -138,14 +166,20 @@ const ProfileUpdate = () => {
             >
               số điện thoại
             </label>
-            <input
-              className=" block w-full border-2 border-gray-300 rounded-sm px-5  py-2 text-2xl"
-              type="phone"
-              name="phone"
-              id="phone"
-              value={form.values.phone}
-              onChange={form.handleChange}
-            />
+
+            <div className="flex flex-col w-full">
+              <input
+                className=" block w-full border-2 border-gray-300 rounded-sm px-5  py-2 text-2xl"
+                type="tel"
+                name="phone"
+                id="phone"
+                value={form.values.phone}
+                onChange={form.handleChange}
+              />
+              {form.errors.phone && (
+                <p className="errMsg ">{form.errors.phone}</p>
+              )}
+            </div>
           </div>
 
           <div className="flex gap-2 items-center">
@@ -155,14 +189,19 @@ const ProfileUpdate = () => {
             >
               địa chỉ
             </label>
-            <input
-              className=" block w-full border-2 border-gray-300 rounded-sm px-5  py-2 text-2xl"
-              type="address"
-              name="address"
-              id="address"
-              value={form.values.address}
-              onChange={form.handleChange}
-            />
+            <div className="flex flex-col w-full">
+              <input
+                className=" block w-full border-2 border-gray-300 rounded-sm px-5  py-2 text-2xl"
+                type="text"
+                name="address"
+                id="address"
+                value={form.values.address}
+                onChange={form.handleChange}
+              />
+              {form.errors.address && (
+                <p className="errMsg ">{form.errors.address}</p>
+              )}
+            </div>
           </div>
 
           <div className="flex gap-2 items-center">
@@ -172,31 +211,41 @@ const ProfileUpdate = () => {
             >
               thành phố
             </label>
-            <input
-              className=" block w-full border-2 border-gray-300 rounded-sm px-5  py-2 text-2xl"
-              type="city"
-              name="city"
-              id="city"
-              value={form.values.city}
-              onChange={form.handleChange}
-            />
+            <div className="flex flex-col w-full">
+              <input
+                className=" block w-full border-2 border-gray-300 rounded-sm px-5  py-2 text-2xl"
+                type="text"
+                name="city"
+                id="city"
+                value={form.values.city}
+                onChange={form.handleChange}
+              />
+              {form.errors.city && (
+                <p className="errMsg ">{form.errors.city}</p>
+              )}
+            </div>
           </div>
 
           <div className="flex gap-2 items-center">
             <label
-              htmlFor="district"
+              htmlFor="text"
               className="capitalize w-[260px] text-gray-500 text-[16px]"
             >
               Quận / Huyện
             </label>
-            <input
-              className=" block w-full border-2 border-gray-300 rounded-sm px-5  py-2 text-2xl"
-              type="district"
-              name="district"
-              id="district"
-              value={form.values.district}
-              onChange={form.handleChange}
-            />
+            <div className="flex flex-col w-full">
+              <input
+                className=" block w-full border-2 border-gray-300 rounded-sm px-5  py-2 text-2xl"
+                type="district"
+                name="district"
+                id="district"
+                value={form.values.district}
+                onChange={form.handleChange}
+              />
+              {form.errors.district && (
+                <p className="errMsg ">{form.errors.district}</p>
+              )}
+            </div>
           </div>
 
           <div className="flex gap-2 items-center">
@@ -218,8 +267,9 @@ const ProfileUpdate = () => {
                   className=" block  border-2 border-gray-300 rounded-sm px-5  py-4 text-2xl"
                   type="radio"
                   name="sex"
+                  checked={form.values.sex === 'male'}
                   id="sex"
-                  value={form.values.sex}
+                  value={'male'}
                   onChange={form.handleChange}
                 />
               </div>
@@ -234,14 +284,38 @@ const ProfileUpdate = () => {
                   className=" block w-full border-2 border-gray-300 rounded-sm px-5  py-4 text-2xl"
                   type="radio"
                   name="sex"
+                  checked={form.values.sex === 'female'}
                   id="sex"
-                  value={form.values.sex}
+                  value={'female'}
                   onChange={form.handleChange}
                 />
               </div>
+              {form.errors.sex && <p className="errMsg ">{form.errors.sex}</p>}
             </div>
           </div>
 
+          <div className="flex gap-2 items-center">
+            <label
+              htmlFor="district"
+              className="capitalize w-[260px] text-gray-500 text-[16px]"
+            >
+              ngày sinh
+            </label>
+            <div className="flex flex-col w-full">
+              <DatePicker
+                id="birthday"
+                name="birthday"
+                className=" block w-full border-2 border-gray-300 rounded-sm px-5  py-2 text-2xl"
+                selected={form.values.birthday}
+                onChange={date => form.setFieldValue('birthday', date)}
+                showYearDropdown
+                dateFormat="dd/MM/yyyy"
+              />
+              {form.errors.birthday && (
+                <p className="errMsg ">{form.errors.birthday}</p>
+              )}
+            </div>
+          </div>
           <div className="mt-6 flex ">
             <div className="w-[266px]"></div>
             <button
