@@ -83,6 +83,14 @@ const routes = [
     )
   },
   {
+    path: '/user/account/index',
+    element: (
+      <ProtectedPage>
+        <AccountPage />
+      </ProtectedPage>
+    )
+  },
+  {
     path: '/user/:authCate',
     element: (
       <ProtectedPage>

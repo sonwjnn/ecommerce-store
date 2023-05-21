@@ -91,12 +91,12 @@ const ProfileUpdate = () => {
 
   return (
     <div className="flex items-start justify-center">
-      <div className="max-w-[600px] ml-[-100px] mt-[50px] px-4  ">
+      <div className="max-w-[600px] md:ml-[-50px] mt-[50px] px-4  ">
         <form onSubmit={form.handleSubmit} className="flex flex-col gap-6">
-          <div className="flex gap-2  items-center">
+          <div className="flex gap-2 flex-col md:flex-row  items-center">
             <label
               htmlFor="username"
-              className="capitalize text-[16px] text-gray-500 w-[260px]"
+              className="capitalize text-[16px]  text-gray-500 w-full md:w-[260px]"
             >
               tên đăng nhập
             </label>
@@ -115,10 +115,10 @@ const ProfileUpdate = () => {
             </div>
           </div>
 
-          <div className="flex gap-2  items-center">
+          <div className="flex gap-2 flex-col md:flex-row  items-center">
             <label
               htmlFor="displayName"
-              className="capitalize text-[16px] text-gray-500 w-[260px]"
+              className="capitalize self-start text-[16px] text-gray-500 w-[260px]"
             >
               tên
             </label>
@@ -137,10 +137,10 @@ const ProfileUpdate = () => {
             </div>
           </div>
 
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 flex-col md:flex-row items-center">
             <label
               htmlFor="email"
-              className="capitalize w-[260px] text-gray-500 text-[16px]"
+              className="capitalize self-start w-[260px] text-gray-500 text-[16px]"
             >
               email
             </label>
@@ -159,10 +159,10 @@ const ProfileUpdate = () => {
             </div>
           </div>
 
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 flex-col md:flex-row items-center">
             <label
               htmlFor="phone"
-              className="capitalize w-[260px] text-gray-500 text-[16px]"
+              className="capitalize self-start w-[260px] text-gray-500 text-[16px]"
             >
               số điện thoại
             </label>
@@ -182,10 +182,10 @@ const ProfileUpdate = () => {
             </div>
           </div>
 
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 flex-col md:flex-row items-center">
             <label
               htmlFor="address"
-              className="capitalize w-[260px] text-gray-500 text-[16px]"
+              className="capitalize self-start w-[260px] text-gray-500 text-[16px]"
             >
               địa chỉ
             </label>
@@ -204,10 +204,10 @@ const ProfileUpdate = () => {
             </div>
           </div>
 
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 flex-col md:flex-row items-center">
             <label
               htmlFor="city"
-              className="capitalize w-[260px] text-gray-500 text-[16px]"
+              className="capitalize self-start w-[260px] text-gray-500 text-[16px]"
             >
               thành phố
             </label>
@@ -226,10 +226,10 @@ const ProfileUpdate = () => {
             </div>
           </div>
 
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 flex-col md:flex-row items-center">
             <label
               htmlFor="text"
-              className="capitalize w-[260px] text-gray-500 text-[16px]"
+              className="capitalize self-start w-[260px] text-gray-500 text-[16px]"
             >
               Quận / Huyện
             </label>
@@ -248,14 +248,14 @@ const ProfileUpdate = () => {
             </div>
           </div>
 
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 flex-col md:flex-row items-center">
             <label
               htmlFor="sex"
-              className="capitalize w-[160px] text-gray-500 text-[16px]"
+              className="capitalize self-start w-[160px] text-gray-500 text-[16px]"
             >
               giới tính
             </label>
-            <div className="flex justify-start gap-8">
+            <div className="flex justify-start self-start gap-8">
               <div className="flex gap-2">
                 <label
                   htmlFor="male"
@@ -294,14 +294,14 @@ const ProfileUpdate = () => {
             </div>
           </div>
 
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 flex-col md:flex-row items-center">
             <label
               htmlFor="district"
-              className="capitalize w-[260px] text-gray-500 text-[16px]"
+              className="capitalize self-start w-[260px] text-gray-500 text-[16px]"
             >
               ngày sinh
             </label>
-            <div className="flex flex-col w-full">
+            <div className="flex  flex-col w-full">
               <DatePicker
                 id="birthday"
                 name="birthday"

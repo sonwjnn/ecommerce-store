@@ -49,12 +49,12 @@ const PasswordUpdate = () => {
 
   return (
     <div className="flex items-start justify-center">
-      <div className="max-w-[600px] ml-[-100px] mt-[50px] px-4  ">
+      <div className="max-w-[600px] md:ml-[-50px] mt-[50px] px-4  ">
         <form onSubmit={form.handleSubmit} className="flex flex-col gap-6">
-          <div className="flex gap-2  items-center">
+          <div className="flex flex-col md:flex-row gap-2  items-center">
             <label
               htmlFor="password"
-              className="capitalize text-[16px] text-gray-500 w-[260px]"
+              className="capitalize text-[16px] self-start text-gray-500 w-[260px]"
             >
               mật khẩu
             </label>
@@ -68,10 +68,10 @@ const PasswordUpdate = () => {
             />
           </div>
 
-          <div className="flex gap-2  items-center">
+          <div className="flex flex-col md:flex-row gap-2  items-center">
             <label
               htmlFor="newPassword"
-              className="capitalize text-[16px] text-gray-500 w-[260px]"
+              className="capitalize self-start text-[16px] text-gray-500 w-[260px]"
             >
               mật khẩu mới
             </label>
@@ -85,10 +85,10 @@ const PasswordUpdate = () => {
             />
           </div>
 
-          <div className="flex gap-2 items-center">
+          <div className="flex flex-col md:flex-row gap-2 items-center">
             <label
               htmlFor="confirmNewPassword"
-              className="capitalize w-[260px] text-gray-500 text-[16px]"
+              className="capitalize w-[260px] self-start text-gray-500 text-[16px]"
             >
               xác nhận mật khẩu
             </label>

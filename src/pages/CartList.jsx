@@ -1,15 +1,12 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  setListCarts,
-  removeCart,
-  removeCarts
-} from '../redux/features/userSlice'
+import { removeCart, removeCarts } from '../redux/features/userSlice'
 import cartApi from '../apis/modules/cart.api'
 import { toast } from 'react-toastify'
 import { useRef } from 'react'
 import { setGlobalLoading } from '../redux/features/globalLoadingSlice'
+
 const cartState = {
   increase: 'increase',
   decrease: 'decrease'
@@ -23,10 +20,8 @@ const CartItem = props => {
     id,
     price,
     onRemoved,
-    onCheckRemoved,
     handleCheckedCart,
     isCheckedAll,
-    checkedCarts,
     handleDotPrice
   } = props
 
@@ -34,6 +29,7 @@ const CartItem = props => {
   const inputRef = useRef()
   const [cartValue, setCartValue] = useState(1)
   const [isChecked, setIsChecked] = useState(false)
+  const [onRequest, setOnRequest] = useState(false)
 
   useEffect(() => {
     setCartValue(+quantity)
@@ -52,16 +48,14 @@ const CartItem = props => {
     handleCheckedCart({ id, currPrice }, !isChecked)
   }
 
-  useEffect(() => {}, [cartValue])
-
   const onRemove = async () => {
-    // if (onRequest) return
-    // setOnRequest(true)
+    if (onRequest) return
+    setOnRequest(true)
 
     const { response, err } = await cartApi.remove({
       cartId: id
     })
-    // setOnRequest(false)
+    setOnRequest(false)
 
     if (err) toast.error(err.message)
     if (response) {
@@ -70,8 +64,6 @@ const CartItem = props => {
       toast.success('Remove cart success!')
     }
   }
-
-  const onCheckRemove = () => {}
 
   const handleValueCart = state => {
     if (cartState.increase == state) {
@@ -100,8 +92,6 @@ const CartItem = props => {
           <input
             type="checkbox"
             checked={isChecked || isCheckedAll}
-            name=""
-            id=""
             ref={inputRef}
             className="w-6 h-6"
             onChange={handleCheckCart}
@@ -161,7 +151,6 @@ const CartItem = props => {
 }
 
 const CartList = () => {
-  const { user, listCarts } = useSelector(state => state.user)
   const dispatch = useDispatch()
   const [carts, setCarts] = useState([])
   const [isCheckedAll, setCheckedAll] = useState(false)
@@ -234,12 +223,13 @@ const CartList = () => {
   }
 
   const handleRemoveCarts = async () => {
-    if (!checkedCarts.length) return
+    if (!checkedCarts.length || onRequest) return
+    setOnRequest(true)
     const newCheckedCarts = checkedCarts.map(item => item.id)
     const { response, err } = await cartApi.removeCarts({
       cartIds: newCheckedCarts
     })
-    // setOnRequest(false)
+    setOnRequest(false)
 
     if (err) toast.error(err.message)
     if (response) {
@@ -249,10 +239,6 @@ const CartList = () => {
       toast.success('Remove carts success!')
     }
   }
-
-  // useEffect(() => {
-  //   console.log(checkedCarts)
-  // }, [checkedCarts])
 
   return (
     <div className="bg-bg_page">
@@ -296,7 +282,7 @@ const CartList = () => {
           </div>
 
           <div className="rounded-md h-full w-full bg-white mt-4">
-            {carts.map((cart, index) => (
+            {carts.map(cart => (
               <CartItem
                 id={cart._id}
                 key={cart.productId}

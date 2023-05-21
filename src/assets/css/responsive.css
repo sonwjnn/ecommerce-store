@@ -208,4 +208,18 @@
   .footer-list-item__socials {
     padding-left: 30%;
   }
+
+  .account-item {
+    border-bottom: 1px solid #ccc;
+    padding: 0 32px;
+  }
+
+  .account-item span {
+    padding: 16px;
+    font-size: 22px;
+  }
+
+  .action-account {
+    font-size: 18px;
+  }
 }

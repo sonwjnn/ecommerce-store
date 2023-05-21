@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { useEffect, useRef, useState } from 'react'
 import { shorterString } from '../../utilities/constants'
+import { IoMdArrowBack } from 'react-icons/io'
 
 const SearchMain = () => {
   const { user, listCarts } = useSelector(state => state.user)
@@ -37,6 +38,10 @@ const SearchMain = () => {
     }
   }
 
+  const goBackPage = () => {
+    navigate(-1)
+  }
+
   return (
     <div className="header-with-search">
       <div className="header__logo hide-on-tablet">
@@ -47,6 +52,14 @@ const SearchMain = () => {
             </g>
           </svg>
         </Link>
+      </div>
+      <div
+        className={`back md:hidden w-[50px] flex items-center justify-start ${
+          location.pathname === '/' ? 'hidden' : 'block'
+        }`}
+        onClick={goBackPage}
+      >
+        <IoMdArrowBack className={`text-white text-[36px] `} />
       </div>
 
       <input
@@ -59,10 +72,10 @@ const SearchMain = () => {
       <div className="header__search-wrap">
         <div className="header__search">
           <div className="header__search-input-wrap">
-            <span className="header__seach-mobile  hidden absolute left-[20px] top-[25%] z-20">
-              <BiSearch className="h-8 text-[20px] text-gray-500 mt-1 " />
-            </span>
-            <form onSubmit={handleSubmitSearch} className="h-full">
+            <form onSubmit={handleSubmitSearch} className="h-full relative">
+              <span className="header__seach-mobile  hidden absolute left-[7px] top-[25%] z-20">
+                <BiSearch className="h-8 text-[22px] text-gray-500 mt-1 " />
+              </span>
               <input
                 type="text"
                 className="header__search-input relative"

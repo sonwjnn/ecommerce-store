@@ -266,7 +266,7 @@ const ProductDetail = () => {
                 </div>
               </div>
 
-              <div className="flex flex-wrap gap-4 items-center">
+              <div className="flex flex-wrap gap-4  items-center">
                 <span className="flex relative items-center border-right-ab after:right-[-2rem]">
                   <span className="mr-2 text-primary text-[16px] sm:text-[18px] relative  after:bg-primary border-bottom-ab">
                     4.0
@@ -591,7 +591,7 @@ const ProductDetail = () => {
               <div className="uppercase text-[20px] bg-white w-full rounded-md">
                 đánh giá sản phẩm
               </div>
-              <div className="mt-8 flex gap-4 capitalize p-[20px] border border-[#f9ede5] bg-[#fffbf8]">
+              <div className="mt-8  gap-4 capitalize hidden md:block p-[20px] border border-[#f9ede5] bg-[#fffbf8]">
                 <div className="p-8 flex flex-col items-center justify-center">
                   <span className="text-primary text-[28px]">
                     4.0 <span className="text-[18px]">trên 5</span>

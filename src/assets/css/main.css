@@ -1599,17 +1599,3 @@ i.home-product-item__icon-heart-fill {
 .auto-swiper .swiper-button-prev::after {
   font-size: 14px;
 }
-
-/* @media (min-width: 768px) {
-  .auto-swiper .swiper-button-next::after,
-  .auto-swiper .swiper-button-prev::after {
-    font-size: 2rem;
-  }
-} */
-
-/* @media (min-width: 768px) {
-  .auto-swiper .swiper {
-    padding-left: 4rem;
-    padding-right: 4rem;
-  }
-} */

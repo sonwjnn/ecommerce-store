@@ -1,5 +1,3 @@
-import React from 'react'
-
 const Footer = () => {
   return (
     <footer className="footer font-roboto">
@@ -211,10 +209,7 @@ const Footer = () => {
                   </a>
                 </li>
                 <li className="footer-list-item footer-list__app">
-                  <a
-                    href=""
-                    className="footer-list-item__link footer-list-appstore"
-                  >
+                  <button className="footer-list-item__link footer-list-appstore">
                     <img
                       src={
                         new URL(
@@ -224,11 +219,8 @@ const Footer = () => {
                       }
                       alt="#"
                     />
-                  </a>
-                  <a
-                    href=""
-                    className="footer-list-item__link footer-list-google"
-                  >
+                  </button>
+                  <button className="footer-list-item__link footer-list-google">
                     <img
                       src={
                         new URL(
@@ -238,11 +230,8 @@ const Footer = () => {
                       }
                       alt="#"
                     />
-                  </a>
-                  <a
-                    href=""
-                    className="footer-list-item__link footer-list-gallery"
-                  >
+                  </button>
+                  <button className="footer-list-item__link footer-list-gallery">
                     <img
                       src={
                         new URL(
@@ -252,7 +241,7 @@ const Footer = () => {
                       }
                       alt="#"
                     />
-                  </a>
+                  </button>
                 </li>
               </div>
             </ul>

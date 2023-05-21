@@ -16,7 +16,7 @@ const NavigateMobile = () => {
       return
     }
 
-    navigate('/user/account/profile')
+    navigate('/user/account/index')
   }
 
   return (

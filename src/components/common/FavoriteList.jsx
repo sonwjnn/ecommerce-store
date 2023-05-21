@@ -73,17 +73,8 @@ const FavoriteItem = props => {
 
   return (
     <div className="p-8 w-full pb-0 pt-0">
-      <div className="p-6 flex   items-center justify-between  border-b-gray-200 border-b">
+      <div className="p-6 flex flex-col md:flex-row items-center justify-between  border-b-gray-200 border-b">
         <div className="flex items-center gap-8 self-start flex-grow">
-          <input
-            type="checkbox"
-            checked={isChecked || isCheckedAll}
-            name=""
-            id=""
-            ref={inputRef}
-            className="w-6 h-6"
-            onChange={handleCheckFav}
-          />
           <div
             className="min-w-[80px] h-[80px] bg-no-repeat bg-center bg-cover "
             style={{
@@ -96,14 +87,14 @@ const FavoriteItem = props => {
           </div>
         </div>
 
-        <div className="flex ml-[132px] self-center items-center">
-          <div className=" text-primary text-[16px] px-12 mr-12">
+        <div className="flex ml-[132px] self-end md:self-center items-center">
+          <div className=" text-primary text-[18px] md:text-[16px] px-12 mr-12">
             ₫{handleDotPrice(price)}
           </div>
 
           <button
             onClick={onRemove}
-            className="text-red-600 mr-2 text-[24px] flex items-center px-3 py-2 justify-center   "
+            className="text-red-600 mr-2 text-[32px] md:text-[24px] flex items-center px-3 py-2 justify-center   "
           >
             <MdDelete />
           </button>
