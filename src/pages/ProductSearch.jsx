@@ -81,12 +81,12 @@ const ProductSearch = () => {
             <div className="col hidden md:block"></div>
 
             <div className="col col-span-10 overflow-hidden grow">
-              {products.length && (
+              {products.length ? (
                 <BoardBar
                   handleSortPriceDownUp={handleSortPriceDownUp}
                   handleSortPriceUpDown={handleSortPriceUpDown}
                 />
-              )}
+              ) : null}
               <div className="home-product min-h-screen home-product--spacing-bottom">
                 <div className="row sm-gutter">
                   {/* <!-- Product item --> */}
@@ -121,7 +121,7 @@ const ProductSearch = () => {
                   )}
                 </div>
               </div>
-              {products.length && <Pagination />}
+              {products.length ? <Pagination /> : null}
             </div>
           </div>
         </div>

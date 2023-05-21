@@ -317,6 +317,7 @@ html {
   font-size: 1.2rem;
   margin-top: 16px;
   font-weight: 300;
+  transition: 0.3s ease;
 }
 
 .footer-list-item__link:hover {

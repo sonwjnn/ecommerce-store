@@ -11,7 +11,7 @@ const HeaderSocial = () => {
         <div className="nav-qr-add"></div>
         <div className="nav-qr-code">
           <img
-            src={new URL('../assets/img/qr-code.png', import.meta.url).href}
+            src={new URL('../../assets/img/qr-code.png', import.meta.url).href}
             alt="img"
             className="nav-qr-code__img"
           />
@@ -19,7 +19,8 @@ const HeaderSocial = () => {
             <button className="nav-qr-code__link-item px-1 py-2">
               <img
                 src={
-                  new URL('../assets/img/google-play.png', import.meta.url).href
+                  new URL('../../assets/img/google-play.png', import.meta.url)
+                    .href
                 }
                 alt="img"
                 className="nav-qr-code__link-img "
@@ -28,7 +29,8 @@ const HeaderSocial = () => {
             <button className="nav-qr-code__link-item px-1 py-2">
               <img
                 src={
-                  new URL('../assets/img/app-store.png', import.meta.url).href
+                  new URL('../../assets/img/app-store.png', import.meta.url)
+                    .href
                 }
                 alt="img"
                 className="nav-qr-code__link-img"
@@ -37,7 +39,8 @@ const HeaderSocial = () => {
             <button className="nav-qr-code__link-item px-1 py-2">
               <img
                 src={
-                  new URL('../assets/img/app-galerry.png', import.meta.url).href
+                  new URL('../../assets/img/app-galerry.png', import.meta.url)
+                    .href
                 }
                 alt="img"
                 className="nav-qr-code__link-img"

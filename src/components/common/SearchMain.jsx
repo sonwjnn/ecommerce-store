@@ -10,6 +10,8 @@ const SearchMain = () => {
   const { user, listCarts } = useSelector(state => state.user)
   const navigate = useNavigate()
   const location = useLocation()
+  const searchInput = useRef()
+  const [keyword, setKeyword] = useState('')
 
   useEffect(() => {
     if (!location.pathname.includes('search')) {
@@ -17,11 +19,13 @@ const SearchMain = () => {
     }
   }, [location])
 
-  const [keyword, setKeyword] = useState('')
-
   const handleSubmitSearch = e => {
     e.preventDefault()
-    navigate(`/search/${encodeURIComponent(keyword)}`)
+    if (keyword.trim()) navigate(`/search/${encodeURIComponent(keyword)}`)
+    else {
+      searchInput.current.focus()
+      setKeyword('')
+    }
   }
 
   const handleCarts = () => {
@@ -64,6 +68,7 @@ const SearchMain = () => {
                 className="header__search-input relative"
                 placeholder="Nhập sản phẩm để tìm kiếm"
                 value={keyword}
+                ref={searchInput}
                 onChange={event => setKeyword(event.target.value)}
               />
             </form>
@@ -91,7 +96,7 @@ const SearchMain = () => {
           </div>
         </div>
         <div className="header__search-decription hide-on-mobile-tablet">
-          <ul className="header__search-decription-list pointer-events-none">
+          <ul className="header__search-decription-list pointer-events-none select-none">
             <li className="header__search-decription-list-item">
               <a href="">Túi xách nữ</a>
             </li>
@@ -120,7 +125,7 @@ const SearchMain = () => {
         </div>
       </div>
       <div className="header__cart">
-        <button onClick={handleCarts} className="header__cart-wrap">
+        <button onClick={handleCarts} className="header__cart-wrap ">
           <CgShoppingCart className="text-[30px] text-white" />
           <span className="header__cart-length  pointer-events-none select-none">
             {listCarts.length}

@@ -20,16 +20,11 @@ const HeaderMenu = () => {
   }
   const dispatch = useDispatch()
   const { user } = useSelector(state => state.user)
-  const [anchorEl, setAnchorEl] = useState(null)
-
-  const toggleMenu = e => setAnchorEl(e.currentTarget)
 
   const checkUserRoute = location.pathname.includes('user')
 
-  const urlAvar = new URL('../assets/img/user-avt.jpg', import.meta.url).href
-
   const urlNotify = new URL(
-    '../assets/img/notify-product.jfif',
+    '../../assets/img/notify-product.jfif',
     import.meta.url
   ).href
   return (
@@ -44,7 +39,7 @@ const HeaderMenu = () => {
           <div className="notify-header">
             <h3 className="notify-header-info">Thông báo mới nhận</h3>
           </div>
-          <div className="notify-container">
+          <div className="notify-container transition-all">
             <button className="notify-container-ptn">
               <span className="notify-container-img-box w-[100px]">
                 <img
@@ -83,7 +78,6 @@ const HeaderMenu = () => {
                 </p>
               </span>
             </button>
-            3
             <button className="notify-container-ptn">
               <span className="notify-container-img-box w-[100px]">
                 <img
@@ -142,8 +136,8 @@ const HeaderMenu = () => {
               </span>
             </button>
           </div>
-          <div className="notify-footer">
-            <button className="notify-footer-btn">Xem tất cả</button>
+          <div className="notify-footer cursor-pointer transition-all">
+            <button className="notify-footer-btn ">Xem tất cả</button>
           </div>
         </div>
       </li>
@@ -165,8 +159,7 @@ const HeaderMenu = () => {
           <button className="language-item w-full text-left">English</button>
         </div>
       </li>
-      {/* <li className="nav-list-item nav-list-item--strong">Đăng ký</li>
-                        <li className="nav-list-item nav-list-item--strong nav-list-item--separate">Đăng nhập</li>  */}
+
       <li className="nav-list-item nav-list-item-user">
         <div className="nav-list-item-user-add"></div>
 

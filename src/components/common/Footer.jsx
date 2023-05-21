@@ -2,7 +2,7 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <footer className="footer">
+    <footer className="footer font-roboto">
       <div className="grid wide">
         <div className="row footer-spacing"></div>
         <div className="row footer-body footer__content">
@@ -173,31 +173,22 @@ const Footer = () => {
             <ul className="footer-list">
               <h3 className="footer-list__heading">THEO DÕI CHÚNG TÔI TRÊN</h3>
               <li className="footer-list-item">
-                <a
-                  href=""
-                  className="footer-list-item__link footer-list-item__socials"
-                >
+                <button className="footer-list-item__link footer-list-item__socials transition-all">
                   <i className="footer-list-item__icon fa-brands fa-facebook-square"></i>
                   Facebook
-                </a>
+                </button>
               </li>
               <li className="footer-list-item">
-                <a
-                  href=""
-                  className="footer-list-item__link footer-list-item__socials"
-                >
+                <button className="footer-list-item__link footer-list-item__socials transition-all">
                   <i className="footer-list-item__icon fa-brands fa-instagram-square"></i>
                   Instagram
-                </a>
+                </button>
               </li>
               <li className="footer-list-item">
-                <a
-                  href=""
-                  className="footer-list-item__link footer-list-item__socials"
-                >
+                <button className="footer-list-item__link footer-list-item__socials transition-all">
                   <i className="footer-list-item__icon fa-brands fa-linkedin"></i>
                   LinkedIn
-                </a>
+                </button>
               </li>
             </ul>
           </div>
@@ -211,7 +202,10 @@ const Footer = () => {
                   <a href="" className="footer-list-item__link footer-list-qr">
                     <img
                       className="footer-list-qr__img"
-                      src="src/assets/img/qr-code.png"
+                      src={
+                        new URL('../../assets/img/qr-code.png', import.meta.url)
+                          .href
+                      }
                       alt="#"
                     />
                   </a>
@@ -221,19 +215,43 @@ const Footer = () => {
                     href=""
                     className="footer-list-item__link footer-list-appstore"
                   >
-                    <img src="src/assets/img/app-store.png" alt="#" />
+                    <img
+                      src={
+                        new URL(
+                          '../../assets/img/app-store.png',
+                          import.meta.url
+                        ).href
+                      }
+                      alt="#"
+                    />
                   </a>
                   <a
                     href=""
                     className="footer-list-item__link footer-list-google"
                   >
-                    <img src="src/assets/img/google-play.png" alt="#" />
+                    <img
+                      src={
+                        new URL(
+                          '../../assets/img/google-play.png',
+                          import.meta.url
+                        ).href
+                      }
+                      alt="#"
+                    />
                   </a>
                   <a
                     href=""
                     className="footer-list-item__link footer-list-gallery"
                   >
-                    <img src="src/assets/img/app-galerry.png" alt="#" />
+                    <img
+                      src={
+                        new URL(
+                          '../../assets/img/app-galerry.png',
+                          import.meta.url
+                        ).href
+                      }
+                      alt="#"
+                    />
                   </a>
                 </li>
               </div>
