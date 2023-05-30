@@ -6,6 +6,7 @@ import reviewApi from '../../apis/modules/review.api'
 import TextAvatar from './TextAvatar'
 import { MdDelete } from 'react-icons/md'
 import { FiSend } from 'react-icons/fi'
+import LoadingButton from './LoadingButton'
 
 const ReviewItem = ({ review, onRemoved }) => {
   const { user } = useSelector(state => state.user)
@@ -45,12 +46,21 @@ const ReviewItem = ({ review, onRemoved }) => {
             </div>
           </div>
           {user && user.id === review.user.id && (
-            <button
+            // <button
+            //   onClick={onRemove}
+            //   className="text-red-600 mr-2 text-[24px] flex items-center px-3 py-2 justify-center sm:relative md:absolute sm:right-0 md:right-2"
+            // >
+            //   <MdDelete />
+            // </button>
+            <LoadingButton
+              loading={onRequest}
+              colorLoading={'#fb5533'}
+              variant={'contained'}
+              className={`bg-transparent border-none text-red-600 mr-2 text-[24px] flex items-center px-3 py-2 justify-center sm:relative md:absolute sm:right-0 md:right-2`}
               onClick={onRemove}
-              className="text-red-600 mr-2 text-[24px] flex items-center px-3 py-2 justify-center sm:relative md:absolute sm:right-0 md:right-2"
             >
               <MdDelete />
-            </button>
+            </LoadingButton>
           )}
         </div>
       </div>
@@ -78,7 +88,6 @@ const ProductReview = ({ reviews, product, productType }) => {
 
   const onAddReview = async () => {
     if (onRequest) return
-    setOnRequest(true)
     const body = {
       content,
       productId: product._id,
@@ -86,7 +95,9 @@ const ProductReview = ({ reviews, product, productType }) => {
       productTitle: product.title || product.name,
       productImage: product.imageName
     }
+    if (!content.trim()) return
 
+    setOnRequest(true)
     const { response, err } = await reviewApi.add(body)
     setOnRequest(false)
 
@@ -155,12 +166,21 @@ const ProductReview = ({ reviews, product, productType }) => {
                     placeholder="Write your review"
                     className="grow p-4 border border-gray-300 resize-none text-[14px]"
                   />
-                  <button
+                  {/* <button
                     onClick={onAddReview}
                     className="flex items-center justify-center btn-primary py-2 px-12 h-[4rem]"
                   >
                     <FiSend className=" mt-1 text-[20px]" />
-                  </button>
+                  </button> */}
+                  <LoadingButton
+                    loading={onRequest}
+                    colorLoading={'#ffffff'}
+                    variant={'contained'}
+                    className={` flex items-center justify-center btn-primary py-2 px-12 h-[4rem]`}
+                    onClick={onAddReview}
+                  >
+                    <FiSend className=" mt-1 text-[20px]" />
+                  </LoadingButton>
                 </div>
               </div>
             </div>

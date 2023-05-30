@@ -19,8 +19,6 @@ const bannerLogos = [
   'nạp điện thoại & thẻ game'
 ]
 
-let indexGlobal = 0
-
 const HomePage = () => {
   const [cates, setCates] = useState([])
   useEffect(() => {

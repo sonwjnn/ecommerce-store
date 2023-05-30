@@ -10,6 +10,7 @@ import PasswordUpdate from '../components/common/PasswordUpdate'
 import FavoriteList from '../components/common/FavoriteList'
 import TextAvatar from '../components/common/TextAvatar'
 import ProfileUpdate from '../components/common/ProfileUpdate'
+import PurchaseList from '../components/common/PurchaseList'
 
 const AccountPage = () => {
   const { user } = useSelector(state => state.user)
@@ -126,6 +127,7 @@ const AccountPage = () => {
             </div>
             {accountType === 'profile' && <ProfileUpdate />}
             {accountType === 'password' && <PasswordUpdate />}
+            {authCate === 'purchase' && <PurchaseList />}
             {authCate === 'favorite' && <FavoriteList />}
           </div>
         </div>

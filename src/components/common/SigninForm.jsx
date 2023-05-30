@@ -7,6 +7,7 @@ import userApi from '../../apis/modules/user.api'
 import { setAuthModalOpen } from '../../redux/features/authModelSlice'
 import { setUser } from '../../redux/features/userSlice'
 import { useNavigate } from 'react-router-dom'
+import LoadingButton from './LoadingButton'
 const SigninForm = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -31,15 +32,16 @@ const SigninForm = () => {
     }),
     onSubmit: async values => {
       setErrorMessage(undefined)
+      setIsLoginRequest(true)
       const { response, error } = await userApi.signin(values)
+      setIsLoginRequest(false)
+
       if (response) {
-        signinForm.resetForm()
         dispatch(setUser(response))
 
         setTimeout(() => {
           navigate('/')
         }, 2000)
-        toast.success('Sign in success')
       }
       if (error) setErrorMessage(error.message)
     }
@@ -85,12 +87,15 @@ const SigninForm = () => {
       </div>
 
       <div className="mt-6 flex flex-col gap-4">
-        <button
+        <LoadingButton
           type="submit"
-          className="transition-all w-full uppercase rounded-md bg-primary px-6 py-4 text-[14px] font-semibold text-white shadow-sm hover:brightness-125 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          loading={isLoginRequest}
+          colorLoading={'#fb5533'}
+          variant={'contained'}
+          className={`uppercase px-6 py-4 text-[14px]  font-semibold bg-primary text-white  `}
         >
           đăng nhập
-        </button>
+        </LoadingButton>
 
         <button
           type="button"

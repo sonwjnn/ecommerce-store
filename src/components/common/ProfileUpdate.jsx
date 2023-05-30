@@ -8,11 +8,13 @@ import { maskedEmail } from '../../utilities/constants'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useDispatch } from 'react-redux'
+import LoadingButton from './LoadingButton'
 
 const ProfileUpdate = () => {
   const { user } = useSelector(state => state.user)
   const [onRequest, setOnRequest] = useState(false)
   const [originalEmail, setOriginalEmail] = useState('')
+
   const dispatch = useDispatch()
   const phoneRegex = /(84|0[3|5|7|8|9])+([0-9]{8})\b/
 
@@ -318,12 +320,16 @@ const ProfileUpdate = () => {
           </div>
           <div className="mt-6 flex ">
             <div className="w-[266px]"></div>
-            <button
+
+            <LoadingButton
               type="submit"
-              className="mb-4 transition-all w-[25%] ml-auto uppercase rounded-md  bg-primary px-4 py-4 text-[14px] font-semibold text-white shadow-sm hover:brightness-125 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              loading={onRequest}
+              colorLoading={'#fb5533'}
+              variant={'contained'}
+              className={`mb-4  w-[25%] ml-auto uppercase  bg-primary px-4 py-4 text-[14px] font-semibold text-white  `}
             >
               lưu
-            </button>
+            </LoadingButton>
           </div>
         </form>
       </div>

@@ -6,6 +6,7 @@ import cartApi from '../apis/modules/cart.api'
 import { toast } from 'react-toastify'
 import { useRef } from 'react'
 import { setGlobalLoading } from '../redux/features/globalLoadingSlice'
+import LoadingButton from '../components/common/LoadingButton'
 
 const cartState = {
   increase: 'increase',
@@ -51,7 +52,6 @@ const CartItem = props => {
   const onRemove = async () => {
     if (onRequest) return
     setOnRequest(true)
-
     const { response, err } = await cartApi.remove({
       cartId: id
     })
@@ -138,12 +138,18 @@ const CartItem = props => {
             ₫{currPrice}
           </div>
 
-          <button
-            className="btn-primary py-2 lg:relative lg:right-0 absolute right-[-86%] top-[50%]"
+          <LoadingButton
+            loading={onRequest}
+            colorLoading={'#fb5533'}
+            variant={'contained'}
+            className={`p-0 lg:relative flex items-center justify-center border-none lg:right-1 absolute right-[-86%] top-[50%] text-primary bg-transparent`}
             onClick={onRemove}
+            size={24}
           >
-            Xoá
-          </button>
+            <div className="bg-primary text-white w-full py-2     rounded-md h-full">
+              Xoá
+            </div>
+          </LoadingButton>
         </div>
       </div>
     </div>
@@ -155,6 +161,7 @@ const CartList = () => {
   const [carts, setCarts] = useState([])
   const [isCheckedAll, setCheckedAll] = useState(false)
   const [checkedCarts, setCheckedCarts] = useState([])
+  const [onRequest, setOnRequest] = useState(false)
 
   useEffect(() => {
     const getListCartUser = async () => {

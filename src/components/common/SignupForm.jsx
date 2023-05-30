@@ -6,6 +6,7 @@ import * as Yup from 'yup'
 import { setUser } from '../../redux/features/userSlice'
 import { useNavigate } from 'react-router-dom'
 import userApi from '../../apis/modules/user.api'
+import LoadingButton from './LoadingButton'
 
 const SignupForm = () => {
   const dispatch = useDispatch()
@@ -71,7 +72,7 @@ const SignupForm = () => {
           value={signupForm.values.displayName}
           onChange={signupForm.handleChange}
         />
-        {signupForm.errors.displayName && (
+        {!isLoginRequest && signupForm.errors.displayName && (
           <p className="errMsg ">{signupForm.errors.displayName}</p>
         )}
       </div>
@@ -87,10 +88,11 @@ const SignupForm = () => {
           value={signupForm.values.username}
           onChange={signupForm.handleChange}
         />
-        {(signupForm.errors.username && (
-          <p className="errMsg ">{signupForm.errors.username}</p>
-        )) ||
-          (errorMessage && <p className="errMsg ">{errorMessage}</p>)}
+        {!isLoginRequest &&
+          ((signupForm.errors.username && (
+            <p className="errMsg ">{signupForm.errors.username}</p>
+          )) ||
+            (errorMessage && <p className="errMsg ">{errorMessage}</p>))}
       </div>
 
       <div className="mt-2 mb-5">
@@ -103,7 +105,7 @@ const SignupForm = () => {
           value={signupForm.values.password}
           onChange={signupForm.handleChange}
         />
-        {signupForm.errors.password && (
+        {!isLoginRequest && signupForm.errors.password && (
           <p className="errMsg ">{signupForm.errors.password}</p>
         )}
       </div>
@@ -118,18 +120,21 @@ const SignupForm = () => {
           value={signupForm.values.confirmPassword}
           onChange={signupForm.handleChange}
         />
-        {signupForm.errors.confirmPassword && (
+        {!isLoginRequest && signupForm.errors.confirmPassword && (
           <p className="errMsg ">{signupForm.errors.confirmPassword}</p>
         )}
       </div>
 
       <div className="mt-6 flex flex-col gap-4">
-        <button
+        <LoadingButton
           type="submit"
-          className="transition-all w-full uppercase rounded-md bg-primary px-6 py-4 text-[14px] font-semibold text-white shadow-sm hover:brightness-125 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          loading={isLoginRequest}
+          colorLoading={'#fb5533'}
+          variant={'contained'}
+          className={`uppercase px-6 py-4 text-[14px]  font-semibold bg-primary text-white  `}
         >
-          đăng kí
-        </button>
+          đăng ký
+        </LoadingButton>
 
         <button
           type="button"

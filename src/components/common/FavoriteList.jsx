@@ -6,33 +6,14 @@ import { shorterString } from '../../utilities/constants'
 import { MdDelete } from 'react-icons/md'
 import { removeFavorite } from '../../redux/features/userSlice'
 import { toast } from 'react-toastify'
+import { SlEmotsmile } from 'react-icons/sl'
 
 const FavoriteItem = props => {
-  const {
-    title,
-    productImage,
-    type,
-    quantity,
-    id,
-    price,
-    onRemoved,
-    onCheckRemoved,
-    handleCheckedFav,
-    isCheckedAll,
-    checkedFavs,
-    handleDotPrice
-  } = props
+  const { title, productImage, type, id, price, onRemoved, handleDotPrice } =
+    props
 
   const dispatch = useDispatch()
-  const inputRef = useRef()
-  const [isChecked, setIsChecked] = useState(false)
   const [onRequest, setOnRequest] = useState(false)
-
-  const handleCheckFav = () => {
-    setIsChecked(!isChecked)
-    const currPrice = +price * favValue
-    handleCheckedFav({ id, currPrice }, !isChecked)
-  }
 
   const onRemove = async () => {
     if (onRequest) return
@@ -48,19 +29,6 @@ const FavoriteItem = props => {
       dispatch(removeFavorite({ favId: id }))
       onRemoved({ id })
       toast.success('Remove favorite success!')
-    }
-  }
-
-  const handleValueFav = state => {
-    if (favState.increase == state) {
-      setFavValue(favValue + 1)
-    }
-    if (favState.decrease == state) {
-      if (favValue - 1 < 1) {
-        setFavValue(1)
-        return
-      }
-      setFavValue(favValue - 1)
     }
   }
 
@@ -160,10 +128,6 @@ const FavoriteList = () => {
     }
   }
 
-  const onCheckedAll = () => {
-    setCheckedAll(!isCheckedAll)
-  }
-
   const onCheckRemoved = ids => {
     let newFavs = [...favs]
     ids.forEach(id => {
@@ -193,7 +157,7 @@ const FavoriteList = () => {
   }
 
   return (
-    <div className="rounded-md min-h-[80vh] w-full bg-white mt-4">
+    <div className="rounded-md min-h-[50vh] w-full bg-white mt-4">
       {favs.map((fav, index) => (
         <FavoriteItem
           id={fav._id}
@@ -213,6 +177,18 @@ const FavoriteList = () => {
           handleDotPrice={handleDotPrice}
         />
       ))}
+      {!favs.length && (
+        <div className="h-[50vh] w-full flex items-center justify-center ">
+          <div className="flex flex-col gap-8 items-center justify-center">
+            <SlEmotsmile className="text-[150px] text-zinc-300" />
+            <div className="gap-4 text-[20px] text-center">
+              <div className="text-gray-500">
+                Bạn không có sản phẩm yêu thích nào
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

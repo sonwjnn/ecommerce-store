@@ -28,8 +28,12 @@
     @apply transition-all hover:brightness-125 rounded-[2px] capitalize py-4 px-8 text-[16px] bg-primary font-normal  text-white;
   }
 
+  .btn-base {
+    @apply transition-all hover:brightness-125 select-none  capitalize py-4 px-8 text-[16px] rounded-md  font-normal;
+  }
+
   .btn-remove {
-    @apply transition-all hover:brightness-125 rounded-[2px] capitalize py-4 px-8 text-[16px] bg-red-600 font-normal  text-white;
+    @apply transition-all hover:brightness-125  rounded-[2px] capitalize py-4 px-8 text-[16px] bg-red-600 font-normal  text-white;
   }
 
   .btn-cart-solid {
