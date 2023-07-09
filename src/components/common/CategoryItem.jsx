@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-const CategoryItem = ({ index, cateType, disable }) => {
+const CategoryItem = ({ index, cateName, disable }) => {
   return (
     <Link
       className={`cursor-pointer ${
@@ -8,7 +8,7 @@ const CategoryItem = ({ index, cateType, disable }) => {
       } relative hover:border-gray-200 hover:shadow-sm flex flex-col items-center h-[50%]  px-2 py-4  border border-gray-100  row-span-${
         (index + 1) % 2 ? 1 : 2
       }`}
-      to={`/products/${cateType}/Tất cả sản phẩm`}
+      to={`/products/${cateName}/Tất cả sản phẩm`}
     >
       <div
         className="bg-no-repeat mx-auto self-start bg-cover w-[70%] h-[80px]"
@@ -25,7 +25,7 @@ const CategoryItem = ({ index, cateType, disable }) => {
         className={` text-[14px]  text-center flex items-center justify-center`}
         key={index}
       >
-        {cateType}
+        {cateName}
       </div>
     </Link>
   )

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { removeCart, removeCarts } from '../redux/features/userSlice'
 import cartApi from '../apis/modules/cart.api'
-import { toast } from 'react-toastify'
+import { toast } from 'react-hot-toast'
 import { useRef } from 'react'
 import { setGlobalLoading } from '../redux/features/globalLoadingSlice'
 import LoadingButton from '../components/common/LoadingButton'
@@ -297,7 +297,7 @@ const CartList = () => {
                 productId={cart.productId}
                 price={cart.productPrice}
                 title={cart.productTitle}
-                type={cart.cateName}
+                type={cart.productType}
                 imageName={cart.productImage}
                 quantity={cart.quantity}
                 onRemoved={onRemoved}

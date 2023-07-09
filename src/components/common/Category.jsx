@@ -9,7 +9,7 @@ import { setProductLoading } from '../../redux/features/productLoading'
 import ProductLoading from './ProductLoading'
 
 const Category = () => {
-  const { cateType, productType } = useParams()
+  const { cateName, productType } = useParams()
   const dispatch = useDispatch()
   const [categories, setCategories] = useState([])
   const [activeLink, setActiveLink] = useState(null)
@@ -44,7 +44,7 @@ const Category = () => {
           {categories.map((cate, index) => (
             <li className="category-item select-none" key={cate._id}>
               <Link
-                to={`/products/${cateType}/${productTypes[index]}`}
+                to={`/products/${cateName}/${productTypes[index]}`}
                 className={`category-item__link ${
                   activeLink === index || productType === cate.name
                     ? 'active'

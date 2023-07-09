@@ -5,8 +5,11 @@ import { useSelector } from 'react-redux'
 import { AiFillHeart } from 'react-icons/ai'
 
 const ProductItem = props => {
-  const { id, title, origin, info, date, price, imageName, cateName } = props
-  const { cateType, productType } = useParams()
+  const { id, title, origin, info, date, price, imageName, type } = props
+  useEffect(() => {
+    if (title === 'chuotttttt') console.log(imageName)
+  }, [])
+  const { cateName, productType } = useParams()
   const { listFavorites } = useSelector(state => state.user)
   const urlImage = new URL(
     `../../assets/img/products/${imageName}`,

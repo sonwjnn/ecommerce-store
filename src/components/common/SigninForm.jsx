@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { toast } from 'react-toastify'
+import { toast } from 'react-hot-toast'
 import * as Yup from 'yup'
 import userApi from '../../apis/modules/user.api'
 import { setAuthModalOpen } from '../../redux/features/authModelSlice'
@@ -38,6 +38,7 @@ const SigninForm = () => {
 
       if (response) {
         dispatch(setUser(response))
+        toast.success('Login success!')
 
         setTimeout(() => {
           navigate('/')

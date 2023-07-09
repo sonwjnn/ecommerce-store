@@ -1,7 +1,7 @@
 import userApi from '../../apis/modules/user.api'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
-import { toast } from 'react-toastify'
+import { toast } from 'react-hot-toast'
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { maskedEmail } from '../../utilities/constants'

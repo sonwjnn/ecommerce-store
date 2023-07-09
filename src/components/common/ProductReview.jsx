@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { toast } from 'react-toastify'
+import { toast } from 'react-hot-toast'
 import dayjs from 'dayjs'
 import { useSelector } from 'react-redux'
 import reviewApi from '../../apis/modules/review.api'

@@ -31,11 +31,11 @@ const HomePage = () => {
 
   // Gộp các phần tử thành các cặp
   const catePairs = productConfigs.productCategory.reduce(
-    (acc, cateType, index) => {
+    (acc, name, index) => {
       if (index % 2 === 0) {
-        acc.push([{ cateType, index }])
+        acc.push([{ name, index }])
       } else {
-        acc[acc.length - 1].push({ cateType, index })
+        acc[acc.length - 1].push({ name, index })
       }
       return acc
     },
@@ -79,11 +79,11 @@ const HomePage = () => {
           <div className="max-w-[1200px]   px-12 min-h-[108px] flex-wrap lg:flex-nowrap lg:mx-auto gap-2 flex justify-around mt-8">
             {bannerLogos.map((item, index) => (
               <div
-                className="min-w-[100px]  flex flex-col gap-2 items-center justify-start cursor-pointer "
+                className="hover:mt-[-2px] transition-all min-w-[100px]  flex flex-col gap-2 items-center justify-start cursor-pointer "
                 key={index}
               >
                 <div
-                  className="bg-no-repeat bg-cover h-[45px] w-[45px]"
+                  className="bg-no-repeat bg-cover h-[45px]  w-[45px]"
                   style={{
                     backgroundImage: `url(${
                       new URL(
@@ -110,8 +110,8 @@ const HomePage = () => {
                     <CategoryItem
                       key={cate.index}
                       index={cate.index}
-                      cateType={cate.cateType}
-                      disable={disableCategories.includes(cate.cateType)}
+                      cateName={cate.name}
+                      disable={disableCategories.includes(cate.name)}
                     />
                   ))}
                 </div>

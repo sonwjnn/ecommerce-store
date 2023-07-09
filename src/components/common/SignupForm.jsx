@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { toast } from 'react-toastify'
+import { toast } from 'react-hot-toast'
 import * as Yup from 'yup'
 import { setUser } from '../../redux/features/userSlice'
 import { useNavigate } from 'react-router-dom'

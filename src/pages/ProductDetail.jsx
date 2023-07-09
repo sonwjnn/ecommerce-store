@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
-import { toast } from 'react-toastify'
+import { toast } from 'react-hot-toast'
 import productApi from '../apis/modules/product.api'
 import cartApi from '../apis/modules/cart.api'
 import { setGlobalLoading } from '../redux/features/globalLoadingSlice'
@@ -79,7 +79,7 @@ const ProductDetail = () => {
     const body = {
       productId: product._id,
       productTitle: product.title || product.name,
-      productType: product.cateName,
+      productType: product.type,
       productPrice: product.price,
       productImage: product.imageName,
       quantity: cartValue
@@ -115,7 +115,7 @@ const ProductDetail = () => {
     const body = {
       productId: product._id,
       productTitle: product.title || product.name,
-      productType: product.cateName,
+      productType: product.type,
       productPrice: product.price,
       productImage: product.imageName
     }
@@ -174,9 +174,9 @@ const ProductDetail = () => {
     title = product.name || product.title,
     imageName = product.imageName,
     info = product.info,
-    date = product.dateOfM,
+    producedAt = product.producedAt,
     origin = product.origin,
-    cateName = product.cateName,
+    type = product.type,
     reviews = product.reviews
   } = product
 
@@ -552,7 +552,7 @@ const ProductDetail = () => {
                   danh mục
                 </span>
                 <span className=" text-blue-600 font-normal text-[14px]">
-                  shopee {'>'} {cateName}
+                  shopee {'>'} {productType}
                 </span>
               </div>
 

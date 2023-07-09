@@ -2,7 +2,7 @@ import userApi from '../../apis/modules/user.api'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import { setUser } from '../../redux/features/userSlice'
-import { toast } from 'react-toastify'
+import { toast } from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 

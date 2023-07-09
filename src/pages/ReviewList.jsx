@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { toast } from 'react-toastify'
+import { toast } from 'react-hot-toast'
 import { Link } from 'react-router-dom'
 import reviewApi from '../apis/modules/review.api'
 import { setGlobalLoading } from '../redux/features/globalLoadingSlice'

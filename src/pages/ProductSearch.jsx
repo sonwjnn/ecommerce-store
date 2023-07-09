@@ -98,9 +98,9 @@ const ProductSearch = () => {
                       price={product.price}
                       imageName={product.imageName}
                       info={product.info}
-                      date={product.dateOfM}
+                      date={product.producedAt}
                       origin={product.origin}
-                      cateName={product.cateName}
+                      type={product.type}
                     />
                   ))}
                   {!products.length && (

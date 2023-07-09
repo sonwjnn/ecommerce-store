@@ -38,7 +38,7 @@ const ProductList = () => {
   useEffect(() => {
     if (products.length) {
       dispatch(
-        setProductsStore(products.filter(item => item.cateName === productType))
+        setProductsStore(products.filter(item => item.type === productType))
       )
       setProductsSort(products)
     }
@@ -80,9 +80,9 @@ const ProductList = () => {
             price={product.price}
             imageName={product.imageName}
             info={product.info}
-            date={product.dateOfM}
+            date={product.producedAt}
             origin={product.origin}
-            cateName={product.cateName}
+            type={product.type}
             isFavorite={product.isFavorite}
           />
         ))}

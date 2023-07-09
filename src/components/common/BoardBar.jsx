@@ -10,7 +10,7 @@ const BoardBar = props => {
   const search = location.pathname.includes('search')
   return (
     <>
-      <div className="home-filter hide-on-mobile-tablet">
+      <div className=" home-filter hide-on-mobile-tablet">
         <span className="home-filter__lable">Sắp xếp theo</span>
         <button className="home-filter__btn btn">Phổ biến</button>
         <button className="home-filter__btn btn btn-primary">Mới nhất</button>

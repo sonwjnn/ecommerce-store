@@ -2,7 +2,7 @@ import { HiHome } from 'react-icons/hi'
 import { FaUserAlt, FaBell } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { toast } from 'react-toastify'
+import { toast } from 'react-hot-toast'
 
 const NavigateMobile = () => {
   const { user } = useSelector(state => state.user)

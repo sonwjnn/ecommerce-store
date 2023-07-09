@@ -21,14 +21,14 @@ const cartApi = {
     productId,
     productTitle,
     productPrice,
-    cateName,
+    productType,
     productImage,
     quantity
   }) => {
     try {
       const response = await privateClient.post(cartEndpoints.add, {
         productId,
-        cateName,
+        productType,
         productTitle,
         productPrice,
         productImage,

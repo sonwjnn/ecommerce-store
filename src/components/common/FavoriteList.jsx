@@ -5,7 +5,7 @@ import favoriteApi from '../../apis/modules/favorite.api'
 import { shorterString } from '../../utilities/constants'
 import { MdDelete } from 'react-icons/md'
 import { removeFavorite } from '../../redux/features/userSlice'
-import { toast } from 'react-toastify'
+import { toast } from 'react-hot-toast'
 import { SlEmotsmile } from 'react-icons/sl'
 
 const FavoriteItem = props => {
@@ -166,7 +166,7 @@ const FavoriteList = () => {
           productId={fav.productId}
           price={fav.productPrice}
           title={fav.productTitle}
-          type={fav.cateName}
+          type={fav.productType}
           productImage={fav.productImage}
           quantity={fav.quantity}
           onRemoved={onRemoved}

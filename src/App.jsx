@@ -5,7 +5,7 @@ import './assets/css/main.css'
 import './assets/css/responsive.css'
 
 import { useSelector } from 'react-redux'
-import { ToastContainer } from 'react-toastify'
+import { Toaster } from 'react-hot-toast'
 import {
   BrowserRouter as Router,
   Routes,
@@ -17,7 +17,6 @@ import MainLayout from './components/layout/MainLayout'
 import SubLayout from './components/layout/SubLayout'
 import routes from './routes/routes'
 import NotFound from './components/common/NotFound'
-import 'react-toastify/dist/ReactToastify.css'
 import ProductList from './components/common/ProductList'
 import 'swiper/css'
 import 'swiper/css/navigation'
@@ -28,16 +27,15 @@ const App = () => {
   return (
     <>
       {/* config toastify */}
-      <ToastContainer
-        position="bottom-left"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        pauseOnFocusLoss
-        pauseOnHover
-        theme="light"
-        className="text-[16px]"
+      <Toaster
+        toastOptions={{
+          style: {
+            background: '#fff',
+            color: '#333',
+            fontSize: '16px'
+          },
+          position: 'bottom-center'
+        }}
       />
 
       {/* app routes */}
@@ -62,8 +60,8 @@ const App = () => {
                   />
                   <Route key="sublayout" path="/" element={<SubLayout />}>
                     <Route
-                      key="products/:cateType/:productType"
-                      path="/products/:cateType/:productType"
+                      key="products/:cateName/:productType"
+                      path="/products/:cateName/:productType"
                       element={<ProductList />}
                     />
                   </Route>

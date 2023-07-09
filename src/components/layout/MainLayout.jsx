@@ -4,7 +4,7 @@ import Footer from '../common/Footer.jsx'
 import Appbar from '../common/AppBar.jsx'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
-import { toast } from 'react-toastify'
+import { toast } from 'react-hot-toast'
 import userApi from '../../apis/modules/user.api.js'
 import cartApi from '../../apis/modules/cart.api'
 import {
