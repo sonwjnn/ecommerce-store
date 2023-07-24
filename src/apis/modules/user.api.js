@@ -27,7 +27,8 @@ const userApi = {
         username,
         password,
         confirmPassword,
-        displayName
+        displayName,
+        role: 'user'
       })
       return { response }
     } catch (error) {
