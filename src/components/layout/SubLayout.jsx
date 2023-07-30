@@ -1,4 +1,4 @@
-import Category from '../common/Category'
+import Category from '../common/ProductType'
 import BoardBar from '../common/BoardBar'
 import Pagination from '../common/Pagination'
 import productConfigs from '../../configs/product.configs'

@@ -1,7 +1,7 @@
 import privateClient from '../client/private.client'
 
 const categoryEndpoints = {
-  list: 'categories/getAllCate'
+  list: 'categories/list'
 }
 
 const categoryApi = {

@@ -11,6 +11,7 @@ const productApi = {
   getList: async () => {
     try {
       const response = await privateClient.get(productEndpoints.list)
+      console.log({ response })
       return { response }
     } catch (error) {
       return { error }

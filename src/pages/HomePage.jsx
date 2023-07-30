@@ -1,11 +1,10 @@
 import BoardContent from '../components/common/BoardContent'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import productConfigs from '../configs/product.configs'
 import { handleLinkImage } from '../utilities/constants'
 import HomeSlide from '../components/common/HomeSlide'
 import ProductList from '../components/common/ProductList'
-import CategoryItem from '../components/common/CategoryItem'
+import Category from '../components/common/Category'
 
 const bannerLogos = [
   'khung giờ săn sale',
@@ -20,28 +19,6 @@ const bannerLogos = [
 ]
 
 const HomePage = () => {
-  const [cates, setCates] = useState([])
-  useEffect(() => {
-    window.scrollTo(0, 0)
-    setCates(productConfigs.productCategory)
-  }, [])
-  const disableCategories = productConfigs.productCategory.filter(
-    item => item !== 'Thiết Bị Điện Tử'
-  )
-
-  // Gộp các phần tử thành các cặp
-  const catePairs = productConfigs.productCategory.reduce(
-    (acc, name, index) => {
-      if (index % 2 === 0) {
-        acc.push([{ name, index }])
-      } else {
-        acc[acc.length - 1].push({ name, index })
-      }
-      return acc
-    },
-    []
-  )
-
   return (
     <>
       <div className="bg-bg_page mt-[64px] lg:mt-[150px] ">
@@ -99,25 +76,7 @@ const HomePage = () => {
           </div>
         </div>
         <div className="max-w-[1200px] h-full  bg-white mx-auto ">
-          <div>
-            <div className="p-8 uppercase text-gray-500 text-[18px]">
-              danh mục
-            </div>
-            <div className="flex  overflow-x-auto flex-nowrap">
-              {catePairs.map((catePair, index) => (
-                <div className="flex flex-col min-w-[120px]" key={index}>
-                  {catePair.map(cate => (
-                    <CategoryItem
-                      key={cate.index}
-                      index={cate.index}
-                      cateName={cate.name}
-                      disable={disableCategories.includes(cate.name)}
-                    />
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
+          <Category />
         </div>
 
         <div className="max-w-[1200px] h-full mt-4  bg-white mx-auto ">

@@ -2,8 +2,8 @@ import ProductItem from './ProductItem'
 import productApi from '../../apis/modules/product.api'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setProductLoading } from '../../redux/features/productLoading'
 import { useParams, useLocation } from 'react-router-dom'
+import { toast } from 'react-hot-toast'
 import {
   clearProductsStore,
   setProductsSortPrice,
@@ -27,8 +27,10 @@ const ProductList = () => {
       const { response, err } = await productApi.getList()
 
       dispatch(setGlobalLoading(false))
-      if (response.kq) {
-        setProducts(response.msg)
+
+      if (err) toast.error(err.message)
+      if (response) {
+        setProducts(response)
       }
     }
 

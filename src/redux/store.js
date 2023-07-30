@@ -6,6 +6,9 @@ import globalLoadingSlice from './features/globalLoadingSlice'
 import signStateSlice from './features/signStateSlice'
 import productSlice from './features/productSlice'
 import productLoadingSlice from './features/productLoading'
+import typeSlice from './features/typeSlice'
+import storage from 'redux-persist/lib/storage'
+import cateSlice from './features/cateSlice'
 import {
   persistStore,
   persistReducer,
@@ -16,8 +19,7 @@ import {
   PURGE,
   REGISTER
 } from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
-import cateSlice from './features/cateSlice'
+
 const persistConfig = {
   key: 'root',
   version: 1,
@@ -31,7 +33,8 @@ const rootReducer = combineReducers({
   signState: signStateSlice,
   products: productSlice,
   productLoading: productLoadingSlice,
-  cates: cateSlice
+  cates: cateSlice,
+  types: typeSlice
 })
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
