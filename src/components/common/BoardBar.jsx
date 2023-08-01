@@ -1,13 +1,11 @@
-import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
-import { productType } from '../../routes/routes'
 
 const BoardBar = props => {
-  const { cates } = useSelector(state => state.cates)
-  const { handleSortPriceDownUp, handleSortPriceUpDown } = props
+  const { handleSelectPriceOption } = props
   const location = useLocation()
   const search = location.pathname.includes('search')
+  const { types } = useSelector(state => state.types)
   return (
     <>
       <div className=" home-filter hide-on-mobile-tablet">
@@ -23,7 +21,7 @@ const BoardBar = props => {
             <li className="select-input__item">
               <button
                 className="select-input__link "
-                onClick={handleSortPriceDownUp}
+                onClick={handleSelectPriceOption}
               >
                 <i className="select-input__icon ti-arrow-down"></i>
                 <span className="ml-2">Thấp đến cao</span>
@@ -32,7 +30,7 @@ const BoardBar = props => {
             <li className="select-input__item">
               <button
                 className="select-input__link "
-                onClick={handleSortPriceUpDown}
+                onClick={handleSelectPriceOption}
               >
                 <i className="select-input__icon ti-arrow-up"></i>
                 <span className="ml-2">Cao đến thấp</span>
@@ -59,9 +57,9 @@ const BoardBar = props => {
       </div>
       <nav className={`mobile-category ${search ? 'hidden' : ''}`}>
         <ul className="mobile-category__list">
-          {cates.map((item, index) => (
+          {types.map((item, index) => (
             <Link
-              to={`/products/${productType[index]}`}
+              to={`/products/${item.name}`}
               className="mobile-category__item"
               key={item._id}
             >

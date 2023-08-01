@@ -16,6 +16,8 @@ import {
 } from '../redux/features/userSlice'
 import ProductReview from '../components/common/ProductReview'
 import favoriteApi from '../apis/modules/favorite.api'
+import { Link } from 'react-router-dom'
+
 const cartState = {
   increase: 'increase',
   decrease: 'decrease'
@@ -25,7 +27,7 @@ const ProductDetail = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [cartValue, setCartValue] = useState(1)
-  const { productType, productId } = useParams()
+  const { productId } = useParams()
   const [product, setProduct] = useState([])
   const [activeReview, setActiveReview] = useState(null)
   const { listCarts, listFavorites, user } = useSelector(state => state.user)
@@ -50,7 +52,11 @@ const ProductDetail = () => {
     }
 
     getProduct()
-  }, [productType, productId, dispatch])
+  }, [dispatch])
+
+  useEffect(() => {
+    console.log(product)
+  }, [product])
 
   const handleValueCart = state => {
     if (cartState.increase == state) {
@@ -552,7 +558,22 @@ const ProductDetail = () => {
                   danh mục
                 </span>
                 <span className=" text-blue-600 font-normal text-[14px]">
-                  shopee {'>'} {productType}
+                  shopee {'>'}
+                  {product.length && (
+                    <Link
+                      to={`/products/${product.cateId.name}/Tất cả sản phẩm`}
+                    >
+                      {product.cateId.name}
+                    </Link>
+                  )}
+                  {'>'}
+                  {product.length && (
+                    <Link
+                      to={`/products/${product.cateId.name}/${product.typeId.name}`}
+                    >
+                      {product.typeId.name}
+                    </Link>
+                  )}
                 </span>
               </div>
 
@@ -623,7 +644,7 @@ const ProductDetail = () => {
               <ProductReview
                 reviews={reviews || []}
                 product={product}
-                productType={productType}
+                productType={''}
               />
             </div>
           </div>

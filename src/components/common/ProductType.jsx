@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import typeApi from '../../apis/modules/type.api'
 import { Link, useParams } from 'react-router-dom'
 import { BiCategory } from 'react-icons/bi'
@@ -13,6 +13,7 @@ const ProductType = () => {
   const dispatch = useDispatch()
   const [productTypes, setProductTypes] = useState([])
   const [activeLink, setActiveLink] = useState(null)
+
   useEffect(() => {
     const getProductTypes = async () => {
       dispatch(setProductLoading(true))
@@ -40,16 +41,16 @@ const ProductType = () => {
         </header>
         <ul className="category-list relative">
           <ProductLoading className="absolute top-0 right-0 left-0 bottom-0" />
-          {productTypes.map((cate, index) => (
-            <li className="category-item select-none" key={cate._id}>
+          {productTypes.map((type, index) => (
+            <li className="category-item select-none" key={type._id}>
               <Link
-                to={`/products/${cateName}/${productTypes[index]}`}
+                to={`/products/${cateName}/${type.name}`}
                 className={`category-item__link ${
-                  activeLink === index || typeName === cate.name ? 'active' : ''
+                  activeLink === index || typeName === type.name ? 'active' : ''
                 }`}
                 onClick={() => setActiveLink(index)}
               >
-                {cate.name}
+                {type.name}
               </Link>
             </li>
           ))}

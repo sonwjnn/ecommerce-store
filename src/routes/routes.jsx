@@ -1,6 +1,6 @@
 import CartList from '../pages/CartList'
 import ProductDetail from '../pages/ProductDetail'
-import ProductList from '../components/common/ProductList'
+import ProductList from '../components/common/ProductGrid'
 import ProductSearch from '../pages/ProductSearch'
 import ReviewList from '../pages/ReviewList'
 import ProtectedPage from '../components/common/ProtectedPage'

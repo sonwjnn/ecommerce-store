@@ -161,7 +161,7 @@ const FavoriteList = () => {
       {favs.map((fav, index) => (
         <FavoriteItem
           id={fav._id}
-          key={fav.productId}
+          key={fav._id}
           userId={fav.user}
           productId={fav.productId}
           price={fav.productPrice}

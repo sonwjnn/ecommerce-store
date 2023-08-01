@@ -143,7 +143,7 @@ const ReviewList = () => {
       <Container header={`Your reviews (${count})`}>
         <Stack spacing={2}>
           {filteredReviews.map(review => (
-            <Box key={review.id}>
+            <Box key={review._id}>
               <ReviewItem review={review} onRemoved={onRemoved} />
               <Divider
                 sx={{

@@ -1,20 +1,40 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import favoriteUtils from '../../utilities/favorite.utils'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { AiFillHeart } from 'react-icons/ai'
+import productApi from '../../apis/modules/product.api'
+import { toast } from 'react-hot-toast'
+import { setGlobalLoading } from '../../redux/features/globalLoadingSlice'
 
 const ProductItem = props => {
-  const { id, title, origin, info, date, price, imageName, type } = props
-  useEffect(() => {
-    if (title === 'chuotttttt') console.log(imageName)
-  }, [])
-  const { cateName, productType } = useParams()
+  const {
+    id,
+    title,
+    origin,
+    info,
+    date,
+    price,
+    imageName,
+    typeName,
+    cateName
+  } = props
+
+  const [imageUrl, setImageUrl] = useState('')
   const { listFavorites } = useSelector(state => state.user)
-  const urlImage = new URL(
-    `../../assets/img/products/${imageName}`,
-    import.meta.url
-  ).href
+
+  useEffect(() => {
+    const getImage = async () => {
+      const { response, err } = await productApi.getImage({ imageName })
+
+      if (err) toast.error(err.message)
+      if (response) {
+        setImageUrl(`data:image/png;base64,${response}`)
+      }
+    }
+
+    getImage()
+  }, [])
 
   const history = useNavigate()
 
@@ -26,8 +46,9 @@ const ProductItem = props => {
       <div className="home-product-item cursor-pointer" onClick={productDetail}>
         <div
           className="home-product-item__img bg-no-repeat bg-center bg-cover"
-          style={{ backgroundImage: `url(${urlImage})` }}
+          style={{ backgroundImage: `url(${imageUrl})` }}
         ></div>
+        {/* <img src={imageUrl} alt="Product" /> */}
         <h2 className="home-product-item__title">{title}</h2>
         <div className="home-product-item__tag-red">Mua 3 & giảm 5%</div>
         <div className="home-product-item__price">

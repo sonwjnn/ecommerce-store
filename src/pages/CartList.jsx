@@ -292,7 +292,7 @@ const CartList = () => {
             {carts.map(cart => (
               <CartItem
                 id={cart._id}
-                key={cart.productId}
+                key={cart._id}
                 userId={cart.user}
                 productId={cart.productId}
                 price={cart.productPrice}

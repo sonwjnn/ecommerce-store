@@ -1,31 +1,26 @@
-import ProductItem from './ProductItem'
-import productApi from '../../apis/modules/product.api'
+import { useDispatch } from 'react-redux'
+import ProductGrid from './ProductGrid'
+import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useParams, useLocation } from 'react-router-dom'
-import { toast } from 'react-hot-toast'
-import {
-  clearProductsStore,
-  setProductsSortPrice,
-  setProductsStore
-} from '../../redux/features/productSlice'
 import { setGlobalLoading } from '../../redux/features/globalLoadingSlice'
+import productApi from '../../apis/modules/product.api'
+import { toast } from 'react-hot-toast'
+import { filterTypeOrder } from '../../utilities/filters'
+import BoardBar from './BoardBar'
+import { mapOrder } from '../../utilities/sorts'
+
 const ProductList = () => {
   const dispatch = useDispatch()
-  const location = useLocation()
-  const { productType } = useParams()
-  const { productsStore, productsSortPrice } = useSelector(
-    state => state.products
-  )
+  const { typeName, cateName } = useParams()
   const [products, setProducts] = useState([])
-  const [productsSort, setProductsSort] = useState([])
+  const [filteredProducts, setFilteredProducts] = useState([])
+  const [payloadProducts, setPayloadProducts] = useState([])
+  const [priceOption, setPriceOption] = useState('')
 
   useEffect(() => {
     const getProducts = async () => {
       dispatch(setGlobalLoading(true))
-      dispatch(clearProductsStore())
-      const { response, err } = await productApi.getList()
-
+      const { response, err } = await productApi.getProductsOfCate({ cateName })
       dispatch(setGlobalLoading(false))
 
       if (err) toast.error(err.message)
@@ -33,63 +28,45 @@ const ProductList = () => {
         setProducts(response)
       }
     }
-
     getProducts()
   }, [dispatch])
 
   useEffect(() => {
-    if (products.length) {
-      dispatch(
-        setProductsStore(products.filter(item => item.type === productType))
+    if (typeName === 'Tất cả sản phẩm') {
+      setFilteredProducts(products)
+    } else {
+      const newFilteredProducts = filterTypeOrder(products, typeName, 'typeId')
+      setFilteredProducts(newFilteredProducts)
+    }
+  }, [typeName, products])
+
+  useEffect(() => {
+    if (priceOption === 'Thấp đến cao') {
+      const newFilteredProducts = mapOrder(
+        [...filteredProducts],
+        'dec',
+        'price'
       )
-      setProductsSort(products)
+      setFilteredProducts(newFilteredProducts)
+    } else if (priceOption === 'Cao đến thấp') {
+      const newFilteredProducts = mapOrder([...filteredProducts], null, 'price')
+      setFilteredProducts(newFilteredProducts)
     }
-  }, [dispatch, productType, products])
+  }, [priceOption])
 
   useEffect(() => {
-    if (productsSortPrice) {
-      if (productsStore.length) {
-        dispatch(
-          setProductsStore(
-            productsSortPrice === 'upToDown'
-              ? [...productsStore].sort((a, b) => +b.price - +a.price)
-              : [...productsStore].sort((a, b) => +a.price - +b.price)
-          )
-        )
-      } else {
-        setProductsSort(
-          productsSortPrice === 'upToDown'
-            ? [...products].sort((a, b) => +b.price - +a.price)
-            : [...products].sort((a, b) => +a.price - +b.price)
-        )
-      }
-    }
-  }, [productsSortPrice])
+    setPayloadProducts([...filteredProducts])
+  }, [filteredProducts])
 
-  useEffect(() => {
-    dispatch(setProductsSortPrice(null))
-  }, [location])
+  const handleSelectPriceOption = e => {
+    setPriceOption(e.target.innerText)
+  }
 
   return (
-    <div className="home-product home-product--spacing-bottom min-h-screen">
-      <div className="row sm-gutter relative">
-        {/* <!-- Product item --> */}
-        {(productsStore.length ? productsStore : productsSort).map(product => (
-          <ProductItem
-            key={product._id}
-            id={product._id}
-            title={product.name}
-            price={product.price}
-            imageName={product.imageName}
-            info={product.info}
-            date={product.producedAt}
-            origin={product.origin}
-            type={product.type}
-            isFavorite={product.isFavorite}
-          />
-        ))}
-      </div>
-    </div>
+    <>
+      <BoardBar handleSelectPriceOption={handleSelectPriceOption} />
+      <ProductGrid products={payloadProducts} />
+    </>
   )
 }
 

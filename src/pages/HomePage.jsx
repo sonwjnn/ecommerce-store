@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { handleLinkImage } from '../utilities/constants'
 import HomeSlide from '../components/common/HomeSlide'
-import ProductList from '../components/common/ProductList'
 import Category from '../components/common/Category'
+import ProductHint from '../components/common/ProductHint'
 
 const bannerLogos = [
   'khung giờ săn sale',
@@ -86,7 +86,7 @@ const HomePage = () => {
         </div>
 
         <div className="max-w-[1200px] h-full mt-4 mx-auto ">
-          <ProductList />
+          <ProductHint />
         </div>
       </div>
     </>

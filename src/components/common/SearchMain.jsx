@@ -176,7 +176,7 @@ const SearchMain = () => {
                       cart.productPrice.replace(/\B(?=(\d{3})+(?!\d))/g, '.')
                     return (
                       <li
-                        key={cart.productId}
+                        key={cart._id}
                         className="header__cart-list--have-items-item cursor-pointer hover:bg-bg_page transition-all p-2 pr-3"
                       >
                         <span className="header__cart-list--have-items-item-wrap gap-2">

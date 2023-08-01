@@ -6,12 +6,7 @@ import './assets/css/responsive.css'
 
 import { useSelector } from 'react-redux'
 import { Toaster } from 'react-hot-toast'
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Outlet
-} from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import PageWrapper from './components/common/PageWrapper'
 import MainLayout from './components/layout/MainLayout'
 import SubLayout from './components/layout/SubLayout'
@@ -60,8 +55,8 @@ const App = () => {
                   />
                   <Route key="sublayout" path="/" element={<SubLayout />}>
                     <Route
-                      key="products/:cateName/:productType"
-                      path="/products/:cateName/:productType"
+                      key="/products/:cateName/:typeName"
+                      path="/products/:cateName/:typeName"
                       element={<ProductList />}
                     />
                   </Route>
