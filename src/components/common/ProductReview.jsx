@@ -68,7 +68,13 @@ const ReviewItem = ({ review, onRemoved }) => {
   )
 }
 
-const ProductReview = ({ reviews, product, productType }) => {
+const ProductReview = ({
+  reviews,
+  product,
+  productType,
+  reviewCount,
+  setReviewCount
+}) => {
   const { user } = useSelector(state => state.user)
 
   const [listReviews, setListReviews] = useState([])
@@ -76,7 +82,6 @@ const ProductReview = ({ reviews, product, productType }) => {
   const [page, setPage] = useState(1)
   const [onRequest, setOnRequest] = useState(false)
   const [content, setContent] = useState('')
-  const [reviewCount, setReviewCount] = useState(0)
 
   const skip = 4
 

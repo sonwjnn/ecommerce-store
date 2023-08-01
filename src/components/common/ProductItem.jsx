@@ -17,7 +17,9 @@ const ProductItem = props => {
     price,
     imageName,
     typeName,
-    cateName
+    cateName,
+    discount,
+    discountPrice
   } = props
 
   const [imageUrl, setImageUrl] = useState('')
@@ -52,13 +54,22 @@ const ProductItem = props => {
         <h2 className="home-product-item__title">{title}</h2>
         <div className="home-product-item__tag-red">Mua 3 & giảm 5%</div>
         <div className="home-product-item__price">
+          {discount && discount !== '0' && (
+            <span className="home-product-item__sale-price text-xl mr-1 text-gray-500 line-through">
+              <a href="" className="text-sm text-gray-500">
+                đ
+              </a>
+              {price.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
+            </span>
+          )}
+
           <span className="home-product-item__sale-price">
-            <a href="" className="currency">
+            <a href="" className="text-sm">
               đ
             </a>
-            {price.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
+            {discountPrice.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
           </span>
-          <span className="home-product-item__freeship">
+          {/* <span className="home-product-item__freeship">
             <svg
               className="home-product-item__freeship-img shopee-svg-icon icon-free-shipping"
               height="12"
@@ -111,7 +122,7 @@ const ProductItem = props => {
                 <circle cx="15" cy="10" fill="#047565" r="1"></circle>
               </g>
             </svg>
-          </span>
+          </span> */}
         </div>
         <div className="home-product-item__action items-center">
           <span className="home-product-item__favorite home-product-item__favorite--liked">
@@ -133,10 +144,12 @@ const ProductItem = props => {
         <div className="home-product-item__love">
           <span>Yêu thích</span>
         </div>
-        <div className="home-product-item__sale-off-percent">
-          <span className="home-product-item__percent">10%</span>
-          <span className="home-product-item__up">GIẢM</span>
-        </div>
+        {discount && discount !== '0' && (
+          <div className="home-product-item__sale-off-percent">
+            <span className="home-product-item__percent">{discount}%</span>
+            <span className="home-product-item__up">GIẢM</span>
+          </div>
+        )}
       </div>
     </div>
   )

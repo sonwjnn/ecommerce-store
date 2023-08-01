@@ -28,12 +28,14 @@ const ProductDetail = () => {
   const navigate = useNavigate()
   const [cartValue, setCartValue] = useState(1)
   const { productId } = useParams()
-  const [product, setProduct] = useState([])
+  const [product, setProduct] = useState(null)
   const [activeReview, setActiveReview] = useState(null)
   const { listCarts, listFavorites, user } = useSelector(state => state.user)
   const [isFavorite, setIsFavorite] = useState(false)
   const [onRequest, setOnRequest] = useState(false)
-
+  const [imageUrl, setImageUrl] = useState('')
+  const [reviewCount, setReviewCount] = useState(0)
+  const [favoriteCount, setFavoriteCount] = useState(0)
   useEffect(() => {
     window.scrollTo(0, 0)
     const getProduct = async () => {
@@ -55,7 +57,20 @@ const ProductDetail = () => {
   }, [dispatch])
 
   useEffect(() => {
-    console.log(product)
+    const getImage = async () => {
+      if (product && product.imageName) {
+        const { response, err } = await productApi.getImage({
+          imageName: product.imageName
+        })
+
+        if (err) toast.error(err.message)
+        if (response) {
+          setImageUrl(`data:image/png;base64,${response}`)
+        }
+      }
+    }
+
+    getImage()
   }, [product])
 
   const handleValueCart = state => {
@@ -134,6 +149,7 @@ const ProductDetail = () => {
       dispatch(addFavorite(response))
       setIsFavorite(true)
       toast.success('Add favorite success')
+      setFavoriteCount(favoriteCount + 1)
     }
   }
 
@@ -154,8 +170,8 @@ const ProductDetail = () => {
     if (response) {
       dispatch(removeFavorite(favorite))
       setIsFavorite(false)
-
       toast.success('Remove favorite success')
+      setFavoriteCount(favoriteCount - 1)
     }
   }
 
@@ -170,26 +186,13 @@ const ProductDetail = () => {
     'có ảnh / video (3)'
   ]
 
-  let realPrice =
-    product.price &&
-    (+product.price * 2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
-  let price =
-    product.price && product.price.replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+  useEffect(() => {
+    if (product && product.reviews) setReviewCount(product.reviews.length)
+  }, [product])
 
-  const {
-    title = product.name || product.title,
-    imageName = product.imageName,
-    info = product.info,
-    producedAt = product.producedAt,
-    origin = product.origin,
-    type = product.type,
-    reviews = product.reviews
-  } = product
-
-  const urlImage = new URL(
-    `../assets/img/products/${imageName}`,
-    import.meta.url
-  ).href
+  useEffect(() => {
+    if (product && product.favories) setReviewCount(product.favories.length)
+  }, [product])
 
   return (
     <div className="bg-bg_page px-0 xl:px-[136px] py-0 sm:py-[56px]   h-full">
@@ -199,15 +202,15 @@ const ProductDetail = () => {
             <div
               className="pt-[450px] bg-center bg-cover m-1.5 w-full"
               style={{
-                backgroundImage: `url(${urlImage})`
+                backgroundImage: `url(${imageUrl})`
               }}
             ></div>
 
             <div className="hidden md:flex gap-4 overflow-x-scroll ">
+              {/* <DetailImage urlImage={urlImage} />
               <DetailImage urlImage={urlImage} />
               <DetailImage urlImage={urlImage} />
-              <DetailImage urlImage={urlImage} />
-              <DetailImage urlImage={urlImage} />
+              <DetailImage urlImage={urlImage} /> */}
             </div>
 
             <div className="p-4 md:flex text-2xl hidden items-center justify-center">
@@ -242,7 +245,7 @@ const ProductDetail = () => {
                     onClick={() => setIsFavorite(!isFavorite)}
                   />
                 )}
-                <span>đã thích (94)</span>
+                <span>đã thích ({favoriteCount})</span>
               </div>
             </div>
           </div>
@@ -253,16 +256,18 @@ const ProductDetail = () => {
                   Yêu thích
                 </span>
 
-                <span className="text-[16px] sm:text-[20px]">{title}</span>
+                <span className="text-[16px] sm:text-[20px]">
+                  {product && product.name}
+                </span>
               </div>
 
               <div className="flex sm:hidden gap-4">
                 <span className="text-[13px] line-through font-normal text-neutral-400">
-                  ₫{realPrice}
+                  ₫{product && product.discountPrice}
                 </span>
 
                 <span className="text-3xl sm:text-5xl font-normal text-primary">
-                  ₫{price}
+                  ₫{product && product.discountPrice}
                 </span>
 
                 <div className="flex items-center">
@@ -288,7 +293,7 @@ const ProductDetail = () => {
 
                 <span className="sm:flex hidden relative ml-[3rem] items-center border-right-ab after:right-[-2rem]">
                   <span className="mr-2  text-[16px] sm:text-[18px] relative after:bg-gray-500 border-bottom-ab">
-                    532
+                    {reviewCount}
                   </span>
                   <span className="text-[14px] sm:text-[16px] text-gray-500">
                     Đánh giá
@@ -321,12 +326,12 @@ const ProductDetail = () => {
               <div className="flex gap-4 flex-wrap">
                 <span className="text-[16px] line-through font-normal text-neutral-400 flex">
                   <span className="text-[11px] mt-1 mr-1">₫</span>
-                  {realPrice}
+                  {product && product.discountPrice}
                 </span>
 
                 <span className="text-5xl font-normal text-primary flex">
                   <span className="text-[18px] mt-1">₫</span>
-                  {price}
+                  {product && product.discountPrice}
                 </span>
 
                 <div className="flex items-center">
@@ -557,19 +562,25 @@ const ProductDetail = () => {
                 <span className="text-[14px] text-gray-500 w-[120px]">
                   danh mục
                 </span>
-                <span className=" text-blue-600 font-normal text-[14px]">
-                  shopee {'>'}
-                  {product.length && (
+                <span className="text-[14px]">
+                  <Link to={`/`} className="text-blue-600 font-normal">
+                    shopee
+                  </Link>
+                  {' > '}
+
+                  {product && (
                     <Link
                       to={`/products/${product.cateId.name}/Tất cả sản phẩm`}
+                      className="text-blue-600 font-normal"
                     >
                       {product.cateId.name}
                     </Link>
                   )}
-                  {'>'}
-                  {product.length && (
+                  {' > '}
+                  {product && (
                     <Link
                       to={`/products/${product.cateId.name}/${product.typeId.name}`}
+                      className="text-blue-600 font-normal"
                     >
                       {product.typeId.name}
                     </Link>
@@ -602,7 +613,9 @@ const ProductDetail = () => {
               </div>
 
               <div className="flex gap-4 capitalize px-6 py-5">
-                <div dangerouslySetInnerHTML={{ __html: info }} />
+                <div
+                  dangerouslySetInnerHTML={{ __html: product && product.info }}
+                />
               </div>
             </div>
           </div>
@@ -642,9 +655,11 @@ const ProductDetail = () => {
                 </div>
               </div>
               <ProductReview
-                reviews={reviews || []}
+                reviews={product ? product.reviews : []}
                 product={product}
                 productType={''}
+                setReviewCount={setReviewCount}
+                reviewCount={reviewCount}
               />
             </div>
           </div>

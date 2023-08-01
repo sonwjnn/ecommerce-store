@@ -18,6 +18,8 @@ const ProductGrid = ({ products }) => {
             typeName={product.typeId.name}
             cateName={product.cateId.name}
             isFavorite={product.isFavorite}
+            discount={product.discount}
+            discountPrice={product.discountPrice}
           />
         ))}
       </div>

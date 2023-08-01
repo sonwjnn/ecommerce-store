@@ -44,12 +44,16 @@ const ProductList = () => {
     if (priceOption === 'Thấp đến cao') {
       const newFilteredProducts = mapOrder(
         [...filteredProducts],
-        'dec',
-        'price'
+        null,
+        'discountPrice'
       )
       setFilteredProducts(newFilteredProducts)
     } else if (priceOption === 'Cao đến thấp') {
-      const newFilteredProducts = mapOrder([...filteredProducts], null, 'price')
+      const newFilteredProducts = mapOrder(
+        [...filteredProducts],
+        'dec',
+        'discountPrice'
+      )
       setFilteredProducts(newFilteredProducts)
     }
   }, [priceOption])
