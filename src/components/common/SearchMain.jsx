@@ -6,6 +6,7 @@ import { toast } from 'react-hot-toast'
 import { useEffect, useRef, useState } from 'react'
 import { shorterString } from '../../utilities/constants'
 import { IoMdArrowBack } from 'react-icons/io'
+import { CartItem } from '../../pages/CartList'
 
 const SearchMain = () => {
   const { user, listCarts } = useSelector(state => state.user)
@@ -13,6 +14,8 @@ const SearchMain = () => {
   const location = useLocation()
   const searchInput = useRef()
   const [keyword, setKeyword] = useState('')
+  const [cart, setCart] = useState(null)
+  const [imageUrl, setImageUrl] = useState('')
 
   useEffect(() => {
     if (!location.pathname.includes('search')) {
@@ -164,11 +167,6 @@ const SearchMain = () => {
               <div className="header__cart-list--have-items-body max-h-[50vh] overflow-hidden">
                 <ul className="header__cart-list--have-items-items">
                   {listCarts.map(cart => {
-                    const urlImage = new URL(
-                      `../../assets/img/products/${cart.productImage}`,
-                      import.meta.url
-                    ).href
-
                     const shorterTitle = shorterString(cart.productTitle, 28)
 
                     let price =
@@ -184,7 +182,7 @@ const SearchMain = () => {
                             <div
                               className="min-w-[50px] h-[50px] bg-no-repeat bg-center bg-cover "
                               style={{
-                                backgroundImage: `url(${urlImage})`
+                                backgroundImage: `url(${null})`
                               }}
                             ></div>
                           </span>

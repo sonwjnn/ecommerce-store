@@ -30,7 +30,7 @@ const ProductDetail = () => {
   const { productId } = useParams()
   const [product, setProduct] = useState(null)
   const [activeReview, setActiveReview] = useState(null)
-  const { listCarts, listFavorites, user } = useSelector(state => state.user)
+  const { listFavorites, user } = useSelector(state => state.user)
   const [isFavorite, setIsFavorite] = useState(false)
   const [onRequest, setOnRequest] = useState(false)
   const [imageUrl, setImageUrl] = useState('')
@@ -191,7 +191,9 @@ const ProductDetail = () => {
   }, [product])
 
   useEffect(() => {
-    if (product && product.favories) setReviewCount(product.favories.length)
+    if (product && product.favorites) {
+      setFavoriteCount(product.favorites.length)
+    }
   }, [product])
 
   return (
@@ -207,10 +209,10 @@ const ProductDetail = () => {
             ></div>
 
             <div className="hidden md:flex gap-4 overflow-x-scroll ">
-              {/* <DetailImage urlImage={urlImage} />
-              <DetailImage urlImage={urlImage} />
-              <DetailImage urlImage={urlImage} />
-              <DetailImage urlImage={urlImage} /> */}
+              <DetailImage imageUrl={imageUrl} />
+              <DetailImage imageUrl={imageUrl} />
+              <DetailImage imageUrl={imageUrl} />
+              <DetailImage imageUrl={imageUrl} />
             </div>
 
             <div className="p-4 md:flex text-2xl hidden items-center justify-center">
@@ -259,22 +261,6 @@ const ProductDetail = () => {
                 <span className="text-[16px] sm:text-[20px]">
                   {product && product.name}
                 </span>
-              </div>
-
-              <div className="flex sm:hidden gap-4">
-                <span className="text-[13px] line-through font-normal text-neutral-400">
-                  ₫{product && product.discountPrice}
-                </span>
-
-                <span className="text-3xl sm:text-5xl font-normal text-primary">
-                  ₫{product && product.discountPrice}
-                </span>
-
-                <div className="flex items-center">
-                  <span className="tag-shopee text-[10px] sm:text-[12px] py-0  bg-primary text-white uppercase font-bold">
-                    50% giảm
-                  </span>
-                </div>
               </div>
 
               <div className="flex flex-wrap gap-4  items-center">
@@ -326,12 +312,14 @@ const ProductDetail = () => {
               <div className="flex gap-4 flex-wrap">
                 <span className="text-[16px] line-through font-normal text-neutral-400 flex">
                   <span className="text-[11px] mt-1 mr-1">₫</span>
-                  {product && product.discountPrice}
+                  {product &&
+                    product.discountPrice.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
                 </span>
 
                 <span className="text-5xl font-normal text-primary flex">
                   <span className="text-[18px] mt-1">₫</span>
-                  {product && product.discountPrice}
+                  {product &&
+                    product.discountPrice.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
                 </span>
 
                 <div className="flex items-center">

@@ -1,11 +1,9 @@
-import React from 'react'
-
-const DetailImage = ({ urlImage }) => {
+const DetailImage = ({ imageUrl }) => {
   return (
     <div
       className="w-[100px] h-[100px] bg-center bg-cover shrink-0"
       style={{
-        backgroundImage: `url(${urlImage})`
+        backgroundImage: `url(${imageUrl})`
       }}
     ></div>
   )

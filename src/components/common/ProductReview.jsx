@@ -142,10 +142,7 @@ const ProductReview = ({
   return (
     <>
       <div>
-        <div className="text-2xl  p-4 text-[18px]">
-          Số lượng đánh giá ({reviewCount})
-        </div>
-        <div className="gap-4 mb-2">
+        <div className="gap-4 mb-2 mt-4">
           {filteredReviews.map(item => (
             <div key={item._id}>
               <ReviewItem review={item} onRemoved={onRemoved} />

@@ -7,12 +7,13 @@ import { toast } from 'react-hot-toast'
 import { useRef } from 'react'
 import { setGlobalLoading } from '../redux/features/globalLoadingSlice'
 import LoadingButton from '../components/common/LoadingButton'
+import productApi from '../apis/modules/product.api'
 
 const cartState = {
   increase: 'increase',
   decrease: 'decrease'
 }
-const CartItem = props => {
+export const CartItem = props => {
   const {
     title,
     imageName,
@@ -31,6 +32,21 @@ const CartItem = props => {
   const [cartValue, setCartValue] = useState(1)
   const [isChecked, setIsChecked] = useState(false)
   const [onRequest, setOnRequest] = useState(false)
+
+  const [imageUrl, setImageUrl] = useState('')
+
+  useEffect(() => {
+    const getImage = async () => {
+      const { response, err } = await productApi.getImage({ imageName })
+
+      if (err) toast.error(err.message)
+      if (response) {
+        setImageUrl(`data:image/png;base64,${response}`)
+      }
+    }
+
+    getImage()
+  }, [])
 
   useEffect(() => {
     setCartValue(+quantity)
@@ -78,11 +94,6 @@ const CartItem = props => {
     }
   }
 
-  const urlImage = new URL(
-    `../assets/img/products/${imageName}`,
-    import.meta.url
-  ).href
-
   let prevPrice = price && handleDotPrice(price)
   let currPrice = price && handleDotPrice((+price * cartValue).toString())
   return (
@@ -99,7 +110,7 @@ const CartItem = props => {
           <div
             className="min-w-[80px] h-[80px] bg-no-repeat bg-center bg-cover "
             style={{
-              backgroundImage: `url(${urlImage})`
+              backgroundImage: `url(${imageUrl})`
             }}
           ></div>
           <div className="flex flex-col justify-center self-start lg:self-center">
@@ -163,18 +174,11 @@ const CartList = () => {
   const [checkedCarts, setCheckedCarts] = useState([])
   const [onRequest, setOnRequest] = useState(false)
 
-  useEffect(() => {
-    const getListCartUser = async () => {
-      dispatch(setGlobalLoading(true))
-      const { response, err } = await cartApi.getList()
-      dispatch(setGlobalLoading(false))
+  const { listCarts } = useSelector(state => state.user)
 
-      if (response) {
-        setCarts(response)
-      }
-    }
-    getListCartUser()
-  }, [dispatch])
+  useEffect(() => {
+    setCarts(listCarts)
+  }, [])
 
   const onRemoved = ({ id, ids }) => {
     if (id) {
