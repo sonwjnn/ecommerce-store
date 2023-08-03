@@ -321,12 +321,13 @@ const ProductDetail = () => {
                   {product &&
                     product.discountPrice.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
                 </span>
-
-                <div className="flex items-center">
-                  <span className="tag-shopee text-[12px] py-0  bg-primary text-white uppercase font-bold">
-                    50% giảm
-                  </span>
-                </div>
+                {product && product.discount !== '0' && (
+                  <div className="flex items-center">
+                    <span className="tag-shopee text-[12px] py-0  bg-primary text-white uppercase font-bold">
+                      {product.discount}% giảm
+                    </span>
+                  </div>
+                )}
               </div>
 
               <div className="flex gap-4 items-center">

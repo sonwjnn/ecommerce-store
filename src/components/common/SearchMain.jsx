@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from 'react'
 import { shorterString } from '../../utilities/constants'
 import { IoMdArrowBack } from 'react-icons/io'
 import { CartItem } from '../../pages/CartList'
+import CartPreview from './CartPreview'
 
 const SearchMain = () => {
   const { user, listCarts } = useSelector(state => state.user)
@@ -148,8 +149,6 @@ const SearchMain = () => {
           </span>
 
           <div className="header__cart-list rounded-md">
-            {/* <!-- No-cart:header__cart-list--no-items -->
-                                    <!-- Have-cart:header__cart-list--have-items --> */}
             <div className="header__cart-list-container overflow-hidden mx-0 px-[12px]  header__cart-list--have-items cursor-default">
               <img
                 src="/src/assets/img/no-items.png"
@@ -166,36 +165,9 @@ const SearchMain = () => {
               </div>
               <div className="header__cart-list--have-items-body max-h-[50vh] overflow-hidden">
                 <ul className="header__cart-list--have-items-items">
-                  {listCarts.map(cart => {
-                    const shorterTitle = shorterString(cart.productTitle, 28)
-
-                    let price =
-                      cart.productPrice &&
-                      cart.productPrice.replace(/\B(?=(\d{3})+(?!\d))/g, '.')
-                    return (
-                      <li
-                        key={cart._id}
-                        className="header__cart-list--have-items-item cursor-pointer hover:bg-bg_page transition-all p-2 pr-3"
-                      >
-                        <span className="header__cart-list--have-items-item-wrap gap-2">
-                          <span className="header__cart-list--have-items-img ">
-                            <div
-                              className="min-w-[50px] h-[50px] bg-no-repeat bg-center bg-cover "
-                              style={{
-                                backgroundImage: `url(${null})`
-                              }}
-                            ></div>
-                          </span>
-                          <span className="header__cart-list--have-items-decription">
-                            {shorterTitle}
-                          </span>
-                        </span>
-                        <span className="header__cart-list--have-items-price">
-                          đ{price}
-                        </span>
-                      </li>
-                    )
-                  })}
+                  {listCarts.map(cart => (
+                    <CartPreview key={cart._id} cart={cart} />
+                  ))}
                 </ul>
               </div>
               <div className="header__cart-list--have-items-footer mt-2">

@@ -1599,3 +1599,13 @@ i.home-product-item__icon-heart-fill {
 .auto-swiper .swiper-button-prev::after {
   font-size: 14px;
 }
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

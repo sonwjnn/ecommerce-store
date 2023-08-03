@@ -57,7 +57,7 @@ const BoardBar = props => {
       </div>
       <nav className={`mobile-category ${search ? 'hidden' : ''}`}>
         <ul className="mobile-category__list">
-          {types.map((item, index) => (
+          {types.map(item => (
             <Link
               to={`/products/${item.name}`}
               className="mobile-category__item"
