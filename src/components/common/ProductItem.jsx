@@ -1,33 +1,21 @@
 import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import favoriteUtils from '../../utilities/favorite.utils'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { AiFillHeart } from 'react-icons/ai'
 import productApi from '../../apis/modules/product.api'
 import { toast } from 'react-hot-toast'
-import { setGlobalLoading } from '../../redux/features/globalLoadingSlice'
+import { twMerge } from 'tailwind-merge'
 
-const ProductItem = props => {
-  const {
-    id,
-    title,
-    origin,
-    info,
-    date,
-    price,
-    imageName,
-    typeName,
-    cateName,
-    discount,
-    discountPrice
-  } = props
-
+const ProductItem = ({ product, className }) => {
   const [imageUrl, setImageUrl] = useState('')
   const { listFavorites } = useSelector(state => state.user)
 
   useEffect(() => {
     const getImage = async () => {
-      const { response, err } = await productApi.getImage({ imageName })
+      const { response, err } = await productApi.getImage({
+        imageName: product.imageName
+      })
 
       if (err) toast.error(err.message)
       if (response) {
@@ -41,25 +29,25 @@ const ProductItem = props => {
   const history = useNavigate()
 
   const productDetail = () => {
-    history(`/products/detail/${id}`)
+    history(`/products/detail/${product.id}`)
   }
   return (
-    <div className="col sm:flex-[33%] md:max-w-[33%] lg:flex-[20%] lg:max-w-[20%] c-6">
+    <div className={twMerge(className)}>
       <div className="home-product-item cursor-pointer" onClick={productDetail}>
         <div
           className="home-product-item__img bg-no-repeat bg-center bg-cover"
           style={{ backgroundImage: `url(${imageUrl})` }}
         ></div>
         {/* <img src={imageUrl} alt="Product" /> */}
-        <h2 className="home-product-item__title">{title}</h2>
-        <div className="home-product-item__tag-red">Mua 3 & giảm 5%</div>
+        <h2 className="home-product-item__title">{product.title}</h2>
+        <div className="home-product-item__tag-red mt-0">Mua 3 & giảm 5%</div>
         <div className="home-product-item__price">
-          {discount && discount !== '0' && (
-            <span className="home-product-item__sale-price text-xl mr-1 text-gray-500 line-through">
+          {product.discount && product.discount !== '0' && (
+            <span className="home-product-item__sale-price text-[14px] mr-1 text-gray-500 line-through">
               <a href="" className="text-sm text-gray-500">
                 đ
               </a>
-              {price.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
+              {product.price.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
             </span>
           )}
 
@@ -67,7 +55,7 @@ const ProductItem = props => {
             <a href="" className="text-sm">
               đ
             </a>
-            {discountPrice.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
+            {product.discountPrice.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
           </span>
           {/* <span className="home-product-item__freeship">
             <svg
@@ -128,7 +116,7 @@ const ProductItem = props => {
           <span className="home-product-item__favorite home-product-item__favorite--liked">
             {favoriteUtils.check({
               listFavorites,
-              productId: id
+              productId: product.id
             }) && <AiFillHeart className="text-red-600 text-[13px]" />}
           </span>
           <span className="home-product-item__rate flex items-center">
@@ -144,9 +132,11 @@ const ProductItem = props => {
         <div className="home-product-item__love">
           <span>Yêu thích</span>
         </div>
-        {discount && discount !== '0' && (
+        {product.discount && product.discount !== '0' && (
           <div className="home-product-item__sale-off-percent">
-            <span className="home-product-item__percent">{discount}%</span>
+            <span className="home-product-item__percent">
+              {product.discount}%
+            </span>
             <span className="home-product-item__up">GIẢM</span>
           </div>
         )}

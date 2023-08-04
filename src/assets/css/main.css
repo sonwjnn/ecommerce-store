@@ -1313,10 +1313,8 @@
 .home-product-item__title {
   font-size: 1.3rem;
   font-weight: 400;
-  line-height: 1.6rem;
-  padding: 0 10px;
+  padding: 0 10px 8px;
   margin-bottom: 0;
-  height: 3.2rem;
   overflow: hidden;
   display: block;
   display: -webkit-box;
@@ -1608,4 +1606,9 @@ i.home-product-item__icon-heart-fill {
 .scrollbar-hide {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+.product-hint-bar {
+  top: var(--header-height) !important;
+  z-index: 30;
 }

@@ -1,15 +1,13 @@
 import ProductItem from './ProductItem'
 
-const ProductGrid = ({ products }) => {
+const ProductHintGrid = ({ products }) => {
   return (
     <div className=" min-h-[800px]">
-      <div className="grid grid-cols-15 gap-3 relative">
+      <div className="relative grid grid-cols-12 gap-3">
         {/* <!-- Product item --> */}
         {products.map(product => (
           <ProductItem
-            className={
-              'col-span-15 sm:col-span-5 md:col-span-5 product_md:col-span-3'
-            }
+            className={'col-span-6 sm:col-span-4 md:col-span-3 lg:col-span-2'}
             product={product}
             key={product._id}
           />
@@ -19,4 +17,4 @@ const ProductGrid = ({ products }) => {
   )
 }
 
-export default ProductGrid
+export default ProductHintGrid

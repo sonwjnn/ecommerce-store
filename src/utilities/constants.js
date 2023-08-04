@@ -12,3 +12,15 @@ export const maskedEmail = email => {
     visibleChars + hiddenChars + email.substring(email.indexOf('@'))
   return maskedEmail
 }
+
+export const bannerLogos = [
+  'khung giờ săn sale',
+  'hàng hiệu outlet giảm 50%',
+  'mã giảm giá',
+  'miễn phí vẫn chuyển',
+  'bắt trend - giá sốc',
+  'voucher giảm đến 200.000Đ',
+  'gì cũng rẻ - mua là free ship',
+  'hàng quốc tế',
+  'nạp điện thoại & thẻ game'
+]

@@ -1,18 +1,7 @@
 import HomeSlide from '../components/common/HomeSlide'
 import Category from '../components/common/Category'
 import ProductHint from '../components/common/ProductHint'
-
-const bannerLogos = [
-  'khung giờ săn sale',
-  'hàng hiệu outlet giảm 50%',
-  'mã giảm giá',
-  'miễn phí vẫn chuyển',
-  'bắt trend - giá sốc',
-  'voucher giảm đến 200.000Đ',
-  'gì cũng rẻ - mua là free ship',
-  'hàng quốc tế',
-  'nạp điện thoại & thẻ game'
-]
+import { bannerLogos } from '../utilities/constants'
 
 const HomePage = () => {
   return (
@@ -75,13 +64,13 @@ const HomePage = () => {
           <Category />
         </div>
 
-        <div className="max-w-[1200px] h-full mt-4  bg-white mx-auto ">
+        <div className="product-hint-bar max-w-[1200px] sticky top-0   h-full mt-4  bg-white mx-auto ">
           <div className="p-8 uppercase text-primary font-semibold text-[20px] text-center border-b-4 border-primary">
             gợi ý hôm nay
           </div>
         </div>
 
-        <div className="max-w-[1200px] h-full mt-4 mx-auto ">
+        <div className="max-w-[1200px] h-full mt-4 mx-auto pb-[50px]">
           <ProductHint />
         </div>
       </div>
