@@ -2,7 +2,7 @@ import ProductItem from './ProductItem'
 
 const ProductHintGrid = ({ products }) => {
   return (
-    <div className=" min-h-[800px]">
+    <div className=" min-h-[700px]">
       <div className="relative grid grid-cols-12 gap-3">
         {/* <!-- Product item --> */}
         {products.map(product => (

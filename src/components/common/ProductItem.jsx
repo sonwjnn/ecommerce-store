@@ -129,9 +129,11 @@ const ProductItem = ({ product, className }) => {
           </span>
         </div>
         <div className="home-product-item__location">TP. Hồ Chí Minh</div>
-        <div className="home-product-item__love">
-          <span>Yêu thích</span>
-        </div>
+        {+product.favorites > 1 && (
+          <div className="home-product-item__love">
+            <span>Yêu thích</span>
+          </div>
+        )}
         {product.discount && product.discount !== '0' && (
           <div className="home-product-item__sale-off-percent">
             <span className="home-product-item__percent">
