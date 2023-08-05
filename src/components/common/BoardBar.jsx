@@ -1,14 +1,13 @@
 import { useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 
-const BoardBar = props => {
-  const { handleSelectPriceOption } = props
+const BoardBar = ({ handleSelectPriceOption }) => {
   const location = useLocation()
   const search = location.pathname.includes('search')
   const { types } = useSelector(state => state.types)
   return (
-    <>
-      <div className=" home-filter hide-on-mobile-tablet">
+    <div className="mb-3">
+      <div className="home-filter hide-on-mobile-tablet">
         <span className="home-filter__lable">Sắp xếp theo</span>
         <button className="home-filter__btn btn">Phổ biến</button>
         <button className="home-filter__btn btn btn-primary">Mới nhất</button>
@@ -68,7 +67,7 @@ const BoardBar = props => {
           ))}
         </ul>
       </nav>
-    </>
+    </div>
   )
 }
 

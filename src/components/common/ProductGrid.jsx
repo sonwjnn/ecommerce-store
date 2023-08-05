@@ -2,9 +2,8 @@ import ProductItem from './ProductItem'
 
 const ProductGrid = ({ products }) => {
   return (
-    <div className=" min-h-[800px]">
+    <div className=" min-h-[700px]">
       <div className="flex flex-wrap sm:grid sm:grid-cols-15 gap-3 relative">
-        {/* <!-- Product item --> */}
         {products.map(product => (
           <ProductItem
             className={

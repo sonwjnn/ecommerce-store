@@ -39,7 +39,7 @@ const ProductItem = ({ product, className }) => {
           style={{ backgroundImage: `url(${imageUrl})` }}
         ></div>
         {/* <img src={imageUrl} alt="Product" /> */}
-        <h2 className="home-product-item__title">{product.title}</h2>
+        <h2 className="home-product-item__title">{product.name}</h2>
         <div className="home-product-item__tag-red mt-0">Mua 3 & giảm 5%</div>
         <div className="home-product-item__price">
           {product.discount && product.discount !== '0' && (

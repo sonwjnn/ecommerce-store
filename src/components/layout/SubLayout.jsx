@@ -1,6 +1,5 @@
 import ProductType from '../common/ProductType'
 import BoardBar from '../common/BoardBar'
-import Pagination from '../common/Pagination'
 import productConfigs from '../../configs/product.configs'
 import { Outlet } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
@@ -19,7 +18,6 @@ const SubLayout = () => {
             <div className="col col-span-10 overflow-hidden grow">
               {/* <ProductList /> */}
               <Outlet />
-              <Pagination />
             </div>
           </div>
         </div>

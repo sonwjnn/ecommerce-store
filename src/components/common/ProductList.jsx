@@ -7,6 +7,8 @@ import productApi from '../../apis/modules/product.api'
 import { toast } from 'react-hot-toast'
 import { filterTypeOrder } from '../../utilities/filters'
 import BoardBar from './BoardBar'
+import Pagination from './Pagination'
+
 import { mapOrder } from '../../utilities/sorts'
 
 const ProductList = () => {
@@ -16,6 +18,9 @@ const ProductList = () => {
   const [filteredProducts, setFilteredProducts] = useState([])
   const [payloadProducts, setPayloadProducts] = useState([])
   const [priceOption, setPriceOption] = useState('')
+  const [page, setPage] = useState(1)
+  const [pageLimits, setPageLimits] = useState(1)
+  const skip = 10
 
   useEffect(() => {
     const getProducts = async () => {
@@ -58,18 +63,41 @@ const ProductList = () => {
     }
   }, [priceOption])
 
+  useEffect(() => {}, [page])
+
   useEffect(() => {
-    setPayloadProducts([...filteredProducts])
+    setPayloadProducts([...filteredProducts].splice(0, skip))
+    const pageLimits = Math.ceil(filteredProducts.length / skip)
+    setPageLimits(pageLimits)
   }, [filteredProducts])
+
+  useEffect(() => {
+    console.log('filter product:', filteredProducts)
+  }, [filteredProducts])
+
+  useEffect(() => {
+    console.log('payload product:', payloadProducts)
+  }, [payloadProducts])
 
   const handleSelectPriceOption = e => {
     setPriceOption(e.target.innerText)
+  }
+
+  const onPageSelect = page => {
+    setPayloadProducts([...filteredProducts].splice(page * skip, skip))
+    setPage(page)
   }
 
   return (
     <>
       <BoardBar handleSelectPriceOption={handleSelectPriceOption} />
       <ProductGrid products={payloadProducts} />
+      <Pagination
+        pageLimits={pageLimits}
+        onPageSelect={onPageSelect}
+        typeName={typeName}
+        cateName={cateName}
+      />
     </>
   )
 }

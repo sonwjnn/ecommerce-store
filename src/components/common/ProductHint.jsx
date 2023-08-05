@@ -15,7 +15,6 @@ const ProductHint = () => {
   useEffect(() => {
     const getProducts = async () => {
       dispatch(setGlobalLoading(true))
-      // dispatch(clearProductsStore())
       const { response, err } = await productApi.getList()
       dispatch(setGlobalLoading(false))
 
