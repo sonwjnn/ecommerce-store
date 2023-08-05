@@ -1,8 +1,12 @@
+import { useEffect } from 'react'
 import ProductItem from './ProductItem'
 
 const ProductGrid = ({ products }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [products])
   return (
-    <div className=" min-h-[700px]">
+    <div className=" min-h-[330px]">
       <div className="flex flex-wrap sm:grid sm:grid-cols-15 gap-3 relative">
         {products.map(product => (
           <ProductItem

@@ -10,30 +10,30 @@ const Pagination = props => {
     (_, index) => index + 1
   )
   return (
-    <div className="mt-8">
-      <ul className="pagination">
-        <li className="pagination-item">
-          <button href="" className="pagination-item__link">
-            <i className="pagination-item__icon ti-angle-left"></i>
-          </button>
-        </li>
+    <div className="mt-12">
+      <div className="flex gap-8 justify-center items-center">
+        <button className="pagination-item__link">
+          <i className="pagination-item__icon ti-angle-left"></i>
+        </button>
         {pageNumbers.map((number, index) => (
-          <li className="pagination-item" key={number}>
-            <Link
-              to={`/products/${cateName}/${typeName}/?page=${number}`}
-              className={`pagination-item__link ${
-                activePage === index ? 'pagination-item__link--active' : ''
-              }`}
-              onClick={() => {
-                setActivePage(index)
-                onPageSelect(number)
-              }}
-            >
-              {number}
-            </Link>
-          </li>
+          <Link
+            key={number}
+            to={`/products/${cateName}/${typeName}?page=${number}`}
+            className={`pagination-item__link ${
+              activePage === index ? 'pagination-item__link--active' : ''
+            }`}
+            onClick={() => {
+              setActivePage(index)
+              onPageSelect(index)
+            }}
+          >
+            {number}
+          </Link>
         ))}
-      </ul>
+        <button className="pagination-item__link">
+          <i className="pagination-item__icon ti-angle-right"></i>
+        </button>
+      </div>
     </div>
   )
 }

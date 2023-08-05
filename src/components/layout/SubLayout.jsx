@@ -1,9 +1,5 @@
 import ProductType from '../common/ProductType'
-import BoardBar from '../common/BoardBar'
-import productConfigs from '../../configs/product.configs'
 import { Outlet } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { setProductsSortPrice } from '../../redux/features/productSlice'
 
 const SubLayout = () => {
   return (

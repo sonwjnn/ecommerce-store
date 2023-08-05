@@ -224,19 +224,6 @@ html {
   color: var(--text-color);
 }
 
-.pagination {
-  display: flex;
-  justify-content: space-around;
-  list-style: none;
-  max-width: 500px;
-  margin: 0 auto;
-  align-items: center;
-  padding-left: 0;
-}
-
-.pagination-item {
-}
-
 .pagination-item__link {
   color: #9a9a9a;
   text-decoration: none;
