@@ -36,6 +36,7 @@ const ProductDetail = () => {
   const [imageUrl, setImageUrl] = useState('')
   const [reviewCount, setReviewCount] = useState(0)
   const [favoriteCount, setFavoriteCount] = useState(0)
+
   useEffect(() => {
     window.scrollTo(0, 0)
     const getProduct = async () => {
@@ -93,14 +94,11 @@ const ProductDetail = () => {
       return
     }
 
-    // if (onRequest) return
-
-    // setOnRequest(true)
-
     const body = {
       productId: product._id,
-      productTitle: product.title || product.name,
-      productType: product.type,
+      productName: product.name,
+      typeId: product.typeId._id,
+      cateId: product.cateId._id,
       productPrice: product.price,
       productImage: product.imageName,
       quantity: cartValue
@@ -109,8 +107,6 @@ const ProductDetail = () => {
     const { response, err } = await cartApi.add(body)
 
     if (err) toast.error(err.message)
-
-    // setOnRequest(false)
 
     if (response) {
       dispatch(addCart(response))
@@ -200,7 +196,7 @@ const ProductDetail = () => {
     <div className="bg-bg_page px-0 xl:px-[136px] py-0 sm:py-[56px]   h-full">
       <div className="bg-white h-full rounded-md max-w-[1220px] mx-auto">
         <div className="flex flex-col sm:flex-row ">
-          <div className="flex-[33%] p-4">
+          <div className="flex-[33%] grow-0 p-4">
             <div
               className="pt-[450px] bg-center bg-cover m-1.5 w-full"
               style={{
@@ -208,7 +204,7 @@ const ProductDetail = () => {
               }}
             ></div>
 
-            <div className="hidden md:flex gap-4 overflow-x-scroll ">
+            <div className="scrollbar-hide hidden md:flex gap-4 overflow-x-scroll max-w-[100%]">
               <DetailImage imageUrl={imageUrl} />
               <DetailImage imageUrl={imageUrl} />
               <DetailImage imageUrl={imageUrl} />
@@ -646,7 +642,6 @@ const ProductDetail = () => {
               <ProductReview
                 reviews={product ? product.reviews : []}
                 product={product}
-                productType={''}
                 setReviewCount={setReviewCount}
                 reviewCount={reviewCount}
               />

@@ -46,12 +46,6 @@ const ReviewItem = ({ review, onRemoved }) => {
             </div>
           </div>
           {user && user.id === review.user.id && (
-            // <button
-            //   onClick={onRemove}
-            //   className="text-red-600 mr-2 text-[24px] flex items-center px-3 py-2 justify-center sm:relative md:absolute sm:right-0 md:right-2"
-            // >
-            //   <MdDelete />
-            // </button>
             <LoadingButton
               loading={onRequest}
               colorLoading={'#fb5533'}
@@ -68,13 +62,7 @@ const ReviewItem = ({ review, onRemoved }) => {
   )
 }
 
-const ProductReview = ({
-  reviews,
-  product,
-  productType,
-  reviewCount,
-  setReviewCount
-}) => {
+const ProductReview = ({ reviews, product, reviewCount, setReviewCount }) => {
   const { user } = useSelector(state => state.user)
 
   const [listReviews, setListReviews] = useState([])
@@ -82,6 +70,7 @@ const ProductReview = ({
   const [page, setPage] = useState(1)
   const [onRequest, setOnRequest] = useState(false)
   const [content, setContent] = useState('')
+  const [rate, setRate] = useState(0)
 
   const skip = 4
 
@@ -94,12 +83,15 @@ const ProductReview = ({
   const onAddReview = async () => {
     if (onRequest) return
     const body = {
-      content,
       productId: product._id,
-      productType,
-      productTitle: product.title || product.name,
-      productImage: product.imageName
+      typeId: product.typeId._id,
+      cateId: product.cateId._id,
+      productName: product.name,
+      productImage: product.imageName,
+      rate,
+      content
     }
+    if (!rate) return
     if (!content.trim()) return
 
     setOnRequest(true)
@@ -168,12 +160,7 @@ const ProductReview = ({
                     placeholder="Write your review"
                     className="grow p-4 border border-gray-300 resize-none text-[14px]"
                   />
-                  {/* <button
-                    onClick={onAddReview}
-                    className="flex items-center justify-center btn-primary py-2 px-12 h-[4rem]"
-                  >
-                    <FiSend className=" mt-1 text-[20px]" />
-                  </button> */}
+
                   <LoadingButton
                     loading={onRequest}
                     colorLoading={'#ffffff'}

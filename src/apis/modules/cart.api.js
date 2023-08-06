@@ -19,18 +19,20 @@ const cartApi = {
 
   add: async ({
     productId,
-    productTitle,
+    productName,
     productPrice,
-    productType,
+    typeId,
+    cateId,
     productImage,
     quantity
   }) => {
     try {
       const response = await privateClient.post(cartEndpoints.add, {
         productId,
-        productType,
-        productTitle,
+        productName,
         productPrice,
+        typeId,
+        cateId,
         productImage,
         quantity
       })
