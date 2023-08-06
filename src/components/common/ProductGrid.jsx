@@ -6,7 +6,7 @@ const ProductGrid = ({ products }) => {
     window.scrollTo(0, 0)
   }, [products])
   return (
-    <div className=" min-h-[330px]">
+    <div>
       <div className="flex flex-wrap sm:grid sm:grid-cols-15 gap-3 relative">
         {products.map(product => (
           <ProductItem

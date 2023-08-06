@@ -1,14 +1,19 @@
-import { useState } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const Pagination = props => {
-  const { pageLimits, onPageSelect, typeName, cateName } = props
+  const { pageLimits, currentPage, typeName, cateName } = props
   const [activePage, setActivePage] = useState(0)
+
+  useEffect(() => {
+    if (currentPage) setActivePage(currentPage - 1)
+  }, [currentPage])
 
   const pageNumbers = Array.from(
     { length: pageLimits },
     (_, index) => index + 1
   )
+
   return (
     <div className="mt-12">
       <div className="flex gap-8 justify-center items-center">
@@ -22,10 +27,6 @@ const Pagination = props => {
             className={`pagination-item__link ${
               activePage === index ? 'pagination-item__link--active' : ''
             }`}
-            onClick={() => {
-              setActivePage(index)
-              onPageSelect(index)
-            }}
           >
             {number}
           </Link>

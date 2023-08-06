@@ -1514,7 +1514,7 @@ i.home-product-item__icon-heart-fill {
   position: absolute;
   background-color: rgba(255, 216, 57, 0.94);
   width: 36px;
-  height: 32px;
+  height: 36px;
   right: 0;
   top: 0;
   display: flex;
@@ -1528,7 +1528,8 @@ i.home-product-item__icon-heart-fill {
   content: '';
   position: absolute;
   bottom: -4px;
-  border-width: 0 18px 4px;
+  right: 0;
+  border-width: 0 18px 4px 19px;
   border-style: solid;
   border-color: transparent rgba(255, 216, 57, 0.94) transparent
     rgba(255, 216, 57, 0.94);

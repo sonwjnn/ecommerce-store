@@ -34,28 +34,32 @@ const ProductType = () => {
 
   return (
     <>
-      <nav className="category  w-[200px]">
-        <header className="category__heading pointer-events-none select-none flex uppercase items-center">
-          <BiCategory className="text-[18px] mr-2" />
-          loại sản phẩm
-        </header>
-        <ul className="category-list relative">
-          <ProductLoading className="absolute top-0 right-0 left-0 bottom-0" />
-          {productTypes.map((type, index) => (
-            <li className="category-item select-none" key={type._id}>
-              <Link
-                to={`/products/${cateName}/${type.name}`}
-                className={`category-item__link ${
-                  activeLink === index || typeName === type.name ? 'active' : ''
-                }`}
-                onClick={() => setActiveLink(index)}
-              >
-                {type.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      {productTypes.length ? (
+        <nav className="category  w-[200px]">
+          <header className="category__heading pointer-events-none select-none flex uppercase items-center">
+            <BiCategory className="text-[18px] mr-2" />
+            loại sản phẩm
+          </header>
+          <ul className="category-list relative">
+            <ProductLoading className="absolute top-0 right-0 left-0 bottom-0" />
+            {productTypes.map((type, index) => (
+              <li className="category-item select-none" key={type._id}>
+                <Link
+                  to={`/products/${cateName}/${type.name}`}
+                  className={`category-item__link ${
+                    activeLink === index || typeName === type.name
+                      ? 'active'
+                      : ''
+                  }`}
+                  onClick={() => setActiveLink(index)}
+                >
+                  {type.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ) : null}
     </>
   )
 }

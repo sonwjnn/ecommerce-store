@@ -66,7 +66,7 @@ const MainLayout = () => {
       {/* <AuthModal /> */}
       {/* login loading*/}
 
-      <div className="flex flex-col min-h-screen font-roboto ">
+      <div className="flex flex-col  font-roboto ">
         {/* header */}
         <Appbar />
         {/* header */}
