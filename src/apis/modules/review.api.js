@@ -13,7 +13,7 @@ const reviewApi = {
     cateId,
     productName,
     productImage,
-    rate,
+    rating,
     content
   }) => {
     try {
@@ -23,7 +23,7 @@ const reviewApi = {
         productName,
         cateId,
         productImage,
-        rate,
+        rating,
         content
       })
 

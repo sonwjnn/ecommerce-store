@@ -7,6 +7,8 @@ import TextAvatar from './TextAvatar'
 import { MdDelete } from 'react-icons/md'
 import { FiSend } from 'react-icons/fi'
 import LoadingButton from './LoadingButton'
+import Star from './Star'
+import StarVote from './StarVote'
 
 const ReviewItem = ({ review, onRemoved }) => {
   const { user } = useSelector(state => state.user)
@@ -36,6 +38,7 @@ const ReviewItem = ({ review, onRemoved }) => {
         <div className="gap-2 flex flex-col grow justify-center">
           <div className="gap-1">
             <h6 className="font-bold text-[16px]">{review.user.name}</h6>
+            <Star stars={review.rating} />
             <p className="text-[11px] text-gray-500">
               {dayjs(review.createdAt).format('DD-MM-YYYY HH:mm:ss')}
             </p>
@@ -70,9 +73,13 @@ const ProductReview = ({ reviews, product, reviewCount, setReviewCount }) => {
   const [page, setPage] = useState(1)
   const [onRequest, setOnRequest] = useState(false)
   const [content, setContent] = useState('')
-  const [rate, setRate] = useState(0)
+  const [rating, setRating] = useState(null)
 
   const skip = 4
+
+  useEffect(() => {
+    console.log(rating)
+  }, [rating])
 
   useEffect(() => {
     setListReviews([...reviews])
@@ -88,10 +95,10 @@ const ProductReview = ({ reviews, product, reviewCount, setReviewCount }) => {
       cateId: product.cateId._id,
       productName: product.name,
       productImage: product.imageName,
-      rate,
+      rating,
       content
     }
-    if (!rate) return
+    if (!rating) return
     if (!content.trim()) return
 
     setOnRequest(true)
@@ -171,6 +178,8 @@ const ProductReview = ({ reviews, product, reviewCount, setReviewCount }) => {
                     <FiSend className=" mt-1 text-[20px]" />
                   </LoadingButton>
                 </div>
+
+                <StarVote rating={rating} setRating={setRating} />
               </div>
             </div>
           </>
