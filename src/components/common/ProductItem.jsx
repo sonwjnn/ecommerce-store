@@ -6,6 +6,7 @@ import { AiFillHeart } from 'react-icons/ai'
 import productApi from '../../apis/modules/product.api'
 import { toast } from 'react-hot-toast'
 import { twMerge } from 'tailwind-merge'
+import Star from './Star'
 
 const ProductItem = ({ product, className }) => {
   const [imageUrl, setImageUrl] = useState('')
@@ -120,11 +121,12 @@ const ProductItem = ({ product, className }) => {
             }) && <AiFillHeart className="text-red-600 text-[13px]" />}
           </span>
           <span className="home-product-item__rate flex items-center">
-            <i className="home-product-item__icon-star--gold  fa-solid fa-star text-[10px]"></i>
+            {/* <i className="home-product-item__icon-star--gold  fa-solid fa-star text-[10px]"></i>
             <i className="home-product-item__icon-star--gold fa-solid fa-star text-[10px]"></i>
             <i className="home-product-item__icon-star--gold fa-solid fa-star text-[10px]"></i>
             <i className="home-product-item__icon-star--gold fa-solid fa-star text-[10px]"></i>
-            <i className="home-product-item__icon-star fa-solid fa-star text-[10px]"></i>
+            <i className="home-product-item__icon-star fa-solid fa-star text-[10px]"></i> */}
+            <Star stars={product.rating} className="text-[11px]" />
             <span className="home-product-item__buy-num ">Đã bán 989</span>
           </span>
         </div>

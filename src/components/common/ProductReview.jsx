@@ -78,10 +78,6 @@ const ProductReview = ({ reviews, product, reviewCount, setReviewCount }) => {
   const skip = 4
 
   useEffect(() => {
-    console.log(rating)
-  }, [rating])
-
-  useEffect(() => {
     setListReviews([...reviews])
     setFilteredReviews([...reviews].splice(0, skip))
     setReviewCount(reviews.length)
@@ -112,6 +108,7 @@ const ProductReview = ({ reviews, product, reviewCount, setReviewCount }) => {
       setFilteredReviews([...filteredReviews, response])
       setReviewCount(reviewCount + 1)
       setContent('')
+      setRating(null)
     }
   }
 

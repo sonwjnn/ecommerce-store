@@ -1,4 +1,5 @@
 import DetailImage from '../components/common/DetailImage'
+import Star from '../components/common/Star'
 import { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -36,6 +37,7 @@ const ProductDetail = () => {
   const [imageUrl, setImageUrl] = useState('')
   const [reviewCount, setReviewCount] = useState(0)
   const [favoriteCount, setFavoriteCount] = useState(0)
+  const [filteredReviews, setFilteredReviews] = useState([])
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -72,6 +74,19 @@ const ProductDetail = () => {
     }
 
     getImage()
+  }, [product])
+
+  useEffect(() => {
+    setFilteredReviews([
+      'tất cả',
+      '5 sao (7)',
+      '4 sao (3)',
+      '3 sao (0)',
+      '2 sao (0)',
+      '1 sao (1)',
+      'có bình luận (4)',
+      'có ảnh / video (3)'
+    ])
   }, [product])
 
   const handleValueCart = state => {
@@ -171,17 +186,6 @@ const ProductDetail = () => {
     }
   }
 
-  const reviewFilter = [
-    'tất cả',
-    '5 sao (7)',
-    '4 sao (3)',
-    '3 sao (0)',
-    '2 sao (0)',
-    '1 sao (1)',
-    'có bình luận (4)',
-    'có ảnh / video (3)'
-  ]
-
   useEffect(() => {
     if (product && product.reviews) setReviewCount(product.reviews.length)
   }, [product])
@@ -262,15 +266,13 @@ const ProductDetail = () => {
               <div className="flex flex-wrap gap-4  items-center">
                 <span className="flex relative items-center border-right-ab after:right-[-2rem]">
                   <span className="mr-2 text-primary text-[16px] sm:text-[18px] relative  after:bg-primary border-bottom-ab">
-                    4.0
+                    {product && product.rating}
                   </span>
-                  <span className="flex gap-1">
-                    <i className="fa-solid fa-star text-primary  text-[14px] sm:text-[16px]"></i>
-                    <i className="fa-solid fa-star text-primary  text-[14px] sm:text-[16px]"></i>
-                    <i className="fa-solid fa-star text-primary  text-[14px] sm:text-[16px]"></i>
-                    <i className="fa-solid fa-star text-primary  text-[14px] sm:text-[16px]"></i>
-                    <i className="fa-regular fa-star text-primary  text-[14px] sm:text-[16px]"></i>
-                  </span>
+
+                  <Star
+                    stars={product && product.rating}
+                    className="text-primary text-[14px] sm:text-[16px]"
+                  />
                 </span>
 
                 <span className="sm:flex hidden relative ml-[3rem] items-center border-right-ab after:right-[-2rem]">
@@ -613,20 +615,18 @@ const ProductDetail = () => {
               <div className="mt-8  gap-4 capitalize hidden md:block p-[20px] border border-[#f9ede5] bg-[#fffbf8]">
                 <div className="p-8 flex flex-col items-center justify-center">
                   <span className="text-primary text-[28px]">
-                    4.0 <span className="text-[18px]">trên 5</span>
+                    {product && product.rating}{' '}
+                    <span className="text-[18px]">trên 5</span>
                   </span>
 
-                  <span className="flex gap-1">
-                    <i className="fa-solid fa-star text-primary text-[16px]"></i>
-                    <i className="fa-solid fa-star text-primary text-[16px]"></i>
-                    <i className="fa-solid fa-star text-primary text-[16px]"></i>
-                    <i className="fa-solid fa-star text-primary text-[16px]"></i>
-                    <i className="fa-regular fa-star text-primary text-[16px]"></i>
-                  </span>
+                  <Star
+                    stars={product && product.rating}
+                    className="text-primary text-[18px]"
+                  />
                 </div>
 
                 <div className="hidden md:flex p-8 gap-3   items-center justify-start flex-wrap">
-                  {reviewFilter.map((item, index) => (
+                  {filteredReviews.map((item, index) => (
                     <span
                       className={`select-type-btn px-10 py-2 review-filter-item  ${
                         activeReview === index ? 'active' : ''
