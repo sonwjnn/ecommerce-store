@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setGlobalLoading } from '../../redux/features/globalLoadingSlice'
 import favoriteApi from '../../apis/modules/favorite.api'
 import { shorterString } from '../../utilities/constants'
-import { MdDelete } from 'react-icons/md'
 import { removeFavorite } from '../../redux/features/userSlice'
 import { toast } from 'react-hot-toast'
 import { SlEmotsmile } from 'react-icons/sl'
+import { RiDeleteBin5Line } from 'react-icons/ri'
+import productApi from '../../apis/modules/product.api'
+import FavoriteNotFound from './FavoriteNotFound'
 
 const FavoriteItem = props => {
   const { title, productImage, type, id, price, onRemoved, handleDotPrice } =
@@ -14,6 +16,22 @@ const FavoriteItem = props => {
 
   const dispatch = useDispatch()
   const [onRequest, setOnRequest] = useState(false)
+  const [imageUrl, setImageUrl] = useState('')
+
+  useEffect(() => {
+    const getImage = async () => {
+      const { response, err } = await productApi.getImage({
+        imageName: productImage
+      })
+
+      if (err) toast.error(err.message)
+      if (response) {
+        setImageUrl(`data:image/png;base64,${response}`)
+      }
+    }
+
+    getImage()
+  }, [])
 
   const onRemove = async () => {
     if (onRequest) return
@@ -34,10 +52,6 @@ const FavoriteItem = props => {
 
   //constants
   const shortTitle = shorterString(title, 28)
-  const urlImage = new URL(
-    `../../assets/img/products/${productImage}`,
-    import.meta.url
-  ).href
 
   return (
     <div className="p-8 w-full pb-0 pt-0">
@@ -46,7 +60,7 @@ const FavoriteItem = props => {
           <div
             className="min-w-[80px] h-[80px] bg-no-repeat bg-center bg-cover "
             style={{
-              backgroundImage: `url(${urlImage})`
+              backgroundImage: `url(${imageUrl})`
             }}
           ></div>
           <div className="flex flex-col justify-center self-center">
@@ -64,7 +78,7 @@ const FavoriteItem = props => {
             onClick={onRemove}
             className="text-red-600 mr-2 text-[32px] md:text-[24px] flex items-center px-3 py-2 justify-center   "
           >
-            <MdDelete />
+            <RiDeleteBin5Line />
           </button>
         </div>
       </div>
@@ -73,22 +87,15 @@ const FavoriteItem = props => {
 }
 
 const FavoriteList = () => {
-  const { user, listFavorites } = useSelector(state => state.user)
   const dispatch = useDispatch()
   const [favs, setFavs] = useState([])
   const [isCheckedAll, setCheckedAll] = useState(false)
   const [checkedFavs, setCheckedFavs] = useState([])
+  const { listFavorites } = useSelector(state => state.user)
 
   useEffect(() => {
-    const getListFavUser = async () => {
-      const { response, err } = await favoriteApi.getList()
-
-      if (response) {
-        setFavs(response)
-      }
-    }
-    getListFavUser()
-  }, [dispatch])
+    setFavs(listFavorites)
+  }, [listFavorites])
 
   const onRemoved = ({ id, ids }) => {
     if (id) {
@@ -98,8 +105,6 @@ const FavoriteList = () => {
       const newFavs = [...favs].filter(e => !ids.includes(e._id))
       setFavs(newFavs)
     }
-    // setFilteredMedias([...newCarts].splice(0, page * skip))
-    // setCount(page - 1)
   }
 
   useEffect(() => {

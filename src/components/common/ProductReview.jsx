@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import dayjs from 'dayjs'
 import { useSelector } from 'react-redux'
@@ -9,6 +9,7 @@ import { FiSend } from 'react-icons/fi'
 import LoadingButton from './LoadingButton'
 import Star from './Star'
 import StarVote from './StarVote'
+import { RiDeleteBin5Line } from 'react-icons/ri'
 
 const ReviewItem = ({ review, onRemoved }) => {
   const { user } = useSelector(state => state.user)
@@ -56,7 +57,7 @@ const ReviewItem = ({ review, onRemoved }) => {
               className={`bg-transparent border-none text-red-600 mr-2 text-[24px] flex items-center px-3 py-2 justify-center sm:relative md:absolute sm:right-0 md:right-2`}
               onClick={onRemove}
             >
-              <MdDelete />
+              <RiDeleteBin5Line />
             </LoadingButton>
           )}
         </div>
@@ -73,7 +74,8 @@ const ProductReview = ({ reviews, product, reviewCount, setReviewCount }) => {
   const [page, setPage] = useState(1)
   const [onRequest, setOnRequest] = useState(false)
   const [content, setContent] = useState('')
-  const [rating, setRating] = useState(null)
+  const [rating, setRating] = useState(0)
+  const reviewRef = useRef()
 
   const skip = 4
 
@@ -94,8 +96,17 @@ const ProductReview = ({ reviews, product, reviewCount, setReviewCount }) => {
       rating,
       content
     }
-    if (!rating) return
-    if (!content.trim()) return
+    if (!content.trim()) {
+      reviewRef.current.focus()
+      return toast.error('Please enter your review before submit!', {
+        id: 'review toast'
+      })
+    }
+    if (!rating) {
+      return toast.error('Please select your vote before submit!', {
+        id: 'vote toast'
+      })
+    }
 
     setOnRequest(true)
     const { response, err } = await reviewApi.add(body)
@@ -159,6 +170,7 @@ const ProductReview = ({ reviews, product, reviewCount, setReviewCount }) => {
                 <div className="flex gap-3">
                   <textarea
                     value={content}
+                    ref={reviewRef}
                     onChange={e => setContent(e.target.value)}
                     rows={4}
                     placeholder="Write your review"
@@ -176,7 +188,11 @@ const ProductReview = ({ reviews, product, reviewCount, setReviewCount }) => {
                   </LoadingButton>
                 </div>
 
-                <StarVote rating={rating} setRating={setRating} />
+                <div className="flex gap-4">
+                  <div className="text-[14px] text-gray-400">Your vote: </div>
+                  <StarVote rating={rating} setRating={setRating} />
+                  <div className="text-[14px] text-gray-500">{rating}/5</div>
+                </div>
               </div>
             </div>
           </>

@@ -5,7 +5,6 @@ import { removeCart, removeCarts } from '../redux/features/userSlice'
 import cartApi from '../apis/modules/cart.api'
 import { toast } from 'react-hot-toast'
 import { useRef } from 'react'
-import { setGlobalLoading } from '../redux/features/globalLoadingSlice'
 import LoadingButton from '../components/common/LoadingButton'
 import productApi from '../apis/modules/product.api'
 
@@ -188,8 +187,6 @@ const CartList = () => {
       let newCarts = [...carts].filter(e => !ids.includes(e._id))
       setCarts(newCarts)
     }
-    // setFilteredMedias([...newCarts].splice(0, page * skip))
-    // setCount(page - 1)
   }
 
   useEffect(() => {

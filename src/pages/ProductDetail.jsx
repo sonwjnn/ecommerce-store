@@ -30,7 +30,7 @@ const ProductDetail = () => {
   const [cartValue, setCartValue] = useState(1)
   const { productId } = useParams()
   const [product, setProduct] = useState(null)
-  const [activeReview, setActiveReview] = useState(null)
+  const [activeReview, setActiveReview] = useState(0)
   const { listFavorites, user } = useSelector(state => state.user)
   const [isFavorite, setIsFavorite] = useState(false)
   const [onRequest, setOnRequest] = useState(false)
@@ -38,6 +38,7 @@ const ProductDetail = () => {
   const [reviewCount, setReviewCount] = useState(0)
   const [favoriteCount, setFavoriteCount] = useState(0)
   const [filteredReviews, setFilteredReviews] = useState([])
+  const [starCount, setStarCount] = useState([])
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -51,6 +52,7 @@ const ProductDetail = () => {
       if (response) {
         setProduct(response)
         setIsFavorite(response.isFavorite)
+        setFilteredReviews(response.reviews)
       }
 
       if (err) toast.error(err.message)
@@ -77,17 +79,25 @@ const ProductDetail = () => {
   }, [product])
 
   useEffect(() => {
-    setFilteredReviews([
-      'tất cả',
-      '5 sao (7)',
-      '4 sao (3)',
-      '3 sao (0)',
-      '2 sao (0)',
-      '1 sao (1)',
-      'có bình luận (4)',
-      'có ảnh / video (3)'
-    ])
+    if (product && product.reviews) {
+      let starCount = Array(6).fill(0)
+      product.reviews.forEach(review => {
+        starCount[review.rating]++
+      })
+      setStarCount(starCount)
+    }
   }, [product])
+
+  useEffect(() => {
+    if (product && product.reviews) {
+      setFilteredReviews(
+        [...product.reviews].filter(review => {
+          if (!activeReview) return review.rating
+          return +review.rating === activeReview
+        })
+      )
+    }
+  }, [activeReview])
 
   const handleValueCart = state => {
     if (cartState.increase == state) {
@@ -626,21 +636,34 @@ const ProductDetail = () => {
                 </div>
 
                 <div className="hidden md:flex p-8 gap-3   items-center justify-start flex-wrap">
-                  {filteredReviews.map((item, index) => (
-                    <span
-                      className={`select-type-btn px-10 py-2 review-filter-item  ${
-                        activeReview === index ? 'active' : ''
-                      }`}
-                      key={index}
-                      onClick={() => setActiveReview(index)}
-                    >
-                      {item}
-                    </span>
-                  ))}
+                  <span
+                    className={`select-type-btn px-10 py-2 review-filter-item  ${
+                      activeReview === 0 ? 'active' : ''
+                    }`}
+                    key={0}
+                    onClick={() => setActiveReview(0)}
+                  >
+                    tất cả
+                  </span>
+                  {starCount.map((star, index) => {
+                    if (index) {
+                      return (
+                        <span
+                          className={`select-type-btn px-10 py-2 review-filter-item  ${
+                            activeReview === index ? 'active' : ''
+                          }`}
+                          key={index}
+                          onClick={() => setActiveReview(index)}
+                        >
+                          {`${index} sao (${star})`}
+                        </span>
+                      )
+                    }
+                  })}
                 </div>
               </div>
               <ProductReview
-                reviews={product ? product.reviews : []}
+                reviews={filteredReviews ? filteredReviews : []}
                 product={product}
                 setReviewCount={setReviewCount}
                 reviewCount={reviewCount}

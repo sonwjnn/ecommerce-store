@@ -35,7 +35,7 @@ const CartPreview = ({ cart }) => {
           ></div>
         </span>
         <span className="header__cart-list--have-items-decription">
-          {shorterString(cart.productTitle, 28)}
+          {shorterString(cart.productName, 28)}
         </span>
       </span>
       <span className="header__cart-list--have-items-price">
