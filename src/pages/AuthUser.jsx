@@ -29,7 +29,7 @@ const AuthUser = () => {
   const switchAuthState = state => setAction(state)
 
   return (
-    <div className="absolute h-screen w-screen overflow-hidden top-0 left-0 right-0 bottom-0 ">
+    <div className="w-full overflow-hidden top-0 left-0 right-0 bottom-0 ">
       <header className="flex items-center justify-center sm:justify-between py-3 px-24 bg-white h-[85px]">
         <div className="flex ">
           <button onClick={toHomePage} className=" inline-block max-w-[200px]">
