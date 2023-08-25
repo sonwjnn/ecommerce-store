@@ -94,7 +94,8 @@ const FavoriteList = () => {
   const { listFavorites } = useSelector(state => state.user)
 
   useEffect(() => {
-    setFavs(listFavorites)
+    console.log(listFavorites)
+    setFavs([...listFavorites])
   }, [listFavorites])
 
   const onRemoved = ({ id, ids }) => {
