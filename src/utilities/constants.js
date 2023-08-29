@@ -13,6 +13,20 @@ export const maskedEmail = email => {
   return maskedEmail
 }
 
+export const handleUrl = url => {
+  // Use a dummy anchor element to handle URL resolution
+  const anchor = document.createElement('a')
+  anchor.href = url
+
+  // Extract the base URL of the deployed application
+  const deployedBaseUrl = anchor.href.replace(anchor.pathname, '')
+
+  // Resolve the provided URL relative to the deployed base URL
+  const resolvedUrl = new URL(url, deployedBaseUrl).href
+
+  return resolvedUrl
+}
+
 export const bannerLogos = [
   'khung giờ săn sale',
   'hàng hiệu outlet giảm 50%',

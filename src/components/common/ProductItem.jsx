@@ -21,6 +21,11 @@ const ProductItem = ({ product, className }) => {
       if (err) toast.error(err.message)
       if (response) {
         setImageUrl(`data:image/png;base64,${response}`)
+      } else {
+        setImageUrl(
+          new URL('../../assets/img/thumnails/no_image.jpg', import.meta.url)
+            .href
+        )
       }
     }
 

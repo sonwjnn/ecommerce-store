@@ -1,4 +1,4 @@
-import { Link, useNavigate, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { BiSearch } from 'react-icons/bi'
 import { CgShoppingCart } from 'react-icons/cg'
 import { useSelector } from 'react-redux'
@@ -165,9 +165,11 @@ const SearchMain = () => {
               </div>
               <div className="header__cart-list--have-items-body max-h-[50vh] overflow-hidden">
                 <ul className="header__cart-list--have-items-items">
-                  {listCarts.map(cart => (
-                    <CartPreview key={cart._id} cart={cart} />
-                  ))}
+                  {listCarts.length
+                    ? listCarts.map(cart => (
+                        <CartPreview key={cart._id} cart={cart} />
+                      ))
+                    : []}
                 </ul>
               </div>
               <div className="header__cart-list--have-items-footer mt-2">
