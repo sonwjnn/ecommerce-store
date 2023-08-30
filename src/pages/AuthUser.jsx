@@ -15,10 +15,6 @@ const AuthUser = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     window.scrollTo(0, 0)
-    dispatch(setGlobalLoading(true))
-    setTimeout(() => {
-      dispatch(setGlobalLoading(false))
-    }, 1000)
   }, [])
 
   const history = useNavigate()

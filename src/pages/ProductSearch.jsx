@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import BoardBar from '../components/common/BoardBar'
 import Pagination from '../components/common/Pagination'
@@ -7,6 +7,7 @@ import Category from '../components/common/ProductType'
 import productApi from '../apis/modules/product.api'
 import { useDispatch } from 'react-redux'
 import { setGlobalLoading } from '../redux/features/globalLoadingSlice'
+import ProductHintGrid from '../components/common/ProductHintGrid'
 import { TbFileSearch } from 'react-icons/tb'
 
 const ProductSearch = () => {
@@ -42,14 +43,15 @@ const ProductSearch = () => {
         if (keyword.trim().length === 0) {
           setProducts([])
           setPage(1)
-        } else
+        } else {
           setProducts(
-            response.msg.filter(product =>
+            response.filter(product =>
               removeVietnameseDiacritics(product.name).includes(
                 removeVietnameseDiacritics(keyword)
               )
             )
           )
+        }
       }
       // if (response.msg) toast.error(response.msg)
     }
@@ -73,6 +75,10 @@ const ProductSearch = () => {
     setProducts(newProducts)
   }
 
+  useEffect(() => {
+    console.log(products)
+  }, [products])
+
   return (
     <>
       <div className="app__container pt-0">
@@ -87,43 +93,26 @@ const ProductSearch = () => {
                   handleSortPriceUpDown={handleSortPriceUpDown}
                 />
               ) : null}
-              <div className="home-product min-h-screen home-product--spacing-bottom">
-                <div className="row sm-gutter">
-                  {/* <!-- Product item --> */}
-                  {products.map((product, index) => (
-                    <ProductItem
-                      key={product._id}
-                      id={product._id}
-                      title={product.name}
-                      price={product.price}
-                      imageName={product.imageName}
-                      info={product.info}
-                      date={product.producedAt}
-                      origin={product.origin}
-                      type={product.type}
-                    />
-                  ))}
-                  {!products.length && (
-                    <div className="h-[50vh] w-full flex items-center justify-center ">
-                      <div className="flex flex-col gap-8 items-center justify-center">
-                        <TbFileSearch className="text-[150px] text-gray-300" />
-                        <div className="gap-4 text-[20px] text-center">
-                          <div className="text-gray-600">
-                            Không tìm thấy kết quả nào
-                          </div>
-                          <div className="text-gray-500">
-                            {' '}
-                            Hãy thử sử dụng các từ khóa chung chung hơn
-                          </div>
-                        </div>
+              <ProductHintGrid products={products} />
+              {!products.length && (
+                <div className="h-[50vh] w-full flex items-center justify-center ">
+                  <div className="flex flex-col gap-8 items-center justify-center">
+                    <TbFileSearch className="text-[150px] text-gray-300" />
+                    <div className="gap-4 text-[20px] text-center">
+                      <div className="text-gray-600">
+                        Không tìm thấy kết quả nào
+                      </div>
+                      <div className="text-gray-500">
+                        {' '}
+                        Hãy thử sử dụng các từ khóa chung chung hơn
                       </div>
                     </div>
-                  )}
+                  </div>
                 </div>
-              </div>
-              {products.length ? <Pagination /> : null}
+              )}
             </div>
           </div>
+          {products.length ? <Pagination /> : null}
         </div>
       </div>
     </>

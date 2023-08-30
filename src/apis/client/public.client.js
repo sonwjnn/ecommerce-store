@@ -1,8 +1,8 @@
 import axios from 'axios'
 import queryString from 'query-string'
 
-// const baseURL = "http://localhost:8017/";
-const baseURL = 'https://admin-shopee-clone.onrender.com/'
+const baseURL = 'http://localhost:8017/'
+// const baseURL = 'https://admin-shopee-clone.onrender.com/'
 
 const publicClient = axios.create({
   baseURL,
