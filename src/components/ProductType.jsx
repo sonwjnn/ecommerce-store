@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import typeApi from '../../apis/modules/type.api'
+import typeApi from '@/apis/modules/type.api'
 import { Link, useParams } from 'react-router-dom'
 import { BiCategory } from 'react-icons/bi'
-import { setTypes } from '../../redux/features/typeSlice'
-import { setProductLoading } from '../../redux/features/productLoading'
+import { setTypes } from '@/redux/features/typeSlice'
+import { setProductLoading } from '@/redux/features/productLoading'
 import ProductLoading from './ProductLoading'
 import { toast } from 'react-hot-toast'
 

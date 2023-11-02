@@ -15,7 +15,7 @@ const CategoryItem = ({ index, cateName, disable }) => {
         style={{
           backgroundImage: `url(${
             new URL(
-              `../../assets/img/cates/cate_${index + 1}.png`,
+              `../assets/img/cates/cate_${index + 1}.png`,
               import.meta.url
             ).href
           })`

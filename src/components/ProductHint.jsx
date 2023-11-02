@@ -1,8 +1,8 @@
 import { useDispatch } from 'react-redux'
 import ProductHintGrid from './ProductHintGrid'
 import { useEffect, useState } from 'react'
-import { setGlobalLoading } from '../../redux/features/globalLoadingSlice'
-import productApi from '../../apis/modules/product.api'
+import { setGlobalLoading } from '@/redux/features/globalLoadingSlice'
+import productApi from '@/apis/modules/product.api'
 import { toast } from 'react-hot-toast'
 
 const ProductHint = () => {
@@ -42,7 +42,7 @@ const ProductHint = () => {
       {filteredProducts.length < products.length && (
         <div className="flex items-center justify-center pb-8">
           <button
-            className="px-8 py-4 capitalize text-[14px] hover:bg-gray-100 border border-gray-300 bg-white outline-none"
+            className="px-8 py-2 mt-2 capitalize text-[14px] hover:bg-gray-100 border border-gray-300 bg-white outline-none"
             onClick={onLoadMore}
           >
             xem thêm

@@ -1,14 +1,12 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setGlobalLoading } from '../../redux/features/globalLoadingSlice'
-import favoriteApi from '../../apis/modules/favorite.api'
-import { shorterString } from '../../utilities/constants'
-import { removeFavorite } from '../../redux/features/userSlice'
+import favoriteApi from '@/apis/modules/favorite.api'
+import { shorterString } from '@/utilities/constants'
+import { removeFavorite } from '@/redux/features/userSlice'
 import { toast } from 'react-hot-toast'
 import { SlEmotsmile } from 'react-icons/sl'
 import { RiDeleteBin5Line } from 'react-icons/ri'
-import productApi from '../../apis/modules/product.api'
-import FavoriteNotFound from './FavoriteNotFound'
+import productApi from '@/apis/modules/product.api'
 
 const FavoriteItem = props => {
   const { title, productImage, type, id, price, onRemoved, handleDotPrice } =
@@ -94,7 +92,6 @@ const FavoriteList = () => {
   const { listFavorites } = useSelector(state => state.user)
 
   useEffect(() => {
-    console.log(listFavorites)
     setFavs([...listFavorites])
   }, [listFavorites])
 

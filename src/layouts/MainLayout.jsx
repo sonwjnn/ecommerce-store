@@ -1,27 +1,24 @@
 import { Outlet } from 'react-router-dom'
-import GlobalLoading from '../common/GlobalLoading.jsx'
-import Footer from '../common/Footer.jsx'
-import Appbar from '../common/AppBar.jsx'
+import GlobalLoading from '@/components/GlobalLoading'
+import Footer from '@/components/Footer'
+import Appbar from '@/components/AppBar'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
-import { toast } from 'react-hot-toast'
-import userApi from '../../apis/modules/user.api.js'
-import cartApi from '../../apis/modules/cart.api'
+import userApi from '@/apis/modules/user.api'
+import cartApi from '@/apis/modules/cart.api'
 import {
   setListCarts,
   setListFavorites,
   setUser
-} from '../../redux/features/userSlice.js'
-import NavigateMobile from '../common/NavigateMobile.jsx'
-import favoriteApi from '../../apis/modules/favorite.api.js'
+} from '@/redux/features/userSlice'
+import NavigateMobile from '@/components/NavigateMobile'
+import favoriteApi from '@/apis/modules/favorite.api'
 
 // Layout use for all pages
 const MainLayout = () => {
-  const { authModalOpen } = useSelector(state => state.authModal)
-
   const dispatch = useDispatch()
 
-  const { user, listFavorites } = useSelector(state => state.user)
+  const { user } = useSelector(state => state.user)
 
   //get user from redux store with JWT
   useEffect(() => {

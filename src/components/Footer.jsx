@@ -1,59 +1,61 @@
 const Footer = () => {
   return (
-    <footer className="footer font-roboto">
+    <footer className="footer font-roboto text-sm">
       <div className="grid wide">
         <div className="row footer-spacing"></div>
         <div className="row footer-body footer__content">
           <div className="col l-2-4 c-6">
             <ul className="footer-list">
-              <h3 className="footer-list__heading">CHĂM SÓC KHÁCH HÀNG</h3>
+              <h3 className="footer-list__heading text-sm">
+                CHĂM SÓC KHÁCH HÀNG
+              </h3>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link">
+                <a href="" className="footer-list-item__link text-sm">
                   Trung Tâm Trợ Giúp
                 </a>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link">
+                <a href="" className="footer-list-item__link text-sm">
                   Shopee Blog
                 </a>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link">
+                <a href="" className="footer-list-item__link text-sm">
                   Shopee Mall
                 </a>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link">
+                <a href="" className="footer-list-item__link text-sm">
                   Hướng Dẫn Mua Hàng
                 </a>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link">
+                <a href="" className="footer-list-item__link text-sm">
                   Thanh Toán
                 </a>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link">
+                <a href="" className="footer-list-item__link text-sm">
                   Shopee Xu
                 </a>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link">
+                <a href="" className="footer-list-item__link text-sm">
                   Vận Chuyển
                 </a>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link">
+                <a href="" className="footer-list-item__link text-sm">
                   Trả Hàng & Hoàn Tiền
                 </a>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link">
+                <a href="" className="footer-list-item__link text-sm">
                   Chăm Sóc Khách Hàng
                 </a>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link">
+                <a href="" className="footer-list-item__link text-sm">
                   Chính Sách Bảo Hành
                 </a>
               </li>
@@ -61,49 +63,49 @@ const Footer = () => {
           </div>
           <div className="col l-2-4 c-6">
             <ul className="footer-list">
-              <h3 className="footer-list__heading">VỀ SHOPEE</h3>
+              <h3 className="footer-list__heading text-sm">VỀ SHOPEE</h3>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link">
+                <a href="" className="footer-list-item__link text-sm">
                   Giới Thiệu Về Shopee Việt Nam
                 </a>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link">
+                <a href="" className="footer-list-item__link text-sm">
                   Tuyển Dụng
                 </a>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link">
+                <a href="" className="footer-list-item__link text-sm">
                   Điều Khoản Shopee
                 </a>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link">
+                <a href="" className="footer-list-item__link text-sm">
                   Chính Sách Bảo Mật
                 </a>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link">
+                <a href="" className="footer-list-item__link text-sm">
                   Chính Hãng
                 </a>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link">
+                <a href="" className="footer-list-item__link text-sm">
                   Kênh Người Bán
                 </a>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link">
+                <a href="" className="footer-list-item__link text-sm">
                   Flash Sales
                 </a>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link">
+                <a href="" className="footer-list-item__link text-sm">
                   Chương Trình Tiếp Thị Liên Kết Shopee
                 </a>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link">
+                <a href="" className="footer-list-item__link text-sm">
                   Liên Hệ Với Truyền Thông
                 </a>
               </li>
@@ -112,7 +114,7 @@ const Footer = () => {
           <div className="col l-2-4 c-6">
             <ul className="footer-list">
               <ul className="footer-list-sub ">
-                <h3 className="footer-list-sub__heading">THANH TOÁN</h3>
+                <h3 className="footer-list-sub__heading text-sm">THANH TOÁN</h3>
                 <li className="footer-list-sub__item">
                   <span className="footer-list-sub__img footer-list-sub__img-1 footer__background"></span>
                 </li>
@@ -136,7 +138,9 @@ const Footer = () => {
                 </li>
               </ul>
               <ul className="footer-list-sub">
-                <h3 className="footer-list-sub__heading">ĐƠN VỊ VẬN CHUYỂN</h3>
+                <h3 className="footer-list-sub__heading text-sm">
+                  ĐƠN VỊ VẬN CHUYỂN
+                </h3>
                 <li className="footer-list-sub__item">
                   <span className="footer-list-sub__img footer-list-sub__img-8 footer__background"></span>
                 </li>
@@ -169,21 +173,23 @@ const Footer = () => {
           </div>
           <div className="col l-2-4 c-6">
             <ul className="footer-list">
-              <h3 className="footer-list__heading">THEO DÕI CHÚNG TÔI TRÊN</h3>
+              <h3 className="footer-list__heading text-sm">
+                THEO DÕI CHÚNG TÔI TRÊN
+              </h3>
               <li className="footer-list-item">
-                <button className="footer-list-item__link footer-list-item__socials transition-all">
+                <button className="footer-list-item__link footer-list-item__socials transition-all text-sm">
                   <i className="footer-list-item__icon fa-brands fa-facebook-square"></i>
                   Facebook
                 </button>
               </li>
               <li className="footer-list-item">
-                <button className="footer-list-item__link footer-list-item__socials transition-all">
+                <button className="footer-list-item__link footer-list-item__socials transition-all text-sm">
                   <i className="footer-list-item__icon fa-brands fa-instagram-square"></i>
                   Instagram
                 </button>
               </li>
               <li className="footer-list-item">
-                <button className="footer-list-item__link footer-list-item__socials transition-all">
+                <button className="footer-list-item__link footer-list-item__socials transition-all text-sm">
                   <i className="footer-list-item__icon fa-brands fa-linkedin"></i>
                   LinkedIn
                 </button>
@@ -192,7 +198,7 @@ const Footer = () => {
           </div>
           <div className="col l-2-4 c-12">
             <ul className="footer-list">
-              <h3 className="footer-list__heading">
+              <h3 className="footer-list__heading text-sm">
                 TẢI ỨNG DỤNG SHOPEE NGAY THÔI
               </h3>
               <div className="footer-list__wrap">
@@ -201,7 +207,7 @@ const Footer = () => {
                     <img
                       className="footer-list-qr__img"
                       src={
-                        new URL('../../assets/img/qr-code.png', import.meta.url)
+                        new URL('@/assets/img/qr-code.png', import.meta.url)
                           .href
                       }
                       alt="#"
@@ -212,10 +218,8 @@ const Footer = () => {
                   <button className="footer-list-item__link footer-list-appstore">
                     <img
                       src={
-                        new URL(
-                          '../../assets/img/app-store.png',
-                          import.meta.url
-                        ).href
+                        new URL('@/assets/img/app-store.png', import.meta.url)
+                          .href
                       }
                       alt="#"
                     />
@@ -223,10 +227,8 @@ const Footer = () => {
                   <button className="footer-list-item__link footer-list-google">
                     <img
                       src={
-                        new URL(
-                          '../../assets/img/google-play.png',
-                          import.meta.url
-                        ).href
+                        new URL('@/assets/img/google-play.png', import.meta.url)
+                          .href
                       }
                       alt="#"
                     />
@@ -234,10 +236,8 @@ const Footer = () => {
                   <button className="footer-list-item__link footer-list-gallery">
                     <img
                       src={
-                        new URL(
-                          '../../assets/img/app-galerry.png',
-                          import.meta.url
-                        ).href
+                        new URL('@/assets/img/app-galerry.png', import.meta.url)
+                          .href
                       }
                       alt="#"
                     />
@@ -348,7 +348,7 @@ const Footer = () => {
             <div className="row footer-footer-company hide-on-mobile">
               Công ty TNHH Shopee
             </div>
-            <div className="row footer-footer-text hide-on-mobile">
+            <div className="row footer-footer-text hide-on-mobile text-[12px]">
               <p>
                 Địa chỉ: Tầng 4-5-6, Tòa nhà Capital Place, số 29 đường Liễu
                 Giai, Phường Ngọc Khánh, Quận Ba Đình, Thành phố Hà Nội, Việt

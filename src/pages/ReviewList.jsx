@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { toast } from 'react-hot-toast'
 import { Link } from 'react-router-dom'
-import reviewApi from '../apis/modules/review.api'
-import { setGlobalLoading } from '../redux/features/globalLoadingSlice'
-import { routesGen } from '../routes/routes'
+import reviewApi from '@/apis/modules/review.api'
+import { setGlobalLoading } from '@/redux/features/globalLoadingSlice'
+import { routesGen } from '@/routes/routes'
 
 const ReviewItem = ({ review, onRemoved }) => {
   const dispatch = useDispatch()

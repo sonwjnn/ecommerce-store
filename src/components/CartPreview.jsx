@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { shorterString } from '../../utilities/constants'
-import productApi from '../../apis/modules/product.api'
+import { shorterString } from '@/utilities/constants'
+import productApi from '@/apis/modules/product.api'
 
 const CartPreview = ({ cart }) => {
   const [imageUrl, setImageUrl] = useState('')
@@ -34,11 +34,11 @@ const CartPreview = ({ cart }) => {
             }}
           ></div>
         </span>
-        <span className="header__cart-list--have-items-decription">
+        <span className="header__cart-list--have-items-decription text-base">
           {shorterString(cart.productName, 28)}
         </span>
       </span>
-      <span className="header__cart-list--have-items-price">
+      <span className="header__cart-list--have-items-price text-base">
         đ{cart.productPrice.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
       </span>
     </li>

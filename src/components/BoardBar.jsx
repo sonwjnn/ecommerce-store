@@ -7,14 +7,16 @@ const BoardBar = ({ handleSelectPriceOption }) => {
   const { types } = useSelector(state => state.types)
   return (
     <div className="mb-3">
-      <div className="home-filter hide-on-mobile-tablet">
-        <span className="home-filter__lable">Sắp xếp theo</span>
-        <button className="home-filter__btn btn">Phổ biến</button>
-        <button className="home-filter__btn btn btn-primary">Mới nhất</button>
-        <button className="home-filter__btn btn">Bán chạy</button>
+      <div className="home-filter hide-on-mobile-tablet ">
+        <span className="home-filter__lable  text-sm">Sắp xếp theo</span>
+        <button className="home-filter__btn btn text-sm">Phổ biến</button>
+        <button className="home-filter__btn btn btn-primary text-sm">
+          Mới nhất
+        </button>
+        <button className="home-filter__btn btn text-sm">Bán chạy</button>
 
         <div className="select-input ">
-          <span className="select-input__lable">Giá</span>
+          <span className="select-input__lable text-sm">Giá</span>
           <i className="select-input__icon ti-angle-down"></i>
           <ul className="select-input__menu top-[110%]">
             <li className="select-input__item">
@@ -22,7 +24,7 @@ const BoardBar = ({ handleSelectPriceOption }) => {
                 className="select-input__link "
                 onClick={handleSelectPriceOption}
               >
-                <i className="select-input__icon ti-arrow-down"></i>
+                <i className="select-input__icon ti-arrow-down text-sm"></i>
                 <span className="ml-2">Thấp đến cao</span>
               </button>
             </li>
@@ -38,8 +40,8 @@ const BoardBar = ({ handleSelectPriceOption }) => {
           </ul>
         </div>
         <div className="home-filter__page">
-          <div className="home-filter__page-num">
-            <span className="home-filter__page-current">1</span>/15
+          <div className="home-filter__page-num text-base">
+            <span className="home-filter__page-current ">1</span>/15
           </div>
           <div className="home-filter__page-move">
             <a

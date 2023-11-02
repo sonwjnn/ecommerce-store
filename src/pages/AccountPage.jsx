@@ -6,11 +6,11 @@ import { MdOutlineFavoriteBorder } from 'react-icons/md'
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { Link, useParams, useLocation } from 'react-router-dom'
-import PasswordUpdate from '../components/common/PasswordUpdate'
-import FavoriteList from '../components/common/FavoriteList'
-import TextAvatar from '../components/common/TextAvatar'
-import ProfileUpdate from '../components/common/ProfileUpdate'
-import PurchaseList from '../components/common/PurchaseList'
+import PasswordUpdate from '@/components/PasswordUpdate'
+import FavoriteList from '@/components/FavoriteList'
+import TextAvatar from '@/components/TextAvatar'
+import ProfileUpdate from '@/components/ProfileUpdate'
+import PurchaseList from '@/components/PurchaseList'
 
 const AccountPage = () => {
   const { user } = useSelector(state => state.user)

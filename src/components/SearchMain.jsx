@@ -4,10 +4,11 @@ import { CgShoppingCart } from 'react-icons/cg'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-hot-toast'
 import { useEffect, useRef, useState } from 'react'
-import { shorterString } from '../../utilities/constants'
+import { shorterString } from '@/utilities/constants'
 import { IoMdArrowBack } from 'react-icons/io'
-import { CartItem } from '../../pages/CartList'
+import { CartItem } from '@/pages/CartList'
 import CartPreview from './CartPreview'
+import { Input } from './ui/input'
 
 const SearchMain = () => {
   const { user, listCarts } = useSelector(state => state.user)
@@ -15,8 +16,6 @@ const SearchMain = () => {
   const location = useLocation()
   const searchInput = useRef()
   const [keyword, setKeyword] = useState('')
-  const [cart, setCart] = useState(null)
-  const [imageUrl, setImageUrl] = useState('')
 
   useEffect(() => {
     if (!location.pathname.includes('search')) {
@@ -69,7 +68,7 @@ const SearchMain = () => {
       <input
         hidden
         type="checkbox"
-        className="header__search-checkbox"
+        className="header__search-checkbox "
         id="mobile-search-checkbox"
       />
 
@@ -80,9 +79,9 @@ const SearchMain = () => {
               <span className="header__seach-mobile  hidden absolute left-[7px] top-[25%] z-20">
                 <BiSearch className="h-8 text-[22px] text-gray-500 mt-1 " />
               </span>
-              <input
+              <Input
                 type="text"
-                className="header__search-input relative"
+                className="h-full border-none focus-visible:ring-0 "
                 placeholder="Nhập sản phẩm để tìm kiếm"
                 value={keyword}
                 ref={searchInput}
@@ -113,7 +112,7 @@ const SearchMain = () => {
           </div>
         </div>
         <div className="header__search-decription hide-on-mobile-tablet">
-          <ul className="header__search-decription-list pointer-events-none select-none">
+          <ul className="header__search-decription-list pointer-events-none select-none text-sm">
             <li className="header__search-decription-list-item">
               <a href="">Túi xách nữ</a>
             </li>
@@ -143,8 +142,8 @@ const SearchMain = () => {
       </div>
       <div className="header__cart">
         <button onClick={handleCarts} className="header__cart-wrap ">
-          <CgShoppingCart className="text-[30px] text-white" />
-          <span className="header__cart-length  pointer-events-none select-none">
+          <CgShoppingCart size={28} className=" text-white" />
+          <span className="header__cart-length  pointer-events-none select-none text-sm">
             {listCarts.length}
           </span>
 
@@ -159,7 +158,7 @@ const SearchMain = () => {
                 Bạn chưa có sản phẩm nào.
               </div>
               <div className="header__cart-list--have-items-header py-4 select-none ">
-                <h3 className="header__cart-list--have-items-title">
+                <h3 className="header__cart-list--have-items-title text-base">
                   Sản phẩm mới thêm
                 </h3>
               </div>

@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { PulseLoader } from 'react-spinners'
 import { css } from '@emotion/react'
-import AppBar from '../common/AppBar.jsx'
+import AppBar from './AppBar'
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 
 const override = css`

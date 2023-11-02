@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { removeCart, removeCarts } from '../redux/features/userSlice'
-import cartApi from '../apis/modules/cart.api'
+import { removeCart, removeCarts } from '@/redux/features/userSlice'
+import cartApi from '@/apis/modules/cart.api'
 import { toast } from 'react-hot-toast'
 import { useRef } from 'react'
-import LoadingButton from '../components/common/LoadingButton'
-import productApi from '../apis/modules/product.api'
+import LoadingButton from '@/components/LoadingButton'
+import productApi from '@/apis/modules/product.api'
 
 const cartState = {
   increase: 'increase',

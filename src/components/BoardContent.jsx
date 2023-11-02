@@ -2,13 +2,13 @@ import ProductType from './ProductType'
 import BoardBar from './BoardBar'
 import ProductList from './ProductGrid'
 import Pagination from './Pagination'
-import productConfigs from '../../configs/product.configs'
+import productConfigs from '@/configs/product.configs'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { setGlobalLoading } from '../../redux/features/globalLoadingSlice'
-import { clearProductsStore } from '../../redux/features/productSlice'
-import productApi from '../../apis/modules/product.api'
+import { setGlobalLoading } from '@/redux/features/globalLoadingSlice'
+import { clearProductsStore } from '@/redux/features/productSlice'
+import productApi from '@/apis/modules/product.api'
 
 const BoardContent = () => {
   const { typeName, cateName } = useParams()

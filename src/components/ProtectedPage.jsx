@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setAuthModalOpen } from '../../redux/features/authModelSlice'
+import { setAuthModalOpen } from '@/redux/features/authModelSlice'
 
 // use like middle steps for component of user
 const ProtectedPage = ({ children }) => {

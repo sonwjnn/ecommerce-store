@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import CategoryItem from './CategoryItem'
-import categoryApi from '../../apis/modules/category.api'
-import { setGlobalLoading } from '../../redux/features/globalLoadingSlice'
-import { setCates } from '../../redux/features/cateSlice'
+import categoryApi from '@/apis/modules/category.api'
+import { setGlobalLoading } from '@/redux/features/globalLoadingSlice'
+import { setCates } from '@/redux/features/cateSlice'
 import { useDispatch } from 'react-redux'
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io'
 const Categoryy = () => {

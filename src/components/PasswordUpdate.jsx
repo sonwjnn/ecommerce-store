@@ -1,10 +1,11 @@
-import userApi from '../../apis/modules/user.api'
+import userApi from '@/apis/modules/user.api'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
-import { setUser } from '../../redux/features/userSlice'
+import { setUser } from '@/redux/features/userSlice'
 import { toast } from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import { Input } from './ui/input'
 
 const PasswordUpdate = () => {
   const navigate = useNavigate()
@@ -58,10 +59,9 @@ const PasswordUpdate = () => {
             >
               mật khẩu
             </label>
-            <input
+            <Input
               type="password"
               name="password"
-              className=" block w-full border-2 border-gray-300 rounded-md px-5  py-2 text-2xl"
               id="password"
               value={form.values.password}
               onChange={form.handleChange}
@@ -75,10 +75,9 @@ const PasswordUpdate = () => {
             >
               mật khẩu mới
             </label>
-            <input
+            <Input
               type="password"
               name="newPassword"
-              className=" block w-full border-2 border-gray-300 rounded-md px-5  py-2 text-2xl"
               id="newPassword"
               value={form.values.newPassword}
               onChange={form.handleChange}
@@ -92,8 +91,7 @@ const PasswordUpdate = () => {
             >
               xác nhận mật khẩu
             </label>
-            <input
-              className=" block w-full border-2 border-gray-300 rounded-md px-5  py-2 text-2xl"
+            <Input
               type="password"
               name="confirmNewPassword"
               id="confirmNewPassword"
@@ -106,7 +104,7 @@ const PasswordUpdate = () => {
             <div className="w-[266px]"></div>
             <button
               type="submit"
-              className="mb-4 transition-all w-[25%] ml-auto uppercase rounded-md  bg-primary px-4 py-4 text-[14px] font-semibold text-white shadow-sm hover:brightness-125 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="mb-4 transition-all w-[25%] ml-auto uppercase rounded-md  bg-primary px-4 py-3 text-sm font-semibold text-white shadow-sm hover:brightness-125 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               lưu
             </button>

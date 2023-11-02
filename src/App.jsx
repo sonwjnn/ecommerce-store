@@ -4,19 +4,18 @@ import './assets/css/grid.css'
 import './assets/css/main.css'
 import './assets/css/responsive.css'
 
-import { useSelector } from 'react-redux'
+import React from 'react'
 import { Toaster } from 'react-hot-toast'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import PageWrapper from './components/common/PageWrapper'
-import MainLayout from './components/layout/MainLayout'
-import SubLayout from './components/layout/SubLayout'
+import PageWrapper from './components/PageWrapper'
+import MainLayout from './layouts/MainLayout'
+import SubLayout from './layouts/SubLayout'
 import routes from './routes/routes'
-import NotFound from './components/common/NotFound'
-import ProductList from './components/common/ProductList'
+import NotFound from './components/NotFound'
+import ProductList from './components/ProductList'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
 
 const App = () => {
   return (
@@ -39,10 +38,9 @@ const App = () => {
           <Route path="/" element={<MainLayout />}>
             {routes.map((route, index) =>
               route.index ? (
-                <>
+                <React.Fragment key={`main_${index}`}>
                   <Route
                     index
-                    key={index}
                     element={
                       route.state ? (
                         <PageWrapper state={route.state}>
@@ -55,16 +53,16 @@ const App = () => {
                   />
                   <Route key="sublayout" path="/" element={<SubLayout />}>
                     <Route
-                      key="/products/:cateName/:typeName"
-                      path="/products/:cateName/:typeName"
+                      key={`products_${route.cateName}_${route.typeName}`}
+                      path={`/products/${route.cateName}/${route.typeName}`}
                       element={<ProductList />}
                     />
                   </Route>
-                </>
+                </React.Fragment>
               ) : (
                 <Route
                   path={route.path}
-                  key={index}
+                  key={`route_${index}`}
                   element={
                     route.state ? (
                       <PageWrapper state={route.state}>

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import dayjs from 'dayjs'
 import { useSelector } from 'react-redux'
-import reviewApi from '../../apis/modules/review.api'
+import reviewApi from '@/apis/modules/review.api'
 import TextAvatar from './TextAvatar'
 import { MdDelete } from 'react-icons/md'
 import { FiSend } from 'react-icons/fi'
@@ -174,7 +174,7 @@ const ProductReview = ({ reviews, product, reviewCount, setReviewCount }) => {
                     onChange={e => setContent(e.target.value)}
                     rows={4}
                     placeholder="Write your review"
-                    className="grow p-4 border border-gray-300 resize-none text-[14px]"
+                    className="grow p-4 border border-gray-300 resize-none text-[14px] bg-white"
                   />
 
                   <LoadingButton

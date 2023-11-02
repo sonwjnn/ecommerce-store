@@ -1,4 +1,4 @@
-import ProductType from '../common/ProductType'
+import ProductType from '@/components/ProductType'
 import { Outlet } from 'react-router-dom'
 
 const SubLayout = () => {

@@ -1,6 +1,6 @@
 import { SwiperSlide } from 'swiper/react'
 import AutoSwiper from './AutoSwiper'
-import { handleLinkImage } from '../../utilities/constants'
+import { handleLinkImage } from '@/utilities/constants'
 
 const HomeSlide = () => {
   const images = [
@@ -23,8 +23,7 @@ const HomeSlide = () => {
               }  md:bg-center h-full w-full`}
               style={{
                 backgroundImage: `url(${
-                  new URL(`../../assets/img/banners/${link}`, import.meta.url)
-                    .href
+                  new URL(`../assets/img/banners/${link}`, import.meta.url).href
                 })`
               }}
             ></div>

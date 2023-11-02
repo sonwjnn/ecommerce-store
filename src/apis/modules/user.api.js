@@ -1,5 +1,5 @@
-import privateClient from '../client/private.client.js'
 import publicClient from '../client/public.client.js'
+import privateClient from '../client/private.client'
 
 const userEndpoints = {
   profileUpdate: 'user/update-profile',

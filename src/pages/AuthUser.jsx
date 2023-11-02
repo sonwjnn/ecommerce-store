@@ -1,9 +1,9 @@
 import { useDispatch } from 'react-redux'
-import SigninForm from '../components/common/SigninForm'
-import SignupForm from '../components/common/SignupForm'
+import SigninForm from '@/components/SigninForm'
+import SignupForm from '@/components/SignupForm'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
-import { setGlobalLoading } from '../redux/features/globalLoadingSlice'
+import { setGlobalLoading } from '@/redux/features/globalLoadingSlice'
 
 const actionState = {
   signin: 'signin',

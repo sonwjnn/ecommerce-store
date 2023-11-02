@@ -52,8 +52,8 @@ const userSlice = createSlice({
     removeFavorite: (state, action) => {
       const { favoriteId } = action.payload
 
-      state.listFavorites = [...state.listFavorites].filter(
-        e => e._id !== favoriteId
+      state.listFavorites = state.listFavorites.filter(
+        item => item.id !== favoriteId
       )
     },
     removeFavorites: (state, action) => {

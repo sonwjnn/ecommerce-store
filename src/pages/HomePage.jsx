@@ -1,7 +1,7 @@
-import HomeSlide from '../components/common/HomeSlide'
-import Category from '../components/common/Category'
-import ProductHint from '../components/common/ProductHint'
-import { bannerLogos } from '../utilities/constants'
+import HomeSlide from '@/components/HomeSlide'
+import Category from '@/components/Category'
+import ProductHint from '@/components/ProductHint'
+import { bannerLogos } from '@/utilities/constants'
 
 const HomePage = () => {
   return (
@@ -19,7 +19,7 @@ const HomePage = () => {
                 style={{
                   backgroundImage: `url(${
                     new URL(
-                      '../assets/img/banners/banner_8.jpg',
+                      '@/assets/img/banners/banner_8.jpg',
                       import.meta.url
                     ).href
                   })`
@@ -30,7 +30,7 @@ const HomePage = () => {
                 style={{
                   backgroundImage: `url(${
                     new URL(
-                      '../assets/img/banners/banner_9.png',
+                      '@/assets/img/banners/banner_9.png',
                       import.meta.url
                     ).href
                   })`
@@ -65,7 +65,7 @@ const HomePage = () => {
         </div>
 
         <div className="product-hint-bar max-w-[1200px] sticky top-0   h-full mt-4  bg-white mx-auto ">
-          <div className="p-8 uppercase text-primary font-semibold text-[20px] text-center border-b-4 border-primary">
+          <div className="px-8 py-4 uppercase text-primary font-semibold text-[20px] text-center border-b-4 border-primary">
             gợi ý hôm nay
           </div>
         </div>

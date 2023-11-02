@@ -3,9 +3,9 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { toast } from 'react-hot-toast'
 import * as Yup from 'yup'
-import { setUser } from '../../redux/features/userSlice'
+import { setUser } from '@/redux/features/userSlice'
 import { useNavigate } from 'react-router-dom'
-import userApi from '../../apis/modules/user.api'
+import userApi from '@/apis/modules/user.api'
 import LoadingButton from './LoadingButton'
 
 const SignupForm = () => {

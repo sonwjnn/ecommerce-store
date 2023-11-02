@@ -1,14 +1,15 @@
-import userApi from '../../apis/modules/user.api'
+import userApi from '@/apis/modules/user.api'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import { toast } from 'react-hot-toast'
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
-import { maskedEmail } from '../../utilities/constants'
+import { maskedEmail } from '@/utilities/constants'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useDispatch } from 'react-redux'
 import LoadingButton from './LoadingButton'
+import { Input } from './ui/input'
 
 const ProfileUpdate = () => {
   const { user } = useSelector(state => state.user)
@@ -98,15 +99,14 @@ const ProfileUpdate = () => {
           <div className="flex gap-2 flex-col md:flex-row  items-center">
             <label
               htmlFor="username"
-              className="capitalize text-[16px]  text-gray-500 w-full md:w-[260px]"
+              className="capitalize text-base  text-gray-500 w-full md:w-[260px]"
             >
               tên đăng nhập
             </label>
             <div className="flex flex-col w-full">
-              <input
+              <Input
                 type="username"
                 name="username"
-                className=" block w-full border-2 border-gray-300 rounded-sm px-5  py-2 text-2xl"
                 id="username"
                 value={form.values.username}
                 onChange={form.handleChange}
@@ -120,15 +120,14 @@ const ProfileUpdate = () => {
           <div className="flex gap-2 flex-col md:flex-row  items-center">
             <label
               htmlFor="displayName"
-              className="capitalize self-start text-[16px] text-gray-500 w-[260px]"
+              className="capitalize self-start text-base text-gray-500 w-[260px]"
             >
               tên
             </label>
             <div className="flex flex-col w-full">
-              <input
+              <Input
                 type="text"
                 name="displayName"
-                className=" block w-full border-2 border-gray-300 rounded-sm px-5  py-2 text-2xl"
                 id="displayName"
                 value={form.values.displayName}
                 onChange={form.handleChange}
@@ -142,13 +141,12 @@ const ProfileUpdate = () => {
           <div className="flex gap-2 flex-col md:flex-row items-center">
             <label
               htmlFor="email"
-              className="capitalize self-start w-[260px] text-gray-500 text-[16px]"
+              className="capitalize self-start w-[260px] text-gray-500 text-base"
             >
               email
             </label>
             <div className="flex flex-col w-full">
-              <input
-                className=" block w-full border-2 border-gray-300 rounded-sm px-5  py-2 text-2xl"
+              <Input
                 type="text"
                 name="email"
                 id="email"
@@ -164,15 +162,14 @@ const ProfileUpdate = () => {
           <div className="flex gap-2 flex-col md:flex-row items-center">
             <label
               htmlFor="phone"
-              className="capitalize self-start w-[260px] text-gray-500 text-[16px]"
+              className="capitalize self-start w-[260px] text-gray-500 text-base"
             >
               số điện thoại
             </label>
 
             <div className="flex flex-col w-full">
-              <input
-                className=" block w-full border-2 border-gray-300 rounded-sm px-5  py-2 text-2xl"
-                type="tel"
+              <Input
+                type="text"
                 name="phone"
                 id="phone"
                 value={form.values.phone}
@@ -187,13 +184,12 @@ const ProfileUpdate = () => {
           <div className="flex gap-2 flex-col md:flex-row items-center">
             <label
               htmlFor="address"
-              className="capitalize self-start w-[260px] text-gray-500 text-[16px]"
+              className="capitalize self-start w-[260px] text-gray-500 text-base"
             >
               địa chỉ
             </label>
             <div className="flex flex-col w-full">
-              <input
-                className=" block w-full border-2 border-gray-300 rounded-sm px-5  py-2 text-2xl"
+              <Input
                 type="text"
                 name="address"
                 id="address"
@@ -209,13 +205,12 @@ const ProfileUpdate = () => {
           <div className="flex gap-2 flex-col md:flex-row items-center">
             <label
               htmlFor="city"
-              className="capitalize self-start w-[260px] text-gray-500 text-[16px]"
+              className="capitalize self-start w-[260px] text-gray-500 text-base"
             >
               thành phố
             </label>
             <div className="flex flex-col w-full">
-              <input
-                className=" block w-full border-2 border-gray-300 rounded-sm px-5  py-2 text-2xl"
+              <Input
                 type="text"
                 name="city"
                 id="city"
@@ -231,13 +226,12 @@ const ProfileUpdate = () => {
           <div className="flex gap-2 flex-col md:flex-row items-center">
             <label
               htmlFor="text"
-              className="capitalize self-start w-[260px] text-gray-500 text-[16px]"
+              className="capitalize self-start w-[260px] text-gray-500 text-base"
             >
               Quận / Huyện
             </label>
             <div className="flex flex-col w-full">
-              <input
-                className=" block w-full border-2 border-gray-300 rounded-sm px-5  py-2 text-2xl"
+              <Input
                 type="district"
                 name="district"
                 id="district"
@@ -253,7 +247,7 @@ const ProfileUpdate = () => {
           <div className="flex gap-2 flex-col md:flex-row items-center">
             <label
               htmlFor="sex"
-              className="capitalize self-start w-[160px] text-gray-500 text-[16px]"
+              className="capitalize self-start w-[160px] text-gray-500 text-base"
             >
               giới tính
             </label>
@@ -261,12 +255,12 @@ const ProfileUpdate = () => {
               <div className="flex gap-2">
                 <label
                   htmlFor="male"
-                  className="capitalize text-gray-500 text-[16px]"
+                  className="capitalize text-gray-500 text-base"
                 >
                   nam
                 </label>
-                <input
-                  className=" block  border-2 border-gray-300 rounded-sm px-5  py-4 text-2xl"
+                <Input
+                  className="text-base"
                   type="radio"
                   name="sex"
                   checked={form.values.sex === 'male'}
@@ -278,12 +272,12 @@ const ProfileUpdate = () => {
               <div className="flex gap-2">
                 <label
                   htmlFor="female"
-                  className="capitalize text-gray-500 text-[16px]"
+                  className="capitalize text-gray-500 text-base"
                 >
                   nữ
                 </label>
-                <input
-                  className=" block w-full border-2 border-gray-300 rounded-sm px-5  py-4 text-2xl"
+                <Input
+                  className="text-base"
                   type="radio"
                   name="sex"
                   checked={form.values.sex === 'female'}
@@ -299,7 +293,7 @@ const ProfileUpdate = () => {
           <div className="flex gap-2 flex-col md:flex-row items-center">
             <label
               htmlFor="district"
-              className="capitalize self-start w-[260px] text-gray-500 text-[16px]"
+              className="capitalize self-start w-[260px] text-gray-500 text-base"
             >
               ngày sinh
             </label>
@@ -307,7 +301,7 @@ const ProfileUpdate = () => {
               <DatePicker
                 id="birthday"
                 name="birthday"
-                className=" block w-full border-2 border-gray-300 rounded-sm px-5  py-2 text-2xl"
+                className="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring  disabled:cursor-not-allowed disabled:opacity-50"
                 selected={form.values.birthday}
                 onChange={date => form.setFieldValue('birthday', date)}
                 showYearDropdown

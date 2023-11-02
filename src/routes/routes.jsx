@@ -1,13 +1,12 @@
-import CartList from '../pages/CartList'
-import ProductDetail from '../pages/ProductDetail'
-import ProductList from '../components/common/ProductGrid'
-import ProductSearch from '../pages/ProductSearch'
-import ReviewList from '../pages/ReviewList'
-import ProtectedPage from '../components/common/ProtectedPage'
-import AuthUser from '../pages/AuthUser'
-import AccountPage from '../pages/AccountPage'
-import HomePage from '../pages/HomePage'
-import PasswordUpdate from '../components/common/PasswordUpdate'
+import CartList from '@/pages/CartList'
+import ProductDetail from '@/pages/ProductDetail'
+import ProductSearch from '@/pages/ProductSearch'
+import ReviewList from '@/pages/ReviewList'
+import ProtectedPage from '@/components/ProtectedPage'
+import AuthUser from '@/pages/AuthUser'
+import AccountPage from '@/pages/AccountPage'
+import HomePage from '@/pages/HomePage'
+import PasswordUpdate from '@/components/PasswordUpdate'
 
 export const routesGen = {
   home: '/',
