@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import favoriteUtils from '@/utilities/favorite.utils'
-import { useSelector } from 'react-redux'
-import { AiFillHeart } from 'react-icons/ai'
 import productApi from '@/apis/modules/product.api'
+import favoriteUtils from '@/utilities/favorite.utils'
+import { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
+import { AiFillHeart } from 'react-icons/ai'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { twMerge } from 'tailwind-merge'
+
 import Star from './Star'
 
 const ProductItem = ({ product, className }) => {
@@ -15,7 +16,7 @@ const ProductItem = ({ product, className }) => {
   useEffect(() => {
     const getImage = async () => {
       const { response, err } = await productApi.getImage({
-        imageName: product.imageName
+        imageName: product.imageName,
       })
 
       if (err) toast.error(err.message)
@@ -40,7 +41,7 @@ const ProductItem = ({ product, className }) => {
     <div className={twMerge(className)}>
       <div className="home-product-item cursor-pointer" onClick={productDetail}>
         <div
-          className="home-product-item__img bg-no-repeat bg-center bg-cover"
+          className="home-product-item__img bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${imageUrl})` }}
         ></div>
         {/* <img src={imageUrl} alt="Product" /> */}
@@ -50,7 +51,7 @@ const ProductItem = ({ product, className }) => {
         </div>
         <div className="home-product-item__price flex-nowrap">
           {product.discount && product.discount !== '0' && (
-            <span className="home-product-item__sale-price text-sm mr-1 text-gray-500 line-through truncate min-w-0">
+            <span className="home-product-item__sale-price mr-1 min-w-0 truncate text-sm text-gray-500 line-through">
               <a href="" className="text-sm text-gray-500">
                 đ
               </a>
@@ -69,8 +70,8 @@ const ProductItem = ({ product, className }) => {
           <span className="home-product-item__favorite home-product-item__favorite--liked">
             {favoriteUtils.check({
               listFavorites,
-              productId: product.id
-            }) && <AiFillHeart className="text-red-600 text-[13px]" />}
+              productId: product.id,
+            }) && <AiFillHeart className="text-[13px] text-red-600" />}
           </span>
           <span className="home-product-item__rate flex items-center">
             <Star stars={product.rating} className="text-[11px]" />

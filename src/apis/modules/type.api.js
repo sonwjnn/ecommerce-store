@@ -2,7 +2,7 @@ import privateClient from '../client/private.client'
 
 const typeEndpoints = {
   list: 'product-types/list',
-  typesOfCate: ({ cateName }) => `product-types/list/${cateName}`
+  typesOfCate: ({ cateName }) => `product-types/list/${cateName}`,
 }
 
 const typeApi = {
@@ -23,7 +23,7 @@ const typeApi = {
     } catch (error) {
       return { error }
     }
-  }
+  },
 }
 
 export default typeApi

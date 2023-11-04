@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import favoriteApi from '@/apis/modules/favorite.api'
-import { shorterString } from '@/utilities/constants'
-import { removeFavorite } from '@/redux/features/userSlice'
-import { toast } from 'react-hot-toast'
-import { SlEmotsmile } from 'react-icons/sl'
-import { LuTrash } from 'react-icons/lu'
 import productApi from '@/apis/modules/product.api'
+import { removeFavorite } from '@/redux/features/userSlice'
+import { shorterString } from '@/utilities/constants'
+import React, { useEffect, useState } from 'react'
+import { toast } from 'react-hot-toast'
+import { LuTrash } from 'react-icons/lu'
+import { SlEmotsmile } from 'react-icons/sl'
+import { useDispatch, useSelector } from 'react-redux'
 
 const FavoriteItem = props => {
   const { title, productImage, type, id, price, onRemoved, handleDotPrice } =
@@ -19,7 +19,7 @@ const FavoriteItem = props => {
   useEffect(() => {
     const getImage = async () => {
       const { response, err } = await productApi.getImage({
-        imageName: productImage
+        imageName: productImage,
       })
 
       if (err) toast.error(err.message)
@@ -36,7 +36,7 @@ const FavoriteItem = props => {
     setOnRequest(true)
 
     const { response, err } = await favoriteApi.remove({
-      favoriteId: id
+      favoriteId: id,
     })
     setOnRequest(false)
 
@@ -52,13 +52,13 @@ const FavoriteItem = props => {
   const shortTitle = shorterString(title, 28)
 
   return (
-    <div className="p-8 w-full pb-0 pt-0">
-      <div className="p-6 flex flex-col md:flex-row items-center justify-between  border-b-gray-200 border-b">
-        <div className="flex items-center gap-8 self-start flex-grow">
+    <div className="w-full p-8 pb-0 pt-0">
+      <div className="flex flex-col items-center justify-between border-b border-b-gray-200  p-6 md:flex-row">
+        <div className="flex flex-grow items-center gap-8 self-start">
           <div
-            className="min-w-[80px] h-[80px] bg-no-repeat bg-center bg-cover "
+            className="h-[80px] min-w-[80px] bg-cover bg-center bg-no-repeat "
             style={{
-              backgroundImage: `url(${imageUrl})`
+              backgroundImage: `url(${imageUrl})`,
             }}
           ></div>
           <div className="flex flex-col justify-center self-center">
@@ -67,14 +67,14 @@ const FavoriteItem = props => {
           </div>
         </div>
 
-        <div className="flex ml-[132px] self-end md:self-center items-center">
-          <div className=" text-primary text-[18px] md:text-base px-12 mr-12">
+        <div className="ml-[132px] flex items-center self-end md:self-center">
+          <div className=" mr-12 px-12 text-[18px] text-primary md:text-base">
             ₫{handleDotPrice(price)}
           </div>
 
           <button
             onClick={onRemove}
-            className="text-red-600 mr-2 text-[32px] md:text-[24px] flex items-center px-3 py-2 justify-center   "
+            className="mr-2 flex items-center justify-center px-3 py-2 text-[32px] text-red-600 md:text-[24px]   "
           >
             <LuTrash />
           </button>
@@ -146,7 +146,7 @@ const FavoriteList = () => {
     if (!checkedFavs.length) return
     const newCheckedFavs = checkedFavs.map(item => item.id)
     const { response, err } = await favoriteApi.removeFavs({
-      favIds: newCheckedFavs
+      favIds: newCheckedFavs,
     })
     // setOnRequest(false)
 
@@ -160,7 +160,7 @@ const FavoriteList = () => {
   }
 
   return (
-    <div className="rounded-md min-h-[50vh] w-full bg-white mt-4">
+    <div className="mt-4 min-h-[50vh] w-full rounded-md bg-white">
       {favs.map((fav, index) => (
         <FavoriteItem
           id={fav._id}
@@ -181,10 +181,10 @@ const FavoriteList = () => {
         />
       ))}
       {!favs.length && (
-        <div className="h-[50vh] w-full flex items-center justify-center ">
-          <div className="flex flex-col gap-8 items-center justify-center">
+        <div className="flex h-[50vh] w-full items-center justify-center ">
+          <div className="flex flex-col items-center justify-center gap-8">
             <SlEmotsmile className="text-[150px] text-zinc-300" />
-            <div className="gap-4 text-[20px] text-center">
+            <div className="gap-4 text-center text-[20px]">
               <div className="text-gray-500">
                 Bạn không có sản phẩm yêu thích nào
               </div>

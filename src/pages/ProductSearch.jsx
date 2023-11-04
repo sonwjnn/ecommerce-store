@@ -1,14 +1,14 @@
-import { useCallback, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import productApi from '@/apis/modules/product.api'
 import BoardBar from '@/components/BoardBar'
 import Pagination from '@/components/Pagination'
+import ProductHintGrid from '@/components/ProductHintGrid'
 import ProductItem from '@/components/ProductItem'
 import Category from '@/components/ProductSidebar'
-import productApi from '@/apis/modules/product.api'
-import { useDispatch } from 'react-redux'
 import { setGlobalLoading } from '@/redux/features/globalLoadingSlice'
-import ProductHintGrid from '@/components/ProductHintGrid'
+import { useCallback, useEffect, useState } from 'react'
 import { TbFileSearch } from 'react-icons/tb'
+import { useDispatch } from 'react-redux'
+import { useParams } from 'react-router-dom'
 
 const ProductSearch = () => {
   const { keyword } = useParams()
@@ -82,11 +82,11 @@ const ProductSearch = () => {
   return (
     <>
       <div className="app__container pt-0">
-        <div className="max-w-[1200px] mx-auto">
-          <div className="flex sm-gutter pt-0 lg:pt-[36px] app__content">
+        <div className="mx-auto max-w-[1200px]">
+          <div className="sm-gutter app__content flex pt-0 lg:pt-[36px]">
             <div className="col hidden md:block"></div>
 
-            <div className="col col-span-10 overflow-hidden grow">
+            <div className="col col-span-10 grow overflow-hidden">
               {products.length ? (
                 <BoardBar
                   handleSortPriceDownUp={handleSortPriceDownUp}
@@ -95,10 +95,10 @@ const ProductSearch = () => {
               ) : null}
               <ProductHintGrid products={products} />
               {!products.length && (
-                <div className="h-[50vh] w-full flex items-center justify-center ">
-                  <div className="flex flex-col gap-8 items-center justify-center">
+                <div className="flex h-[50vh] w-full items-center justify-center ">
+                  <div className="flex flex-col items-center justify-center gap-8">
                     <TbFileSearch className="text-[150px] text-gray-300" />
-                    <div className="gap-4 text-[20px] text-center">
+                    <div className="gap-4 text-center text-[20px]">
                       <div className="text-gray-600">
                         Không tìm thấy kết quả nào
                       </div>

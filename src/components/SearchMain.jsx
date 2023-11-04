@@ -1,12 +1,13 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { CartItem } from '@/pages/CartList'
+import { shorterString } from '@/utilities/constants'
+import { useEffect, useRef, useState } from 'react'
+import { toast } from 'react-hot-toast'
 import { BiSearch } from 'react-icons/bi'
 import { CgShoppingCart } from 'react-icons/cg'
-import { useSelector } from 'react-redux'
-import { toast } from 'react-hot-toast'
-import { useEffect, useRef, useState } from 'react'
-import { shorterString } from '@/utilities/constants'
 import { IoMdArrowBack } from 'react-icons/io'
-import { CartItem } from '@/pages/CartList'
+import { useSelector } from 'react-redux'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+
 import CartPreview from './CartPreview'
 import { Input } from './ui/input'
 
@@ -57,12 +58,12 @@ const SearchMain = () => {
         </Link>
       </div>
       <div
-        className={`back md:hidden w-[50px] flex items-center justify-start ${
+        className={`back flex w-[50px] items-center justify-start md:hidden ${
           location.pathname === '/' ? 'hidden' : 'block'
         }`}
         onClick={goBackPage}
       >
-        <IoMdArrowBack className={`text-white text-[36px] `} />
+        <IoMdArrowBack className={`text-[36px] text-white `} />
       </div>
 
       <input
@@ -75,9 +76,9 @@ const SearchMain = () => {
       <div className="header__search-wrap">
         <div className="header__search">
           <div className="header__search-input-wrap">
-            <form onSubmit={handleSubmitSearch} className="h-full relative">
-              <span className="header__seach-mobile  hidden absolute left-[7px] top-[25%] z-20">
-                <BiSearch className="h-8 text-[22px] text-gray-500 mt-1 " />
+            <form onSubmit={handleSubmitSearch} className="relative h-full">
+              <span className="header__seach-mobile  absolute left-[7px] top-[25%] z-20 hidden">
+                <BiSearch className="mt-1 h-8 text-[22px] text-gray-500 " />
               </span>
               <Input
                 type="text"
@@ -107,7 +108,7 @@ const SearchMain = () => {
           </div>
           <div className="header__search-option">
             <span className="header__search-btn" onClick={handleSubmitSearch}>
-              <BiSearch className="text-[20px] text-white mt-1" />
+              <BiSearch className="mt-1 text-[20px] text-white" />
             </span>
           </div>
         </div>
@@ -148,7 +149,7 @@ const SearchMain = () => {
           </span>
 
           <div className="header__cart-list rounded-md">
-            <div className="header__cart-list-container overflow-hidden mx-0 px-[12px]  header__cart-list--have-items cursor-default">
+            <div className="header__cart-list-container header__cart-list--have-items mx-0 cursor-default  overflow-hidden px-[12px]">
               <img
                 src="/src/assets/img/no-items.png"
                 alt=""
@@ -157,7 +158,7 @@ const SearchMain = () => {
               <div className="header__cart-list--no-items-decription">
                 Bạn chưa có sản phẩm nào.
               </div>
-              <div className="header__cart-list--have-items-header py-4 select-none ">
+              <div className="header__cart-list--have-items-header select-none py-4 ">
                 <h3 className="header__cart-list--have-items-title text-base">
                   Sản phẩm mới thêm
                 </h3>
@@ -174,7 +175,7 @@ const SearchMain = () => {
               <div className="header__cart-list--have-items-footer mt-2">
                 <span
                   onClick={handleCarts}
-                  className="header__cart-list--have-items-btn auth-form__form-btn cursor-pointer px-1 py-3 w-[120px] btn-primary"
+                  className="header__cart-list--have-items-btn auth-form__form-btn btn-primary w-[120px] cursor-pointer px-1 py-3"
                 >
                   Xem giỏ hàng
                 </span>

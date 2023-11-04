@@ -1,7 +1,7 @@
 import privateClient from '../client/private.client'
 
 const categoryEndpoints = {
-  list: 'categories/list'
+  list: 'categories/list',
 }
 
 const categoryApi = {
@@ -12,7 +12,7 @@ const categoryApi = {
     } catch (error) {
       return { error }
     }
-  }
+  },
 }
 
 export default categoryApi

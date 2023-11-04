@@ -1,29 +1,30 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import userSlice from './features/userSlice'
-import authModalSlice from './features/authModelSlice'
-import appStateSlice from './features/appStateSlice'
-import globalLoadingSlice from './features/globalLoadingSlice'
-import signStateSlice from './features/signStateSlice'
-import productSlice from './features/productSlice'
-import productLoadingSlice from './features/productLoading'
-import typeSlice from './features/typeSlice'
-import storage from 'redux-persist/lib/storage'
-import cateSlice from './features/cateSlice'
 import {
-  persistStore,
-  persistReducer,
   FLUSH,
-  REHYDRATE,
   PAUSE,
   PERSIST,
   PURGE,
-  REGISTER
+  REGISTER,
+  REHYDRATE,
+  persistReducer,
+  persistStore,
 } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+
+import appStateSlice from './features/appStateSlice'
+import authModalSlice from './features/authModelSlice'
+import cateSlice from './features/cateSlice'
+import globalLoadingSlice from './features/globalLoadingSlice'
+import productLoadingSlice from './features/productLoading'
+import productSlice from './features/productSlice'
+import signStateSlice from './features/signStateSlice'
+import typeSlice from './features/typeSlice'
+import userSlice from './features/userSlice'
 
 const persistConfig = {
   key: 'root',
   version: 1,
-  storage
+  storage,
 }
 const rootReducer = combineReducers({
   user: userSlice,
@@ -34,7 +35,7 @@ const rootReducer = combineReducers({
   products: productSlice,
   productLoading: productLoadingSlice,
   cates: cateSlice,
-  types: typeSlice
+  types: typeSlice,
 })
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
@@ -43,9 +44,9 @@ export const store = configureStore({
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
-      }
-    })
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 })
 
 export let persistor = persistStore(store)

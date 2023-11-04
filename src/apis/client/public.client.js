@@ -7,16 +7,16 @@ const baseURL = 'http://localhost:8017/'
 const publicClient = axios.create({
   baseURL,
   paramsSerializer: {
-    encode: params => queryString.stringify(params)
-  }
+    encode: params => queryString.stringify(params),
+  },
 })
 
 publicClient.interceptors.request.use(async config => {
   return {
     ...config,
     headers: {
-      'Content-Type': 'application/json'
-    }
+      'Content-Type': 'application/json',
+    },
   }
 })
 

@@ -4,7 +4,7 @@ const cartEndpoints = {
   list: 'user/carts',
   add: 'user/carts',
   remove: ({ cartId }) => `user/carts/${cartId}`,
-  removeCarts: `user/carts`
+  removeCarts: `user/carts`,
 }
 
 const cartApi = {
@@ -24,7 +24,7 @@ const cartApi = {
     typeId,
     cateId,
     productImage,
-    quantity
+    quantity,
   }) => {
     try {
       const response = await privateClient.post(cartEndpoints.add, {
@@ -34,7 +34,7 @@ const cartApi = {
         typeId,
         cateId,
         productImage,
-        quantity
+        quantity,
       })
       return { response }
     } catch (error) {
@@ -46,7 +46,7 @@ const cartApi = {
     try {
       const response = await privateClient.delete(
         cartEndpoints.remove({
-          cartId
+          cartId,
         })
       )
       return { response }
@@ -57,13 +57,13 @@ const cartApi = {
   removeCarts: async ({ cartIds }) => {
     try {
       const response = await privateClient.delete(cartEndpoints.removeCarts, {
-        data: cartIds
+        data: cartIds,
       })
       return { response }
     } catch (error) {
       return { error }
     }
-  }
+  },
 }
 
 export default cartApi

@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
-import { shorterString } from '@/utilities/constants'
 import productApi from '@/apis/modules/product.api'
+import { shorterString } from '@/utilities/constants'
+import { useEffect, useState } from 'react'
 
 const CartPreview = ({ cart }) => {
   const [imageUrl, setImageUrl] = useState('')
@@ -8,7 +8,7 @@ const CartPreview = ({ cart }) => {
   useEffect(() => {
     const getImage = async () => {
       const { response, err } = await productApi.getImage({
-        imageName: cart.productImage
+        imageName: cart.productImage,
       })
 
       if (err) toast.error(err.message)
@@ -23,14 +23,14 @@ const CartPreview = ({ cart }) => {
   return (
     <li
       key={cart._id}
-      className="header__cart-list--have-items-item cursor-pointer hover:bg-bg_page transition-all p-2 pr-3"
+      className="header__cart-list--have-items-item cursor-pointer p-2 pr-3 transition-all hover:bg-bg_page"
     >
       <span className="header__cart-list--have-items-item-wrap gap-2">
         <span className="header__cart-list--have-items-img ">
           <div
-            className="min-w-[50px] h-[50px] bg-no-repeat bg-center bg-cover "
+            className="h-[50px] min-w-[50px] bg-cover bg-center bg-no-repeat "
             style={{
-              backgroundImage: `url(${imageUrl})`
+              backgroundImage: `url(${imageUrl})`,
             }}
           ></div>
         </span>

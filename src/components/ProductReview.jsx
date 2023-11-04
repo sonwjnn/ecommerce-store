@@ -1,15 +1,16 @@
+import reviewApi from '@/apis/modules/review.api'
+import dayjs from 'dayjs'
 import { useEffect, useRef, useState } from 'react'
 import { toast } from 'react-hot-toast'
-import dayjs from 'dayjs'
-import { useSelector } from 'react-redux'
-import reviewApi from '@/apis/modules/review.api'
-import TextAvatar from './TextAvatar'
-import { MdDelete } from 'react-icons/md'
 import { FiSend } from 'react-icons/fi'
+import { MdDelete } from 'react-icons/md'
+import { RiDeleteBin5Line } from 'react-icons/ri'
+import { useSelector } from 'react-redux'
+
 import LoadingButton from './LoadingButton'
 import Star from './Star'
 import StarVote from './StarVote'
-import { RiDeleteBin5Line } from 'react-icons/ri'
+import TextAvatar from './TextAvatar'
 
 const ReviewItem = ({ review, onRemoved }) => {
   const { user } = useSelector(state => state.user)
@@ -28,7 +29,7 @@ const ReviewItem = ({ review, onRemoved }) => {
   }
 
   return (
-    <div className="p-2 rounded-md relative hover:bg-bg_page mb-2">
+    <div className="relative mb-2 rounded-md p-2 hover:bg-bg_page">
       <div className="flex flex-row gap-4">
         {/* avatar */}
         <div className="h-[30px] w-[30px]">
@@ -36,15 +37,15 @@ const ReviewItem = ({ review, onRemoved }) => {
         </div>
         {/* avatar */}
 
-        <div className="gap-2 flex flex-col grow justify-center">
+        <div className="flex grow flex-col justify-center gap-2">
           <div className="gap-1">
-            <h6 className="font-bold text-base">{review.user.name}</h6>
+            <h6 className="text-base font-bold">{review.user.name}</h6>
             <Star stars={review.rating} />
             <p className="text-[11px] text-gray-500">
               {dayjs(review.createdAt).format('DD-MM-YYYY HH:mm:ss')}
             </p>
           </div>
-          <div className=" gap-4 flex flex-row justify-between">
+          <div className=" flex flex-row justify-between gap-4">
             <div className="flex justify-center text-sm">{review.content}</div>
           </div>
           {user && user.id === review.user.id && (
@@ -52,7 +53,7 @@ const ReviewItem = ({ review, onRemoved }) => {
               loading={onRequest}
               colorLoading={'#fb5533'}
               variant={'contained'}
-              className={`bg-transparent border-none text-red-600 mr-2 text-[24px] flex items-center px-3 py-2 justify-center sm:relative md:absolute sm:right-0 md:right-2`}
+              className={`mr-2 flex items-center justify-center border-none bg-transparent px-3 py-2 text-[24px] text-red-600 sm:relative sm:right-0 md:absolute md:right-2`}
               onClick={onRemove}
             >
               <RiDeleteBin5Line />
@@ -92,17 +93,17 @@ const ProductReview = ({ reviews, product, reviewCount, setReviewCount }) => {
       productName: product.name,
       productImage: product.imageName,
       rating,
-      content
+      content,
     }
     if (!content.trim()) {
       reviewRef.current.focus()
       return toast.error('Please enter your review before submit!', {
-        id: 'review toast'
+        id: 'review toast',
       })
     }
     if (!rating) {
       return toast.error('Please select your vote before submit!', {
-        id: 'vote toast'
+        id: 'vote toast',
       })
     }
 
@@ -147,7 +148,7 @@ const ProductReview = ({ reviews, product, reviewCount, setReviewCount }) => {
   return (
     <>
       <div>
-        <div className="gap-4 mb-2 mt-4">
+        <div className="mb-2 mt-4 gap-4">
           {filteredReviews.map(item => (
             <div key={item._id}>
               <ReviewItem review={item} onRemoved={onRemoved} />
@@ -159,12 +160,12 @@ const ProductReview = ({ reviews, product, reviewCount, setReviewCount }) => {
         </div>
         {user && (
           <>
-            <div className="flex flex-row gap-2 mt-2">
-              <div className="w-[40px] h-[40px]">
+            <div className="mt-2 flex flex-row gap-2">
+              <div className="h-[40px] w-[40px]">
                 <TextAvatar text={user.name} />
               </div>
-              <div className="flex gap-4 flex-col w-full">
-                <h6 className="font-bold text-base">{user.name}</h6>
+              <div className="flex w-full flex-col gap-4">
+                <h6 className="text-base font-bold">{user.name}</h6>
                 <div className="flex gap-3">
                   <textarea
                     value={content}
@@ -172,14 +173,14 @@ const ProductReview = ({ reviews, product, reviewCount, setReviewCount }) => {
                     onChange={e => setContent(e.target.value)}
                     rows={4}
                     placeholder="Write your review"
-                    className="grow p-4 border border-gray-300 resize-none text-sm bg-white"
+                    className="grow resize-none border border-gray-300 bg-white p-4 text-sm"
                   />
 
                   <LoadingButton
                     loading={onRequest}
                     colorLoading={'#ffffff'}
                     variant={'contained'}
-                    className={` flex items-center justify-center btn-primary py-2 px-12 h-[4rem]`}
+                    className={` btn-primary flex h-[4rem] items-center justify-center px-12 py-2`}
                     onClick={onAddReview}
                   >
                     <FiSend className=" mt-1 text-[20px]" />

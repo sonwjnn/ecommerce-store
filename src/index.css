@@ -5,50 +5,50 @@
 
 @layer components {
   .border-right-ab {
-    @apply after:absolute after:top-0 after:bottom-0 after:right-0 after:w-[1px] after:bg-gray-300;
+    @apply after:absolute after:bottom-0 after:right-0 after:top-0 after:w-[1px] after:bg-gray-300;
   }
 
   .border-bottom-ab {
-    @apply after:bottom-[-1px] after:absolute after:w-full after:right-0 after:left-0 after:h-[0.5px];
+    @apply after:absolute after:bottom-[-1px] after:left-0 after:right-0 after:h-[0.5px] after:w-full;
   }
 
   .tag-shopee {
-    @apply text-sm  px-[4px] py-[1px] mr-4  text-center rounded-[2px] font-semibold;
+    @apply mr-4  rounded-[2px] px-[4px] py-[1px]  text-center text-sm font-semibold;
   }
 
   .select-type-btn {
-    @apply transition-all bg-white cursor-pointer select-none hover:border-primary hover:text-primary  px-6 py-1 text-sm text-gray-600 border border-gray-300;
+    @apply cursor-pointer select-none border border-gray-300 bg-white px-6  py-1 text-sm text-gray-600 transition-all hover:border-primary hover:text-primary;
   }
 
   .select-type-dis-btn {
-    @apply pointer-events-none px-6 select-none py-1 text-sm text-gray-400 border border-gray-300;
+    @apply pointer-events-none select-none border border-gray-300 px-6 py-1 text-sm text-gray-400;
   }
 
   .btn-primary {
-    @apply transition-all hover:brightness-125 rounded-[2px] capitalize py-4 px-8 text-base bg-primary font-normal  text-white;
+    @apply rounded-[2px] bg-primary px-8 py-4 text-base font-normal capitalize text-white transition-all  hover:brightness-125;
   }
 
   .btn-base {
-    @apply transition-all hover:brightness-125 select-none  capitalize py-4 px-8 text-base rounded-md  font-normal;
+    @apply select-none rounded-md px-8  py-4 text-base font-normal capitalize transition-all  hover:brightness-125;
   }
 
   .btn-remove {
-    @apply transition-all hover:brightness-125  rounded-[2px] capitalize py-4 px-8 text-base bg-red-600 font-normal  text-white;
+    @apply rounded-[2px] bg-red-600  px-8 py-4 text-base font-normal capitalize text-white transition-all  hover:brightness-125;
   }
 
   .btn-cart-solid {
-    @apply py-2 transition-all px-8 hover:text-primary  text-gray-500  rounded-md;
+    @apply rounded-md px-8 py-2 text-gray-500  transition-all  hover:text-primary;
   }
 
   .errMsg {
-    @apply text-red-500 text-[12px];
+    @apply text-[12px] text-red-500;
   }
   .cate-disable {
-    @apply after:absolute after:top-0 after:right-0 after:bottom-0 after:left-0  after:bg-slate-50 after:opacity-80;
+    @apply after:absolute after:bottom-0 after:left-0 after:right-0 after:top-0  after:bg-slate-50 after:opacity-80;
   }
 
   .star {
-    @apply text-yellow-500 text-[13px];
+    @apply text-[13px] text-yellow-500;
   }
 }
 

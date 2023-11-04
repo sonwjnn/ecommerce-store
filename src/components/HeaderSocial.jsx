@@ -1,5 +1,6 @@
-import { BsFacebook } from 'react-icons/bs'
 import { AiFillInstagram } from 'react-icons/ai'
+import { BsFacebook } from 'react-icons/bs'
+
 const urlSocial = new URL('@/assets/img/notify-product.jfif', import.meta.url)
   .href
 const HeaderSocial = () => {
@@ -12,7 +13,7 @@ const HeaderSocial = () => {
       <li className="nav-list-item nav-list-item--separate">
         <span className="header__nav-title--no-pointer">Kết nối</span>
         <button className="nav-item-link">
-          <BsFacebook className="text-white ml-3 text-base" />
+          <BsFacebook className="ml-3 text-base text-white" />
         </button>
         <button className="nav-item-link ml-2 text-[20px]">
           <AiFillInstagram className="text-white" />

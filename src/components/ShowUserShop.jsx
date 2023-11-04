@@ -1,14 +1,15 @@
-import * as Yup from 'yup'
+import shopApi from '@/apis/modules/shop.api'
+import { updateShop } from '@/redux/features/userSlice'
+import { districts, provinces } from '@/utilities/provinceCity'
 import { useFormik } from 'formik'
+import { useEffect, useState } from 'react'
+import 'react-datepicker/dist/react-datepicker.css'
 import { toast } from 'react-hot-toast'
 import { useDispatch, useSelector } from 'react-redux'
-import { useState, useEffect } from 'react'
-import 'react-datepicker/dist/react-datepicker.css'
+import * as Yup from 'yup'
+
 import LoadingButton from './LoadingButton'
 import { Input } from './ui/input'
-import shopApi from '@/apis/modules/shop.api'
-import { provinces, districts } from '@/utilities/provinceCity'
-import { updateShop } from '@/redux/features/userSlice'
 
 const ShowUserShop = () => {
   const { shop } = useSelector(state => state.user)
@@ -23,7 +24,7 @@ const ShowUserShop = () => {
     title: shop.title,
     address: shop.address ? shop.address : '',
     city: shop.city ? shop.city : '',
-    district: shop.district ? shop.district : ''
+    district: shop.district ? shop.district : '',
   }
 
   const form = useFormik({
@@ -34,9 +35,9 @@ const ShowUserShop = () => {
         .required('title is required'),
       address: Yup.string()
         .min(10, 'address minimum 10 character')
-        .required('address is required')
+        .required('address is required'),
     }),
-    onSubmit: async values => onUpdate(values)
+    onSubmit: async values => onUpdate(values),
   })
 
   const onUpdate = async values => {
@@ -47,7 +48,7 @@ const ShowUserShop = () => {
     const action = shop ? shopApi.update : shopApi.add
 
     const { response, err } = await action({
-      ...values
+      ...values,
     })
 
     setOnRequest(false)
@@ -70,16 +71,16 @@ const ShowUserShop = () => {
 
   return (
     <div className="flex items-start justify-center">
-      <div className="max-w-[600px] md:ml-[-50px] mt-[50px] px-4  ">
+      <div className="mt-[50px] max-w-[600px] px-4 md:ml-[-50px]  ">
         <form onSubmit={form.handleSubmit} className="flex flex-col gap-6">
-          <div className="flex gap-2 flex-col md:flex-row  items-center">
+          <div className="flex flex-col items-center gap-2  md:flex-row">
             <label
               htmlFor="title"
-              className="capitalize text-base  text-gray-500 w-full md:w-[260px]"
+              className="w-full text-base capitalize text-gray-500 md:w-[260px]"
             >
               Tên shop
             </label>
-            <div className="flex flex-col w-full">
+            <div className="flex w-full flex-col">
               <Input
                 type="title"
                 name="title"
@@ -93,14 +94,14 @@ const ShowUserShop = () => {
             </div>
           </div>
 
-          <div className="flex gap-2 flex-col md:flex-row items-center">
+          <div className="flex flex-col items-center gap-2 md:flex-row">
             <label
               htmlFor="address"
-              className="capitalize self-start w-[260px] text-gray-500 text-base"
+              className="w-[260px] self-start text-base capitalize text-gray-500"
             >
               Địa chỉ
             </label>
-            <div className="flex flex-col w-full">
+            <div className="flex w-full flex-col">
               <Input
                 type="text"
                 name="address"
@@ -114,15 +115,15 @@ const ShowUserShop = () => {
             </div>
           </div>
 
-          <div className="flex gap-2 flex-col md:flex-row items-center">
+          <div className="flex flex-col items-center gap-2 md:flex-row">
             <label
               htmlFor="city"
-              className="capitalize self-start w-[260px] text-gray-500 text-base"
+              className="w-[260px] self-start text-base capitalize text-gray-500"
             >
               Thành phố
             </label>
             <select
-              className="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring  disabled:cursor-not-allowed disabled:opacity-50"
+              className="border-input placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2  disabled:cursor-not-allowed disabled:opacity-50"
               name="city"
               id="city"
               value={form.values.city}
@@ -140,15 +141,15 @@ const ShowUserShop = () => {
             {form.errors.city && <p className="errMsg ">{form.errors.city}</p>}
           </div>
 
-          <div className="flex gap-2 flex-col md:flex-row items-center">
+          <div className="flex flex-col items-center gap-2 md:flex-row">
             <label
               htmlFor="text"
-              className="capitalize self-start w-[260px] text-gray-500 text-base"
+              className="w-[260px] self-start text-base capitalize text-gray-500"
             >
               Quận / Huyện
             </label>
             <select
-              className="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring  disabled:cursor-not-allowed disabled:opacity-50"
+              className="border-input placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2  disabled:cursor-not-allowed disabled:opacity-50"
               disabled={!selectedProvince}
               value={form.values.district || 'District'}
               name="district"
@@ -174,7 +175,7 @@ const ShowUserShop = () => {
               loading={onRequest}
               colorLoading={'#fb5533'}
               variant={'contained'}
-              className={`mb-4  w-[25%] ml-auto uppercase  bg-primary px-4 py-4 text-sm font-semibold text-white  `}
+              className={`mb-4  ml-auto w-[25%] bg-primary  px-4 py-4 text-sm font-semibold uppercase text-white  `}
             >
               lưu
             </LoadingButton>

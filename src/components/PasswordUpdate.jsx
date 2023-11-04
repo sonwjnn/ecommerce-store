@@ -1,10 +1,11 @@
 import userApi from '@/apis/modules/user.api'
-import * as Yup from 'yup'
-import { useFormik } from 'formik'
 import { setUser } from '@/redux/features/userSlice'
+import { useFormik } from 'formik'
 import { toast } from 'react-hot-toast'
-import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import * as Yup from 'yup'
+
 import { Input } from './ui/input'
 
 const PasswordUpdate = () => {
@@ -14,7 +15,7 @@ const PasswordUpdate = () => {
     initialValues: {
       password: '',
       newPassword: '',
-      confirmNewPassword: ''
+      confirmNewPassword: '',
     },
     validationSchema: Yup.object({
       password: Yup.string()
@@ -26,9 +27,9 @@ const PasswordUpdate = () => {
       confirmNewPassword: Yup.string()
         .oneOf([Yup.ref('newPassword')], 'confirmNewPassword not match')
         .min(8, 'confirm new password minimum 8 character')
-        .required('confirm new password is required')
+        .required('confirm new password is required'),
     }),
-    onSubmit: async values => onUpdate(values)
+    onSubmit: async values => onUpdate(values),
   })
 
   const onUpdate = async values => {
@@ -50,12 +51,12 @@ const PasswordUpdate = () => {
 
   return (
     <div className="flex items-start justify-center">
-      <div className="max-w-[600px] md:ml-[-50px] mt-[50px] px-4  ">
+      <div className="mt-[50px] max-w-[600px] px-4 md:ml-[-50px]  ">
         <form onSubmit={form.handleSubmit} className="flex flex-col gap-6">
-          <div className="flex flex-col md:flex-row gap-2  items-center">
+          <div className="flex flex-col items-center gap-2  md:flex-row">
             <label
               htmlFor="password"
-              className="capitalize text-base self-start text-gray-500 w-[260px]"
+              className="w-[260px] self-start text-base capitalize text-gray-500"
             >
               mật khẩu
             </label>
@@ -68,10 +69,10 @@ const PasswordUpdate = () => {
             />
           </div>
 
-          <div className="flex flex-col md:flex-row gap-2  items-center">
+          <div className="flex flex-col items-center gap-2  md:flex-row">
             <label
               htmlFor="newPassword"
-              className="capitalize self-start text-base text-gray-500 w-[260px]"
+              className="w-[260px] self-start text-base capitalize text-gray-500"
             >
               mật khẩu mới
             </label>
@@ -84,10 +85,10 @@ const PasswordUpdate = () => {
             />
           </div>
 
-          <div className="flex flex-col md:flex-row gap-2 items-center">
+          <div className="flex flex-col items-center gap-2 md:flex-row">
             <label
               htmlFor="confirmNewPassword"
-              className="capitalize w-[260px] self-start text-gray-500 text-base"
+              className="w-[260px] self-start text-base capitalize text-gray-500"
             >
               xác nhận mật khẩu
             </label>
@@ -104,7 +105,7 @@ const PasswordUpdate = () => {
             <div className="w-[266px]"></div>
             <button
               type="submit"
-              className="mb-4 transition-all w-[25%] ml-auto uppercase rounded-md  bg-primary px-4 py-3 text-sm font-semibold text-white shadow-sm hover:brightness-125 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="mb-4 ml-auto w-[25%] rounded-md bg-primary px-4  py-3 text-sm font-semibold uppercase text-white shadow-sm transition-all hover:brightness-125 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               lưu
             </button>

@@ -1,12 +1,12 @@
-import publicClient from '../client/public.client.js'
 import privateClient from '../client/private.client'
+import publicClient from '../client/public.client.js'
 
 const userEndpoints = {
   profileUpdate: 'user/update-profile',
   signin: 'user/signin',
   signup: 'user/signup',
   passwordUpdate: 'user/update-password',
-  getInfo: 'user/info'
+  getInfo: 'user/info',
 }
 
 const userApi = {
@@ -14,7 +14,7 @@ const userApi = {
     try {
       const response = await publicClient.post(userEndpoints.signin, {
         username,
-        password
+        password,
       })
       return { response }
     } catch (error) {
@@ -28,7 +28,7 @@ const userApi = {
         password,
         confirmPassword,
         displayName,
-        role: 'user'
+        role: 'user',
       })
       return { response }
     } catch (error) {
@@ -48,7 +48,7 @@ const userApi = {
       const response = await privateClient.put(userEndpoints.passwordUpdate, {
         password,
         newPassword,
-        confirmNewPassword
+        confirmNewPassword,
       })
       return { response }
     } catch (error) {
@@ -63,7 +63,7 @@ const userApi = {
     city,
     district,
     sex,
-    birthday
+    birthday,
   }) => {
     try {
       const response = await privateClient.put(userEndpoints.profileUpdate, {
@@ -74,13 +74,13 @@ const userApi = {
         city,
         district,
         sex,
-        birthday
+        birthday,
       })
       return { response }
     } catch (error) {
       return { error }
     }
-  }
+  },
 }
 
 export default userApi

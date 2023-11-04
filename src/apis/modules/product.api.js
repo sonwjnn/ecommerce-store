@@ -6,7 +6,7 @@ const productEndpoints = {
   search: ({ productType, query, page }) =>
     `${productType}/search?query=${query}&page=${page}}`,
   productsOfCate: ({ cateName }) => `products/list/${cateName}`,
-  getImage: ({ imageName }) => `products/image/${imageName}`
+  getImage: ({ imageName }) => `products/image/${imageName}`,
 }
 
 const productApi = {
@@ -33,7 +33,7 @@ const productApi = {
       const response = await privateClient.get(
         productEndpoints.search({
           query,
-          page
+          page,
         })
       )
       return { response }
@@ -60,7 +60,7 @@ const productApi = {
     } catch (error) {
       return { error }
     }
-  }
+  },
 }
 
 export default productApi

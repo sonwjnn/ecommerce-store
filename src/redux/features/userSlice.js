@@ -6,7 +6,7 @@ const userSlice = createSlice({
     user: null,
     listCarts: [],
     listFavorites: [],
-    shop: null
+    shop: null,
   },
   reducers: {
     setUser: (state, action) => {
@@ -77,8 +77,8 @@ const userSlice = createSlice({
     },
     updateShop: (state, action) => {
       state.shop = { ...state.shop, ...action.payload }
-    }
-  }
+    },
+  },
 })
 
 export const {
@@ -93,7 +93,7 @@ export const {
   removeFavorites,
   addFavorite,
   setShop,
-  updateShop
+  updateShop,
 } = userSlice.actions
 
 export default userSlice.reducer

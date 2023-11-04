@@ -1,27 +1,27 @@
-import DetailImage from '@/components/DetailImage'
-import Star from '@/components/Star'
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { useParams } from 'react-router-dom'
-import { toast } from 'react-hot-toast'
-import productApi from '@/apis/modules/product.api'
 import cartApi from '@/apis/modules/cart.api'
+import favoriteApi from '@/apis/modules/favorite.api'
+import productApi from '@/apis/modules/product.api'
+import DetailImage from '@/components/DetailImage'
+import ProductReview from '@/components/ProductReview'
+import Star from '@/components/Star'
 import { setGlobalLoading } from '@/redux/features/globalLoadingSlice'
-import { BsCartPlus, BsTruck } from 'react-icons/bs'
-import { MdOutlineFavorite, MdOutlineFavoriteBorder } from 'react-icons/md'
 import {
   addCart,
   addFavorite,
-  removeFavorite
+  removeFavorite,
 } from '@/redux/features/userSlice'
-import ProductReview from '@/components/ProductReview'
-import favoriteApi from '@/apis/modules/favorite.api'
+import { useEffect, useState } from 'react'
+import { toast } from 'react-hot-toast'
+import { BsCartPlus, BsTruck } from 'react-icons/bs'
+import { MdOutlineFavorite, MdOutlineFavoriteBorder } from 'react-icons/md'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
 const cartState = {
   increase: 'increase',
-  decrease: 'decrease'
+  decrease: 'decrease',
 }
 
 const ProductDetail = () => {
@@ -45,7 +45,7 @@ const ProductDetail = () => {
     const getProduct = async () => {
       dispatch(setGlobalLoading(true))
       const { response, err } = await productApi.getDetail({
-        productId
+        productId,
       })
       dispatch(setGlobalLoading(false))
 
@@ -65,7 +65,7 @@ const ProductDetail = () => {
     const getImage = async () => {
       if (product && product.imageName) {
         const { response, err } = await productApi.getImage({
-          imageName: product.imageName
+          imageName: product.imageName,
         })
 
         if (err) toast.error(err.message)
@@ -126,7 +126,7 @@ const ProductDetail = () => {
       cateId: product.cateId._id,
       productPrice: product.price,
       productImage: product.imageName,
-      quantity: cartValue
+      quantity: cartValue,
     }
 
     const { response, err } = await cartApi.add(body)
@@ -159,7 +159,7 @@ const ProductDetail = () => {
       productTitle: product.title || product.name,
       productType: product.type,
       productPrice: product.price,
-      productImage: product.imageName
+      productImage: product.imageName,
     }
     const { response, err } = await favoriteApi.add(body)
     if (err) toast.error(err.message)
@@ -181,7 +181,7 @@ const ProductDetail = () => {
     const favorite = listFavorites.find(item => item.productId === product._id)
 
     const { response, err } = await favoriteApi.remove({
-      favoriteId: favorite.id
+      favoriteId: favorite.id,
     })
 
     setOnRequest(false)
@@ -206,27 +206,27 @@ const ProductDetail = () => {
   }, [product])
 
   return (
-    <div className="bg-bg_page px-0 xl:px-[136px] py-0 sm:py-[56px]   h-full">
-      <div className="bg-white h-full rounded-md max-w-[1220px] mx-auto">
+    <div className="h-full bg-bg_page px-0 py-0 sm:py-[56px]   xl:px-[136px]">
+      <div className="mx-auto h-full max-w-[1220px] rounded-md bg-white">
         <div className="flex flex-col sm:flex-row ">
           <div className="flex-[33%] grow-0 p-4">
             <div
-              className="pt-[450px] bg-center bg-cover m-1.5 w-full"
+              className="m-1.5 w-full bg-cover bg-center pt-[450px]"
               style={{
-                backgroundImage: `url(${imageUrl})`
+                backgroundImage: `url(${imageUrl})`,
               }}
             ></div>
 
-            <div className="scrollbar-hide hidden md:flex gap-4 overflow-x-scroll max-w-[100%]">
+            <div className="scrollbar-hide hidden max-w-[100%] gap-4 overflow-x-scroll md:flex">
               <DetailImage imageUrl={imageUrl} />
               <DetailImage imageUrl={imageUrl} />
               <DetailImage imageUrl={imageUrl} />
               <DetailImage imageUrl={imageUrl} />
             </div>
 
-            <div className="p-4 md:flex  hidden items-center justify-center">
+            <div className="hidden items-center  justify-center p-4 md:flex">
               <h3 className="text-base">Chia sẻ:</h3>
-              <div className="text-2xl ml-4 flex gap-4 relative border-right-ab after:right-[-2rem]">
+              <div className="border-right-ab relative ml-4 flex gap-4 text-2xl after:right-[-2rem]">
                 <button className="text-[#0384ff]">
                   <i className="fa-brands fa-facebook-messenger"></i>
                 </button>
@@ -242,17 +242,17 @@ const ProductDetail = () => {
               </div>
 
               <div
-                className="capitalize flex items-center cursor-pointer select-none"
+                className="flex cursor-pointer select-none items-center capitalize"
                 onClick={onFavoriteClick}
               >
                 {!isFavorite ? (
                   <MdOutlineFavoriteBorder
-                    className="text-red-600 ml-[4rem] mr-3 text-2xl"
+                    className="ml-[4rem] mr-3 text-2xl text-red-600"
                     onClick={() => setIsFavorite(!isFavorite)}
                   />
                 ) : (
                   <MdOutlineFavorite
-                    className="text-red-600 ml-[4rem] mr-3 text-2xl"
+                    className="ml-[4rem] mr-3 text-2xl text-red-600"
                     onClick={() => setIsFavorite(!isFavorite)}
                   />
                 )}
@@ -263,7 +263,7 @@ const ProductDetail = () => {
           <div className="flex-[66%] p-4">
             <div className="flex flex-col gap-10">
               <div className="flex items-center">
-                <span className="self-start mt-2 text-[12px] sm:text-sm min-w-[66px] tag-shopee bg-primary text-white">
+                <span className="tag-shopee mt-2 min-w-[66px] self-start bg-primary text-[12px] text-white sm:text-sm">
                   Yêu thích
                 </span>
 
@@ -272,66 +272,66 @@ const ProductDetail = () => {
                 </span>
               </div>
 
-              <div className="flex flex-wrap gap-4  items-center">
-                <span className="flex relative items-center border-right-ab after:right-[-2rem]">
-                  <span className="mr-2 text-primary text-base sm:text-[18px] relative  after:bg-primary border-bottom-ab">
+              <div className="flex flex-wrap items-center  gap-4">
+                <span className="border-right-ab relative flex items-center after:right-[-2rem]">
+                  <span className="border-bottom-ab relative mr-2 text-base text-primary  after:bg-primary sm:text-[18px]">
                     {product && product.rating}
                   </span>
 
                   <Star
                     stars={product && product.rating}
-                    className="text-primary text-sm sm:text-base"
+                    className="text-sm text-primary sm:text-base"
                   />
                 </span>
 
-                <span className="sm:flex hidden relative ml-[3rem] items-center border-right-ab after:right-[-2rem]">
-                  <span className="mr-2  text-base sm:text-[18px] relative after:bg-gray-500 border-bottom-ab">
+                <span className="border-right-ab relative ml-[3rem] hidden items-center after:right-[-2rem] sm:flex">
+                  <span className="border-bottom-ab  relative mr-2 text-base after:bg-gray-500 sm:text-[18px]">
                     {reviewCount}
                   </span>
                   <span className="text-sm  text-gray-500">Đánh giá</span>
                 </span>
 
-                <span className="flex ml-[3rem] items-center ">
-                  <span className="mr-2  text-base sm:text-[18px] relative after:bg-gray-500 border-bottom-ab">
+                <span className="ml-[3rem] flex items-center ">
+                  <span className="border-bottom-ab  relative mr-2 text-base after:bg-gray-500 sm:text-[18px]">
                     2,3k
                   </span>
                   <span className="text-sm  text-gray-500">Đã bán</span>
                 </span>
 
-                <span className="flex gap-8 items-center sm:hidden ml-4">
-                  <button className="text-[#0384ff] text-3xl">
+                <span className="ml-4 flex items-center gap-8 sm:hidden">
+                  <button className="text-3xl text-[#0384ff]">
                     <i className="fa-brands fa-facebook-messenger"></i>
                   </button>
                   <button>
-                    <i className="fa-regular fa-heart text-primary  text-3xl"></i>
+                    <i className="fa-regular fa-heart text-3xl  text-primary"></i>
                   </button>
                 </span>
               </div>
             </div>
 
-            <div className="p-6 hidden sm:block bg-[#fafafa] mt-5">
-              <div className="flex gap-4 flex-wrap">
-                <span className="text-base line-through font-normal text-neutral-400 flex items-start">
-                  <span className="text-[11px] mr-1">₫</span>
+            <div className="mt-5 hidden bg-[#fafafa] p-6 sm:block">
+              <div className="flex flex-wrap gap-4">
+                <span className="flex items-start text-base font-normal text-neutral-400 line-through">
+                  <span className="mr-1 text-[11px]">₫</span>
                   {product &&
                     product.discountPrice.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
                 </span>
 
-                <span className="text-3xl font-normal text-primary flex items-start">
+                <span className="flex items-start text-3xl font-normal text-primary">
                   <span className="text-[18px] ">₫</span>
                   {product &&
                     product.discountPrice.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
                 </span>
                 {product && product.discount !== '0' && (
                   <div className="flex items-center">
-                    <span className="tag-shopee text-[12px] py-0  bg-primary text-white uppercase font-bold">
+                    <span className="tag-shopee bg-primary py-0  text-[12px] font-bold uppercase text-white">
                       {product.discount}% giảm
                     </span>
                   </div>
                 )}
               </div>
 
-              <div className="flex gap-4 items-center">
+              <div className="flex items-center gap-4">
                 <div className="">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -399,9 +399,9 @@ const ProductDetail = () => {
                   </svg>
                 </div>
 
-                <div className="flex flex-wrap flex-col justify-center items-start">
+                <div className="flex flex-col flex-wrap items-start justify-center">
                   <div className="flex gap-4">
-                    <span className="text-primary text-base font-normal">
+                    <span className="text-base font-normal text-primary">
                       Gì cũng rẻ
                     </span>
                   </div>
@@ -414,33 +414,33 @@ const ProductDetail = () => {
             </div>
 
             <div className="p-4 ">
-              <div className="flex gap-4 capitalize py-3">
-                <span className="hidden md:block text-sm text-gray-500 w-[120px]">
+              <div className="flex gap-4 py-3 capitalize">
+                <span className="hidden w-[120px] text-sm text-gray-500 md:block">
                   deal sốc
                 </span>
-                <span className="tag-shopee text-primary font-normal bg-[#ffeee8]">
+                <span className="tag-shopee bg-[#ffeee8] font-normal text-primary">
                   mua kèm deal sốc
                 </span>
               </div>
 
-              <div className="flex gap-4 text-sm py-3 flex-wrap">
-                <span className="hidden md:block capitalize text-gray-500 mt-1 w-[120px]">
+              <div className="flex flex-wrap gap-4 py-3 text-sm">
+                <span className="mt-1 hidden w-[120px] capitalize text-gray-500 md:block">
                   vận chuyển
                 </span>
                 <span>
                   <div className="flex gap-4 py-2">
                     <img
                       src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/74f3e9ac01da8565c3baead996ed6e2a.png"
-                      className="w-[20x] h-[20px]"
+                      className="h-[20px] w-[20x]"
                     />
                     <p className="first-letter:uppercase">
                       miễn phí vận chuyển
                     </p>
                   </div>
-                  <div className="capitalize flex gap-4">
-                    <BsTruck className="fa-solid fa-truck text-[20px] mr-1 mt-2" />
+                  <div className="flex gap-4 capitalize">
+                    <BsTruck className="fa-solid fa-truck mr-1 mt-2 text-[20px]" />
                     <span className="flex flex-col">
-                      <div className="hidden md:flex items-center gap-4 py-2">
+                      <div className="hidden items-center gap-4 py-2 md:flex">
                         <span className="text-gray-500 ">vận chuyển tới</span>
                         <span>
                           phường tràng tiền, quận hoàn kiếm
@@ -449,7 +449,7 @@ const ProductDetail = () => {
                       </div>
 
                       <div className="flex items-center gap-4 py-2 ">
-                        <span className="text-gray-500 text-sm">
+                        <span className="text-sm text-gray-500">
                           phí vận chuyển
                         </span>
                         <span className="flex">
@@ -464,12 +464,12 @@ const ProductDetail = () => {
                 </span>
               </div>
 
-              <div className="flex flex-col md:flex-row gap-4 capitalize py-3 flex-wrap">
-                <span className="text-sm text-gray-500 w-[120px]">
+              <div className="flex flex-col flex-wrap gap-4 py-3 capitalize md:flex-row">
+                <span className="w-[120px] text-sm text-gray-500">
                   chọn màu
                 </span>
                 <span className=" font-normal">
-                  <div className="flex gap-4 flex-wap">
+                  <div className="flex-wap flex gap-4">
                     <span className="select-type-btn">trắng</span>
                     <span className="select-type-dis-btn">xám bạc</span>
                     <span className="select-type-btn">đen</span>
@@ -477,41 +477,41 @@ const ProductDetail = () => {
                 </span>
               </div>
 
-              <div className="flex flex-wrap flex-col md:flex-row gap-4 capitalize py-3 mt-4">
-                <span className="text-sm text-gray-500 w-[120px]">
+              <div className="mt-4 flex flex-col flex-wrap gap-4 py-3 capitalize md:flex-row">
+                <span className="w-[120px] text-sm text-gray-500">
                   số lượng
                 </span>
                 <span className=" font-normal">
-                  <div className="flex gap-4 items-center">
+                  <div className="flex items-center gap-4">
                     <span>
                       <span
-                        className="select-none px-5 py-1 text-[20px] text-gray-600 border border-gray-300 cursor-pointer"
+                        className="cursor-pointer select-none border border-gray-300 px-5 py-1 text-[20px] text-gray-600"
                         onClick={() => handleValueCart(cartState.decrease)}
                       >
                         -
                       </span>
-                      <span className="select-none px-7 py-1 text-[20px] text-gray-600 border border-gray-300">
+                      <span className="select-none border border-gray-300 px-7 py-1 text-[20px] text-gray-600">
                         {cartValue}
                       </span>
                       <span
-                        className="select-none px-4 py-1 text-[20px] text-gray-600 border border-gray-300
-                      cursor-pointer"
+                        className="cursor-pointer select-none border border-gray-300 px-4 py-1 text-[20px]
+                      text-gray-600"
                         onClick={() => handleValueCart(cartState.increase)}
                       >
                         +
                       </span>
                     </span>
-                    <span className="hidden md:block px-6 py-1 text-sm text-gray-500">
+                    <span className="hidden px-6 py-1 text-sm text-gray-500 md:block">
                       322 sảm phẩm có sẵn
                     </span>
                   </div>
                 </span>
               </div>
 
-              <div className="flex mt-8 gap-4">
+              <div className="mt-8 flex gap-4">
                 <button
                   onClick={onCartClick}
-                  className="flex items-center hover:bg-[#fff5f1] rounded-[2px] capitalize py-4 px-8 text-base bg-[#ffeee8] font-normal border border-primary text-primary"
+                  className="flex items-center rounded-[2px] border border-primary bg-[#ffeee8] px-8 py-4 text-base font-normal capitalize text-primary hover:bg-[#fff5f1]"
                 >
                   <BsCartPlus className="mr-2" />
                   <span>thêm vào giỏ hàng</span>
@@ -520,7 +520,7 @@ const ProductDetail = () => {
                 <button className="btn-primary">mua ngay</button>
               </div>
 
-              <div className="flex p-8 gap-4 border-t border-gray-200 mt-[40px] capitalize text-sm items-center">
+              <div className="mt-[40px] flex items-center gap-4 border-t border-gray-200 p-8 text-sm capitalize">
                 <img
                   src={
                     new URL(
@@ -528,7 +528,7 @@ const ProductDetail = () => {
                       import.meta.url
                     ).href
                   }
-                  className="w-[20px] h-[20px]"
+                  className="h-[20px] w-[20px]"
                 />
                 <span>shopee đảm bảo</span>
                 <span className="text-gray-500">
@@ -540,19 +540,19 @@ const ProductDetail = () => {
         </div>
       </div>
 
-      <div className=" h-full max-w-[1220px]  mt-8 flex mx-auto">
+      <div className=" mx-auto mt-8  flex h-full max-w-[1220px]">
         <div className="flex-[80%]  md:mr-4">
-          <div className="p-10 rounded-md bg-white">
+          <div className="rounded-md bg-white p-10">
             <div className="">
-              <div className="uppercase px-6 py-5 text-[20px] bg-[#fafafa] w-full rounded-md">
+              <div className="w-full rounded-md bg-[#fafafa] px-6 py-5 text-[20px] uppercase">
                 chi tiết sản phẩm
               </div>
-              <div className="flex gap-4 capitalize px-6 py-5">
-                <span className="text-sm text-gray-500 w-[120px]">
+              <div className="flex gap-4 px-6 py-5 capitalize">
+                <span className="w-[120px] text-sm text-gray-500">
                   danh mục
                 </span>
                 <span className="text-sm">
-                  <Link to={`/`} className="text-blue-600 font-normal">
+                  <Link to={`/`} className="font-normal text-blue-600">
                     shopee
                   </Link>
                   {' > '}
@@ -560,7 +560,7 @@ const ProductDetail = () => {
                   {product && (
                     <Link
                       to={`/products/${product.cateId.name}/Tất cả sản phẩm`}
-                      className="text-blue-600 font-normal"
+                      className="font-normal text-blue-600"
                     >
                       {product.cateId.name}
                     </Link>
@@ -569,7 +569,7 @@ const ProductDetail = () => {
                   {product && (
                     <Link
                       to={`/products/${product.cateId.name}/${product.typeId.name}`}
-                      className="text-blue-600 font-normal"
+                      className="font-normal text-blue-600"
                     >
                       {product.typeId.name}
                     </Link>
@@ -577,57 +577,57 @@ const ProductDetail = () => {
                 </span>
               </div>
 
-              <div className="flex gap-4 capitalize px-6 py-5">
-                <span className="text-sm text-gray-500 w-[120px]">
+              <div className="flex gap-4 px-6 py-5 capitalize">
+                <span className="w-[120px] text-sm text-gray-500">
                   kho hàng
                 </span>
-                <span className=" text-gray-600 font-normal text-sm">6454</span>
+                <span className=" text-sm font-normal text-gray-600">6454</span>
               </div>
 
-              <div className="flex gap-4 capitalize px-6 py-5">
-                <span className="text-sm text-gray-500 w-[120px]">gửi từ</span>
-                <span className=" text-gray-600 font-normal text-sm">
+              <div className="flex gap-4 px-6 py-5 capitalize">
+                <span className="w-[120px] text-sm text-gray-500">gửi từ</span>
+                <span className=" text-sm font-normal text-gray-600">
                   Hà Nội
                 </span>
               </div>
             </div>
 
             <div className="mt-8">
-              <div className="uppercase px-6 py-5 text-[20px] bg-[#fafafa] w-full rounded-md">
+              <div className="w-full rounded-md bg-[#fafafa] px-6 py-5 text-[20px] uppercase">
                 mô tả sản phẩm
               </div>
 
-              <div className="flex gap-4 capitalize px-6 py-5">
+              <div className="flex gap-4 px-6 py-5 capitalize">
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: product && product.info
+                    __html: product && product.info,
                   }}
                 />
               </div>
             </div>
           </div>
 
-          <div className="p-10 rounded-md bg-white">
+          <div className="rounded-md bg-white p-10">
             <div className="">
-              <div className="uppercase text-[20px] bg-white w-full rounded-md">
+              <div className="w-full rounded-md bg-white text-[20px] uppercase">
                 đánh giá sản phẩm
               </div>
-              <div className="mt-8  gap-4 capitalize hidden md:block p-[20px] border border-[#f9ede5] bg-[#fffbf8]">
-                <div className="p-8 flex flex-col items-center justify-center">
-                  <span className="text-primary text-[28px]">
+              <div className="mt-8  hidden gap-4 border border-[#f9ede5] bg-[#fffbf8] p-[20px] capitalize md:block">
+                <div className="flex flex-col items-center justify-center p-8">
+                  <span className="text-[28px] text-primary">
                     {product && product.rating}{' '}
                     <span className="text-[18px]">trên 5</span>
                   </span>
 
                   <Star
                     stars={product && product.rating}
-                    className="text-primary text-[18px]"
+                    className="text-[18px] text-primary"
                   />
                 </div>
 
-                <div className="hidden md:flex p-8 gap-3   items-center justify-start flex-wrap">
+                <div className="hidden flex-wrap items-center justify-start   gap-3 p-8 md:flex">
                   <span
-                    className={`select-type-btn px-10 py-2 review-filter-item  ${
+                    className={`select-type-btn review-filter-item px-10 py-2  ${
                       activeReview === 0 ? 'active' : ''
                     }`}
                     key={0}
@@ -639,7 +639,7 @@ const ProductDetail = () => {
                     if (index) {
                       return (
                         <span
-                          className={`select-type-btn px-10 py-2 review-filter-item  ${
+                          className={`select-type-btn review-filter-item px-10 py-2  ${
                             activeReview === index ? 'active' : ''
                           }`}
                           key={index}
@@ -661,16 +661,16 @@ const ProductDetail = () => {
             </div>
           </div>
         </div>
-        <div className="hidden md:block flex-[20%]  h-full rounded-md bg-white ml-4 px-6 py-8">
+        <div className="ml-4 hidden h-full  flex-[20%] rounded-md bg-white px-6 py-8 md:block">
           <div>
-            <span className="text-sm text-gray-500 w-[120px] ">
+            <span className="w-[120px] text-sm text-gray-500 ">
               Mã giảm giá của shop
             </span>
 
-            <div className="py-8 px-2">
-              <span className="px-2 py-8 flex flex-wrap gap-4 items-center justify-center bg-[#fff4f4] border border-[#fbc9c0]">
+            <div className="px-2 py-8">
+              <span className="flex flex-wrap items-center justify-center gap-4 border border-[#fbc9c0] bg-[#fff4f4] px-2 py-8">
                 <div>
-                  <div className="text-primary capitalize mb-4 font-medium">
+                  <div className="mb-4 font-medium capitalize text-primary">
                     <div className="text-sm">giảm 10%</div>
                     <div className="text-[12px]">đơn tối thiểu 69k</div>
                   </div>
@@ -679,17 +679,17 @@ const ProductDetail = () => {
                 </div>
 
                 <div className="flex items-center">
-                  <button className="btn-primary text-sm py-1 px-4">lưu</button>
+                  <button className="btn-primary px-4 py-1 text-sm">lưu</button>
                 </div>
               </span>
             </div>
           </div>
 
           <div>
-            <div className="py-8 px-2">
-              <span className="px-2 py-8 flex flex-wrap gap-4 items-center justify-center bg-[#fff4f4] border border-[#fbc9c0]">
+            <div className="px-2 py-8">
+              <span className="flex flex-wrap items-center justify-center gap-4 border border-[#fbc9c0] bg-[#fff4f4] px-2 py-8">
                 <div>
-                  <div className="text-primary capitalize mb-4 font-medium">
+                  <div className="mb-4 font-medium capitalize text-primary">
                     <div className="text-sm">giảm 15%</div>
                     <div className="text-[12px]">đơn tối thiểu 150k</div>
                   </div>
@@ -698,17 +698,17 @@ const ProductDetail = () => {
                 </div>
 
                 <div className="flex items-center">
-                  <button className="btn-primary text-sm py-1 px-4">lưu</button>
+                  <button className="btn-primary px-4 py-1 text-sm">lưu</button>
                 </div>
               </span>
             </div>
           </div>
 
           <div>
-            <div className="py-8 px-2">
-              <span className="px-2 py-8 flex flex-wrap gap-4 items-center justify-center bg-[#fff4f4] border border-[#fbc9c0]">
+            <div className="px-2 py-8">
+              <span className="flex flex-wrap items-center justify-center gap-4 border border-[#fbc9c0] bg-[#fff4f4] px-2 py-8">
                 <div>
-                  <div className="text-primary capitalize mb-4 font-medium">
+                  <div className="mb-4 font-medium capitalize text-primary">
                     <div className="text-sm">giảm 20%</div>
                     <div className="text-[12px]">đơn tối thiểu 299k</div>
                   </div>
@@ -717,7 +717,7 @@ const ProductDetail = () => {
                 </div>
 
                 <div className="flex items-center">
-                  <button className="btn-primary text-sm py-1 px-4">lưu</button>
+                  <button className="btn-primary px-4 py-1 text-sm">lưu</button>
                 </div>
               </span>
             </div>

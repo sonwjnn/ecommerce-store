@@ -1,9 +1,9 @@
 const DetailImage = ({ imageUrl }) => {
   return (
     <div
-      className="w-[100px] h-[100px] bg-center bg-cover shrink-0"
+      className="h-[100px] w-[100px] shrink-0 bg-cover bg-center"
       style={{
-        backgroundImage: `url(${imageUrl})`
+        backgroundImage: `url(${imageUrl})`,
       }}
     ></div>
   )

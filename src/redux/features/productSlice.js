@@ -4,7 +4,7 @@ export const productSlice = createSlice({
   name: 'products',
   initialState: {
     productsStore: [],
-    productsSortPrice: null
+    productsSortPrice: null,
   },
   reducers: {
     setProductsStore: (state, action) => {
@@ -15,8 +15,8 @@ export const productSlice = createSlice({
     },
     clearProductsStore: state => {
       state.productsStore = []
-    }
-  }
+    },
+  },
 })
 
 export const { setProductsStore, setProductsSortPrice, clearProductsStore } =

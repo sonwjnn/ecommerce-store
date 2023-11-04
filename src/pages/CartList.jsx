@@ -1,16 +1,16 @@
-import { Link } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { removeCart, removeCarts } from '@/redux/features/userSlice'
 import cartApi from '@/apis/modules/cart.api'
-import { toast } from 'react-hot-toast'
-import { useRef } from 'react'
-import LoadingButton from '@/components/LoadingButton'
 import productApi from '@/apis/modules/product.api'
+import LoadingButton from '@/components/LoadingButton'
+import { removeCart, removeCarts } from '@/redux/features/userSlice'
+import { useEffect, useState } from 'react'
+import { useRef } from 'react'
+import { toast } from 'react-hot-toast'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const cartState = {
   increase: 'increase',
-  decrease: 'decrease'
+  decrease: 'decrease',
 }
 export const CartItem = props => {
   const {
@@ -23,7 +23,7 @@ export const CartItem = props => {
     onRemoved,
     handleCheckedCart,
     isCheckedAll,
-    handleDotPrice
+    handleDotPrice,
   } = props
 
   const dispatch = useDispatch()
@@ -68,7 +68,7 @@ export const CartItem = props => {
     if (onRequest) return
     setOnRequest(true)
     const { response, err } = await cartApi.remove({
-      cartId: id
+      cartId: id,
     })
     setOnRequest(false)
 
@@ -96,20 +96,20 @@ export const CartItem = props => {
   let prevPrice = price && handleDotPrice(price)
   let currPrice = price && handleDotPrice((+price * cartValue).toString())
   return (
-    <div className="p-8 w-full pb-0 pt-0">
-      <div className="p-6 flex flex-col lg:flex-row items-center justify-between  border-b-gray-200 border-b">
-        <div className="flex items-center gap-8 self-start flex-grow">
+    <div className="w-full p-8 pb-0 pt-0">
+      <div className="flex flex-col items-center justify-between border-b border-b-gray-200  p-6 lg:flex-row">
+        <div className="flex flex-grow items-center gap-8 self-start">
           <input
             type="checkbox"
             checked={isChecked || isCheckedAll}
             ref={inputRef}
-            className="w-6 h-6"
+            className="h-6 w-6"
             onChange={handleCheckCart}
           />
           <div
-            className="min-w-[80px] h-[80px] bg-no-repeat bg-center bg-cover "
+            className="h-[80px] min-w-[80px] bg-cover bg-center bg-no-repeat "
             style={{
-              backgroundImage: `url(${imageUrl})`
+              backgroundImage: `url(${imageUrl})`,
             }}
           ></div>
           <div className="flex flex-col justify-center self-start lg:self-center">
@@ -118,24 +118,24 @@ export const CartItem = props => {
           </div>
         </div>
 
-        <div className="flex relative flex-col lg:flex-row self-start ml-[132px] lg:self-center lg:ml-0  gap-[14px] lg:gap-[60px] md:items-center">
-          <div className="text-primary text-base lg:px-12">₫{prevPrice}</div>
+        <div className="relative ml-[132px] flex flex-col gap-[14px] self-start md:items-center lg:ml-0  lg:flex-row lg:gap-[60px] lg:self-center">
+          <div className="text-base text-primary lg:px-12">₫{prevPrice}</div>
 
           <div className=" font-normal">
-            <div className="flex gap-4 items-center">
+            <div className="flex items-center gap-4">
               <span className="flex items-center">
                 <span
-                  className="flex items-center select-none px-5 h-12  text-[20px] text-gray-600 border border-gray-300 cursor-pointer"
+                  className="flex h-12 cursor-pointer select-none items-center  border border-gray-300 px-5 text-[20px] text-gray-600"
                   onClick={() => handleValueCart(cartState.decrease)}
                 >
                   <span>-</span>
                 </span>
-                <span className="select-none px-5 h-12 py-1 text-base text-gray-600 border border-gray-300">
+                <span className="h-12 select-none border border-gray-300 px-5 py-1 text-base text-gray-600">
                   {cartValue}
                 </span>
                 <span
-                  className="flex items-center select-none h-12 px-4 text-[20px] text-gray-600 border border-gray-300 
-                      cursor-pointer"
+                  className="flex h-12 cursor-pointer select-none items-center border border-gray-300 px-4 text-[20px] 
+                      text-gray-600"
                   onClick={() => handleValueCart(cartState.increase)}
                 >
                   <span>+</span>
@@ -144,7 +144,7 @@ export const CartItem = props => {
             </div>
           </div>
 
-          <div className="hidden lg:block text-primary text-base px-12">
+          <div className="hidden px-12 text-base text-primary lg:block">
             ₫{currPrice}
           </div>
 
@@ -152,11 +152,11 @@ export const CartItem = props => {
             loading={onRequest}
             colorLoading={'#fb5533'}
             variant={'contained'}
-            className={`p-0 lg:relative flex items-center justify-center border-none lg:right-1 absolute right-[-86%] top-[50%] text-primary bg-transparent`}
+            className={`absolute right-[-86%] top-[50%] flex items-center justify-center border-none bg-transparent p-0 text-primary lg:relative lg:right-1`}
             onClick={onRemove}
             size={24}
           >
-            <div className="bg-primary text-white w-full py-2     rounded-md h-full">
+            <div className="h-full w-full rounded-md bg-primary     py-2 text-white">
               Xoá
             </div>
           </LoadingButton>
@@ -235,7 +235,7 @@ const CartList = () => {
     setOnRequest(true)
     const newCheckedCarts = checkedCarts.map(item => item.id)
     const { response, err } = await cartApi.removeCarts({
-      cartIds: newCheckedCarts
+      cartIds: newCheckedCarts,
     })
     setOnRequest(false)
 
@@ -250,8 +250,8 @@ const CartList = () => {
 
   return (
     <div className="bg-bg_page">
-      <header className="flex items-center justify-between py-6 px-16 sm:px-24 bg-white h-[85px]">
-        <div className="flex items-center mx-auto md:mx-0">
+      <header className="flex h-[85px] items-center justify-between bg-white px-16 py-6 sm:px-24">
+        <div className="mx-auto flex items-center md:mx-0">
           <Link to={'/'} className=" inline-block max-w-[200px]">
             <svg
               fill="#fb5533"
@@ -264,32 +264,32 @@ const CartList = () => {
             </svg>
           </Link>
 
-          <span className="text-[22px] h-full mt-4 text-gray-400 font-normal ml-4">
+          <span className="ml-4 mt-4 h-full text-[22px] font-normal text-gray-400">
             Giỏ Hàng
           </span>
         </div>
 
-        <div className="hidden md:block help text-base text-primary underline cursor-pointer">
+        <div className="help hidden cursor-pointer text-base text-primary underline md:block">
           Bạn cần giúp đỡ ?
         </div>
       </header>
 
-      <div className="w-full min-h-screen ">
-        <div className=" max-w-[1200px] h-full mx-auto overflow-hidden ">
-          <div className="rounded-md  min-h-[40px] px-6 py-4 w-full  bg-white mt-12 hidden lg:flex justify-between text-base">
-            <div className="flex ml-8 items-center">
-              <div className="py-4 px-4 text-gray-500">Tất cả sản phẩm</div>
+      <div className="min-h-screen w-full ">
+        <div className=" mx-auto h-full max-w-[1200px] overflow-hidden ">
+          <div className="mt-12  hidden min-h-[40px] w-full justify-between  rounded-md bg-white px-6 py-4 text-base lg:flex">
+            <div className="ml-8 flex items-center">
+              <div className="px-4 py-4 text-gray-500">Tất cả sản phẩm</div>
             </div>
 
             <div className="flex gap-x-[70px] text-gray-500">
-              <div className="py-4 px-8">Đơn giá</div>
-              <div className="py-4 px-8">Số lượng</div>
-              <div className="py-4 px-8">Số tiền</div>
-              <div className="py-4 px-8">Thao tác</div>
+              <div className="px-8 py-4">Đơn giá</div>
+              <div className="px-8 py-4">Số lượng</div>
+              <div className="px-8 py-4">Số tiền</div>
+              <div className="px-8 py-4">Thao tác</div>
             </div>
           </div>
 
-          <div className="rounded-md h-full w-full bg-white mt-4">
+          <div className="mt-4 h-full w-full rounded-md bg-white">
             {carts.map(cart => (
               <CartItem
                 id={cart._id}
@@ -311,9 +311,9 @@ const CartList = () => {
             ))}
           </div>
 
-          <div className="sticky hidden md:block bottom-0 rounded-md h-full w-full bg-white mt-4 mb-20">
+          <div className="sticky bottom-0 mb-20 mt-4 hidden h-full w-full rounded-md bg-white md:block">
             <div className="flex items-center justify-between p-4 lg:p-8">
-              <div className="flex items-center text-sm lg:text-[17px] gap-4">
+              <div className="flex items-center gap-4 text-sm lg:text-[17px]">
                 <button
                   className="btn-cart-solid pointer-events-none select-none"
                   onClick={onCheckedAll}
@@ -326,12 +326,12 @@ const CartList = () => {
                 <button className="btn-cart-solid">Thêm đã thích</button>
               </div>
 
-              <div className="flex gap-8 items-center ">
-                <span className="text-sm lg:text-[17px] text-gray-500">
+              <div className="flex items-center gap-8 ">
+                <span className="text-sm text-gray-500 lg:text-[17px]">
                   Tổng thanh toán ({checkedCarts.length} sản phẩm):
                 </span>
-                <span className="text-primary font-semibold text-[20px] flex items-start  lg:text-[24px]">
-                  <span className="text-base mt-2">₫</span>
+                <span className="flex items-start text-[20px] font-semibold text-primary  lg:text-[24px]">
+                  <span className="mt-2 text-base">₫</span>
                   {handleDotPrice(
                     checkedCarts
                       .reduce(
@@ -341,14 +341,14 @@ const CartList = () => {
                       .toString()
                   )}
                 </span>
-                <button className="btn-primary py-3 px-12 lg:py-4 lg:px-16 min-w-[152px]">
+                <button className="btn-primary min-w-[152px] px-12 py-3 lg:px-16 lg:py-4">
                   mua hàng
                 </button>
               </div>
             </div>
           </div>
 
-          <div className="md:hidden bottom-0 rounded-md h-full w-full bg-white mt-4 mb-20">
+          <div className="bottom-0 mb-20 mt-4 h-full w-full rounded-md bg-white md:hidden">
             <div className="flex items-center justify-between  pl-2">
               <div className="flex items-center text-sm">
                 <button className="btn-cart-solid p-0" onClick={onCheckedAll}>
@@ -356,11 +356,11 @@ const CartList = () => {
                 </button>
               </div>
 
-              <div className="flex gap-2 items-center ">
+              <div className="flex items-center gap-2 ">
                 <span className="text-[13px] text-gray-500">
                   Tổng thanh toán:
                 </span>
-                <span className="text-primary font-semibold text-base">
+                <span className="text-base font-semibold text-primary">
                   ₫52.000
                 </span>
                 <button className="btn-primary rounded-l-none">mua hàng</button>

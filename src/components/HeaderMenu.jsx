@@ -1,15 +1,16 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { useState } from 'react'
 import { setAuthModalOpen } from '@/redux/features/authModelSlice'
 import { setSignState } from '@/redux/features/signStateSlice'
 import { setUser } from '@/redux/features/userSlice'
-import { Link, useNavigate, useLocation } from 'react-router-dom'
+import { useState } from 'react'
 import { RiGlobalLine } from 'react-icons/ri'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+
 import TextAvatar from './TextAvatar'
 
 const actionState = {
   signin: 'signin',
-  signup: 'signup'
+  signup: 'signup',
 }
 const HeaderMenu = () => {
   const history = useNavigate()
@@ -41,7 +42,7 @@ const HeaderMenu = () => {
       </li>
       <li className="nav-list-item ">
         <button className="nav-item-link">
-          <RiGlobalLine className="text-[20px] mr-2" />
+          <RiGlobalLine className="mr-2 text-[20px]" />
           Tiếng Việt
           <i className="nav-icon fa-solid fa-angle-down ml-4 mr-2"></i>
         </button>
@@ -95,7 +96,7 @@ const HeaderMenu = () => {
         ) : (
           <>
             <button
-              className="signup-btn hover:text-sky-300 mr-5 "
+              className="signup-btn mr-5 hover:text-sky-300 "
               onClick={() => {
                 authUserPage(actionState.signup)
               }}

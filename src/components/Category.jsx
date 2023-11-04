@@ -1,10 +1,12 @@
-import { useEffect, useRef, useState } from 'react'
-import CategoryItem from './CategoryItem'
 import categoryApi from '@/apis/modules/category.api'
-import { setGlobalLoading } from '@/redux/features/globalLoadingSlice'
 import { setCates } from '@/redux/features/cateSlice'
+import { setGlobalLoading } from '@/redux/features/globalLoadingSlice'
+import { useEffect, useRef, useState } from 'react'
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
 import { useDispatch } from 'react-redux'
-import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io'
+
+import CategoryItem from './CategoryItem'
+
 const Categoryy = () => {
   const [categories, setCategories] = useState([])
   const dispatch = useDispatch()
@@ -42,19 +44,19 @@ const Categoryy = () => {
 
   return (
     <div className=" relative">
-      <div className="p-8 uppercase text-gray-500 text-[18px]">danh mục</div>
+      <div className="p-8 text-[18px] uppercase text-gray-500">danh mục</div>
       <button
-        className="absolute bottom-[34%] left-[-25px] w-[50px] h-[50px] z-10 bg-white shadow-md rounded-[50%] flex items-center justify-center text-lg  focus:outline-none"
+        className="absolute bottom-[34%] left-[-25px] z-10 flex h-[50px] w-[50px] items-center justify-center rounded-[50%] bg-white text-lg shadow-md  focus:outline-none"
         onClick={() => scroll(-1000)}
       >
         <IoIosArrowBack className="text-[26px] text-gray-600" />
       </button>
       <div
-        className="flex  overflow-auto scrollbar-hide flex-nowrap scroll-smooth "
+        className="scrollbar-hide  flex flex-nowrap overflow-auto scroll-smooth "
         ref={ref}
       >
         {catePairs.map((catePair, index) => (
-          <div className="flex flex-col min-w-[120px]" key={index}>
+          <div className="flex min-w-[120px] flex-col" key={index}>
             {catePair.map(cate => (
               <CategoryItem
                 key={cate.index}
@@ -67,7 +69,7 @@ const Categoryy = () => {
         ))}
       </div>
       <button
-        className="absolute bottom-[34%] right-[-25px] w-[50px] h-[50px] z-10 bg-white shadow-md rounded-[50%] flex items-center justify-center focus:outline-none"
+        className="absolute bottom-[34%] right-[-25px] z-10 flex h-[50px] w-[50px] items-center justify-center rounded-[50%] bg-white shadow-md focus:outline-none"
         onClick={() => scroll(1000)}
       >
         <IoIosArrowForward className="text-[26px] text-gray-600" />

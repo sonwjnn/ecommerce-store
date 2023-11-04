@@ -1,8 +1,8 @@
-import { HiHome } from 'react-icons/hi'
-import { FaUserAlt, FaBell } from 'react-icons/fa'
-import { Link, useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 import { toast } from 'react-hot-toast'
+import { FaBell, FaUserAlt } from 'react-icons/fa'
+import { HiHome } from 'react-icons/hi'
+import { useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
 
 const NavigateMobile = () => {
   const { user } = useSelector(state => state.user)
@@ -20,7 +20,7 @@ const NavigateMobile = () => {
   }
 
   return (
-    <div className=" flex p-4 justify-around h-full items-center text-primary text-[30px] bg-white shadow-gray-600 shadow-md">
+    <div className=" flex h-full items-center justify-around bg-white p-4 text-[30px] text-primary shadow-md shadow-gray-600">
       <Link to={'/'}>
         <HiHome />
       </Link>

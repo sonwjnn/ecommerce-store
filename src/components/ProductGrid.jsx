@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+
 import ProductItem from './ProductItem'
 
 const ProductGrid = ({ products }) => {
@@ -7,7 +8,7 @@ const ProductGrid = ({ products }) => {
   }, [products])
   return (
     <div>
-      <div className="flex flex-wrap sm:grid sm:grid-cols-15 gap-3 relative">
+      <div className="relative flex flex-wrap gap-3 sm:grid sm:grid-cols-15">
         {products.map(product => (
           <ProductItem
             className={

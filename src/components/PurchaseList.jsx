@@ -2,10 +2,10 @@ import { SlEmotsmile } from 'react-icons/sl'
 
 const PurchaseList = () => {
   return (
-    <div className="h-[50vh] w-full flex items-center justify-center ">
-      <div className="flex flex-col gap-8 items-center justify-center">
+    <div className="flex h-[50vh] w-full items-center justify-center ">
+      <div className="flex flex-col items-center justify-center gap-8">
         <SlEmotsmile className="text-[150px] text-zinc-300" />
-        <div className="gap-4 text-[20px] text-center">
+        <div className="gap-4 text-center text-[20px]">
           <div className="text-gray-500">Bạn không có đơn hàng nào.</div>
         </div>
       </div>

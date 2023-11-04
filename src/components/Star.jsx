@@ -1,5 +1,5 @@
-import { FaStar, FaStarHalfAlt } from 'react-icons/fa'
 import { AiOutlineStar } from 'react-icons/ai'
+import { FaStar, FaStarHalfAlt } from 'react-icons/fa'
 import { twMerge } from 'tailwind-merge'
 
 const Star = ({ stars, className }) => {

@@ -4,7 +4,7 @@ const shopEndpoints = {
   list: 'shops',
   add: 'shops',
   info: 'shops/info',
-  update: 'shops'
+  update: 'shops',
 }
 
 const shopApi = {
@@ -23,7 +23,7 @@ const shopApi = {
         title,
         address,
         city,
-        district
+        district,
       })
       return { response }
     } catch (error) {
@@ -44,13 +44,13 @@ const shopApi = {
         title,
         address,
         city,
-        district
+        district,
       })
       return { response }
     } catch (error) {
       return { error }
     }
-  }
+  },
 }
 
 export default shopApi

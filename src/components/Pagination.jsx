@@ -16,7 +16,7 @@ const Pagination = props => {
 
   return (
     <div className="mt-12">
-      <div className="flex gap-8 justify-center items-center">
+      <div className="flex items-center justify-center gap-8">
         <button className="pagination-item__link">
           <i className="pagination-item__icon ti-angle-left"></i>
         </button>

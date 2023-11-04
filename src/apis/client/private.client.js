@@ -7,8 +7,8 @@ const baseURL = 'http://localhost:8017/'
 const privateClient = axios.create({
   baseURL,
   paramsSerializer: {
-    encode: params => queryString.stringify(params)
-  }
+    encode: params => queryString.stringify(params),
+  },
 })
 
 privateClient.interceptors.request.use(async config => {
@@ -16,8 +16,8 @@ privateClient.interceptors.request.use(async config => {
     ...config,
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('actkn')}`
-    }
+      Authorization: `Bearer ${localStorage.getItem('actkn')}`,
+    },
   }
 })
 

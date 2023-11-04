@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { ClipLoader } from 'react-spinners'
 
 const LoadingButton = props => {
@@ -15,8 +15,8 @@ const LoadingButton = props => {
     <button
       type={type || 'button'}
       onClick={onClick}
-      className={` min-w-[50px] text-center cursor-pointer btn-base  $ ${className} ${
-        isLoading && `bg-white border-2 border-[${colorLoading}] `
+      className={` btn-base $ min-w-[50px] cursor-pointer  text-center ${className} ${
+        isLoading && `border-2 bg-white border-[${colorLoading}] `
       }`}
     >
       {!isLoading ? (

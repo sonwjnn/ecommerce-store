@@ -36,5 +36,5 @@ export const bannerLogos = [
   'voucher giảm đến 200.000Đ',
   'gì cũng rẻ - mua là free ship',
   'hàng quốc tế',
-  'nạp điện thoại & thẻ game'
+  'nạp điện thoại & thẻ game',
 ]

@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <footer className="footer font-roboto text-sm">
-      <div className="grid wide">
+      <div className="wide grid">
         <div className="row footer-spacing"></div>
         <div className="row footer-body footer__content">
           <div className="col l-2-4 c-6">
@@ -177,19 +177,19 @@ const Footer = () => {
                 THEO DÕI CHÚNG TÔI TRÊN
               </h3>
               <li className="footer-list-item">
-                <button className="footer-list-item__link footer-list-item__socials transition-all text-sm">
+                <button className="footer-list-item__link footer-list-item__socials text-sm transition-all">
                   <i className="footer-list-item__icon fa-brands fa-facebook-square"></i>
                   Facebook
                 </button>
               </li>
               <li className="footer-list-item">
-                <button className="footer-list-item__link footer-list-item__socials transition-all text-sm">
+                <button className="footer-list-item__link footer-list-item__socials text-sm transition-all">
                   <i className="footer-list-item__icon fa-brands fa-instagram-square"></i>
                   Instagram
                 </button>
               </li>
               <li className="footer-list-item">
-                <button className="footer-list-item__link footer-list-item__socials transition-all text-sm">
+                <button className="footer-list-item__link footer-list-item__socials text-sm transition-all">
                   <i className="footer-list-item__icon fa-brands fa-linkedin"></i>
                   LinkedIn
                 </button>
@@ -309,7 +309,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="footer-footer__full">
-        <div className="grid wide">
+        <div className="wide grid">
           <div className="row footer-footer">
             <div className="row footer-footer-heading hide-on-mobile">
               <span className="footer-footer-heading__link">

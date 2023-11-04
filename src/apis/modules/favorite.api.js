@@ -4,7 +4,7 @@ const favoriteEndpoints = {
   list: 'user/favorites',
   add: 'user/favorites',
   remove: ({ favoriteId }) => `user/favorites/${favoriteId}`,
-  removefavorites: 'user/favorites'
+  removefavorites: 'user/favorites',
 }
 
 const favoriteApi = {
@@ -22,7 +22,7 @@ const favoriteApi = {
     productTitle,
     productPrice,
     productType,
-    productImage
+    productImage,
   }) => {
     try {
       const response = await privateClient.post(favoriteEndpoints.add, {
@@ -30,7 +30,7 @@ const favoriteApi = {
         productType,
         productTitle,
         productPrice,
-        productImage
+        productImage,
       })
       return { response }
     } catch (error) {
@@ -42,7 +42,7 @@ const favoriteApi = {
     try {
       const response = await privateClient.delete(
         favoriteEndpoints.remove({
-          favoriteId
+          favoriteId,
         })
       )
       return { response }
@@ -55,14 +55,14 @@ const favoriteApi = {
       const response = await privateClient.delete(
         favoriteEndpoints.removeFavorites,
         {
-          data: favoriteIds
+          data: favoriteIds,
         }
       )
       return { response }
     } catch (error) {
       return { error }
     }
-  }
+  },
 }
 
 export default favoriteApi

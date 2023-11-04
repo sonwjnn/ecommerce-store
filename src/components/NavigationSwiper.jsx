@@ -10,7 +10,7 @@ const NavigationSwiper = ({ children }) => {
         pagination={{ clickable: true }}
         navigation={true}
         modules={[Navigation, Pagination]}
-        className="w-full h-full"
+        className="h-full w-full"
       >
         {children}
       </Swiper>

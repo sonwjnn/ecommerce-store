@@ -1,17 +1,17 @@
-import { FaRegUser, FaUserCircle } from 'react-icons/fa'
-import { SiReacthookform } from 'react-icons/si'
-import { BsBell } from 'react-icons/bs'
-import { AiOutlineTags, AiTwotoneShop } from 'react-icons/ai'
-import { MdOutlineFavoriteBorder } from 'react-icons/md'
-import { useSelector } from 'react-redux'
-import { useEffect, useState } from 'react'
-import { Link, useParams, useLocation } from 'react-router-dom'
-import PasswordUpdate from '@/components/PasswordUpdate'
 import FavoriteList from '@/components/FavoriteList'
-import TextAvatar from '@/components/TextAvatar'
+import PasswordUpdate from '@/components/PasswordUpdate'
 import ProfileUpdate from '@/components/ProfileUpdate'
 import PurchaseList from '@/components/PurchaseList'
 import ShowUserShop from '@/components/ShowUserShop'
+import TextAvatar from '@/components/TextAvatar'
+import { useEffect, useState } from 'react'
+import { AiOutlineTags, AiTwotoneShop } from 'react-icons/ai'
+import { BsBell } from 'react-icons/bs'
+import { FaRegUser, FaUserCircle } from 'react-icons/fa'
+import { MdOutlineFavoriteBorder } from 'react-icons/md'
+import { SiReacthookform } from 'react-icons/si'
+import { useSelector } from 'react-redux'
+import { Link, useLocation, useParams } from 'react-router-dom'
 
 const AccountPage = () => {
   const { user } = useSelector(state => state.user)
@@ -22,7 +22,7 @@ const AccountPage = () => {
 
   const actionsAccount = [
     ['profile', 'hồ sơ'],
-    ['password', 'đổi mật khẩu']
+    ['password', 'đổi mật khẩu'],
   ]
 
   const [onRequest, setOnRequest] = useState(false)
@@ -32,38 +32,38 @@ const AccountPage = () => {
   }, [])
 
   return (
-    <div className="bg-white md:bg-bg_page px-0 xl:px-[136px] py-0 sm:py-[56px]   min-h-[80vh]">
-      <div className=" h-full rounded-md max-w-[1220px] ">
+    <div className="min-h-[80vh] bg-white px-0 py-0 sm:py-[56px] md:bg-bg_page   xl:px-[136px]">
+      <div className=" h-full max-w-[1220px] rounded-md ">
         <div className="flex min-h-[66vh]">
           <div
             className={`bg-white md:bg-bg_page ${
               accountType || authCate ? 'hidden' : ''
-            } md:block md:w-[250px] w-full   md:p-4`}
+            } w-full md:block md:w-[250px]   md:p-4`}
           >
-            <div className="flex flex-col md:gap-6 mt-10  md:px-0 md:mt-0">
+            <div className="mt-10 flex flex-col md:mt-0  md:gap-6 md:px-0">
               <div className="flex gap-2 p-4">
-                <div className="min-w-[50px] min-h-[50px] ">
+                <div className="min-h-[50px] min-w-[50px] ">
                   <TextAvatar text={user.name} />
                 </div>
-                <div className="text-[26px] md:text-[20px] lg:text-base text-gray-600 font-semibold line-clamp-2">
+                <div className="line-clamp-2 text-[26px] font-semibold text-gray-600 md:text-[20px] lg:text-base">
                   {user.name}
                 </div>
               </div>
 
-              <div className="flex  gap-3 items-center  account-item ">
-                <FaRegUser className="self-start text-[30px] md:text-[22px] mt-8 md:mt-0 text-blue-600" />
-                <div className="flex flex-col capitalize gap-3 w-full">
-                  <span className="text-base pt-0">
+              <div className="account-item  flex items-center  gap-3 ">
+                <FaRegUser className="mt-8 self-start text-[30px] text-blue-600 md:mt-0 md:text-[22px]" />
+                <div className="flex w-full flex-col gap-3 capitalize">
+                  <span className="pt-0 text-base">
                     <Link to={'/user/account/profile'}>tài khoản của tôi</Link>
                   </span>
-                  <div className="gap-2 flex flex-col ">
+                  <div className="flex flex-col gap-2 ">
                     {actionsAccount.map((action, index) => (
                       <Link
                         key={index}
                         to={`/user/account/${action[0]}`}
                         className={`action-account ${
                           activeAccount === index ? 'active' : ''
-                        } capitalize text-gray-600  text-left p-1 md:p-0 text-[20px] md:text-sm ml-1`}
+                        } ml-1 p-1  text-left text-[20px] capitalize text-gray-600 md:p-0 md:text-sm`}
                         onClick={() => setActiveAccount(index)}
                       >
                         {action[1]}
@@ -73,48 +73,48 @@ const AccountPage = () => {
                 </div>
               </div>
 
-              <button className="flex gap-3 items-center account-item">
-                <SiReacthookform className="text-[30px] md:text-[22px] text-orange-700" />
-                <span className="text-base text-left capitalize w-full">
+              <button className="account-item flex items-center gap-3">
+                <SiReacthookform className="text-[30px] text-orange-700 md:text-[22px]" />
+                <span className="w-full text-left text-base capitalize">
                   <Link to={'/user/purchase'}>đơn mua</Link>
                 </span>
               </button>
 
-              <button className="flex gap-3 items-center account-item">
-                <BsBell className="text-[30px] md:text-[22px] text-yellow-500" />
-                <span className="text-base text-left capitalize w-full">
+              <button className="account-item flex items-center gap-3">
+                <BsBell className="text-[30px] text-yellow-500 md:text-[22px]" />
+                <span className="w-full text-left text-base capitalize">
                   thông báo
                 </span>
               </button>
 
-              <button className="flex gap-3 items-center account-item">
-                <AiOutlineTags className="text-[32px] md:text-[20px] text-purple-500" />
-                <span className="text-base text-left capitalize w-full">
+              <button className="account-item flex items-center gap-3">
+                <AiOutlineTags className="text-[32px] text-purple-500 md:text-[20px]" />
+                <span className="w-full text-left text-base capitalize">
                   kho vouncher
                 </span>
               </button>
 
-              <button className="flex gap-3 items-center account-item">
-                <MdOutlineFavoriteBorder className="text-[30px] md:text-[20px] text-red-500" />
-                <span className="text-base text-left capitalize w-full">
+              <button className="account-item flex items-center gap-3">
+                <MdOutlineFavoriteBorder className="text-[30px] text-red-500 md:text-[20px]" />
+                <span className="w-full text-left text-base capitalize">
                   <Link to={'/user/favorite'}>yêu thích</Link>
                 </span>
               </button>
 
-              <button className="flex gap-3 items-center account-item">
-                <AiTwotoneShop className="text-[30px] md:text-[20px] text-purple-500" />
-                <span className="text-base text-left capitalize w-full">
+              <button className="account-item flex items-center gap-3">
+                <AiTwotoneShop className="text-[30px] text-purple-500 md:text-[20px]" />
+                <span className="w-full text-left text-base capitalize">
                   <Link to={'/user/shop'}>Shop</Link>
                 </span>
               </button>
             </div>
           </div>
           <div
-            className={`bg-white  w-full rounded-md p-4 ${
+            className={`w-full  rounded-md bg-white p-4 ${
               accountType || authCate ? 'block' : 'hidden'
             } md:block`}
           >
-            <div className="text-[24px] py-4 text-gray-600 px-8 capitalize border-b-gray-200 border-b">
+            <div className="border-b border-b-gray-200 px-8 py-4 text-[24px] capitalize text-gray-600">
               {accountType === 'password'
                 ? 'đổi mật khẩu'
                 : accountType === 'profile'

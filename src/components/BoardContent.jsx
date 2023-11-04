@@ -1,14 +1,15 @@
-import ProductSidebar from './ProductSidebar'
-import BoardBar from './BoardBar'
-import ProductList from './ProductGrid'
-import Pagination from './Pagination'
+import productApi from '@/apis/modules/product.api'
 import productConfigs from '@/configs/product.configs'
-import { useDispatch, useSelector } from 'react-redux'
-import { useLocation, useParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
 import { setGlobalLoading } from '@/redux/features/globalLoadingSlice'
 import { clearProductsStore } from '@/redux/features/productSlice'
-import productApi from '@/apis/modules/product.api'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useLocation, useParams } from 'react-router-dom'
+
+import BoardBar from './BoardBar'
+import Pagination from './Pagination'
+import ProductList from './ProductGrid'
+import ProductSidebar from './ProductSidebar'
 
 const BoardContent = () => {
   const { typeName, cateName } = useParams()
@@ -75,7 +76,7 @@ const BoardContent = () => {
     <div className="app__container">
       <div className="wide">
         <div className="row sm-gutter app__content w-full">
-          <div className="col l-2 m-0 c-0">
+          <div className="col l-2 c-0 m-0">
             <ProductSidebar />
           </div>
 

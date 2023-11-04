@@ -1,11 +1,11 @@
-import dayjs from 'dayjs'
-import { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { toast } from 'react-hot-toast'
-import { Link } from 'react-router-dom'
 import reviewApi from '@/apis/modules/review.api'
 import { setGlobalLoading } from '@/redux/features/globalLoadingSlice'
 import { routesGen } from '@/routes/routes'
+import dayjs from 'dayjs'
+import { useEffect, useState } from 'react'
+import { toast } from 'react-hot-toast'
+import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const ReviewItem = ({ review, onRemoved }) => {
   const dispatch = useDispatch()
@@ -17,7 +17,7 @@ const ReviewItem = ({ review, onRemoved }) => {
     setOnRequest(true)
 
     const { response, err } = await reviewApi.remove({
-      reviewId: review._id
+      reviewId: review._id,
     })
     setOnRequest(false)
 
@@ -36,7 +36,7 @@ const ReviewItem = ({ review, onRemoved }) => {
         flexDirection: { xs: 'column', md: 'row' },
         padding: 1,
         opacity: onRequest ? 0.6 : 1,
-        '&:hover': { backgroundColor: 'background.paper' }
+        '&:hover': { backgroundColor: 'background.paper' },
       }}
     >
       <Box sx={{ width: { xs: 0, md: '10%' } }}>
@@ -49,7 +49,7 @@ const ReviewItem = ({ review, onRemoved }) => {
               paddingTop: '160%',
               ...uiConfigs.style.backgroundImage(
                 tmdbConfigs.posterPath(review.mediaPoster)
-              )
+              ),
             }}
           />
         </Link>
@@ -58,7 +58,7 @@ const ReviewItem = ({ review, onRemoved }) => {
       <Box
         sx={{
           width: { xs: '100%', md: '80%' },
-          padding: { xs: 0, md: '0 2rem' }
+          padding: { xs: 0, md: '0 2rem' },
         }}
       >
         <Stack spacing={1}>
@@ -86,7 +86,7 @@ const ReviewItem = ({ review, onRemoved }) => {
           position: { xs: 'relative', md: 'absolute' },
           right: { xs: 0, md: '10px' },
           marginTop: { xs: 2, md: 0 },
-          width: 'max-content'
+          width: 'max-content',
         }}
         startIcon={<DeleteIcon />}
         loadingPosition="start"
@@ -127,7 +127,7 @@ const ReviewList = () => {
   const onLoadMore = () => {
     setFilteredReviews([
       ...filteredReviews,
-      ...[...reviews].splice(page * skip, skip)
+      ...[...reviews].splice(page * skip, skip),
     ])
     setPage(page + 1)
   }
@@ -147,7 +147,7 @@ const ReviewList = () => {
               <ReviewItem review={review} onRemoved={onRemoved} />
               <Divider
                 sx={{
-                  display: { xs: 'block', md: 'none' }
+                  display: { xs: 'block', md: 'none' },
                 }}
               />
             </Box>

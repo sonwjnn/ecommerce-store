@@ -1,7 +1,8 @@
 import React from 'react'
-import SearchMain from './SearchMain'
+import { useLocation, useParams } from 'react-router-dom'
+
 import HeaderNavigate from './HeaderNavigate'
-import { useParams, useLocation } from 'react-router-dom'
+import SearchMain from './SearchMain'
 
 const AppBar = () => {
   const location = useLocation()
@@ -11,7 +12,7 @@ const AppBar = () => {
   return (
     <>
       <div
-        className={` header bg-gradient-to-b  from-bg_header_b to-bg_header_t  w-full  ${
+        className={` header w-full  bg-gradient-to-b from-bg_header_b  to-bg_header_t  ${
           sign || carts ? 'hidden' : ''
         } ${
           productId ||
@@ -24,7 +25,7 @@ const AppBar = () => {
         } ${!sign && !productId ? 'fixed' : ''}
         `}
       >
-        <div className="grid wide">
+        <div className="wide grid">
           <HeaderNavigate />
           <SearchMain />
         </div>

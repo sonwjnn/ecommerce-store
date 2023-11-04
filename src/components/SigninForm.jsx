@@ -1,14 +1,16 @@
-import { useFormik } from 'formik'
-import { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { toast } from 'react-hot-toast'
-import * as Yup from 'yup'
 import userApi from '@/apis/modules/user.api'
 import { setAuthModalOpen } from '@/redux/features/authModelSlice'
 import { setUser } from '@/redux/features/userSlice'
+import { useFormik } from 'formik'
+import { useState } from 'react'
+import { toast } from 'react-hot-toast'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import * as Yup from 'yup'
+
 import LoadingButton from './LoadingButton'
 import { Input } from './ui/input'
+
 const SigninForm = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -21,7 +23,7 @@ const SigninForm = () => {
   const signinForm = useFormik({
     initialValues: {
       password: '',
-      username: ''
+      username: '',
     },
     validationSchema: Yup.object({
       username: Yup.string()
@@ -29,7 +31,7 @@ const SigninForm = () => {
         .required('user name is required'),
       password: Yup.string()
         .min(8, 'password minimum 8 character')
-        .required('password is required')
+        .required('password is required'),
     }),
     onSubmit: async values => {
       setErrorMessage(undefined)
@@ -46,13 +48,13 @@ const SigninForm = () => {
         }, 2000)
       }
       if (error) setErrorMessage(error.message)
-    }
+    },
   })
   return (
     <form onSubmit={signinForm.handleSubmit}>
-      <h1 className="text-[22px] mb-6">Đăng Nhập</h1>
+      <h1 className="mb-6 text-[22px]">Đăng Nhập</h1>
 
-      <div className="mt-2 mb-5">
+      <div className="mb-5 mt-2">
         <Input
           type="text"
           name="username"
@@ -92,14 +94,14 @@ const SigninForm = () => {
           loading={isLoginRequest}
           colorLoading={'#fb5533'}
           variant={'contained'}
-          className={`uppercase px-6 py-3 text-sm  font-semibold bg-primary text-white  `}
+          className={`bg-primary px-6 py-3 text-sm  font-semibold uppercase text-white  `}
         >
           đăng nhập
         </LoadingButton>
 
         <button
           type="button"
-          className=" w-full uppercase rounded-md bg-white border-primary border-2 px-6 py-2 text-sm font-semibold text-primary shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          className=" w-full rounded-md border-2 border-primary bg-white px-6 py-2 text-sm font-semibold uppercase text-primary shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           onClick={() => authUserPage('signup')}
         >
           đăng kí

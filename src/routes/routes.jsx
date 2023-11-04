@@ -1,12 +1,12 @@
+import PasswordUpdate from '@/components/PasswordUpdate'
+import ProtectedPage from '@/components/ProtectedPage'
+import AccountPage from '@/pages/AccountPage'
+import AuthUser from '@/pages/AuthUser'
 import CartList from '@/pages/CartList'
+import HomePage from '@/pages/HomePage'
 import ProductDetail from '@/pages/ProductDetail'
 import ProductSearch from '@/pages/ProductSearch'
 import ReviewList from '@/pages/ReviewList'
-import ProtectedPage from '@/components/ProtectedPage'
-import AuthUser from '@/pages/AuthUser'
-import AccountPage from '@/pages/AccountPage'
-import HomePage from '@/pages/HomePage'
-import PasswordUpdate from '@/components/PasswordUpdate'
 
 export const routesGen = {
   home: '/',
@@ -16,7 +16,7 @@ export const routesGen = {
   person: id => `/person/${id}`,
   favoriteList: '/favorites',
   reviewList: '/reviews',
-  passwordUpdate: '/password-update'
+  passwordUpdate: '/password-update',
 }
 
 export const productType = [
@@ -27,14 +27,14 @@ export const productType = [
   'Laptop',
   'Laptop gaming',
   'Apple',
-  'Bàn phím'
+  'Bàn phím',
 ]
 
 const routes = [
   {
     index: true,
     element: <HomePage />,
-    state: 'home'
+    state: 'home',
   },
 
   {
@@ -44,7 +44,7 @@ const routes = [
         <PasswordUpdate />
       </ProtectedPage>
     ),
-    state: 'password.update'
+    state: 'password.update',
   },
   {
     path: 'user/carts',
@@ -53,7 +53,7 @@ const routes = [
         <CartList />
       </ProtectedPage>
     ),
-    state: 'carts'
+    state: 'carts',
   },
   {
     path: '/reviews',
@@ -62,16 +62,16 @@ const routes = [
         <ReviewList />
       </ProtectedPage>
     ),
-    state: 'reviews'
+    state: 'reviews',
   },
   {
     path: '/products/detail/:productId',
-    element: <ProductDetail />
+    element: <ProductDetail />,
   },
 
   {
     path: '/authUser/:sign',
-    element: <AuthUser />
+    element: <AuthUser />,
   },
   {
     path: '/user/account/:accountType',
@@ -79,7 +79,7 @@ const routes = [
       <ProtectedPage>
         <AccountPage />
       </ProtectedPage>
-    )
+    ),
   },
   {
     path: '/user/account/index',
@@ -87,7 +87,7 @@ const routes = [
       <ProtectedPage>
         <AccountPage />
       </ProtectedPage>
-    )
+    ),
   },
   {
     path: '/user/:authCate',
@@ -95,12 +95,12 @@ const routes = [
       <ProtectedPage>
         <AccountPage />
       </ProtectedPage>
-    )
+    ),
   },
   {
     path: '/search/:keyword',
     element: <ProductSearch />,
-    state: 'search'
+    state: 'search',
   },
   {
     path: '/reviews',
@@ -109,8 +109,8 @@ const routes = [
         <ReviewList />
       </ProtectedPage>
     ),
-    state: 'reviews'
-  }
+    state: 'reviews',
+  },
 ]
 
 export default routes

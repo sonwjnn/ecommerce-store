@@ -1,20 +1,20 @@
+import React from 'react'
+import { Toaster } from 'react-hot-toast'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+
 import './App.css'
 import './assets/css/base.css'
 import './assets/css/grid.css'
 import './assets/css/main.css'
 import './assets/css/responsive.css'
-
-import React from 'react'
-import { Toaster } from 'react-hot-toast'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import PageWrapper from './components/PageWrapper'
+import ProductList from './components/ProductList'
 import MainLayout from './layouts/MainLayout'
 import SubLayout from './layouts/SubLayout'
 import routes from './routes/routes'
-import ProductList from './components/ProductList'
-import 'swiper/css'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
 
 const App = () => {
   return (
@@ -25,9 +25,9 @@ const App = () => {
           style: {
             background: '#fff',
             color: '#333',
-            fontSize: '16px'
+            fontSize: '16px',
           },
-          position: 'bottom-center'
+          position: 'bottom-center',
         }}
       />
 

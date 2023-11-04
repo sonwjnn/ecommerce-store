@@ -1,9 +1,10 @@
-import { useSelector } from 'react-redux'
-import { useState, useEffect } from 'react'
-import { PulseLoader } from 'react-spinners'
 import { css } from '@emotion/react'
-import AppBar from './AppBar'
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { PulseLoader } from 'react-spinners'
+
+import AppBar from './AppBar'
 
 const override = css`
   display: 'block';
@@ -32,9 +33,9 @@ const GlobalLoading = () => {
     <>
       {isLoading ? (
         <>
-          <div className=" h-screen top-0 left-0 w-full z-50 fixed transition-all bg-white">
+          <div className=" fixed left-0 top-0 z-50 h-screen w-full bg-white transition-all">
             <AppBar className="z-51" />
-            <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+            <div className="absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]">
               <PulseLoader
                 color={'#888888'}
                 loading={isLoading}

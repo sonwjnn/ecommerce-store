@@ -61,7 +61,7 @@ const provinces = [
     'Tuyên Quang',
     'Vĩnh Long',
     'Vĩnh Phúc',
-    'Yên Bái'
+    'Yên Bái',
   ],
   c1 = [
     'Thành phố Long Xuyên',
@@ -74,7 +74,7 @@ const provinces = [
     'Huyện Phú Tân',
     'Huyện Thoại Sơn',
     'Huyện Tịnh Biên',
-    'Huyện Tri Tôn'
+    'Huyện Tri Tôn',
   ],
   c2 = [
     'Thành phố Vũng Tàu',
@@ -85,7 +85,7 @@ const provinces = [
     'Huyện Đất Đỏ',
     'Huyện Long Điền',
     'Huyện Tân Thành',
-    'Huyện Xuyên Mộc'
+    'Huyện Xuyên Mộc',
   ],
   c3 = [
     'Thành phố Bạc Liêu',
@@ -94,7 +94,7 @@ const provinces = [
     'Huyện Hòa Bình',
     'Huyện Hồng Dân',
     'Huyện Phước Long',
-    'Huyện Vĩnh Lợi'
+    'Huyện Vĩnh Lợi',
   ],
   c4 = [
     'Thị xã Bắc Kạn',
@@ -104,7 +104,7 @@ const provinces = [
     'Huyện Chợ Mới',
     'Huyện Na Rì',
     'Huyện Ngân Sơn',
-    'Huyện Pác Nặm'
+    'Huyện Pác Nặm',
   ],
   c5 = [
     'Thành phố Bắc Giang',
@@ -116,7 +116,7 @@ const provinces = [
     'Huyện Tân Yên',
     'Huyện Việt Yên',
     'Huyện Yên Dũng',
-    'Huyện Yên Thế'
+    'Huyện Yên Thế',
   ],
   c6 = [
     'Thành phố Bắc Ninh',
@@ -126,7 +126,7 @@ const provinces = [
     'Huyện Quế Võ',
     'Huyện Thuận Thành',
     'Huyện Tiên Du',
-    'Huyện Yên Phong'
+    'Huyện Yên Phong',
   ],
   c7 = [
     'Thành phố Bến Tre',
@@ -137,7 +137,7 @@ const provinces = [
     'Huyện Giồng Trôm',
     'Huyện Mỏ Cày Bắc',
     'Huyện Mỏ Cày Nam',
-    'Huyện Thạnh Phú'
+    'Huyện Thạnh Phú',
   ],
   c8 = [
     'Thành phố Thủ Dầu Một',
@@ -148,7 +148,7 @@ const provinces = [
     'Huyện Dĩ An',
     'Huyện Phú Giáo',
     'Huyện Tân Uyên',
-    'Huyện Thuận An'
+    'Huyện Thuận An',
   ],
   c9 = [
     'Thành phố Quy Nhơn',
@@ -161,7 +161,7 @@ const provinces = [
     'Huyện Tây Sơn',
     'Huyện Tuy Phước',
     'Huyện Vân Canh',
-    'Huyện Vĩnh Thạnh'
+    'Huyện Vĩnh Thạnh',
   ],
   c10 = [
     'Thị xã Bình Long',
@@ -174,7 +174,7 @@ const provinces = [
     'Huyện Đồng Phú',
     'Huyện Hớn Quản',
     'Huyện Lộc Ninh',
-    'Huyện Phú Riềng'
+    'Huyện Phú Riềng',
   ],
   c11 = [
     'Thành phố Phan Thiết',
@@ -186,7 +186,7 @@ const provinces = [
     'Huyện Hàm Thuận Bắc',
     'Huyện Hàm Thuận Nam',
     'Huyện Tánh Linh',
-    'Huyện Tuy Phong'
+    'Huyện Tuy Phong',
   ],
   c12 = [
     'Thành phố Cà Mau',
@@ -198,7 +198,7 @@ const provinces = [
     'Huyện Thới Bình',
     'Huyện Trần Văn Thời',
     'Huyện U Minh',
-    'Huyện Tuy Phong'
+    'Huyện Tuy Phong',
   ],
   c13 = [
     'Thị xã Cao Bằng',
@@ -213,7 +213,7 @@ const provinces = [
     'Huyện Thạch An',
     'Huyện Thông Nông',
     'Huyện Trà Lĩnh',
-    'Huyện Trùng Khánh'
+    'Huyện Trùng Khánh',
   ],
   c14 = [
     'Quận Bình Thủy',
@@ -224,7 +224,7 @@ const provinces = [
     'Huyện Thới Lai',
     'Huyện Cờ Đỏ',
     'Huyện Phong Điền',
-    'Huyện Vĩnh Thạnh'
+    'Huyện Vĩnh Thạnh',
   ],
   c15 = [
     'Quận Cẩm Lệ',
@@ -234,7 +234,7 @@ const provinces = [
     'Quận Sơn Trà',
     'Quận Thanh Khê',
     'Huyện Hòa Vang',
-    'Huyện Hoàng Sa'
+    'Huyện Hoàng Sa',
   ],
   c16 = [
     'Thành phố Buôn Ma Thuột',
@@ -251,7 +251,7 @@ const provinces = [
     'Huyện Krông Năng',
     'Huyện Krông Pắc',
     'Huyện Lăk',
-    "Huyện M'Đrăk"
+    "Huyện M'Đrăk",
   ],
   c17 = [
     'Thị xã Gia Nghĩa',
@@ -261,7 +261,7 @@ const provinces = [
     "Huyện Dăk R'Lấp",
     'Huyện Dăk Song',
     'Huyện Krông Nô',
-    'Huyện Tuy Đức'
+    'Huyện Tuy Đức',
   ],
   c18 = [
     'Thành phố Biên Hòa',
@@ -274,7 +274,7 @@ const provinces = [
     'Huyện Thống Nhất',
     'Huyện Trảng Bom',
     'Huyện Vĩnh Cửu',
-    'Huyện Xuân Lộc'
+    'Huyện Xuân Lộc',
   ],
   c19 = [
     'Thành phố Cao Lãnh',
@@ -288,7 +288,7 @@ const provinces = [
     'Huyện Tam Nông',
     'Huyện Tân Hồng',
     'Huyện Thanh Bình',
-    'Huyện Tháp Mười'
+    'Huyện Tháp Mười',
   ],
   c20 = [
     'Thành phố Điện Biên Phủ',
@@ -300,7 +300,7 @@ const provinces = [
     'Huyện Mường Nhé',
     'Huyện Nậm Pồ',
     'Huyện Tủa Chùa',
-    'Huyện Tuần Giáo'
+    'Huyện Tuần Giáo',
   ],
   c21 = [
     'Thành Phố Pleiku',
@@ -319,7 +319,7 @@ const provinces = [
     'Huyện Kông Chro',
     'Huyện Krông Pa',
     'Huyện Mang Yang',
-    'Huyện Phú Thiện'
+    'Huyện Phú Thiện',
   ],
   c22 = [
     'Thành phố Hà Giang',
@@ -332,7 +332,7 @@ const provinces = [
     'Huyện Quang Bình',
     'Huyện Vị Xuyên',
     'Huyện Xín Mần',
-    'Huyện Yên Minh'
+    'Huyện Yên Minh',
   ],
   c23 = [
     'Thành phố Phủ Lý',
@@ -340,7 +340,7 @@ const provinces = [
     'Huyện Duy Tiên',
     'Huyện Kim Bảng',
     'Huyện Lý Nhân',
-    'Huyện Thanh Liêm'
+    'Huyện Thanh Liêm',
   ],
   c24 = [
     'Quận Ba Đình',
@@ -372,7 +372,7 @@ const provinces = [
     'Huyện Thanh Trì',
     'Quận Thanh Xuân',
     'Huyện Thường Tín',
-    'Huyện Ứng Hòa'
+    'Huyện Ứng Hòa',
   ],
   c25 = [
     'Thành phố Hà Tĩnh',
@@ -386,7 +386,7 @@ const provinces = [
     'Huyện Lộc Hà',
     'Huyện Nghi Xuân',
     'Huyện Thạch Hà',
-    'Huyện Vũ Quang'
+    'Huyện Vũ Quang',
   ],
   c26 = [
     'Thành phố Hải Dương',
@@ -400,7 +400,7 @@ const provinces = [
     'Huyện Ninh Giang',
     'Huyện Thanh Hà',
     'Huyện Thanh Miện',
-    'Huyện Tứ Kỳ'
+    'Huyện Tứ Kỳ',
   ],
   c27 = [
     'Quận Đồ Sơn',
@@ -417,7 +417,7 @@ const provinces = [
     'Huyện Kiến Thụy',
     'Huyện Thủy Nguyên',
     'Huyện Tiên Lãng',
-    'Huyện Vĩnh Bảo'
+    'Huyện Vĩnh Bảo',
   ],
   c28 = [
     'Thành phố Hòa Bình',
@@ -430,7 +430,7 @@ const provinces = [
     'Huyện Lương Sơn',
     'Huyện Mai Châu',
     'Huyện Tân Lạc',
-    'Huyện Yên Thủy'
+    'Huyện Yên Thủy',
   ],
   c29 = [
     'Thành phố Vị Thanh',
@@ -439,7 +439,7 @@ const provinces = [
     'Huyện Châu Thành A',
     'Huyện Long Mỹ',
     'Huyện Phụng Hiệp',
-    'Huyện Vị Thủy'
+    'Huyện Vị Thủy',
   ],
   c30 = [
     'Thành phố Hưng Yên',
@@ -451,7 +451,7 @@ const provinces = [
     'Huyện Tiên Lữ',
     'Huyện Văn Giang',
     'Huyện Văn Lâm',
-    'Huyện Yên Mỹ'
+    'Huyện Yên Mỹ',
   ],
   c31 = [
     'Quận 1',
@@ -477,7 +477,7 @@ const provinces = [
     'Huyện Cần Giờ',
     'Huyện Củ Chi',
     'Huyện Hóc Môn',
-    'Huyện Nhà Bè'
+    'Huyện Nhà Bè',
   ],
   c32 = [
     'Thành phố Nha Trang',
@@ -488,7 +488,7 @@ const provinces = [
     'Huyện Khánh Sơn',
     'Huyện Khánh Vĩnh',
     'Huyện Trường Sa',
-    'Huyện Vạn Ninh'
+    'Huyện Vạn Ninh',
   ],
   c33 = [
     'Thành phố Rạch Giá',
@@ -505,7 +505,7 @@ const provinces = [
     'Huyện Phú Quốc',
     'Huyện Tân Hiệp',
     'Huyện U minh Thượng',
-    'Huyện Vĩnh Thuận'
+    'Huyện Vĩnh Thuận',
   ],
   c34 = [
     'Thành phố KonTum',
@@ -517,7 +517,7 @@ const provinces = [
     'Huyện Ngọc Hồi',
     'Huyện Sa Thầy',
     'Huyện Tu Mơ Rông',
-    "Huyện Ia H' Drai"
+    "Huyện Ia H' Drai",
   ],
   c35 = [
     'Thị xã Lai Châu',
@@ -527,7 +527,7 @@ const provinces = [
     'Huyện Sìn Hồ',
     'Huyện Tam Đường',
     'Huyện Tân Uyên',
-    'Huyện Than Uyên'
+    'Huyện Than Uyên',
   ],
   c36 = [
     'Thành phố Lào Cai',
@@ -538,7 +538,7 @@ const provinces = [
     'Huyện Mường Khương',
     'Huyện Sa Pa',
     'Huyện Văn Bàn',
-    'Huyện Xi Ma Cai'
+    'Huyện Xi Ma Cai',
   ],
   c37 = [
     'Thành phố Lạng Sơn',
@@ -551,7 +551,7 @@ const provinces = [
     'Huyện Lộc Bình',
     'Huyện Tràng Định',
     'Huyện Văn Lãng',
-    'Huyện Văn Quan'
+    'Huyện Văn Quan',
   ],
   c38 = [
     'Thành phố Bảo Lộc',
@@ -565,7 +565,7 @@ const provinces = [
     'Huyện Đơn Dương',
     'Huyện Đức Trọng',
     'Huyện Lạc Dương',
-    'Huyện Lâm Hà'
+    'Huyện Lâm Hà',
   ],
   c39 = [
     'Thành phố Tân An',
@@ -582,7 +582,7 @@ const provinces = [
     'Huyện Tân Trụ',
     'Huyện Thạnh Hóa',
     'Huyện Thủ Thừa',
-    'Huyện Vĩnh Hưng'
+    'Huyện Vĩnh Hưng',
   ],
   c40 = [
     'Thành phố Nam Định',
@@ -594,7 +594,7 @@ const provinces = [
     'Huyện Trực Ninh',
     'Huyện Vụ Bản',
     'Huyện Xuân Trường',
-    'Huyện Ý Yên'
+    'Huyện Ý Yên',
   ],
   c41 = [
     'Thành phố Vinh',
@@ -617,7 +617,7 @@ const provinces = [
     'Huyện Tân Kỳ',
     'Huyện Thanh Chương',
     'Huyện Tương Dương',
-    'Huyện Yên Thành'
+    'Huyện Yên Thành',
   ],
   c42 = [
     'Thành phố Ninh Bình',
@@ -627,7 +627,7 @@ const provinces = [
     'Huyện Kim Sơn',
     'Huyện Nho Quan',
     'Huyện Yên Khánh',
-    'Huyện Yên Mô'
+    'Huyện Yên Mô',
   ],
   c43 = [
     'Thành phố Phan Rang - Tháp Chàm',
@@ -636,7 +636,7 @@ const provinces = [
     'Huyện Ninh Phước',
     'Huyện Ninh Sơn',
     'Huyện Thuận Bắc',
-    'Huyện Thuận Nam'
+    'Huyện Thuận Nam',
   ],
   c44 = [
     'Thành phố Việt Trì',
@@ -651,7 +651,7 @@ const provinces = [
     'Huyện Thanh Ba',
     'Huyện Thanh Sơn',
     'Huyện Thanh Thủy',
-    'Huyện Yên Lập'
+    'Huyện Yên Lập',
   ],
   c45 = [
     'Thành phố Tuy Hòa',
@@ -662,7 +662,7 @@ const provinces = [
     'Huyện Sơn Hòa',
     'Huyện Sông Hinh',
     'Huyện Tây Hòa',
-    'Huyện Tuy An'
+    'Huyện Tuy An',
   ],
   c46 = [
     'Thành phố Đồng Hới',
@@ -672,7 +672,7 @@ const provinces = [
     'Huyện Minh Hóa',
     'Huyện Quảng Ninh',
     'Huyện Quảng Trạch',
-    'Huyện Tuyên Hóa'
+    'Huyện Tuyên Hóa',
   ],
   c47 = [
     'Thành phố Hội An',
@@ -692,7 +692,7 @@ const provinces = [
     'Huyện Quế Sơn',
     'Huyện Tây Giang',
     'Huyện Thăng Bình',
-    'Huyện Tiên Phước'
+    'Huyện Tiên Phước',
   ],
   c48 = [
     'Thành phố Quảng Ngãi',
@@ -708,7 +708,7 @@ const provinces = [
     'Huyện Sơn Tịnh',
     'Huyện Tây Trà',
     'Huyện Trà Bồng',
-    'Huyện Tư Nghĩa'
+    'Huyện Tư Nghĩa',
   ],
   c49 = [
     'Thành phố Hạ Long',
@@ -724,7 +724,7 @@ const provinces = [
     'Huyện Hoành Bồ',
     'Huyện Quảng Yên',
     'Huyện Tiên Yên',
-    'Huyện Vân Đồn'
+    'Huyện Vân Đồn',
   ],
   c50 = [
     'Thành phố Đông Hà',
@@ -737,7 +737,7 @@ const provinces = [
     'Huyện Hải Lăng',
     'Huyện Hướng Hóa',
     'Huyện Triệu Phong',
-    'Huyện Vĩnh Linh'
+    'Huyện Vĩnh Linh',
   ],
   c51 = [
     'Thành phố Sóc Trăng',
@@ -750,7 +750,7 @@ const provinces = [
     'Huyện Ngã Năm',
     'Huyện Thạnh Trị',
     'Huyện Trần Đề',
-    'Huyện Vĩnh Châu'
+    'Huyện Vĩnh Châu',
   ],
   c52 = [
     'Thành phố Sơn La',
@@ -764,7 +764,7 @@ const provinces = [
     'Huyện Sốp Cộp',
     'Huyện Thuận Châu',
     'Huyện Vân Hồ',
-    'Huyện Yên Châu'
+    'Huyện Yên Châu',
   ],
   c53 = [
     'Thành phố Tây Ninh',
@@ -775,7 +775,7 @@ const provinces = [
     'Huyện Hòa Thành',
     'Huyện Tân Biên',
     'Huyện Tân Châu',
-    'Huyện Trảng Bàng'
+    'Huyện Trảng Bàng',
   ],
   c54 = [
     'Thành phố Thái Bình',
@@ -785,7 +785,7 @@ const provinces = [
     'Huyện Quỳnh Phụ',
     'Huyện Thái Thuỵ',
     'Huyện Tiền Hải',
-    'Huyện Vũ Thư'
+    'Huyện Vũ Thư',
   ],
   c55 = [
     'Thành phố Thái Nguyên',
@@ -796,7 +796,7 @@ const provinces = [
     'Huyện Phổ Yên',
     'Huyện Phú Bình',
     'Huyện Phú Lương',
-    'Huyện Võ Nhai'
+    'Huyện Võ Nhai',
   ],
   c56 = [
     'Thành phố Thanh Hóa',
@@ -825,7 +825,7 @@ const provinces = [
     'Huyện Tĩnh Gia',
     'Huyện Triệu Sơn',
     'Huyện Vĩnh Lộc',
-    'Huyện Yên Định'
+    'Huyện Yên Định',
   ],
   c57 = [
     'Thành phố Huế',
@@ -835,7 +835,7 @@ const provinces = [
     'Huyện Phong Điền',
     'Huyện Phú Lộc',
     'Huyện Phú Vang',
-    'Huyện Quảng Điền'
+    'Huyện Quảng Điền',
   ],
   c58 = [
     'Thành phố Mỹ Tho',
@@ -847,7 +847,7 @@ const provinces = [
     'Huyện Gò Công Đông',
     'Huyện Gò Công Tây',
     'Huyện Tân Phú Đông',
-    'Huyện Tân Phước'
+    'Huyện Tân Phước',
   ],
   c59 = [
     'Thành phố Trà Vinh',
@@ -857,7 +857,7 @@ const provinces = [
     'Huyện Châu Thành',
     'Huyện Duyên Hải',
     'Huyện Tiểu Cần',
-    'Huyện Trà Cú'
+    'Huyện Trà Cú',
   ],
   c60 = [
     'Thành phố Tuyên Quang',
@@ -866,7 +866,7 @@ const provinces = [
     'Huyện Lâm Bình',
     'Huyện Na Hang',
     'Huyện Sơn Dương',
-    'Huyện Yên Sơn'
+    'Huyện Yên Sơn',
   ],
   c61 = [
     'Thành phố Vĩnh Long',
@@ -876,7 +876,7 @@ const provinces = [
     'Huyện Mang Thít',
     'Huyện Tam Bình',
     'Huyện Trà Ôn',
-    'Huyện Vũng Liêm'
+    'Huyện Vũng Liêm',
   ],
   c62 = [
     'Thành phố Vĩnh Yên',
@@ -887,7 +887,7 @@ const provinces = [
     'Huyện Tam Đảo',
     'Huyện Tam Dương',
     'Huyện Vĩnh Tường',
-    'Huyện Yên Lạc'
+    'Huyện Yên Lạc',
   ],
   c63 = [
     'Thành phố Yên Bái',
@@ -898,7 +898,7 @@ const provinces = [
     'Huyện Trấn Yên',
     'Huyện Văn Chấn',
     'Huyện Văn Yên',
-    'Huyện Yên Bình'
+    'Huyện Yên Bình',
   ],
   districts = [
     c1,
@@ -963,7 +963,7 @@ const provinces = [
     c60,
     c61,
     c62,
-    c63
+    c63,
   ]
 
 export { provinces, districts }

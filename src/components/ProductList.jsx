@@ -1,14 +1,15 @@
-import { useDispatch } from 'react-redux'
-import ProductGrid from './ProductGrid'
-import { useParams, useSearchParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-import { setGlobalLoading } from '@/redux/features/globalLoadingSlice'
 import productApi from '@/apis/modules/product.api'
-import { toast } from 'react-hot-toast'
+import { setGlobalLoading } from '@/redux/features/globalLoadingSlice'
 import { filterTypeOrder } from '@/utilities/filters'
+import { mapOrder } from '@/utilities/sorts'
+import { useEffect, useState } from 'react'
+import { toast } from 'react-hot-toast'
+import { useDispatch } from 'react-redux'
+import { useParams, useSearchParams } from 'react-router-dom'
+
 import BoardBar from './BoardBar'
 import Pagination from './Pagination'
-import { mapOrder } from '@/utilities/sorts'
+import ProductGrid from './ProductGrid'
 import ProductNotFound from './ProductNotFound'
 
 const ProductList = () => {

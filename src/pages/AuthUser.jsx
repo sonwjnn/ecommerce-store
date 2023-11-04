@@ -1,13 +1,13 @@
-import { useDispatch } from 'react-redux'
 import SigninForm from '@/components/SigninForm'
 import SignupForm from '@/components/SignupForm'
-import { useNavigate, useParams } from 'react-router-dom'
-import { useEffect } from 'react'
 import { setGlobalLoading } from '@/redux/features/globalLoadingSlice'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const actionState = {
   signin: 'signin',
-  signup: 'signup'
+  signup: 'signup',
 }
 
 const AuthUser = () => {
@@ -25,8 +25,8 @@ const AuthUser = () => {
   const switchAuthState = state => setAction(state)
 
   return (
-    <div className="w-full overflow-hidden top-0 left-0 right-0 bottom-0 ">
-      <header className="flex items-center justify-center sm:justify-between py-3 px-24 bg-white h-[85px]">
+    <div className="bottom-0 left-0 right-0 top-0 w-full overflow-hidden ">
+      <header className="flex h-[85px] items-center justify-center bg-white px-24 py-3 sm:justify-between">
         <div className="flex ">
           <button onClick={toHomePage} className=" inline-block max-w-[200px]">
             <svg
@@ -41,23 +41,23 @@ const AuthUser = () => {
           </button>
         </div>
 
-        <div className="help text-base hidden sm:block text-primary underline cursor-pointer">
+        <div className="help hidden cursor-pointer text-base text-primary underline sm:block">
           Bạn cần giúp đỡ ?
         </div>
       </header>
 
       <main
-        className="bg-primary h-[600px] relative w-full bg-no-repeat bg-contain bg-center "
+        className="relative h-[600px] w-full bg-primary bg-contain bg-center bg-no-repeat "
         style={{
           backgroundImage: `url(
             'https://down-vn.img.susercontent.com/file/sg-11134004-7qvd5-lfuyd509f57p08'
-          )`
+          )`,
         }}
       >
         <div className="flex ">
-          <div className="left-[10%] top-[22%] absolute hidden auth:block"></div>
+          <div className="absolute left-[10%] top-[22%] hidden auth:block"></div>
         </div>
-        <div className="sm:w-[400px] w-full h-[492px] sm:mx-auto  auth:mx-0 block bg-white rounded-md mt-[8%] auth:mt-0 py-6 px-12 auth:absolute auth:right-[10%] auth:top-[50%] auth:translate-y-[-50%] ">
+        <div className="mt-[8%] block h-[492px] w-full  rounded-md bg-white px-12 py-6 sm:mx-auto sm:w-[400px] auth:absolute auth:right-[10%] auth:top-[50%] auth:mx-0 auth:mt-0 auth:translate-y-[-50%] ">
           {sign === actionState.signin && (
             <SigninForm
               switchAuthState={() => switchAuthState(actionState.signup)}

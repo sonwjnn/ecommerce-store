@@ -1,20 +1,20 @@
-import { Outlet } from 'react-router-dom'
-import GlobalLoading from '@/components/GlobalLoading'
-import Footer from '@/components/Footer'
-import Appbar from '@/components/AppBar'
-import { useSelector, useDispatch } from 'react-redux'
-import { useEffect } from 'react'
-import userApi from '@/apis/modules/user.api'
 import cartApi from '@/apis/modules/cart.api'
+import favoriteApi from '@/apis/modules/favorite.api'
+import shopApi from '@/apis/modules/shop.api'
+import userApi from '@/apis/modules/user.api'
+import Appbar from '@/components/AppBar'
+import Footer from '@/components/Footer'
+import GlobalLoading from '@/components/GlobalLoading'
+import NavigateMobile from '@/components/NavigateMobile'
 import {
   setListCarts,
   setListFavorites,
+  setShop,
   setUser,
-  setShop
 } from '@/redux/features/userSlice'
-import NavigateMobile from '@/components/NavigateMobile'
-import favoriteApi from '@/apis/modules/favorite.api'
-import shopApi from '@/apis/modules/shop.api'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Outlet } from 'react-router-dom'
 
 // Layout use for all pages
 const MainLayout = () => {
@@ -88,7 +88,7 @@ const MainLayout = () => {
           <Outlet />
         </main>
         {/* main */}
-        <div className=" lg:hidden h-[64px] fixed bottom-0 left-0 right-0 z-100">
+        <div className=" z-100 fixed bottom-0 left-0 right-0 h-[64px] lg:hidden">
           <NavigateMobile />
         </div>
       </div>

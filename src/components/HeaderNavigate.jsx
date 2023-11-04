@@ -1,6 +1,7 @@
 import React from 'react'
-import HeaderSocial from './HeaderSocial'
+
 import HeaderMenu from './HeaderMenu'
+import HeaderSocial from './HeaderSocial'
 
 const HeaderNavigate = () => {
   return (
