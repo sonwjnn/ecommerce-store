@@ -1,6 +1,6 @@
 import { SlEmotsmile } from 'react-icons/sl'
 
-const NotFoundProduct = ({ text }) => {
+const ProductNotFound = ({ text }) => {
   return (
     <div className="h-[50vh] w-full flex items-center justify-center ">
       <div className="flex flex-col gap-8 items-center justify-center">
@@ -13,4 +13,4 @@ const NotFoundProduct = ({ text }) => {
   )
 }
 
-export default NotFoundProduct
+export default ProductNotFound

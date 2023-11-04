@@ -2,21 +2,27 @@ import userApi from '@/apis/modules/user.api'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import { toast } from 'react-hot-toast'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { maskedEmail } from '@/utilities/constants'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import { useDispatch } from 'react-redux'
 import LoadingButton from './LoadingButton'
 import { Input } from './ui/input'
+import { provinces, districts } from '@/utilities/provinceCity'
+import { updateUser } from '@/redux/features/userSlice'
+import dayjs from 'dayjs'
 
 const ProfileUpdate = () => {
   const { user } = useSelector(state => state.user)
   const [onRequest, setOnRequest] = useState(false)
   const [originalEmail, setOriginalEmail] = useState('')
+  const [selectedProvince, setSelectedProvince] = useState('')
+  const [provinceOptions, setProvinceOptions] = useState(provinces)
+  const [districtOptions, setDistrictOptions] = useState(districts)
 
   const dispatch = useDispatch()
+
   const phoneRegex = /(84|0[3|5|7|8|9])+([0-9]{8})\b/
 
   const initialValues = {
@@ -51,12 +57,6 @@ const ProfileUpdate = () => {
       address: Yup.string()
         .min(10, 'address minimum 10 character')
         .required('address is required'),
-      city: Yup.string()
-        .min(10, 'city minimum 10 character')
-        .required('city is required'),
-      district: Yup.string()
-        .min(4, 'district minimum 4 character')
-        .required('district is required'),
       sex: Yup.string()
         .min(3, 'sex minimum 3 character')
         .required('sex is required'),
@@ -71,6 +71,7 @@ const ProfileUpdate = () => {
     if (onRequest) return
     setOnRequest(true)
     if (JSON.stringify(values) === JSON.stringify(initialValues)) return
+
     const { response, err } = await userApi.profileUpdate({
       ...values,
       email: originalEmail ? originalEmail : user.email
@@ -82,6 +83,12 @@ const ProfileUpdate = () => {
     if (response) {
       setOriginalEmail(response.email)
 
+      dispatch(
+        updateUser({
+          ...values,
+          birthday: dayjs(values.birthday).format('YYYY-MM-DD')
+        })
+      )
       toast.success('Update profile success!')
     }
   }
@@ -91,6 +98,15 @@ const ProfileUpdate = () => {
     setOriginalEmail(email)
     form.setFieldValue('email', email)
   }
+
+  useEffect(() => {
+    if (form.values.city) {
+      const provinceIndex = provinces.indexOf(form.values.city)
+      const newDistricts = districts[provinceIndex]
+      setDistrictOptions(newDistricts)
+      setSelectedProvince(form.values.city)
+    }
+  }, [form.values.city])
 
   return (
     <div className="flex items-start justify-center">
@@ -209,18 +225,24 @@ const ProfileUpdate = () => {
             >
               thành phố
             </label>
-            <div className="flex flex-col w-full">
-              <Input
-                type="text"
-                name="city"
-                id="city"
-                value={form.values.city}
-                onChange={form.handleChange}
-              />
-              {form.errors.city && (
-                <p className="errMsg ">{form.errors.city}</p>
-              )}
-            </div>
+
+            <select
+              className="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring  disabled:cursor-not-allowed disabled:opacity-50"
+              name="city"
+              id="city"
+              value={form.values.city}
+              onChange={form.handleChange}
+            >
+              <option value={form.values.city || ''}>
+                {form.values.city || 'Provinces/City'}
+              </option>
+              {provinceOptions?.map((province, index) => (
+                <option key={index} value={province}>
+                  {province}
+                </option>
+              ))}
+            </select>
+            {form.errors.city && <p className="errMsg ">{form.errors.city}</p>}
           </div>
 
           <div className="flex gap-2 flex-col md:flex-row items-center">
@@ -230,18 +252,24 @@ const ProfileUpdate = () => {
             >
               Quận / Huyện
             </label>
-            <div className="flex flex-col w-full">
-              <Input
-                type="district"
-                name="district"
-                id="district"
-                value={form.values.district}
-                onChange={form.handleChange}
-              />
-              {form.errors.district && (
-                <p className="errMsg ">{form.errors.district}</p>
-              )}
-            </div>
+
+            <select
+              className="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring  disabled:cursor-not-allowed disabled:opacity-50"
+              disabled={!selectedProvince}
+              value={form.values.district || 'District'}
+              name="district"
+              id="district"
+              onChange={form.handleChange}
+            >
+              {districtOptions?.map((district, index) => (
+                <option key={index} value={district}>
+                  {district}
+                </option>
+              ))}
+            </select>
+            {form.errors.district && (
+              <p className="errMsg ">{form.errors.district}</p>
+            )}
           </div>
 
           <div className="flex gap-2 flex-col md:flex-row items-center">
@@ -320,7 +348,7 @@ const ProfileUpdate = () => {
               loading={onRequest}
               colorLoading={'#fb5533'}
               variant={'contained'}
-              className={`mb-4  w-[25%] ml-auto uppercase  bg-primary px-4 py-4 text-[14px] font-semibold text-white  `}
+              className={`mb-4  w-[25%] ml-auto uppercase  bg-primary px-4 py-4 text-sm font-semibold text-white  `}
             >
               lưu
             </LoadingButton>

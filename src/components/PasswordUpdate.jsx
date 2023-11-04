@@ -55,7 +55,7 @@ const PasswordUpdate = () => {
           <div className="flex flex-col md:flex-row gap-2  items-center">
             <label
               htmlFor="password"
-              className="capitalize text-[16px] self-start text-gray-500 w-[260px]"
+              className="capitalize text-base self-start text-gray-500 w-[260px]"
             >
               mật khẩu
             </label>
@@ -71,7 +71,7 @@ const PasswordUpdate = () => {
           <div className="flex flex-col md:flex-row gap-2  items-center">
             <label
               htmlFor="newPassword"
-              className="capitalize self-start text-[16px] text-gray-500 w-[260px]"
+              className="capitalize self-start text-base text-gray-500 w-[260px]"
             >
               mật khẩu mới
             </label>
@@ -87,7 +87,7 @@ const PasswordUpdate = () => {
           <div className="flex flex-col md:flex-row gap-2 items-center">
             <label
               htmlFor="confirmNewPassword"
-              className="capitalize w-[260px] self-start text-gray-500 text-[16px]"
+              className="capitalize w-[260px] self-start text-gray-500 text-base"
             >
               xác nhận mật khẩu
             </label>

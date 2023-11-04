@@ -21,20 +21,20 @@ const BoardBar = ({ handleSelectPriceOption }) => {
           <ul className="select-input__menu top-[110%]">
             <li className="select-input__item">
               <button
-                className="select-input__link "
+                className="select-input__link py-2"
                 onClick={handleSelectPriceOption}
               >
                 <i className="select-input__icon ti-arrow-down text-sm"></i>
-                <span className="ml-2">Thấp đến cao</span>
+                <span className="ml-2 text-sm">Thấp đến cao</span>
               </button>
             </li>
             <li className="select-input__item">
               <button
-                className="select-input__link "
+                className="select-input__link py-2"
                 onClick={handleSelectPriceOption}
               >
-                <i className="select-input__icon ti-arrow-up"></i>
-                <span className="ml-2">Cao đến thấp</span>
+                <i className="select-input__icon ti-arrow-up text-sm"></i>
+                <span className="ml-2 text-sm">Cao đến thấp</span>
               </button>
             </li>
           </ul>
@@ -44,15 +44,12 @@ const BoardBar = ({ handleSelectPriceOption }) => {
             <span className="home-filter__page-current ">1</span>/15
           </div>
           <div className="home-filter__page-move">
-            <a
-              href=""
-              className="home-filter__page-btn home-filter__page-btn--disable"
-            >
+            <button className="home-filter__page-btn home-filter__page-btn--disable">
               <i className="home-filter__page-icon home-filter__page-icon--disable ti-angle-left"></i>
-            </a>
-            <a href="" className="home-filter__page-btn">
+            </button>
+            <button className="home-filter__page-btn">
               <i className="home-filter__page-icon ti-angle-right"></i>
-            </a>
+            </button>
           </div>
         </div>
       </div>

@@ -41,7 +41,7 @@ const AuthUser = () => {
           </button>
         </div>
 
-        <div className="help text-2xl hidden sm:block text-primary underline cursor-pointer">
+        <div className="help text-base hidden sm:block text-primary underline cursor-pointer">
           Bạn cần giúp đỡ ?
         </div>
       </header>

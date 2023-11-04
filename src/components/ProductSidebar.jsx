@@ -7,8 +7,9 @@ import { setTypes } from '@/redux/features/typeSlice'
 import { setProductLoading } from '@/redux/features/productLoading'
 import ProductLoading from './ProductLoading'
 import { toast } from 'react-hot-toast'
+import { cn } from '@/lib/utils'
 
-const ProductType = () => {
+const ProductSidebar = () => {
   const { cateName, typeName } = useParams()
   const dispatch = useDispatch()
   const [productTypes, setProductTypes] = useState([])
@@ -36,7 +37,7 @@ const ProductType = () => {
     <>
       {productTypes.length ? (
         <nav className="category  w-[200px]">
-          <header className="category__heading pointer-events-none select-none flex uppercase items-center">
+          <header className="category__heading pointer-events-none select-none flex uppercase items-center text-base font-bold">
             <BiCategory className="text-[18px] mr-2" />
             loại sản phẩm
           </header>
@@ -46,11 +47,10 @@ const ProductType = () => {
               <li className="category-item select-none" key={type._id}>
                 <Link
                   to={`/products/${cateName}/${type.name}`}
-                  className={`category-item__link ${
-                    activeLink === index || typeName === type.name
-                      ? 'active'
-                      : ''
-                  }`}
+                  className={cn(
+                    `category-item__link  text-sm`,
+                    (activeLink === index || typeName === type.name) && 'active'
+                  )}
                   onClick={() => setActiveLink(index)}
                 >
                   {type.name}
@@ -64,4 +64,4 @@ const ProductType = () => {
   )
 }
 
-export default ProductType
+export default ProductSidebar

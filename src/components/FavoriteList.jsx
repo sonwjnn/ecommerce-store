@@ -5,7 +5,7 @@ import { shorterString } from '@/utilities/constants'
 import { removeFavorite } from '@/redux/features/userSlice'
 import { toast } from 'react-hot-toast'
 import { SlEmotsmile } from 'react-icons/sl'
-import { RiDeleteBin5Line } from 'react-icons/ri'
+import { LuTrash } from 'react-icons/lu'
 import productApi from '@/apis/modules/product.api'
 
 const FavoriteItem = props => {
@@ -62,13 +62,13 @@ const FavoriteItem = props => {
             }}
           ></div>
           <div className="flex flex-col justify-center self-center">
-            <div className="text-[16px] text-gray-500">{shortTitle}</div>
-            <div className="text-[14px]">{type}</div>
+            <div className="text-base text-gray-500">{shortTitle}</div>
+            <div className="text-sm">{type}</div>
           </div>
         </div>
 
         <div className="flex ml-[132px] self-end md:self-center items-center">
-          <div className=" text-primary text-[18px] md:text-[16px] px-12 mr-12">
+          <div className=" text-primary text-[18px] md:text-base px-12 mr-12">
             ₫{handleDotPrice(price)}
           </div>
 
@@ -76,7 +76,7 @@ const FavoriteItem = props => {
             onClick={onRemove}
             className="text-red-600 mr-2 text-[32px] md:text-[24px] flex items-center px-3 py-2 justify-center   "
           >
-            <RiDeleteBin5Line />
+            <LuTrash />
           </button>
         </div>
       </div>

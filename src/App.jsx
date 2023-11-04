@@ -11,7 +11,6 @@ import PageWrapper from './components/PageWrapper'
 import MainLayout from './layouts/MainLayout'
 import SubLayout from './layouts/SubLayout'
 import routes from './routes/routes'
-import NotFound from './components/NotFound'
 import ProductList from './components/ProductList'
 import 'swiper/css'
 import 'swiper/css/navigation'
@@ -54,7 +53,7 @@ const App = () => {
                   <Route key="sublayout" path="/" element={<SubLayout />}>
                     <Route
                       key={`products_${route.cateName}_${route.typeName}`}
-                      path={`/products/${route.cateName}/${route.typeName}`}
+                      path={`/products/:cateName/:typeName`}
                       element={<ProductList />}
                     />
                   </Route>
@@ -75,7 +74,7 @@ const App = () => {
                 />
               )
             )}
-            <Route path="*" element={<NotFound />} />
+            {/* <Route path="*" element={<NotFound />} /> */}
           </Route>
         </Routes>
       </Router>

@@ -38,16 +38,14 @@ const ReviewItem = ({ review, onRemoved }) => {
 
         <div className="gap-2 flex flex-col grow justify-center">
           <div className="gap-1">
-            <h6 className="font-bold text-[16px]">{review.user.name}</h6>
+            <h6 className="font-bold text-base">{review.user.name}</h6>
             <Star stars={review.rating} />
             <p className="text-[11px] text-gray-500">
               {dayjs(review.createdAt).format('DD-MM-YYYY HH:mm:ss')}
             </p>
           </div>
           <div className=" gap-4 flex flex-row justify-between">
-            <div className="flex justify-center text-[14px]">
-              {review.content}
-            </div>
+            <div className="flex justify-center text-sm">{review.content}</div>
           </div>
           {user && user.id === review.user.id && (
             <LoadingButton
@@ -166,7 +164,7 @@ const ProductReview = ({ reviews, product, reviewCount, setReviewCount }) => {
                 <TextAvatar text={user.name} />
               </div>
               <div className="flex gap-4 flex-col w-full">
-                <h6 className="font-bold text-[16px]">{user.name}</h6>
+                <h6 className="font-bold text-base">{user.name}</h6>
                 <div className="flex gap-3">
                   <textarea
                     value={content}
@@ -174,7 +172,7 @@ const ProductReview = ({ reviews, product, reviewCount, setReviewCount }) => {
                     onChange={e => setContent(e.target.value)}
                     rows={4}
                     placeholder="Write your review"
-                    className="grow p-4 border border-gray-300 resize-none text-[14px] bg-white"
+                    className="grow p-4 border border-gray-300 resize-none text-sm bg-white"
                   />
 
                   <LoadingButton
@@ -189,9 +187,9 @@ const ProductReview = ({ reviews, product, reviewCount, setReviewCount }) => {
                 </div>
 
                 <div className="flex gap-4">
-                  <div className="text-[14px] text-gray-400">Your vote: </div>
+                  <div className="text-sm text-gray-400">Your vote: </div>
                   <StarVote rating={rating} setRating={setRating} />
-                  <div className="text-[14px] text-gray-500">{rating}/5</div>
+                  <div className="text-sm text-gray-500">{rating}/5</div>
                 </div>
               </div>
             </div>

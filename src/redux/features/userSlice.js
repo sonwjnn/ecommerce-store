@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { forEach } from 'lodash'
 
 const userSlice = createSlice({
   name: 'user',
   initialState: {
     user: null,
     listCarts: [],
-    listFavorites: []
+    listFavorites: [],
+    shop: null
   },
   reducers: {
     setUser: (state, action) => {
@@ -71,6 +71,12 @@ const userSlice = createSlice({
           state.listFavorites = [action.payload, ...state.listFavorites]
         }
       }
+    },
+    setShop: (state, action) => {
+      state.shop = action.payload
+    },
+    updateShop: (state, action) => {
+      state.shop = { ...state.shop, ...action.payload }
     }
   }
 })
@@ -85,7 +91,9 @@ export const {
   setListFavorites,
   removeFavorite,
   removeFavorites,
-  addFavorite
+  addFavorite,
+  setShop,
+  updateShop
 } = userSlice.actions
 
 export default userSlice.reducer

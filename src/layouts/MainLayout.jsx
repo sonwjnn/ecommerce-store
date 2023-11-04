@@ -9,10 +9,12 @@ import cartApi from '@/apis/modules/cart.api'
 import {
   setListCarts,
   setListFavorites,
-  setUser
+  setUser,
+  setShop
 } from '@/redux/features/userSlice'
 import NavigateMobile from '@/components/NavigateMobile'
 import favoriteApi from '@/apis/modules/favorite.api'
+import shopApi from '@/apis/modules/shop.api'
 
 // Layout use for all pages
 const MainLayout = () => {
@@ -29,7 +31,7 @@ const MainLayout = () => {
       } else dispatch(setUser(null))
     }
     authUser()
-  }, [dispatch])
+  }, [user, dispatch])
 
   useEffect(() => {
     const cartsOfUser = async () => {
@@ -46,10 +48,23 @@ const MainLayout = () => {
     const favoritesOfUser = async () => {
       const { response, err } = await favoriteApi.getList()
       if (response) dispatch(setListFavorites(response))
+      else dispatch(setListFavorites([]))
     }
     favoritesOfUser()
     if (!user) {
       dispatch(setListFavorites([]))
+    }
+  }, [user, dispatch])
+
+  useEffect(() => {
+    const shopOfUser = async () => {
+      const { response, err } = await shopApi.getInfo()
+      if (response) dispatch(setShop(response))
+      else dispatch(setShop(null))
+    }
+    shopOfUser()
+    if (!user) {
+      dispatch(setShop(null))
     }
   }, [user, dispatch])
 

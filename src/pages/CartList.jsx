@@ -113,13 +113,13 @@ export const CartItem = props => {
             }}
           ></div>
           <div className="flex flex-col justify-center self-start lg:self-center">
-            <div className="text-[16px] text-gray-500">{title}</div>
-            <div className="text-[14px]">{type}</div>
+            <div className="text-base text-gray-500">{title}</div>
+            <div className="text-sm">{type}</div>
           </div>
         </div>
 
         <div className="flex relative flex-col lg:flex-row self-start ml-[132px] lg:self-center lg:ml-0  gap-[14px] lg:gap-[60px] md:items-center">
-          <div className="text-primary text-[16px] lg:px-12">₫{prevPrice}</div>
+          <div className="text-primary text-base lg:px-12">₫{prevPrice}</div>
 
           <div className=" font-normal">
             <div className="flex gap-4 items-center">
@@ -130,7 +130,7 @@ export const CartItem = props => {
                 >
                   <span>-</span>
                 </span>
-                <span className="select-none px-5 h-12 py-1 text-[16px] text-gray-600 border border-gray-300">
+                <span className="select-none px-5 h-12 py-1 text-base text-gray-600 border border-gray-300">
                   {cartValue}
                 </span>
                 <span
@@ -144,7 +144,7 @@ export const CartItem = props => {
             </div>
           </div>
 
-          <div className="hidden lg:block text-primary text-[16px] px-12">
+          <div className="hidden lg:block text-primary text-base px-12">
             ₫{currPrice}
           </div>
 
@@ -269,14 +269,14 @@ const CartList = () => {
           </span>
         </div>
 
-        <div className="hidden md:block help text-2xl text-primary underline cursor-pointer">
+        <div className="hidden md:block help text-base text-primary underline cursor-pointer">
           Bạn cần giúp đỡ ?
         </div>
       </header>
 
       <div className="w-full min-h-screen ">
         <div className=" max-w-[1200px] h-full mx-auto overflow-hidden ">
-          <div className="rounded-md  min-h-[40px] px-6 py-4 w-full  bg-white mt-12 hidden lg:flex justify-between text-[16px]">
+          <div className="rounded-md  min-h-[40px] px-6 py-4 w-full  bg-white mt-12 hidden lg:flex justify-between text-base">
             <div className="flex ml-8 items-center">
               <div className="py-4 px-4 text-gray-500">Tất cả sản phẩm</div>
             </div>
@@ -297,7 +297,7 @@ const CartList = () => {
                 userId={cart.user}
                 productId={cart.productId}
                 price={cart.productPrice}
-                title={cart.productTitle}
+                title={cart.productName}
                 type={cart.productType}
                 imageName={cart.productImage}
                 quantity={cart.quantity}
@@ -313,7 +313,7 @@ const CartList = () => {
 
           <div className="sticky hidden md:block bottom-0 rounded-md h-full w-full bg-white mt-4 mb-20">
             <div className="flex items-center justify-between p-4 lg:p-8">
-              <div className="flex items-center text-[14px] lg:text-[17px] gap-4">
+              <div className="flex items-center text-sm lg:text-[17px] gap-4">
                 <button
                   className="btn-cart-solid pointer-events-none select-none"
                   onClick={onCheckedAll}
@@ -327,11 +327,11 @@ const CartList = () => {
               </div>
 
               <div className="flex gap-8 items-center ">
-                <span className="text-[14px] lg:text-[17px] text-gray-500">
+                <span className="text-sm lg:text-[17px] text-gray-500">
                   Tổng thanh toán ({checkedCarts.length} sản phẩm):
                 </span>
                 <span className="text-primary font-semibold text-[20px] flex items-start  lg:text-[24px]">
-                  <span className="text-[16px] mt-2">₫</span>
+                  <span className="text-base mt-2">₫</span>
                   {handleDotPrice(
                     checkedCarts
                       .reduce(
@@ -350,7 +350,7 @@ const CartList = () => {
 
           <div className="md:hidden bottom-0 rounded-md h-full w-full bg-white mt-4 mb-20">
             <div className="flex items-center justify-between  pl-2">
-              <div className="flex items-center text-[14px]">
+              <div className="flex items-center text-sm">
                 <button className="btn-cart-solid p-0" onClick={onCheckedAll}>
                   Tất cả
                 </button>
@@ -360,7 +360,7 @@ const CartList = () => {
                 <span className="text-[13px] text-gray-500">
                   Tổng thanh toán:
                 </span>
-                <span className="text-primary font-semibold text-[16px]">
+                <span className="text-primary font-semibold text-base">
                   ₫52.000
                 </span>
                 <button className="btn-primary rounded-l-none">mua hàng</button>

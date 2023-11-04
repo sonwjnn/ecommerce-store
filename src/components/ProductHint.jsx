@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux'
 import ProductHintGrid from './ProductHintGrid'
+import ProductNotFound from './ProductNotFound'
 import { useEffect, useState } from 'react'
 import { setGlobalLoading } from '@/redux/features/globalLoadingSlice'
 import productApi from '@/apis/modules/product.api'
@@ -37,17 +38,23 @@ const ProductHint = () => {
 
   return (
     <>
-      <ProductHintGrid products={filteredProducts} />
+      {filteredProducts.length ? (
+        <>
+          <ProductHintGrid products={filteredProducts} />
 
-      {filteredProducts.length < products.length && (
-        <div className="flex items-center justify-center pb-8">
-          <button
-            className="px-8 py-2 mt-2 capitalize text-[14px] hover:bg-gray-100 border border-gray-300 bg-white outline-none"
-            onClick={onLoadMore}
-          >
-            xem thêm
-          </button>
-        </div>
+          {filteredProducts.length < products.length && (
+            <div className="flex items-center justify-center pb-8">
+              <button
+                className="px-8 py-2 mt-2 capitalize text-sm hover:bg-gray-100 border border-gray-300 bg-white outline-none"
+                onClick={onLoadMore}
+              >
+                xem thêm
+              </button>
+            </div>
+          )}
+        </>
+      ) : (
+        <ProductNotFound text={'Hiện tại chưa có sản phẩm nào.'} />
       )}
     </>
   )

@@ -22,7 +22,7 @@ const CategoryItem = ({ index, cateName, disable }) => {
         }}
       ></div>
       <div
-        className={` text-[14px]  text-center flex items-center justify-center`}
+        className={` text-sm  text-center flex items-center justify-center`}
         key={index}
       >
         {cateName}

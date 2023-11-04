@@ -1,4 +1,4 @@
-import ProductType from './ProductType'
+import ProductSidebar from './ProductSidebar'
 import BoardBar from './BoardBar'
 import ProductList from './ProductGrid'
 import Pagination from './Pagination'
@@ -76,7 +76,7 @@ const BoardContent = () => {
       <div className="wide">
         <div className="row sm-gutter app__content w-full">
           <div className="col l-2 m-0 c-0">
-            <ProductType />
+            <ProductSidebar />
           </div>
 
           <div className="col l-10 c-12">

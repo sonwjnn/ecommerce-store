@@ -12,7 +12,7 @@ const HeaderSocial = () => {
       <li className="nav-list-item nav-list-item--separate">
         <span className="header__nav-title--no-pointer">Kết nối</span>
         <button className="nav-item-link">
-          <BsFacebook className="text-white ml-3 text-[16px]" />
+          <BsFacebook className="text-white ml-3 text-base" />
         </button>
         <button className="nav-item-link ml-2 text-[20px]">
           <AiFillInstagram className="text-white" />
