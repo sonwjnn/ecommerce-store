@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
 
+import { Button } from './ui/button'
 import { Input } from './ui/input'
 
 const PasswordUpdate = () => {
@@ -103,12 +104,7 @@ const PasswordUpdate = () => {
 
           <div className="mt-6 flex ">
             <div className="w-[266px]"></div>
-            <button
-              type="submit"
-              className="mb-4 ml-auto w-[25%] rounded-md bg-primary px-4  py-3 text-sm font-semibold uppercase text-white shadow-sm transition-all hover:brightness-125 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              lưu
-            </button>
+            <Button type="submit">lưu</Button>
           </div>
         </form>
       </div>

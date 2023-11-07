@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FaStar, FaStarHalfAlt } from 'react-icons/fa'
+import { BiSolidStar } from 'react-icons/bi'
 
 const StarVote = ({ rating, setRating }) => {
   const [hover, setHover] = useState(null)
@@ -16,8 +16,8 @@ const StarVote = ({ rating, setRating }) => {
               value={currentRating}
               onClick={() => setRating(currentRating)}
             />
-            <FaStar
-              className={`star cursor-pointer text-[20px] ${
+            <BiSolidStar
+              className={`star cursor-pointer text-xl ${
                 currentRating <= (hover || rating) ? '' : 'text-[#e4e5e9]'
               }`}
               onMouseEnter={() => setHover(currentRating)}

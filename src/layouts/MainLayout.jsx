@@ -2,9 +2,9 @@ import cartApi from '@/apis/modules/cart.api'
 import favoriteApi from '@/apis/modules/favorite.api'
 import shopApi from '@/apis/modules/shop.api'
 import userApi from '@/apis/modules/user.api'
-import Appbar from '@/components/AppBar'
 import Footer from '@/components/Footer'
 import GlobalLoading from '@/components/GlobalLoading'
+import Header from '@/components/Header'
 import NavigateMobile from '@/components/NavigateMobile'
 import {
   setListCarts,
@@ -31,7 +31,7 @@ const MainLayout = () => {
       } else dispatch(setUser(null))
     }
     authUser()
-  }, [user, dispatch])
+  }, [dispatch])
 
   useEffect(() => {
     const cartsOfUser = async () => {
@@ -42,7 +42,7 @@ const MainLayout = () => {
     if (!user) {
       dispatch(setListCarts([]))
     }
-  }, [user, dispatch])
+  }, [dispatch])
 
   useEffect(() => {
     const favoritesOfUser = async () => {
@@ -54,7 +54,7 @@ const MainLayout = () => {
     if (!user) {
       dispatch(setListFavorites([]))
     }
-  }, [user, dispatch])
+  }, [dispatch])
 
   useEffect(() => {
     const shopOfUser = async () => {
@@ -66,7 +66,7 @@ const MainLayout = () => {
     if (!user) {
       dispatch(setShop(null))
     }
-  }, [user, dispatch])
+  }, [dispatch])
 
   return (
     <>
@@ -80,7 +80,7 @@ const MainLayout = () => {
 
       <div className="flex flex-col  font-roboto ">
         {/* header */}
-        <Appbar />
+        <Header />
         {/* header */}
 
         {/* main */}

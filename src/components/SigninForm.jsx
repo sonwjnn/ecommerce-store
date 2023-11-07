@@ -1,5 +1,4 @@
 import userApi from '@/apis/modules/user.api'
-import { setAuthModalOpen } from '@/redux/features/authModelSlice'
 import { setUser } from '@/redux/features/userSlice'
 import { useFormik } from 'formik'
 import { useState } from 'react'
@@ -8,7 +7,8 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
 
-import LoadingButton from './LoadingButton'
+import { Spinner } from './spinner'
+import { Button } from './ui/button'
 import { Input } from './ui/input'
 
 const SigninForm = () => {
@@ -89,23 +89,20 @@ const SigninForm = () => {
       </div>
 
       <div className="mt-6 flex flex-col gap-4">
-        <LoadingButton
-          type="submit"
-          loading={isLoginRequest}
-          colorLoading={'#fb5533'}
-          variant={'contained'}
-          className={`bg-primary px-6 py-3 text-sm  font-semibold uppercase text-white  `}
-        >
+        <Button className="uppercase" type="submit" disable={isLoginRequest}>
+          <div className="mr-2">
+            {isLoginRequest ? <Spinner size="lg" /> : ''}
+          </div>
           đăng nhập
-        </LoadingButton>
+        </Button>
 
-        <button
-          type="button"
-          className=" w-full rounded-md border-2 border-primary bg-white px-6 py-2 text-sm font-semibold uppercase text-primary shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        <Button
+          className="uppercase"
+          variant="outline"
           onClick={() => authUserPage('signup')}
         >
           đăng kí
-        </button>
+        </Button>
       </div>
     </form>
   )

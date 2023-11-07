@@ -1,5 +1,4 @@
-import { AiOutlineStar } from 'react-icons/ai'
-import { FaStar, FaStarHalfAlt } from 'react-icons/fa'
+import { BiSolidStar, BiSolidStarHalf, BiStar } from 'react-icons/bi'
 import { twMerge } from 'tailwind-merge'
 
 const Star = ({ stars, className }) => {
@@ -8,11 +7,11 @@ const Star = ({ stars, className }) => {
     return (
       <span key={index}>
         {stars >= index + 1 ? (
-          <FaStar className={twMerge(`star`, className)} />
+          <BiSolidStar className={twMerge(`star`, className)} />
         ) : stars >= number ? (
-          <FaStarHalfAlt className={twMerge(`star`, className)} />
+          <BiSolidStarHalf className={twMerge(`star`, className)} />
         ) : (
-          <AiOutlineStar className={twMerge(`star`, className)} />
+          <BiStar className={twMerge(`star`, className)} />
         )}
       </span>
     )

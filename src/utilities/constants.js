@@ -1,3 +1,6 @@
+import { BsFacebook } from 'react-icons/bs'
+import { FaGithub, FaInstagram } from 'react-icons/fa'
+
 export const handleLinkImage = link => {
   return new URL(link, import.meta.url).href
 }
@@ -27,14 +30,20 @@ export const handleUrl = url => {
   return resolvedUrl
 }
 
-export const bannerLogos = [
-  'khung giờ săn sale',
-  'hàng hiệu outlet giảm 50%',
-  'mã giảm giá',
-  'miễn phí vẫn chuyển',
-  'bắt trend - giá sốc',
-  'voucher giảm đến 200.000Đ',
-  'gì cũng rẻ - mua là free ship',
-  'hàng quốc tế',
-  'nạp điện thoại & thẻ game',
+export const socialNetworkLinks = [
+  {
+    title: 'Facebook',
+    link: 'https://www.facebook.com/profile.php?id=100011436148089',
+    icon: BsFacebook,
+  },
+  {
+    title: 'Instagram',
+    link: 'https://www.instagram.com/sonn_wjh/',
+    icon: FaInstagram,
+  },
+  {
+    title: 'Github',
+    link: 'https://github.com/sonwjnn',
+    icon: FaGithub,
+  },
 ]

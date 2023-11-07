@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="footer font-roboto text-sm">
+    <footer className="footer border border-t-4 border-primary font-roboto text-sm">
       <div className="wide grid">
         <div className="row footer-spacing"></div>
         <div className="row footer-body footer__content">
@@ -348,7 +348,7 @@ const Footer = () => {
             <div className="row footer-footer-company hide-on-mobile">
               Công ty TNHH Shopee
             </div>
-            <div className="row footer-footer-text hide-on-mobile text-[12px]">
+            <div className="row footer-footer-text hide-on-mobile text-xs">
               <p>
                 Địa chỉ: Tầng 4-5-6, Tòa nhà Capital Place, số 29 đường Liễu
                 Giai, Phường Ngọc Khánh, Quận Ba Đình, Thành phố Hà Nội, Việt

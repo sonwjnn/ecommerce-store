@@ -24,35 +24,8 @@ const HeaderMenu = () => {
 
   const checkUserRoute = location.pathname.includes('user')
 
-  const urlNotify = new URL('@/assets/img/notify-product.jfif', import.meta.url)
-    .href
   return (
     <ul className="nav-list text-sm">
-      <li className="nav-list-item">
-        <button href="" className="nav-item-link">
-          <i className="nav-icon fa-regular fa-bell mr-2 text-base"></i>
-          Thông báo
-        </button>
-      </li>
-      <li className="nav-list-item ">
-        <button className="nav-item-link">
-          <i className="nav-icon fa-regular fa-circle-question mr-2 text-base"></i>
-          Trợ giúp
-        </button>
-      </li>
-      <li className="nav-list-item ">
-        <button className="nav-item-link">
-          <RiGlobalLine className="mr-2 text-[20px]" />
-          Tiếng Việt
-          <i className="nav-icon fa-solid fa-angle-down ml-4 mr-2"></i>
-        </button>
-        <div className="language-item-add"></div>
-        <div className="nav-language">
-          <button className="language-item w-full text-left">Tiếng Việt</button>
-          <button className="language-item w-full text-left">English</button>
-        </div>
-      </li>
-
       <li className="nav-list-item nav-list-item-user">
         <div className="nav-list-item-user-add"></div>
 

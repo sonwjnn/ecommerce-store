@@ -1,4 +1,4 @@
-import { handleLinkImage } from '@/utilities/constants'
+import { cn } from '@/lib/utils'
 import { SwiperSlide } from 'swiper/react'
 
 import AutoSwiper from './AutoSwiper'
@@ -9,9 +9,7 @@ const HomeSlide = () => {
     'banner_2.jpg',
     'banner_3.jpg',
     'banner_4.jpg',
-    'banner_5.png',
-    'banner_6.jpg',
-    'banner_7.jpg',
+    'banner_5.jpg',
   ]
   return (
     <AutoSwiper>
@@ -19,9 +17,10 @@ const HomeSlide = () => {
         return (
           <SwiperSlide key={index}>
             <div
-              className={`bg-cover bg-no-repeat ${
+              className={cn(
+                `h-full w-full bg-cover bg-no-repeat md:bg-center`,
                 index === 0 || index === 1 ? 'bg-center' : 'bg-left'
-              }  h-full w-full md:bg-center`}
+              )}
               style={{
                 backgroundImage: `url(${
                   new URL(`../assets/img/banners/${link}`, import.meta.url).href

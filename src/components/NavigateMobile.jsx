@@ -20,7 +20,7 @@ const NavigateMobile = () => {
   }
 
   return (
-    <div className=" flex h-full items-center justify-around bg-white p-4 text-[30px] text-primary shadow-md shadow-gray-600">
+    <div className=" flex h-full items-center justify-around bg-white p-4 text-3xl text-primary shadow-md shadow-gray-600">
       <Link to={'/'}>
         <HiHome />
       </Link>

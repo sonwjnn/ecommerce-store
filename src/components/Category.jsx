@@ -44,7 +44,7 @@ const Categoryy = () => {
 
   return (
     <div className=" relative">
-      <div className="p-8 text-[18px] uppercase text-gray-500">danh mục</div>
+      <div className="p-8 text-lg uppercase text-gray-500">danh mục</div>
       <button
         className="absolute bottom-[34%] left-[-25px] z-10 flex h-[50px] w-[50px] items-center justify-center rounded-[50%] bg-white text-lg shadow-md  focus:outline-none"
         onClick={() => scroll(-1000)}

@@ -25,6 +25,10 @@ const FavoriteItem = props => {
       if (err) toast.error(err.message)
       if (response) {
         setImageUrl(`data:image/png;base64,${response}`)
+      } else {
+        setImageUrl(
+          new URL('@/assets/img/thumnails/no_image.jpg', import.meta.url).href
+        )
       }
     }
 
@@ -68,13 +72,13 @@ const FavoriteItem = props => {
         </div>
 
         <div className="ml-[132px] flex items-center self-end md:self-center">
-          <div className=" mr-12 px-12 text-[18px] text-primary md:text-base">
+          <div className=" mr-12 px-12 text-lg text-primary md:text-base">
             ₫{handleDotPrice(price)}
           </div>
 
           <button
             onClick={onRemove}
-            className="mr-2 flex items-center justify-center px-3 py-2 text-[32px] text-red-600 md:text-[24px]   "
+            className="mr-2 flex items-center justify-center px-3 py-2 text-[32px] text-red-600 md:text-2xl   "
           >
             <LuTrash />
           </button>
@@ -184,7 +188,7 @@ const FavoriteList = () => {
         <div className="flex h-[50vh] w-full items-center justify-center ">
           <div className="flex flex-col items-center justify-center gap-8">
             <SlEmotsmile className="text-[150px] text-zinc-300" />
-            <div className="gap-4 text-center text-[20px]">
+            <div className="gap-4 text-center text-xl">
               <div className="text-gray-500">
                 Bạn không có sản phẩm yêu thích nào
               </div>

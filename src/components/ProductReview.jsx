@@ -2,15 +2,16 @@ import reviewApi from '@/apis/modules/review.api'
 import dayjs from 'dayjs'
 import { useEffect, useRef, useState } from 'react'
 import { toast } from 'react-hot-toast'
-import { FiSend } from 'react-icons/fi'
-import { MdDelete } from 'react-icons/md'
-import { RiDeleteBin5Line } from 'react-icons/ri'
+import { BsFillSendFill } from 'react-icons/bs'
+import { LuTrash } from 'react-icons/lu'
 import { useSelector } from 'react-redux'
 
 import LoadingButton from './LoadingButton'
+import { Spinner } from './Spinner'
 import Star from './Star'
 import StarVote from './StarVote'
 import TextAvatar from './TextAvatar'
+import { Button } from './ui/button'
 
 const ReviewItem = ({ review, onRemoved }) => {
   const { user } = useSelector(state => state.user)
@@ -29,7 +30,7 @@ const ReviewItem = ({ review, onRemoved }) => {
   }
 
   return (
-    <div className="relative mb-2 rounded-md p-2 hover:bg-bg_page">
+    <div className="hover:bg-bg_page relative mb-2 rounded-md p-2">
       <div className="flex flex-row gap-4">
         {/* avatar */}
         <div className="h-[30px] w-[30px]">
@@ -48,18 +49,23 @@ const ReviewItem = ({ review, onRemoved }) => {
           <div className=" flex flex-row justify-between gap-4">
             <div className="flex justify-center text-sm">{review.content}</div>
           </div>
-          {user && user.id === review.user.id && (
-            <LoadingButton
-              loading={onRequest}
-              colorLoading={'#fb5533'}
-              variant={'contained'}
-              className={`mr-2 flex items-center justify-center border-none bg-transparent px-3 py-2 text-[24px] text-red-600 sm:relative sm:right-0 md:absolute md:right-2`}
-              onClick={onRemove}
-            >
-              <RiDeleteBin5Line />
-            </LoadingButton>
-          )}
         </div>
+
+        {user && user.id === review.user.id && (
+          <Button
+            className="border-none"
+            variant="outline"
+            size="icon"
+            disable={onRequest}
+            onClick={onRemove}
+          >
+            {onRequest ? (
+              <Spinner className="text-primary" />
+            ) : (
+              <LuTrash size={20} />
+            )}
+          </Button>
+        )}
       </div>
     </div>
   )
@@ -173,18 +179,16 @@ const ProductReview = ({ reviews, product, reviewCount, setReviewCount }) => {
                     onChange={e => setContent(e.target.value)}
                     rows={4}
                     placeholder="Write your review"
-                    className="grow resize-none border border-gray-300 bg-white p-4 text-sm"
+                    className="flex w-full grow resize-none rounded-md border border-input bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring  disabled:cursor-not-allowed disabled:opacity-50"
                   />
 
-                  <LoadingButton
-                    loading={onRequest}
-                    colorLoading={'#ffffff'}
-                    variant={'contained'}
-                    className={` btn-primary flex h-[4rem] items-center justify-center px-12 py-2`}
+                  <Button
+                    className="px-6"
+                    disable={onRequest}
                     onClick={onAddReview}
                   >
-                    <FiSend className=" mt-1 text-[20px]" />
-                  </LoadingButton>
+                    {onRequest ? <Spinner /> : <BsFillSendFill size={16} />}
+                  </Button>
                 </div>
 
                 <div className="flex gap-4">

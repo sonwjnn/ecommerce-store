@@ -23,7 +23,7 @@ const CartPreview = ({ cart }) => {
   return (
     <li
       key={cart._id}
-      className="header__cart-list--have-items-item cursor-pointer p-2 pr-3 transition-all hover:bg-bg_page"
+      className="header__cart-list--have-items-item hover:bg-bg_page cursor-pointer p-2 pr-3 transition-all"
     >
       <span className="header__cart-list--have-items-item-wrap gap-2">
         <span className="header__cart-list--have-items-img ">

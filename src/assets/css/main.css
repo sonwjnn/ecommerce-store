@@ -51,16 +51,7 @@
   font-weight: 425;
 }
 
-.nav-list-item--separate::after {
-  content: '';
-  display: block;
-  position: absolute;
-  border-left: 2px solid #fb9086;
-  height: 14px;
-  top: 50%;
-  left: -14px;
-  transform: translateY(-50%);
-}
+
 
 .header__nav-title--no-pointer {
   cursor: text;

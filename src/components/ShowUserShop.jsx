@@ -21,10 +21,10 @@ const ShowUserShop = () => {
   const dispatch = useDispatch()
 
   const initialValues = {
-    title: shop.title,
-    address: shop.address ? shop.address : '',
-    city: shop.city ? shop.city : '',
-    district: shop.district ? shop.district : '',
+    title: shop?.title,
+    address: shop?.address ? shop?.address : '',
+    city: shop?.city ? shop?.city : '',
+    district: shop?.district ? shop?.district : '',
   }
 
   const form = useFormik({
@@ -123,7 +123,7 @@ const ShowUserShop = () => {
               Thành phố
             </label>
             <select
-              className="border-input placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2  disabled:cursor-not-allowed disabled:opacity-50"
+              className="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring  disabled:cursor-not-allowed disabled:opacity-50"
               name="city"
               id="city"
               value={form.values.city}
@@ -149,7 +149,7 @@ const ShowUserShop = () => {
               Quận / Huyện
             </label>
             <select
-              className="border-input placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2  disabled:cursor-not-allowed disabled:opacity-50"
+              className="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring  disabled:cursor-not-allowed disabled:opacity-50"
               disabled={!selectedProvince}
               value={form.values.district || 'District'}
               name="district"

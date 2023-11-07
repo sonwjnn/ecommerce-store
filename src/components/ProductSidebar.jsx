@@ -39,7 +39,7 @@ const ProductSidebar = () => {
       {productTypes.length ? (
         <nav className="category  w-[200px]">
           <header className="category__heading pointer-events-none flex select-none items-center text-base font-bold uppercase">
-            <BiCategory className="mr-2 text-[18px]" />
+            <BiCategory className="mr-2 text-lg" />
             loại sản phẩm
           </header>
           <ul className="category-list relative">

@@ -32,11 +32,11 @@ const AccountPage = () => {
   }, [])
 
   return (
-    <div className="min-h-[80vh] bg-white px-0 py-0 sm:py-[56px] md:bg-bg_page   xl:px-[136px]">
+    <div className="md:bg-bg_page min-h-[80vh] bg-white px-0 py-0 sm:py-[56px]   xl:px-[136px]">
       <div className=" h-full max-w-[1220px] rounded-md ">
         <div className="flex min-h-[66vh]">
           <div
-            className={`bg-white md:bg-bg_page ${
+            className={`md:bg-bg_page bg-white ${
               accountType || authCate ? 'hidden' : ''
             } w-full md:block md:w-[250px]   md:p-4`}
           >
@@ -45,13 +45,13 @@ const AccountPage = () => {
                 <div className="min-h-[50px] min-w-[50px] ">
                   <TextAvatar text={user.name} />
                 </div>
-                <div className="line-clamp-2 text-[26px] font-semibold text-gray-600 md:text-[20px] lg:text-base">
+                <div className="line-clamp-2 text-[26px] font-semibold text-gray-600 md:text-xl lg:text-base">
                   {user.name}
                 </div>
               </div>
 
               <div className="account-item  flex items-center  gap-3 ">
-                <FaRegUser className="mt-8 self-start text-[30px] text-blue-600 md:mt-0 md:text-[22px]" />
+                <FaRegUser className="mt-8 self-start text-3xl text-blue-600 md:mt-0 md:text-[22px]" />
                 <div className="flex w-full flex-col gap-3 capitalize">
                   <span className="pt-0 text-base">
                     <Link to={'/user/account/profile'}>tài khoản của tôi</Link>
@@ -63,7 +63,7 @@ const AccountPage = () => {
                         to={`/user/account/${action[0]}`}
                         className={`action-account ${
                           activeAccount === index ? 'active' : ''
-                        } ml-1 p-1  text-left text-[20px] capitalize text-gray-600 md:p-0 md:text-sm`}
+                        } ml-1 p-1  text-left text-xl capitalize text-gray-600 md:p-0 md:text-sm`}
                         onClick={() => setActiveAccount(index)}
                       >
                         {action[1]}
@@ -74,35 +74,35 @@ const AccountPage = () => {
               </div>
 
               <button className="account-item flex items-center gap-3">
-                <SiReacthookform className="text-[30px] text-orange-700 md:text-[22px]" />
+                <SiReacthookform className="text-3xl text-orange-700 md:text-[22px]" />
                 <span className="w-full text-left text-base capitalize">
                   <Link to={'/user/purchase'}>đơn mua</Link>
                 </span>
               </button>
 
               <button className="account-item flex items-center gap-3">
-                <BsBell className="text-[30px] text-yellow-500 md:text-[22px]" />
+                <BsBell className="text-3xl text-yellow-500 md:text-[22px]" />
                 <span className="w-full text-left text-base capitalize">
                   thông báo
                 </span>
               </button>
 
               <button className="account-item flex items-center gap-3">
-                <AiOutlineTags className="text-[32px] text-purple-500 md:text-[20px]" />
+                <AiOutlineTags className="text-[32px] text-purple-500 md:text-xl" />
                 <span className="w-full text-left text-base capitalize">
                   kho vouncher
                 </span>
               </button>
 
               <button className="account-item flex items-center gap-3">
-                <MdOutlineFavoriteBorder className="text-[30px] text-red-500 md:text-[20px]" />
+                <MdOutlineFavoriteBorder className="text-3xl text-red-500 md:text-xl" />
                 <span className="w-full text-left text-base capitalize">
                   <Link to={'/user/favorite'}>yêu thích</Link>
                 </span>
               </button>
 
               <button className="account-item flex items-center gap-3">
-                <AiTwotoneShop className="text-[30px] text-purple-500 md:text-[20px]" />
+                <AiTwotoneShop className="text-3xl text-purple-500 md:text-xl" />
                 <span className="w-full text-left text-base capitalize">
                   <Link to={'/user/shop'}>Shop</Link>
                 </span>
@@ -114,7 +114,7 @@ const AccountPage = () => {
               accountType || authCate ? 'block' : 'hidden'
             } md:block`}
           >
-            <div className="border-b border-b-gray-200 px-8 py-4 text-[24px] capitalize text-gray-600">
+            <div className="border-b border-b-gray-200 px-8 py-4 text-2xl capitalize text-gray-600">
               {accountType === 'password'
                 ? 'đổi mật khẩu'
                 : accountType === 'profile'

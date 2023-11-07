@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { PulseLoader } from 'react-spinners'
 
-import AppBar from './AppBar'
+import Header from './Header'
 
 const override = css`
   display: 'block';
@@ -34,7 +34,7 @@ const GlobalLoading = () => {
       {isLoading ? (
         <>
           <div className=" fixed left-0 top-0 z-50 h-screen w-full bg-white transition-all">
-            <AppBar className="z-51" />
+            <Header className="z-51" />
             <div className="absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]">
               <PulseLoader
                 color={'#888888'}

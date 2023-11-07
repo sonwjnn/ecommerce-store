@@ -191,8 +191,7 @@ html {
   display: block;
 }
 
-.select-input__item {
-}
+
 
 .select-input__link {
   text-decoration: none;
@@ -247,9 +246,7 @@ html {
   font-size: 1.4rem;
 }
 
-.footer {
-  border-top: 4px solid var(--primary-color);
-}
+
 
 .footer-spacing {
   height: 120px;

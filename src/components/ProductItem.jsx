@@ -75,12 +75,12 @@ const ProductItem = ({ product, className }) => {
           </span>
           <span className="home-product-item__rate flex items-center">
             <Star stars={product.rating} className="text-[11px]" />
-            <span className="home-product-item__buy-num text-[12px]">
+            <span className="home-product-item__buy-num text-xs">
               Đã bán 989
             </span>
           </span>
         </div>
-        <div className="home-product-item__location text-[12px]">
+        <div className="home-product-item__location text-xs">
           TP. Hồ Chí Minh
         </div>
         {+product.favorites > 1 && (
@@ -90,10 +90,10 @@ const ProductItem = ({ product, className }) => {
         )}
         {product.discount && product.discount !== '0' && (
           <div className="home-product-item__sale-off-percent">
-            <span className="home-product-item__percent text-[12px]">
+            <span className="home-product-item__percent text-xs">
               {product.discount}%
             </span>
-            <span className="home-product-item__up text-[12px]">GIẢM</span>
+            <span className="home-product-item__up text-xs">GIẢM</span>
           </div>
         )}
       </div>

@@ -1,10 +1,10 @@
-import React from 'react'
+import { cn } from '@/lib/utils'
 import { useLocation, useParams } from 'react-router-dom'
 
 import HeaderNavigate from './HeaderNavigate'
 import SearchMain from './SearchMain'
 
-const AppBar = () => {
+const Header = () => {
   const location = useLocation()
   const { sign, productId, accountType, keyword, authCate } = useParams()
   const carts = location.pathname === '/user/carts'
@@ -12,18 +12,19 @@ const AppBar = () => {
   return (
     <>
       <div
-        className={` header w-full  bg-gradient-to-b from-bg_header_b  to-bg_header_t  ${
-          sign || carts ? 'hidden' : ''
-        } ${
+        className={cn(
+          `header w-full bg-primary 
+        `,
+          !sign && !productId ? 'fixed' : '',
           productId ||
-          accountType ||
-          authCate ||
-          keyword ||
-          location.pathname.includes('account')
+            accountType ||
+            authCate ||
+            keyword ||
+            location.pathname.includes('account')
             ? 'relative'
-            : ''
-        } ${!sign && !productId ? 'fixed' : ''}
-        `}
+            : '',
+          sign || carts ? 'hidden' : ''
+        )}
       >
         <div className="wide grid">
           <HeaderNavigate />
@@ -34,4 +35,4 @@ const AppBar = () => {
   )
 }
 
-export default AppBar
+export default Header

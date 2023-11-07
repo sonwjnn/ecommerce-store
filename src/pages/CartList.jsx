@@ -125,7 +125,7 @@ export const CartItem = props => {
             <div className="flex items-center gap-4">
               <span className="flex items-center">
                 <span
-                  className="flex h-12 cursor-pointer select-none items-center  border border-gray-300 px-5 text-[20px] text-gray-600"
+                  className="flex h-12 cursor-pointer select-none items-center  border border-gray-300 px-5 text-xl text-gray-600"
                   onClick={() => handleValueCart(cartState.decrease)}
                 >
                   <span>-</span>
@@ -134,7 +134,7 @@ export const CartItem = props => {
                   {cartValue}
                 </span>
                 <span
-                  className="flex h-12 cursor-pointer select-none items-center border border-gray-300 px-4 text-[20px] 
+                  className="flex h-12 cursor-pointer select-none items-center border border-gray-300 px-4 text-xl 
                       text-gray-600"
                   onClick={() => handleValueCart(cartState.increase)}
                 >
@@ -330,7 +330,7 @@ const CartList = () => {
                 <span className="text-sm text-gray-500 lg:text-[17px]">
                   Tổng thanh toán ({checkedCarts.length} sản phẩm):
                 </span>
-                <span className="flex items-start text-[20px] font-semibold text-primary  lg:text-[24px]">
+                <span className="flex items-start text-xl font-semibold text-primary  lg:text-2xl">
                   <span className="mt-2 text-base">₫</span>
                   {handleDotPrice(
                     checkedCarts
