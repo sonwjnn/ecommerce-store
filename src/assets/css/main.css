@@ -404,20 +404,9 @@
 
 
 
-.nav-list-item-user-menu-item button:hover {
-  color: #00bfa5;
-  background-color: #fafafa;
-}
 
-.nav-list-item-user-menu-item button {
-  width: 100%;
-  padding: 8px 16px;
-  text-decoration: none;
-  color: var(--text-color);
-  display: inline-block;
-  text-align: left;
-  transition: 0.3s ease;
-}
+
+
 
 .auth-form {
   border-radius: 4px;

@@ -1,6 +1,7 @@
 import userApi from '@/apis/modules/user.api'
 import { setUser } from '@/redux/features/userSlice'
 import { useFormik } from 'formik'
+import { useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -12,6 +13,8 @@ import { Input } from './ui/input'
 const PasswordUpdate = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const [onRequest, setOnRequest] = useState(false)
+
   const form = useFormik({
     initialValues: {
       password: '',
@@ -34,12 +37,12 @@ const PasswordUpdate = () => {
   })
 
   const onUpdate = async values => {
-    // if (onRequest) return
-    // setOnRequest(true)
+    if (onRequest) return
+    setOnRequest(true)
 
     const { response, err } = await userApi.passwordUpdate(values)
 
-    // setOnRequest(false)
+    setOnRequest(false)
 
     if (err) toast.error(err.message)
     if (response) {
@@ -103,8 +106,13 @@ const PasswordUpdate = () => {
           </div>
 
           <div className="mt-6 flex ">
-            <div className="w-[266px]"></div>
-            <Button type="submit">lưu</Button>
+            <Button
+              type="submit"
+              disabled={onRequest}
+              className="ml-auto px-6 "
+            >
+              Lưu
+            </Button>
           </div>
         </form>
       </div>

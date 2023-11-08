@@ -23,7 +23,7 @@ const Header = () => {
             location.pathname.includes('account')
             ? 'relative'
             : '',
-          sign || carts ? 'hidden' : ''
+          sign ? 'hidden' : ''
         )}
       >
         <div className="wide grid">

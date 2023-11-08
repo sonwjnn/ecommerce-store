@@ -66,9 +66,16 @@ export default {
         auth: '1175px',
         product_md: '1200px',
       },
-
       gridTemplateColumns: {
         15: 'repeat(15, minmax(0, 1fr))',
+        'list-2': 'minmax(200px, 4fr) 50px !important',
+        'list-3': '[index] 16px [first] 6fr [last] minmax(120px,1fr)',
+        'list-4':
+          '[index] 16px [first] 4fr [var1] 2fr [last] minmax(120px,1fr)',
+        'list-5':
+          '[index] 16px [first] 6fr [var1] 4fr [var2] 3fr [last] minmax(120px,1fr)',
+        'list-6':
+          '[check] 24px [first] 6fr [var1] 3fr [var2] 2fr [var3] 3fr [last] minmax(120px,1fr)',
       },
       gridColumn: {
         'span-15': 'span 15 / span 15',

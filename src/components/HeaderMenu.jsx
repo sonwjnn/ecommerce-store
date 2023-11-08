@@ -2,7 +2,13 @@ import { setAuthModalOpen } from '@/redux/features/authModelSlice'
 import { setSignState } from '@/redux/features/signStateSlice'
 import { setUser } from '@/redux/features/userSlice'
 import { useState } from 'react'
+import { BiNotepad } from 'react-icons/bi'
+import { FaRegUser } from 'react-icons/fa'
+import { HiOutlineLogout } from 'react-icons/hi'
+import { LuUserCircle } from 'react-icons/lu'
+import { MdOutlineFavoriteBorder } from 'react-icons/md'
 import { RiGlobalLine } from 'react-icons/ri'
+import { SiReacthookform } from 'react-icons/si'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
@@ -38,23 +44,41 @@ const HeaderMenu = () => {
               {user.name ? user.name : 'null'}
             </span>
             <ul className="nav-list-item-user-menu text-base">
-              <li className="nav-list-item-user-menu-item ">
+              <li className="px-3 py-2 text-base text-black transition hover:bg-accent hover:text-primary">
                 <button>
-                  <Link to={'/user/account/profile'}>Tài khoản</Link>
+                  <Link
+                    to={'/user/account/profile'}
+                    className="flex items-center gap-x-2"
+                  >
+                    <FaRegUser />
+                    Tài khoản
+                  </Link>
                 </button>
               </li>
-              <li className="nav-list-item-user-menu-item">
-                <Link to={'/user/purchase'}>
+              <li className="px-3 py-2 text-base text-black transition hover:bg-accent hover:text-primary">
+                <Link
+                  to={'/user/purchase'}
+                  className="flex items-center gap-x-2"
+                >
+                  <BiNotepad />
                   <button>Đơn mua</button>
                 </Link>
               </li>
-              <li className="nav-list-item-user-menu-item">
-                <Link to={'/user/favorite'}>
+              <li className="border-b border-b-neutral-300 px-3 py-2 text-base text-black transition hover:bg-accent hover:text-primary">
+                <Link
+                  to={'/user/favorite'}
+                  className="flex items-center gap-x-2"
+                >
+                  <MdOutlineFavoriteBorder />
                   <button>Yêu thích</button>
                 </Link>
               </li>
-              <li className="nav-list-item-user-menu-item">
-                <Link to={checkUserRoute ? '/' : null}>
+              <li className="px-3 py-2 text-base text-black transition hover:bg-accent hover:text-primary">
+                <Link
+                  to={checkUserRoute ? '/' : null}
+                  className="flex items-center gap-x-2"
+                >
+                  <HiOutlineLogout className="text-red-500 " />
                   <button
                     onClick={() => {
                       dispatch(setUser(null))

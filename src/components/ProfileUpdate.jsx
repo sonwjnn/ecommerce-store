@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import * as Yup from 'yup'
 
 import LoadingButton from './LoadingButton'
+import { Button } from './ui/button'
 import { Input } from './ui/input'
 
 const ProfileUpdate = () => {
@@ -344,15 +345,9 @@ const ProfileUpdate = () => {
           <div className="mt-6 flex ">
             <div className="w-[266px]"></div>
 
-            <LoadingButton
-              type="submit"
-              loading={onRequest}
-              colorLoading={'#fb5533'}
-              variant={'contained'}
-              className={`mb-4  ml-auto w-[25%] bg-primary  px-4 py-4 text-sm font-semibold uppercase text-white  `}
-            >
-              lưu
-            </LoadingButton>
+            <Button type="submit" disabled={onRequest} className="ml-auto px-6">
+              Lưu
+            </Button>
           </div>
         </form>
       </div>
