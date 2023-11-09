@@ -24,11 +24,6 @@ import { useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
-const cartState = {
-  increase: 'increase',
-  decrease: 'decrease',
-}
-
 const ProductDetail = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -162,10 +157,6 @@ const ProductDetail = () => {
 
     const body = {
       productId: product._id,
-      productTitle: product.title || product.name,
-      productType: product.type,
-      productPrice: product.price,
-      productImage: product.imageName,
     }
     const { response, err } = await favoriteApi.add(body)
     if (err) toast.error(err.message)
@@ -173,7 +164,12 @@ const ProductDetail = () => {
     setOnRequest(false)
 
     if (response) {
-      dispatch(addFavorite(response))
+      dispatch(
+        addFavorite({
+          ...response,
+          productId: { ...product },
+        })
+      )
       setIsFavorite(true)
       toast.success('Add favorite success')
       setFavoriteCount(favoriteCount + 1)
@@ -184,7 +180,9 @@ const ProductDetail = () => {
     if (onRequest) return
 
     setOnRequest(true)
-    const favorite = listFavorites.find(item => item.productId === product._id)
+    const favorite = listFavorites.find(
+      item => item.productId._id === product._id
+    )
 
     const { response, err } = await favoriteApi.remove({
       favoriteId: favorite.id,
@@ -226,21 +224,21 @@ const ProductDetail = () => {
   return (
     <div className="bg-bg_page h-full px-0 py-0 sm:py-[56px]   xl:px-[136px]">
       <div className="mx-auto h-full max-w-[1220px] rounded-md bg-white">
-        <div className="flex flex-col sm:flex-row ">
+        <div className="flex flex-col md:flex-row ">
           <div className="flex-[33%] grow-0 p-4">
             <div
-              className="m-1.5 w-full bg-cover bg-center pt-[450px]"
+              className="aspect-square  bg-cover bg-center md:min-h-[450px] md:min-w-[450px]"
               style={{
                 backgroundImage: `url(${imageUrl})`,
               }}
             ></div>
 
-            <div className="scrollbar-hide hidden max-w-[100%] gap-4 overflow-x-scroll md:flex">
+            {/* <div className="scrollbar-hide hidden max-w-[100%] gap-4 overflow-x-scroll md:flex">
               <DetailImage imageUrl={imageUrl} />
               <DetailImage imageUrl={imageUrl} />
               <DetailImage imageUrl={imageUrl} />
               <DetailImage imageUrl={imageUrl} />
-            </div>
+            </div> */}
 
             <div className="hidden items-center  justify-center p-4 md:flex">
               <h3 className="text-base">Chia sẻ:</h3>
@@ -279,13 +277,15 @@ const ProductDetail = () => {
             </div>
           </div>
           <div className="flex-[66%] p-4">
-            <div className="flex flex-col gap-10">
-              <div className="flex items-center">
-                <span className="tag-shopee mt-2 min-w-[66px] self-start bg-primary text-xs text-white sm:text-sm">
-                  Yêu thích
-                </span>
+            <div className="flex  flex-col gap-y-3">
+              <div className="flex min-h-[46px] items-center ">
+                {favoriteCount > 1 ? (
+                  <span className="tag-shopee  min-w-[66px] rounded-sm  bg-secondary text-sm text-white">
+                    Yêu thích
+                  </span>
+                ) : null}
 
-                <span className="text-base sm:text-xl">
+                <span className="line-clamp-2 text-xl">
                   {product && product.name}
                 </span>
               </div>
@@ -298,7 +298,7 @@ const ProductDetail = () => {
 
                   <Star
                     stars={product && product.rating}
-                    className="text-sm text-yellow-500 sm:text-base"
+                    className=" text-lg text-yellow-500"
                   />
                 </span>
 
@@ -316,13 +316,28 @@ const ProductDetail = () => {
                   <span className="text-sm  text-gray-500">Đã bán</span>
                 </span>
 
-                <span className="ml-4 flex items-center gap-8 sm:hidden">
-                  <button className="text-3xl text-[#0384ff]">
-                    <i className="fa-brands fa-facebook-messenger"></i>
-                  </button>
-                  <button>
-                    <i className="fa-regular fa-heart text-3xl  text-primary"></i>
-                  </button>
+                <span className="4 flex items-center gap-8 sm:hidden">
+                  <div
+                    className="flex cursor-pointer select-none items-center capitalize"
+                    onClick={onFavoriteClick}
+                  >
+                    {!isFavorite ? (
+                      <MdOutlineFavoriteBorder
+                        size={28}
+                        className="ml-2 mr-1  text-red-600"
+                        onClick={() => setIsFavorite(!isFavorite)}
+                      />
+                    ) : (
+                      <MdOutlineFavorite
+                        size={28}
+                        className="ml-2 mr-1  text-red-600"
+                        onClick={() => setIsFavorite(!isFavorite)}
+                      />
+                    )}
+                    <span className="text-base">
+                      đã thích ({favoriteCount})
+                    </span>
+                  </div>
                 </span>
               </div>
             </div>
@@ -487,7 +502,7 @@ const ProductDetail = () => {
               <div className="mt-8 flex gap-4">
                 <Button
                   onClick={onCartClick}
-                  className="py-4 text-base uppercase"
+                  className="py-4 text-base capitalize"
                   size="lg"
                   variant="outline"
                 >
@@ -495,7 +510,11 @@ const ProductDetail = () => {
                   <span>thêm vào giỏ hàng</span>
                 </Button>
 
-                <Button className="py-4 text-base uppercase" size="lg">
+                <Button
+                  className="py-4 text-base capitalize"
+                  variant="secondary"
+                  size="lg"
+                >
                   mua ngay
                 </Button>
               </div>

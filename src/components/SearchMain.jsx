@@ -38,7 +38,7 @@ const SearchMain = () => {
     if (user) {
       navigate('/user/carts')
     } else {
-      toast.warning('You must login first!', { toastId: 'warning-login' })
+      toast.error('You must login first!', { toastId: 'warning-login' })
       navigate('/authUser/signin')
     }
   }
@@ -121,7 +121,7 @@ const SearchMain = () => {
       <div className="header__cart">
         <div onClick={handleCarts} className="header__cart-wrap cursor-pointer">
           <CgShoppingCart size={28} className=" text-white" />
-          <span className="header__cart-length  pointer-events-none select-none border-none bg-red-500 text-xs text-white">
+          <span className="header__cart-length  pointer-events-none select-none border-none bg-secondary text-xs text-white">
             {listCarts.length}
           </span>
 

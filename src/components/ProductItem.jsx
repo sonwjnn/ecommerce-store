@@ -32,18 +32,20 @@ const ProductItem = ({ product, className }) => {
     getImage()
   }, [])
 
-  const history = useNavigate()
+  const navigate = useNavigate()
 
-  const productDetail = () => {
-    history(`/products/detail/${product.id}`)
-  }
   return (
-    <div className={twMerge(className)}>
-      <div className="home-product-item cursor-pointer" onClick={productDetail}>
-        <div
-          className="home-product-item__img bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${imageUrl})` }}
-        ></div>
+    <div className={twMerge('group', className)}>
+      <div
+        className="home-product-item cursor-pointer"
+        onClick={() => navigate(`/products/detail/${product.id}`)}
+      >
+        <div className="h-full w-full overflow-hidden">
+          <div
+            className="home-product-item__img   bg-cover bg-center bg-no-repeat transition-all group-hover:scale-110"
+            style={{ backgroundImage: `url(${imageUrl})` }}
+          ></div>
+        </div>
         {/* <img src={imageUrl} alt="Product" /> */}
         <div className="home-product-item__title line-clamp-2 min-h-[32px]  pb-0 text-xs">
           {product.name}
@@ -59,7 +61,7 @@ const ProductItem = ({ product, className }) => {
             </span>
           )}
 
-          <span className="home-product-item__sale-price text-base ">
+          <span className="home-product-item__sale-price text-base text-secondary">
             <a href="" className="text-sm">
               đ
             </a>
@@ -71,7 +73,7 @@ const ProductItem = ({ product, className }) => {
             {favoriteUtils.check({
               listFavorites,
               productId: product.id,
-            }) && <AiFillHeart className="text-[13px] text-red-600" />}
+            }) && <AiFillHeart className="text-[13px] text-secondary" />}
           </span>
           <span className="home-product-item__rate flex items-center">
             <Star stars={product.rating} className="text-[11px]" />
@@ -84,7 +86,7 @@ const ProductItem = ({ product, className }) => {
           TP. Hồ Chí Minh
         </div>
         {+product.favorites > 1 && (
-          <div className="home-product-item__love">
+          <div className="home-product-item__love bg-secondary text-sm">
             <span>Yêu thích</span>
           </div>
         )}

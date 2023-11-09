@@ -41,7 +41,7 @@ const CartPreview = ({ cart }) => {
         </span>
         <span className="line-clamp-2 text-left text-base">{name}</span>
       </span>
-      <span className="header__cart-list--have-items-price text-base">
+      <span className="header__cart-list--have-items-price text-base text-secondary">
         đ{discountPrice?.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
       </span>
     </li>

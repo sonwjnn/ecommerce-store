@@ -13,6 +13,7 @@ import { useRef } from 'react'
 import { toast } from 'react-hot-toast'
 import { LuMinus, LuPlus, LuTrash } from 'react-icons/lu'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { useDebouncedCallback } from 'use-debounce'
 
 export const CartItem = props => {
@@ -26,9 +27,11 @@ export const CartItem = props => {
     onRemoved,
     handleCheckedCart,
     isCheckedAll,
+    productId,
     handleDotPrice,
   } = props
 
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const inputRef = useRef()
   const [isChecked, setIsChecked] = useState(false)
@@ -130,8 +133,8 @@ export const CartItem = props => {
   let currPrice = price && handleDotPrice((+price * cartValue).toString())
 
   return (
-    <div className="w-full px-6 py-1 ">
-      <div className="border-b-gray-2006 grid min-h-[56px] grid-cols-list-6 items-center  border-b">
+    <div className="border-b-gray-2006 w-full border-b px-6 py-2">
+      <div className=" grid min-h-[56px] grid-cols-list-3  items-center   md:grid-cols-list-6">
         <input
           type="checkbox"
           checked={isChecked || isCheckedAll}
@@ -139,25 +142,56 @@ export const CartItem = props => {
           className="h-4 w-4"
           onChange={handleCheckCart}
         />
-        <div className="flex items-center gap-x-2">
+        <div className="group flex cursor-pointer items-center gap-x-2">
           <div
-            className="h-[56px] w-[56px] bg-cover bg-center bg-no-repeat "
+            onClick={() => navigate(`/products/detail/${productId}`)}
+            className="aspect-square h-[80px] w-[80px] bg-cover bg-center bg-no-repeat md:h-[56px] md:w-[56px] "
             style={{
               backgroundImage: `url(${imageUrl})`,
             }}
           ></div>
-          <div className="flex flex-col justify-center ">
-            <div className="line-clamp-2 text-sm text-gray-500">{title}</div>
-            <div className="text-sm">{type}</div>
+          <div className="flex flex-col justify-center gap-y-4 md:gap-y-0 ">
+            <div
+              onClick={() => navigate(`/products/detail/${productId}`)}
+              className="line-clamp-2 text-base text-gray-500 group-hover:underline md:text-sm"
+            >
+              {title}
+            </div>
+            {/* <div className="text-sm">{type}</div> */}
+            <div className="text-left text-base text-primary md:hidden">
+              ₫{currPrice}
+            </div>
+            <div className="flex items-center justify-start md:hidden">
+              <button
+                onClick={handleDecreaseQuantity}
+                className="flex h-8 w-8 items-center justify-center rounded-l-md border border-neutral-300 bg-transparent outline-none"
+              >
+                <LuMinus />
+              </button>
+              <Input
+                className="h-[32px] w-[50px] rounded-none border border-x-0 border-neutral-300 bg-white text-center text-base"
+                type="number"
+                value={cartValue}
+                onChange={handleInputQuantity}
+              />
+              <button
+                onClick={handleIncreaseQuantity}
+                className="flex h-8 w-8 items-center justify-center rounded-r-md border border-neutral-300 bg-transparent outline-none"
+              >
+                <LuPlus />
+              </button>
+            </div>
           </div>
         </div>
 
-        <div className="text-center text-sm text-primary">₫{prevPrice}</div>
+        <div className="hidden text-center text-sm text-gray-500 md:block">
+          ₫{prevPrice}
+        </div>
 
-        <div className="flex items-center justify-center">
+        <div className="hidden items-center justify-center md:flex">
           <button
             onClick={handleDecreaseQuantity}
-            className="flex h-8 w-8 items-center justify-center border border-neutral-300 bg-transparent outline-none"
+            className="flex h-8 w-8 items-center justify-center rounded-l-md border border-neutral-300 bg-transparent outline-none"
           >
             <LuMinus />
           </button>
@@ -169,13 +203,15 @@ export const CartItem = props => {
           />
           <button
             onClick={handleIncreaseQuantity}
-            className="flex h-8 w-8 items-center justify-center border border-neutral-300 bg-transparent outline-none"
+            className="flex h-8 w-8 items-center justify-center rounded-r-md border border-neutral-300 bg-transparent outline-none"
           >
             <LuPlus />
           </button>
         </div>
 
-        <div className="text-center text-sm text-primary">₫{currPrice}</div>
+        <div className="hidden text-center text-sm text-primary md:block">
+          ₫{currPrice}
+        </div>
 
         <Button
           className="mx-auto border-none"
@@ -187,7 +223,7 @@ export const CartItem = props => {
           {onRequest ? (
             <Spinner className="text-primary" />
           ) : (
-            <LuTrash size={20} />
+            <LuTrash className="text-secondary" size={20} />
           )}
         </Button>
       </div>
@@ -293,7 +329,7 @@ const CartList = () => {
 
       <div className="min-h-screen w-full ">
         <div className=" mx-auto h-full max-w-[1200px] overflow-hidden ">
-          <div className="mt-12 grid min-h-[40px]   w-full grid-cols-list-6  rounded-md bg-white px-6 py-4 text-base text-gray-500">
+          <div className="mt-12 hidden min-h-[40px]  w-full   grid-cols-list-6  rounded-md  bg-white px-6 py-4 text-base text-gray-500 md:grid">
             <div></div>
             <div>Tất cả sản phẩm</div>
 
@@ -303,7 +339,7 @@ const CartList = () => {
             <div className="text-center">Thao tác</div>
           </div>
 
-          <div className="mt-4 h-full min-h-[40vh] w-full rounded-md bg-white">
+          <div className="mt-4 h-full min-h-[40vh] w-full rounded-md bg-white py-4">
             {carts.map(cart => (
               <CartItem
                 id={cart._id}
@@ -355,7 +391,10 @@ const CartList = () => {
                       .toString()
                   )}
                 </span>
-                <Button className="px-12 py-3 capitalize lg:px-8 lg:py-4">
+                <Button
+                  variant="secondary"
+                  className="px-12 py-3 capitalize lg:px-8 lg:py-4"
+                >
                   mua hàng
                 </Button>
               </div>
@@ -377,7 +416,7 @@ const CartList = () => {
                 <span className="text-base font-semibold text-primary">
                   ₫52.000
                 </span>
-                <Button>Mua hàng</Button>
+                <Button variant="secondary">Mua hàng</Button>
               </div>
             </div>
           </div>

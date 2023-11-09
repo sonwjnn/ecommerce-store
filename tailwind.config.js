@@ -69,7 +69,9 @@ export default {
       gridTemplateColumns: {
         15: 'repeat(15, minmax(0, 1fr))',
         'list-2': 'minmax(200px, 4fr) 50px !important',
-        'list-3': '[index] 16px [first] 6fr [last] minmax(120px,1fr)',
+        'list-3': '[index] 20px [first] 6fr [last] minmax(120px,1fr)',
+        'favorite-3':
+          '[first] 6fr [second] minmax(120px,1fr) [last] minmax(120px,1fr)',
         'list-4':
           '[index] 16px [first] 4fr [var1] 2fr [last] minmax(120px,1fr)',
         'list-5':

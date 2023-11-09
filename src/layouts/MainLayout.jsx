@@ -42,7 +42,7 @@ const MainLayout = () => {
     if (!user) {
       dispatch(setListCarts([]))
     }
-  }, [dispatch])
+  }, [dispatch, user])
 
   useEffect(() => {
     const favoritesOfUser = async () => {

@@ -6,13 +6,15 @@ import { toast } from 'react-hot-toast'
 import { LuTrash } from 'react-icons/lu'
 import { SlEmotsmile } from 'react-icons/sl'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 import { Spinner } from './Spinner'
 import { Button } from './ui/button'
 
 const FavoriteItem = props => {
-  const { title, productImage, type, id, price, onRemoved } = props
+  const { title, productImage, type, id, price, onRemoved, productId } = props
 
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const [onRequest, setOnRequest] = useState(false)
   const [imageUrl, setImageUrl] = useState('')
@@ -47,47 +49,50 @@ const FavoriteItem = props => {
 
     if (err) toast.error(err.message)
     if (response) {
-      dispatch(removeFavorite({ favId: id }))
+      dispatch(removeFavorite({ favoriteId: id }))
       onRemoved({ id })
       toast.success('Remove favorite success!')
     }
   }
 
   return (
-    <div className="w-full p-8 pb-0 pt-0">
-      <div className="flex min-h-[56px] flex-col items-center justify-between border-b border-b-gray-200  p-1 md:flex-row">
-        <div className="flex flex-grow items-center gap-8 self-start">
+    <div className="w-full px-4 pb-0 pt-0">
+      <div className="grid-cols-favorite-3 grid min-h-[56px]  items-center  border-b border-b-gray-200  p-1 ">
+        <div
+          onClick={() => navigate(`/products/detail/${productId}`)}
+          className="group flex  cursor-pointer items-center gap-x-2"
+        >
           <div
-            className="h-[56px] min-w-[56px] bg-cover bg-center bg-no-repeat "
+            className="aspect-square h-[56px] min-w-[56px] bg-cover bg-center bg-no-repeat "
             style={{
               backgroundImage: `url(${imageUrl})`,
             }}
           ></div>
           <div className="flex flex-col justify-center self-center">
-            <div className="line-clamp-2 text-sm text-gray-500">{title}</div>
-            <div className="text-sm">{type}</div>
+            <div className="line-clamp-2 text-sm text-gray-500 group-hover:underline">
+              {title}
+            </div>
+            {/* <div className="text-sm">{type}</div> */}
           </div>
         </div>
 
-        <div className="ml-[132px] flex items-center self-end md:self-center">
-          <div className=" mr-12 px-12 text-lg text-primary md:text-base">
-            ₫{price?.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
-          </div>
-
-          <Button
-            className="border-none"
-            variant="outline"
-            size="icon"
-            disable={onRequest}
-            onClick={onRemove}
-          >
-            {onRequest ? (
-              <Spinner className="text-primary" />
-            ) : (
-              <LuTrash size={20} />
-            )}
-          </Button>
+        <div className="text-center  text-lg text-primary md:text-base">
+          ₫{price?.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
         </div>
+
+        <Button
+          className="mx-auto border-none"
+          variant="outline"
+          size="icon"
+          disable={onRequest}
+          onClick={onRemove}
+        >
+          {onRequest ? (
+            <Spinner className="text-primary" />
+          ) : (
+            <LuTrash className="text-secondary" size={20} />
+          )}
+        </Button>
       </div>
     </div>
   )

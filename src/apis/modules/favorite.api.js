@@ -17,20 +17,10 @@ const favoriteApi = {
     }
   },
 
-  add: async ({
-    productId,
-    productTitle,
-    productPrice,
-    productType,
-    productImage,
-  }) => {
+  add: async ({ productId }) => {
     try {
       const response = await privateClient.post(favoriteEndpoints.add, {
         productId,
-        productType,
-        productTitle,
-        productPrice,
-        productImage,
       })
       return { response }
     } catch (error) {

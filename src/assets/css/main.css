@@ -1206,11 +1206,6 @@
   will-change: transform;
 }
 
-.home-product-item:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.05);
-}
-
 .home-product-item__img {
   padding-top: 100%;
   background-size: contain;
@@ -1416,7 +1411,6 @@ i.home-product-item__icon-heart-fill {
   margin: 0 6px;
   display: flex;
   align-items: center;
-  font-size: 1.2rem;
 }
 
 .home-product-item__mall {
@@ -1455,7 +1449,7 @@ i.home-product-item__icon-heart-fill {
   filter: brightness(60%);
   position: absolute;
   left: 0px;
-  top: 16px;
+  top: 20px;
 }
 
 .home-product-item__mall::before {

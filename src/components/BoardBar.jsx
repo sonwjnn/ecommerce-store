@@ -1,6 +1,8 @@
 import { useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 
+import { Button } from './ui/button'
+
 const BoardBar = ({ handleSelectPriceOption }) => {
   const location = useLocation()
   const search = location.pathname.includes('search')
@@ -8,15 +10,19 @@ const BoardBar = ({ handleSelectPriceOption }) => {
   return (
     <div className="mb-3">
       <div className="home-filter hide-on-mobile-tablet ">
-        <span className="home-filter__lable  text-sm">Sắp xếp theo</span>
-        <button className="home-filter__btn btn text-sm">Phổ biến</button>
-        <button className="home-filter__btn btn btn-primary text-sm">
-          Mới nhất
-        </button>
-        <button className="home-filter__btn btn text-sm">Bán chạy</button>
+        <span className="home-filter__lable  mr-3 text-sm">Sắp xếp theo</span>
+        <div className="flex gap-x-2">
+          <Button className="border-none bg-white font-normal text-black  hover:bg-accent">
+            Phổ biến
+          </Button>
+          <Button variant="secondary">Mới nhất</Button>
+          <Button className="border-none bg-white font-normal text-black hover:bg-accent">
+            Bán chạy
+          </Button>
+        </div>
 
         <div className="select-input ">
-          <span className="select-input__lable text-sm">Giá</span>
+          <span className="select-input__lable text-sm ">Giá</span>
           <i className="select-input__icon ti-angle-down"></i>
           <ul className="select-input__menu top-[110%]">
             <li className="select-input__item">

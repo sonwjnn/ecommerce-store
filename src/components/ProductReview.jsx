@@ -62,7 +62,7 @@ const ReviewItem = ({ review, onRemoved }) => {
             {onRequest ? (
               <Spinner className="text-primary" />
             ) : (
-              <LuTrash size={20} />
+              <LuTrash className="text-secondary" size={20} />
             )}
           </Button>
         )}
