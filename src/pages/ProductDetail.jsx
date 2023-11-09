@@ -5,6 +5,7 @@ import DetailImage from '@/components/DetailImage'
 import ProductReview from '@/components/ProductReview'
 import Star from '@/components/Star'
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
 import { setGlobalLoading } from '@/redux/features/globalLoadingSlice'
 import {
@@ -16,6 +17,7 @@ import { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { BiSolidShieldAlt2 } from 'react-icons/bi'
 import { BsCartPlus, BsTruck } from 'react-icons/bs'
+import { LuMinus, LuPlus } from 'react-icons/lu'
 import { MdOutlineFavorite, MdOutlineFavoriteBorder } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -34,7 +36,7 @@ const ProductDetail = () => {
   const { productId } = useParams()
   const [product, setProduct] = useState(null)
   const [activeReview, setActiveReview] = useState(0)
-  const { listFavorites, user } = useSelector(state => state.user)
+  const { listFavorites, user, listCarts } = useSelector(state => state.user)
   const [isFavorite, setIsFavorite] = useState(false)
   const [onRequest, setOnRequest] = useState(false)
   const [imageUrl, setImageUrl] = useState('')
@@ -102,44 +104,45 @@ const ProductDetail = () => {
     }
   }, [activeReview])
 
-  const handleValueCart = state => {
-    if (cartState.increase == state) {
-      setCartValue(cartValue + 1)
-    }
-    if (cartState.decrease == state) {
-      if (cartValue - 1 < 1) {
-        setCartValue(1)
-        return
-      }
-      setCartValue(cartValue - 1)
-    }
-  }
-
   const onCartClick = async () => {
     if (!user) {
       toast.error('You must login first!', { toastId: 'warning-login' })
       navigate('/authUser/signin')
       return
     }
+    if (onRequest) return
+
+    setOnRequest(true)
+
+    let newCartValue = cartValue
+    if (listCarts.length) {
+      listCarts.map(cart => {
+        if (cart.productId._id === product._id) {
+          newCartValue = newCartValue + +cart.quantity
+        }
+      })
+    }
+    if (newCartValue > 50) newCartValue = 50
 
     const body = {
       productId: product._id,
-      productName: product.name,
-      typeId: product.typeId._id,
-      cateId: product.cateId._id,
-      productPrice: product.price,
-      productImage: product.imageName,
-      quantity: cartValue,
+      quantity: newCartValue,
     }
 
     const { response, err } = await cartApi.add(body)
 
+    setOnRequest(false)
+
     if (err) toast.error(err.message)
 
     if (response) {
-      dispatch(addCart(response))
-
-      toast.success('Add cart success')
+      dispatch(
+        addCart({
+          ...response,
+          productId: { ...product },
+        })
+      )
+      toast.success('Added cart!')
     }
   }
 
@@ -195,6 +198,18 @@ const ProductDetail = () => {
       dispatch(removeFavorite({ favoriteId: favorite.id }))
       setIsFavorite(false)
       setFavoriteCount(favoriteCount - 1)
+    }
+  }
+
+  const handleInputQuantity = e => {
+    const value = e.target.value
+
+    if (value < 1) {
+      setCartValue(1)
+    } else if (value > 50) {
+      setCartValue(50)
+    } else {
+      setCartValue(+value)
     }
   }
 
@@ -440,24 +455,28 @@ const ProductDetail = () => {
                 </span>
                 <span className=" font-normal">
                   <div className="flex items-center gap-4">
-                    <span>
-                      <span
-                        className="cursor-pointer select-none border border-gray-300 px-5 py-1 text-xl text-gray-600"
-                        onClick={() => handleValueCart(cartState.decrease)}
+                    <div className="flex items-center justify-center">
+                      <button
+                        onClick={() =>
+                          setCartValue(prev => (prev - 1 < 0 ? 0 : prev - 1))
+                        }
+                        className="flex h-8 w-8 items-center justify-center border border-neutral-300 bg-transparent outline-none"
                       >
-                        -
-                      </span>
-                      <span className="select-none border border-gray-300 px-7 py-1 text-xl text-gray-600">
-                        {cartValue}
-                      </span>
-                      <span
-                        className="cursor-pointer select-none border border-gray-300 px-4 py-1 text-xl
-                      text-gray-600"
-                        onClick={() => handleValueCart(cartState.increase)}
+                        <LuMinus />
+                      </button>
+                      <Input
+                        className="h-[32px] w-[50px] rounded-none border border-x-0 border-neutral-300 bg-white text-center text-base"
+                        type="number"
+                        value={cartValue}
+                        onChange={handleInputQuantity}
+                      />
+                      <button
+                        onClick={() => setCartValue(prev => prev + 1)}
+                        className="flex h-8 w-8 items-center justify-center border border-neutral-300 bg-transparent outline-none"
                       >
-                        +
-                      </span>
-                    </span>
+                        <LuPlus />
+                      </button>
+                    </div>
                     <span className="hidden px-6 py-1 text-sm text-gray-500 md:block">
                       322 sảm phẩm có sẵn
                     </span>

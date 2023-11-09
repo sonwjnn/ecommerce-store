@@ -1,16 +1,17 @@
 import favoriteApi from '@/apis/modules/favorite.api'
 import productApi from '@/apis/modules/product.api'
 import { removeFavorite } from '@/redux/features/userSlice'
-import { shorterString } from '@/utilities/constants'
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { LuTrash } from 'react-icons/lu'
 import { SlEmotsmile } from 'react-icons/sl'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { Spinner } from './Spinner'
+import { Button } from './ui/button'
+
 const FavoriteItem = props => {
-  const { title, productImage, type, id, price, onRemoved, handleDotPrice } =
-    props
+  const { title, productImage, type, id, price, onRemoved } = props
 
   const dispatch = useDispatch()
   const [onRequest, setOnRequest] = useState(false)
@@ -52,36 +53,40 @@ const FavoriteItem = props => {
     }
   }
 
-  //constants
-  const shortTitle = shorterString(title, 28)
-
   return (
     <div className="w-full p-8 pb-0 pt-0">
-      <div className="flex flex-col items-center justify-between border-b border-b-gray-200  p-6 md:flex-row">
+      <div className="flex min-h-[56px] flex-col items-center justify-between border-b border-b-gray-200  p-1 md:flex-row">
         <div className="flex flex-grow items-center gap-8 self-start">
           <div
-            className="h-[80px] min-w-[80px] bg-cover bg-center bg-no-repeat "
+            className="h-[56px] min-w-[56px] bg-cover bg-center bg-no-repeat "
             style={{
               backgroundImage: `url(${imageUrl})`,
             }}
           ></div>
           <div className="flex flex-col justify-center self-center">
-            <div className="text-base text-gray-500">{shortTitle}</div>
+            <div className="line-clamp-2 text-sm text-gray-500">{title}</div>
             <div className="text-sm">{type}</div>
           </div>
         </div>
 
         <div className="ml-[132px] flex items-center self-end md:self-center">
           <div className=" mr-12 px-12 text-lg text-primary md:text-base">
-            ₫{handleDotPrice(price)}
+            ₫{price?.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
           </div>
 
-          <button
+          <Button
+            className="border-none"
+            variant="outline"
+            size="icon"
+            disable={onRequest}
             onClick={onRemove}
-            className="mr-2 flex items-center justify-center px-3 py-2 text-[32px] text-red-600 md:text-2xl   "
           >
-            <LuTrash />
-          </button>
+            {onRequest ? (
+              <Spinner className="text-primary" />
+            ) : (
+              <LuTrash size={20} />
+            )}
+          </Button>
         </div>
       </div>
     </div>
@@ -142,9 +147,6 @@ const FavoriteList = () => {
     })
     setFavs(newFavs)
   }
-  const handleDotPrice = price => {
-    return price.replace(/\B(?=(\d{3})+(?!\d))/g, '.')
-  }
 
   const handleRemoveFavs = async () => {
     if (!checkedFavs.length) return
@@ -170,18 +172,17 @@ const FavoriteList = () => {
           id={fav._id}
           key={fav._id}
           userId={fav.user}
-          productId={fav.productId}
-          price={fav.productPrice}
-          title={fav.productTitle}
-          type={fav.productType}
-          productImage={fav.productImage}
+          productId={fav.productId._id}
+          price={fav.productId.price}
+          title={fav.productId.name}
+          type={fav.productId.type}
+          productImage={fav.productId.imageName}
           quantity={fav.quantity}
           onRemoved={onRemoved}
           onCheckRemoved={onCheckRemoved}
           handleCheckedFav={handleCheckedFav}
           isCheckedAll={isCheckedAll}
           checkedFavs={checkedFavs}
-          handleDotPrice={handleDotPrice}
         />
       ))}
       {!favs.length && (

@@ -1,14 +1,19 @@
 import cartApi from '@/apis/modules/cart.api'
 import productApi from '@/apis/modules/product.api'
-import LoadingButton from '@/components/LoadingButton'
+import { Spinner } from '@/components/Spinner'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { removeCart, removeCarts } from '@/redux/features/userSlice'
+import {
+  removeCart,
+  removeCarts,
+  updateQuantityCart,
+} from '@/redux/features/userSlice'
 import { useEffect, useState } from 'react'
 import { useRef } from 'react'
 import { toast } from 'react-hot-toast'
-import { LuMinus, LuPlus } from 'react-icons/lu'
+import { LuMinus, LuPlus, LuTrash } from 'react-icons/lu'
 import { useDispatch, useSelector } from 'react-redux'
+import { useDebouncedCallback } from 'use-debounce'
 
 export const CartItem = props => {
   const {
@@ -26,10 +31,9 @@ export const CartItem = props => {
 
   const dispatch = useDispatch()
   const inputRef = useRef()
-  const [cartValue, setCartValue] = useState(1)
   const [isChecked, setIsChecked] = useState(false)
   const [onRequest, setOnRequest] = useState(false)
-
+  const [cartValue, setCartValue] = useState(1)
   const [imageUrl, setImageUrl] = useState('')
 
   useEffect(() => {
@@ -56,6 +60,50 @@ export const CartItem = props => {
     }
   }, [cartValue])
 
+  const handleChangeQuantity = async () => {
+    const body = {
+      cartId: id,
+      quantity: cartValue,
+    }
+
+    const { response, err } = await cartApi.updateCart(body)
+
+    if (err) toast.error(err.message)
+
+    if (response) {
+      dispatch(updateQuantityCart(body))
+    }
+  }
+
+  const debouncedCallback = useDebouncedCallback(handleChangeQuantity, 500)
+
+  const handleIncreaseQuantity = () => {
+    setCartValue(prev => prev + 1)
+    debouncedCallback()
+  }
+
+  const handleInputQuantity = e => {
+    const value = e.target.value
+
+    if (value < 1) {
+      setCartValue(1)
+    } else if (value > 50) {
+      setCartValue(50)
+    } else {
+      setCartValue(value)
+    }
+
+    debouncedCallback()
+  }
+
+  const handleDecreaseQuantity = () => {
+    const isUpdate = cartValue - 1 < 1 ? false : true
+    setCartValue(prev => (prev - 1 < 1 ? 1 : prev - 1))
+    if (isUpdate) {
+      debouncedCallback()
+    }
+  }
+
   const handleCheckCart = () => {
     setIsChecked(!isChecked)
     const currPrice = +price * cartValue
@@ -80,9 +128,10 @@ export const CartItem = props => {
 
   let prevPrice = price && handleDotPrice(price)
   let currPrice = price && handleDotPrice((+price * cartValue).toString())
+
   return (
     <div className="w-full px-6 py-1 ">
-      <div className="grid-cols-list-6 border-b-gray-2006 grid min-h-[56px] items-center  border-b">
+      <div className="border-b-gray-2006 grid min-h-[56px] grid-cols-list-6 items-center  border-b">
         <input
           type="checkbox"
           checked={isChecked || isCheckedAll}
@@ -97,44 +146,49 @@ export const CartItem = props => {
               backgroundImage: `url(${imageUrl})`,
             }}
           ></div>
-          <div className="flex flex-col justify-center self-start lg:self-center">
-            <div className="text-sm text-gray-500">{title}</div>
+          <div className="flex flex-col justify-center ">
+            <div className="line-clamp-2 text-sm text-gray-500">{title}</div>
             <div className="text-sm">{type}</div>
           </div>
         </div>
 
         <div className="text-center text-sm text-primary">₫{prevPrice}</div>
 
-        <div class="flex items-center justify-center">
+        <div className="flex items-center justify-center">
           <button
-            onClick={() => setCartValue(prev => (prev - 1 < 0 ? 0 : prev - 1))}
+            onClick={handleDecreaseQuantity}
             className="flex h-8 w-8 items-center justify-center border border-neutral-300 bg-transparent outline-none"
           >
             <LuMinus />
           </button>
           <Input
-            class="h-[32px] w-[50px] rounded-none border border-x-0 border-neutral-300 bg-white text-center text-base"
-            type="text"
+            className="h-[32px] w-[50px] rounded-none border border-x-0 border-neutral-300 bg-white text-center text-base"
+            type="number"
             value={cartValue}
+            onChange={handleInputQuantity}
           />
           <button
-            onClick={() => setCartValue(prev => prev + 1)}
+            onClick={handleIncreaseQuantity}
             className="flex h-8 w-8 items-center justify-center border border-neutral-300 bg-transparent outline-none"
           >
             <LuPlus />
           </button>
         </div>
 
-        <div className="hidden  text-center text-sm text-primary lg:block">
-          ₫{currPrice}
-        </div>
+        <div className="text-center text-sm text-primary">₫{currPrice}</div>
 
         <Button
-          className="mx-auto w-[80px]"
+          className="mx-auto border-none"
+          variant="outline"
+          size="icon"
           disable={onRequest}
           onClick={onRemove}
         >
-          Xoá
+          {onRequest ? (
+            <Spinner className="text-primary" />
+          ) : (
+            <LuTrash size={20} />
+          )}
         </Button>
       </div>
     </div>
@@ -202,7 +256,7 @@ const CartList = () => {
     setCarts(newCarts)
   }
   const handleDotPrice = price => {
-    return price.replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+    return price?.replace(/\B(?=(\d{3})+(?!\d))/g, '.')
   }
 
   const handleRemoveCarts = async () => {
@@ -239,7 +293,7 @@ const CartList = () => {
 
       <div className="min-h-screen w-full ">
         <div className=" mx-auto h-full max-w-[1200px] overflow-hidden ">
-          <div className="grid-cols-list-6 mt-12 grid   min-h-[40px] w-full  rounded-md bg-white px-6 py-4 text-base text-gray-500">
+          <div className="mt-12 grid min-h-[40px]   w-full grid-cols-list-6  rounded-md bg-white px-6 py-4 text-base text-gray-500">
             <div></div>
             <div>Tất cả sản phẩm</div>
 
@@ -255,11 +309,11 @@ const CartList = () => {
                 id={cart._id}
                 key={cart._id}
                 userId={cart.user}
-                productId={cart.productId}
-                price={cart.productPrice}
-                title={cart.productName}
-                type={cart.productType}
-                imageName={cart.productImage}
+                productId={cart.productId._id}
+                price={cart.productId.discountPrice}
+                title={cart.productId.name}
+                type={cart.productId.type}
+                imageName={cart.productId.imageName}
                 quantity={cart.quantity}
                 onRemoved={onRemoved}
                 onCheckRemoved={onCheckRemoved}
@@ -323,7 +377,7 @@ const CartList = () => {
                 <span className="text-base font-semibold text-primary">
                   ₫52.000
                 </span>
-                <Button>mua hàng</Button>
+                <Button>Mua hàng</Button>
               </div>
             </div>
           </div>

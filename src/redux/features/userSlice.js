@@ -36,13 +36,30 @@ const userSlice = createSlice({
     },
     addCart: (state, action) => {
       let flag = 0
-      state.listCarts.forEach(cart => {
+      const newCarts = state.listCarts.map(cart => {
         if (cart._id === action.payload._id) {
           flag++
-          return
+          return {
+            ...action.payload,
+          }
         }
+        return cart
       })
       if (!flag) state.listCarts = [action.payload, ...state.listCarts]
+      else state.listCarts = newCarts
+    },
+
+    updateQuantityCart: (state, action) => {
+      const newCarts = state.listCarts.map(cart => {
+        if (cart._id === action.payload.cartId) {
+          return {
+            ...cart,
+            ...action.payload,
+          }
+        }
+        return cart
+      })
+      state.listCarts = newCarts
     },
 
     //favorites
@@ -94,6 +111,7 @@ export const {
   addFavorite,
   setShop,
   updateShop,
+  updateQuantityCart,
 } = userSlice.actions
 
 export default userSlice.reducer

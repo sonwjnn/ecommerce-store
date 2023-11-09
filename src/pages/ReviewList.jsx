@@ -80,21 +80,19 @@ const ReviewItem = ({ review, onRemoved }) => {
           <Typography>{review.content}</Typography>
         </Stack>
       </Box>
-      <LoadingButton
-        variant="contained"
-        sx={{
-          position: { xs: 'relative', md: 'absolute' },
-          right: { xs: 0, md: '10px' },
-          marginTop: { xs: 2, md: 0 },
-          width: 'max-content',
-        }}
-        startIcon={<DeleteIcon />}
-        loadingPosition="start"
-        loading={onRequest}
+      <Button
+        className="border-none"
+        variant="outline"
+        size="icon"
+        disable={onRequest}
         onClick={onRemove}
       >
-        remove
-      </LoadingButton>
+        {onRequest ? (
+          <Spinner className="text-primary" />
+        ) : (
+          <LuTrash size={20} />
+        )}
+      </Button>
     </Box>
   )
 }

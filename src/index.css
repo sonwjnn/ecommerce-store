@@ -118,4 +118,15 @@
     transition: background-color 5000s ease-in-out 0s;
     box-shadow: inset 0 0 20px 20px white;
   }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  }
+
+  input[type='number'] {
+    -moz-appearance: textfield; /* Firefox */
+    appearance: textfiled;
+  }
 }

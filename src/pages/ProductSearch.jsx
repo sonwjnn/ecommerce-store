@@ -75,10 +75,6 @@ const ProductSearch = () => {
     setProducts(newProducts)
   }
 
-  useEffect(() => {
-    console.log(products)
-  }, [products])
-
   return (
     <>
       <div className="app__container pt-0">

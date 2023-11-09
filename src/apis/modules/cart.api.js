@@ -5,6 +5,7 @@ const cartEndpoints = {
   add: 'user/carts',
   remove: ({ cartId }) => `user/carts/${cartId}`,
   removeCarts: `user/carts`,
+  updateCart: `user/carts`,
 }
 
 const cartApi = {
@@ -17,23 +18,10 @@ const cartApi = {
     }
   },
 
-  add: async ({
-    productId,
-    productName,
-    productPrice,
-    typeId,
-    cateId,
-    productImage,
-    quantity,
-  }) => {
+  add: async ({ productId, quantity }) => {
     try {
       const response = await privateClient.post(cartEndpoints.add, {
         productId,
-        productName,
-        productPrice,
-        typeId,
-        cateId,
-        productImage,
         quantity,
       })
       return { response }
@@ -56,8 +44,19 @@ const cartApi = {
   },
   removeCarts: async ({ cartIds }) => {
     try {
-      const response = await privateClient.delete(cartEndpoints.removeCarts, {
+      const response = await privateClient.put(cartEndpoints.removeCarts, {
         data: cartIds,
+      })
+      return { response }
+    } catch (error) {
+      return { error }
+    }
+  },
+  updateCart: async ({ cartId, quantity }) => {
+    try {
+      const response = await privateClient.put(cartEndpoints.updateCart, {
+        cartId,
+        quantity,
       })
       return { response }
     } catch (error) {

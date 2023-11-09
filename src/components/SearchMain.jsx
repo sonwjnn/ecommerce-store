@@ -82,9 +82,6 @@ const SearchMain = () => {
         <div className="header__search rounded-sm">
           <div className="header__search-input-wrap">
             <form onSubmit={handleSubmitSearch} className="relative h-full">
-              <span className="header__seach-mobile  absolute left-[7px] top-[25%] z-20 hidden">
-                <BiSearch className="mt-1 h-8 text-[22px] text-gray-500 " />
-              </span>
               <Input
                 type="text"
                 className="h-full border-none focus-visible:ring-0"

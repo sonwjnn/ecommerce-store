@@ -809,17 +809,7 @@
   width: 100%;
 }
 
-.header__cart-list--have-items-decription {
-  text-align: left;
-  flex: 1;
-  line-height: 1.4rem;
-  height: 4rem;
-  color: var(--text-color);
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-}
+
 
 .header__cart-list--have-items-price {
   font-size: 1.4rem;

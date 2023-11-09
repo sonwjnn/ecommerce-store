@@ -45,10 +45,10 @@ const ProductItem = ({ product, className }) => {
           style={{ backgroundImage: `url(${imageUrl})` }}
         ></div>
         {/* <img src={imageUrl} alt="Product" /> */}
-        <h2 className="home-product-item__title text-sm">{product.name}</h2>
-        <div className="home-product-item__tag-red mt-0 text-[10px]">
-          Mua 3 & giảm 5%
+        <div className="home-product-item__title line-clamp-2 min-h-[32px]  pb-0 text-xs">
+          {product.name}
         </div>
+
         <div className="home-product-item__price flex-nowrap">
           {product.discount && product.discount !== '0' && (
             <span className="home-product-item__sale-price mr-1 min-w-0 truncate text-sm text-gray-500 line-through">
