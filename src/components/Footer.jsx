@@ -1,6 +1,11 @@
+import { socialNetworkLinks } from '@/utilities/constants'
+import { AiFillApple } from 'react-icons/ai'
+import { BsGooglePlay } from 'react-icons/bs'
+import { TbBrandAppgallery } from 'react-icons/tb'
+
 const Footer = () => {
   return (
-    <footer className="footer border border-t-4 border-primary font-roboto text-sm">
+    <footer className="footer font-be mt-8 border border-t-4 border-primary text-sm">
       <div className="wide grid">
         <div className="row footer-spacing"></div>
         <div className="row footer-body footer__content">
@@ -10,54 +15,48 @@ const Footer = () => {
                 CHĂM SÓC KHÁCH HÀNG
               </h3>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link text-sm">
+                <div className="footer-list-item__link text-sm">
                   Trung Tâm Trợ Giúp
-                </a>
+                </div>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link text-sm">
+                <div className="footer-list-item__link text-sm">
                   Shopee Blog
-                </a>
+                </div>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link text-sm">
+                <div className="footer-list-item__link text-sm">
                   Shopee Mall
-                </a>
+                </div>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link text-sm">
+                <div className="footer-list-item__link text-sm">
                   Hướng Dẫn Mua Hàng
-                </a>
+                </div>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link text-sm">
-                  Thanh Toán
-                </a>
+                <div className="footer-list-item__link text-sm">Thanh Toán</div>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link text-sm">
-                  Shopee Xu
-                </a>
+                <div className="footer-list-item__link text-sm">Shopee Xu</div>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link text-sm">
-                  Vận Chuyển
-                </a>
+                <div className="footer-list-item__link text-sm">Vận Chuyển</div>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link text-sm">
+                <div className="footer-list-item__link text-sm">
                   Trả Hàng & Hoàn Tiền
-                </a>
+                </div>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link text-sm">
+                <div className="footer-list-item__link text-sm">
                   Chăm Sóc Khách Hàng
-                </a>
+                </div>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link text-sm">
+                <div className="footer-list-item__link text-sm">
                   Chính Sách Bảo Hành
-                </a>
+                </div>
               </li>
             </ul>
           </div>
@@ -65,49 +64,45 @@ const Footer = () => {
             <ul className="footer-list">
               <h3 className="footer-list__heading text-sm">VỀ SHOPEE</h3>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link text-sm">
+                <div className="footer-list-item__link text-sm">
                   Giới Thiệu Về Shopee Việt Nam
-                </a>
+                </div>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link text-sm">
-                  Tuyển Dụng
-                </a>
+                <div className="footer-list-item__link text-sm">Tuyển Dụng</div>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link text-sm">
+                <div className="footer-list-item__link text-sm">
                   Điều Khoản Shopee
-                </a>
+                </div>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link text-sm">
+                <div className="footer-list-item__link text-sm">
                   Chính Sách Bảo Mật
-                </a>
+                </div>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link text-sm">
-                  Chính Hãng
-                </a>
+                <div className="footer-list-item__link text-sm">Chính Hãng</div>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link text-sm">
+                <div className="footer-list-item__link text-sm">
                   Kênh Người Bán
-                </a>
+                </div>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link text-sm">
+                <div className="footer-list-item__link text-sm">
                   Flash Sales
-                </a>
+                </div>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link text-sm">
+                <div className="footer-list-item__link text-sm">
                   Chương Trình Tiếp Thị Liên Kết Shopee
-                </a>
+                </div>
               </li>
               <li className="footer-list-item">
-                <a href="" className="footer-list-item__link text-sm">
+                <div className="footer-list-item__link text-sm">
                   Liên Hệ Với Truyền Thông
-                </a>
+                </div>
               </li>
             </ul>
           </div>
@@ -115,59 +110,11 @@ const Footer = () => {
             <ul className="footer-list">
               <ul className="footer-list-sub ">
                 <h3 className="footer-list-sub__heading text-sm">THANH TOÁN</h3>
-                <li className="footer-list-sub__item">
-                  <span className="footer-list-sub__img footer-list-sub__img-1 footer__background"></span>
-                </li>
-                <li className="footer-list-sub__item">
-                  <span className="footer-list-sub__img footer-list-sub__img-2 footer__background"></span>
-                </li>
-                <li className="footer-list-sub__item">
-                  <span className="footer-list-sub__img footer-list-sub__img-3 footer__background"></span>
-                </li>
-                <li className="footer-list-sub__item">
-                  <span className="footer-list-sub__img footer-list-sub__img-4 footer__background"></span>
-                </li>
-                <li className="footer-list-sub__item">
-                  <span className="footer-list-sub__img footer-list-sub__img-5 footer__background"></span>
-                </li>
-                <li className="footer-list-sub__item">
-                  <span className="footer-list-sub__img footer-list-sub__img-6 footer__background"></span>
-                </li>
-                <li className="footer-list-sub__item">
-                  <span className="footer-list-sub__img footer-list-sub__img-7 footer__background"></span>
-                </li>
               </ul>
               <ul className="footer-list-sub">
                 <h3 className="footer-list-sub__heading text-sm">
                   ĐƠN VỊ VẬN CHUYỂN
                 </h3>
-                <li className="footer-list-sub__item">
-                  <span className="footer-list-sub__img footer-list-sub__img-8 footer__background"></span>
-                </li>
-                <li className="footer-list-sub__item">
-                  <span className="footer-list-sub__img footer-list-sub__img-9 footer__background"></span>
-                </li>
-                <li className="footer-list-sub__item">
-                  <span className="footer-list-sub__img footer-list-sub__img-10 footer__background"></span>
-                </li>
-                <li className="footer-list-sub__item">
-                  <span className="footer-list-sub__img footer-list-sub__img-11 footer__background"></span>
-                </li>
-                <li className="footer-list-sub__item">
-                  <span className="footer-list-sub__img footer-list-sub__img-12 footer__background"></span>
-                </li>
-                <li className="footer-list-sub__item">
-                  <span className="footer-list-sub__img footer-list-sub__img-13 footer__background"></span>
-                </li>
-                <li className="footer-list-sub__item">
-                  <span className="footer-list-sub__img footer-list-sub__img-14 footer__background"></span>
-                </li>
-                <li className="footer-list-sub__item">
-                  <span className="footer-list-sub__img footer-list-sub__img-15 footer__background"></span>
-                </li>
-                <li className="footer-list-sub__item">
-                  <span className="footer-list-sub__img footer-list-sub__img-16 footer__background"></span>
-                </li>
               </ul>
             </ul>
           </div>
@@ -176,71 +123,41 @@ const Footer = () => {
               <h3 className="footer-list__heading text-sm">
                 THEO DÕI CHÚNG TÔI TRÊN
               </h3>
-              <li className="footer-list-item">
-                <button className="footer-list-item__link footer-list-item__socials text-sm transition-all">
-                  <i className="footer-list-item__icon fa-brands fa-facebook-square"></i>
-                  Facebook
-                </button>
-              </li>
-              <li className="footer-list-item">
-                <button className="footer-list-item__link footer-list-item__socials text-sm transition-all">
-                  <i className="footer-list-item__icon fa-brands fa-instagram-square"></i>
-                  Instagram
-                </button>
-              </li>
-              <li className="footer-list-item">
-                <button className="footer-list-item__link footer-list-item__socials text-sm transition-all">
-                  <i className="footer-list-item__icon fa-brands fa-linkedin"></i>
-                  LinkedIn
-                </button>
-              </li>
+              {socialNetworkLinks.map(item => {
+                const Icon = item.icon
+                return (
+                  <a
+                    className="mt-2 flex items-center justify-start gap-x-2 rounded-full text-[#605f5f] hover:brightness-110"
+                    key={item.title}
+                    href={item.link}
+                    target="_blank"
+                  >
+                    <Icon className="text-lg " />
+
+                    {item.title}
+                  </a>
+                )
+              })}
             </ul>
           </div>
           <div className="col l-2-4 c-12">
             <ul className="footer-list">
               <h3 className="footer-list__heading text-sm">
-                TẢI ỨNG DỤNG SHOPEE NGAY THÔI
+                TẢI ỨNG DỤNG SHOPEE NGAY
               </h3>
               <div className="footer-list__wrap">
-                <li className="footer-list-item">
-                  <a href="" className="footer-list-item__link footer-list-qr">
-                    <img
-                      className="footer-list-qr__img"
-                      src={
-                        new URL('@/assets/img/qr-code.png', import.meta.url)
-                          .href
-                      }
-                      alt="#"
-                    />
-                  </a>
-                </li>
-                <li className="footer-list-item footer-list__app">
-                  <button className="footer-list-item__link footer-list-appstore">
-                    <img
-                      src={
-                        new URL('@/assets/img/app-store.png', import.meta.url)
-                          .href
-                      }
-                      alt="#"
-                    />
+                <li className="footer-list-item footer-list__app ">
+                  <button className="footer-list-item__link footer-list-appstore mt-2 flex text-left text-[#605f5f]">
+                    <AiFillApple size={20} className="mr-1" />
+                    App Store
                   </button>
-                  <button className="footer-list-item__link footer-list-google">
-                    <img
-                      src={
-                        new URL('@/assets/img/google-play.png', import.meta.url)
-                          .href
-                      }
-                      alt="#"
-                    />
+                  <button className="footer-list-item__link footer-list-google mt-2 flex text-left text-[#605f5f]">
+                    <BsGooglePlay size={20} className="mr-1" />
+                    Google Play
                   </button>
-                  <button className="footer-list-item__link footer-list-gallery">
-                    <img
-                      src={
-                        new URL('@/assets/img/app-galerry.png', import.meta.url)
-                          .href
-                      }
-                      alt="#"
-                    />
+                  <button className="footer-list-item__link footer-list-gallery mt-2 flex text-left text-[#605f5f]">
+                    <TbBrandAppgallery size={20} className="mr-1" />
+                    App Gallery
                   </button>
                 </li>
               </div>
@@ -250,60 +167,28 @@ const Footer = () => {
         <div className="row footer-region hide-on-mobile">
           <div className="grid__column-4 footer-region-titles">
             <span className="footer-region-title">
-              © 2022 Shopee. Tất cả các quyền được bảo lưu.
+              © 2023 Sonwjn shopping. Tất cả các quyền được bảo lưu.
             </span>
           </div>
           <div className="grid__column-8 footer-region-place">
             <span className="footer-region-nation">
               Quốc gia & Khu vực:
-              <a href="" className="footer-region-nation__link">
-                Singapore
-              </a>
-              <a href="" className="footer-region-nation__link">
-                Indonesia
-              </a>
-              <a href="" className="footer-region-nation__link">
-                Đài Loan
-              </a>
-              <a href="" className="footer-region-nation__link">
-                Thái Lan
-              </a>
-              <a href="" className="footer-region-nation__link">
-                Malaysia
-              </a>
-              <a href="" className="footer-region-nation__link">
-                Việt Nam
-              </a>
-              <a href="" className="footer-region-nation__link">
-                Philippines
-              </a>
-              <a href="" className="footer-region-nation__link">
-                Brazil
-              </a>
-              <a href="" className="footer-region-nation__link">
-                Mexico
-              </a>
-              <a href="" className="footer-region-nation__link">
-                Colombia
-              </a>
-              <a href="" className="footer-region-nation__link">
-                Chile
-              </a>
-              <a href="" className="footer-region-nation__link">
-                Poland
-              </a>
-              <a href="" className="footer-region-nation__link">
-                France
-              </a>
-              <a href="" className="footer-region-nation__link">
-                Spain
-              </a>
-              <a href="" className="footer-region-nation__link">
-                India
-              </a>
-              <a href="" className="footer-region-nation__link">
-                Argentina
-              </a>
+              <div className="footer-region-nation__link">Singapore</div>
+              <div className="footer-region-nation__link">Indonesia</div>
+              <div className="footer-region-nation__link">Đài Loan</div>
+              <div className="footer-region-nation__link">Thái Lan</div>
+              <div className="footer-region-nation__link">Malaysia</div>
+              <div className="footer-region-nation__link">Việt Nam</div>
+              <div className="footer-region-nation__link">Philippines</div>
+              <div className="footer-region-nation__link">Brazil</div>
+              <div className="footer-region-nation__link">Mexico</div>
+              <div className="footer-region-nation__link">Colombia</div>
+              <div className="footer-region-nation__link">Chile</div>
+              <div className="footer-region-nation__link">Poland</div>
+              <div className="footer-region-nation__link">France</div>
+              <div className="footer-region-nation__link">Spain</div>
+              <div className="footer-region-nation__link">India</div>
+              <div className="footer-region-nation__link">Argentina</div>
             </span>
           </div>
         </div>
@@ -325,46 +210,27 @@ const Footer = () => {
                 CHÍNH SÁCH TRẢ HÀNG VÀ HOÀN TIỀN
               </span>
             </div>
-            <div className="row footer-footer-logo">
-              <div className="footer-footer-logo__item">
-                <a
-                  href=""
-                  className="footer-footer-logo--spacing footer__background footer-footer-logo__link-1"
-                ></a>
-              </div>
-              <div className="footer-footer-logo__item">
-                <a
-                  href=""
-                  className="footer-footer-logo--spacing footer__background footer-footer-logo__link-2"
-                ></a>
-              </div>
-              <div className="footer-footer-logo__item">
-                <a
-                  href=""
-                  className="footer-footer-logo--spacing footer__background footer-footer-logo__link-3"
-                ></a>
-              </div>
-            </div>
+
             <div className="row footer-footer-company hide-on-mobile">
-              Công ty TNHH Shopee
+              Công ty TNHH Sonwjn
             </div>
             <div className="row footer-footer-text hide-on-mobile text-xs">
               <p>
-                Địa chỉ: Tầng 4-5-6, Tòa nhà Capital Place, số 29 đường Liễu
-                Giai, Phường Ngọc Khánh, Quận Ba Đình, Thành phố Hà Nội, Việt
-                Nam. Tổng đài hỗ trợ: 19001221 - Email: cskh@hotro.shopee.vn
+                Địa chỉ: Tầng 4-5-6, Tòa nhà Sonwjn Towner, số 29 đường Bà Điểm
+                4, Quận 12, Thành phố Hồ Chí Minh, Việt Nam. Tổng đài hỗ trợ:
+                19001221 - Email: nguyenlehoangson2106@gmail.com
               </p>
               <p>
-                Chịu Trách Nhiệm Quản Lý Nội Dung: Nguyễn Đức Trí - Điện thoại
-                liên hệ: 024 73081221 (ext 4678)
+                Chịu Trách Nhiệm Quản Lý Nội Dung: Nguyễn Lê Hoàng Sơn - Điện
+                thoại liên hệ: 083 7474 905
               </p>
               <p>
-                Mã số doanh nghiệp: 0106773786 do Sở Kế hoạch & Đầu tư TP Hà Nội
-                cấp lần đầu ngày 10/02/2015
+                Mã số doanh nghiệp: 0123456789 do Sở Kế hoạch & Đầu tư TP Hồ Chí
+                Minh cấp lần đầu ngày 10/02/2023
               </p>
             </div>
             <div className="row footer-footer-copyright">
-              <p>© 2015 - Bản quyền thuộc về Công ty TNHH Shopee</p>
+              <p>© 2023 - Bản quyền thuộc về Công ty TNHH Sonwin</p>
             </div>
           </div>
         </div>

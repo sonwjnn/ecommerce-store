@@ -1,9 +1,11 @@
+import PageWrapper from '@/components/PageWrapper'
 import PasswordUpdate from '@/components/PasswordUpdate'
 import ProtectedPage from '@/components/ProtectedPage'
 import AccountPage from '@/pages/AccountPage'
 import AuthUser from '@/pages/AuthUser'
 import CartList from '@/pages/CartList'
 import HomePage from '@/pages/HomePage'
+import OrderPage from '@/pages/OrderPage'
 import ProductDetail from '@/pages/ProductDetail'
 import ProductSearch from '@/pages/ProductSearch'
 import ReviewList from '@/pages/ReviewList'
@@ -33,7 +35,11 @@ export const productType = [
 const routes = [
   {
     index: true,
-    element: <HomePage />,
+    element: (
+      <PageWrapper>
+        <HomePage />
+      </PageWrapper>
+    ),
     state: 'home',
   },
 
@@ -55,23 +61,25 @@ const routes = [
     ),
     state: 'carts',
   },
-  {
-    path: '/reviews',
-    element: (
-      <ProtectedPage>
-        <ReviewList />
-      </ProtectedPage>
-    ),
-    state: 'reviews',
-  },
+
   {
     path: '/products/detail/:productId',
-    element: <ProductDetail />,
+    element: (
+      <PageWrapper>
+        <ProductDetail />
+      </PageWrapper>
+    ),
+    state: 'product.detail',
   },
 
   {
     path: '/authUser/:sign',
-    element: <AuthUser />,
+    element: (
+      <ProtectedPage>
+        <AuthUser />
+      </ProtectedPage>
+    ),
+    state: 'authUser',
   },
   {
     path: '/user/account/:accountType',
@@ -103,13 +111,13 @@ const routes = [
     state: 'search',
   },
   {
-    path: '/reviews',
+    path: '/order',
     element: (
       <ProtectedPage>
-        <ReviewList />
+        <OrderPage />
       </ProtectedPage>
     ),
-    state: 'reviews',
+    state: 'order',
   },
 ]
 

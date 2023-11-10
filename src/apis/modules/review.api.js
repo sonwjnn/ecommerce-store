@@ -7,22 +7,10 @@ const reviewEndpoints = {
 }
 
 const reviewApi = {
-  add: async ({
-    productId,
-    typeId,
-    cateId,
-    productName,
-    productImage,
-    rating,
-    content,
-  }) => {
+  add: async ({ productId, rating, content }) => {
     try {
       const response = await privateClient.post(reviewEndpoints.add, {
         productId,
-        typeId,
-        productName,
-        cateId,
-        productImage,
         rating,
         content,
       })

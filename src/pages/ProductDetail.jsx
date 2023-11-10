@@ -1,7 +1,6 @@
 import cartApi from '@/apis/modules/cart.api'
 import favoriteApi from '@/apis/modules/favorite.api'
 import productApi from '@/apis/modules/product.api'
-import DetailImage from '@/components/DetailImage'
 import ProductReview from '@/components/ProductReview'
 import Star from '@/components/Star'
 import { Button } from '@/components/ui/button'
@@ -41,7 +40,6 @@ const ProductDetail = () => {
   const [starCount, setStarCount] = useState([])
 
   useEffect(() => {
-    window.scrollTo(0, 0)
     const getProduct = async () => {
       dispatch(setGlobalLoading(true))
       const { response, err } = await productApi.getDetail({
@@ -240,7 +238,7 @@ const ProductDetail = () => {
               <DetailImage imageUrl={imageUrl} />
             </div> */}
 
-            <div className="hidden items-center  justify-center p-4 md:flex">
+            <div className="hidden items-center  justify-center p-2 md:flex">
               <h3 className="text-base">Chia sẻ:</h3>
               <div className="border-right-ab relative ml-4 flex gap-4 text-2xl after:right-[-2rem]">
                 <button className="text-[#0384ff]">
@@ -391,7 +389,7 @@ const ProductDetail = () => {
               </div>
             </div>
 
-            <div className="p-4 ">
+            <div className="px-0 md:p-4 ">
               <div className="flex gap-4 py-3 capitalize">
                 <span className="hidden w-[120px] text-sm text-gray-500 md:block">
                   deal sốc
@@ -451,67 +449,47 @@ const ProductDetail = () => {
                 </span>
               </div>
 
-              <div className="flex flex-col flex-wrap gap-4 py-3 capitalize md:flex-row">
-                <span className="w-[120px] text-sm text-gray-500">
-                  chọn màu
-                </span>
-                <span className=" font-normal">
-                  <div className="flex-wap flex gap-4">
-                    <span className="select-type-btn">trắng</span>
-                    <span className="select-type-dis-btn">xám bạc</span>
-                    <span className="select-type-btn">đen</span>
-                  </div>
-                </span>
-              </div>
-
               <div className="mt-4 flex flex-col flex-wrap gap-4 py-3 capitalize md:flex-row">
                 <span className="w-[120px] text-sm text-gray-500">
                   số lượng
                 </span>
-                <span className=" font-normal">
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center justify-center">
-                      <button
-                        onClick={() =>
-                          setCartValue(prev => (prev - 1 < 0 ? 0 : prev - 1))
-                        }
-                        className="flex h-8 w-8 items-center justify-center border border-neutral-300 bg-transparent outline-none"
-                      >
-                        <LuMinus />
-                      </button>
-                      <Input
-                        className="h-[32px] w-[50px] rounded-none border border-x-0 border-neutral-300 bg-white text-center text-base"
-                        type="number"
-                        value={cartValue}
-                        onChange={handleInputQuantity}
-                      />
-                      <button
-                        onClick={() => setCartValue(prev => prev + 1)}
-                        className="flex h-8 w-8 items-center justify-center border border-neutral-300 bg-transparent outline-none"
-                      >
-                        <LuPlus />
-                      </button>
-                    </div>
-                    <span className="hidden px-6 py-1 text-sm text-gray-500 md:block">
-                      322 sảm phẩm có sẵn
-                    </span>
-                  </div>
-                </span>
+                <div className="flex items-center justify-start ">
+                  <button
+                    onClick={() =>
+                      setCartValue(prev => (prev - 1 < 1 ? 1 : prev - 1))
+                    }
+                    className="flex h-8 w-8 items-center justify-center rounded-l-md border border-neutral-300 bg-transparent outline-none"
+                  >
+                    <LuMinus />
+                  </button>
+                  <Input
+                    className="h-[32px] w-[50px] rounded-none border border-x-0 border-neutral-300 bg-white text-center text-base"
+                    type="number"
+                    value={cartValue}
+                    onChange={handleInputQuantity}
+                  />
+                  <button
+                    onClick={() => setCartValue(prev => prev + 1)}
+                    className="flex h-8 w-8 items-center justify-center rounded-r-md border border-neutral-300 bg-transparent outline-none"
+                  >
+                    <LuPlus />
+                  </button>
+                </div>
               </div>
 
-              <div className="mt-8 flex gap-4">
+              <div className="mt-8 flex min-w-0 flex-wrap gap-4">
                 <Button
                   onClick={onCartClick}
-                  className="py-4 text-base capitalize"
+                  className="w-full py-4  text-base capitalize md:w-[250px]"
                   size="lg"
                   variant="outline"
                 >
                   <BsCartPlus className="mr-2" />
-                  <span>thêm vào giỏ hàng</span>
+                  thêm vào giỏ hàng
                 </Button>
 
                 <Button
-                  className="py-4 text-base capitalize"
+                  className="w-full py-4   text-base capitalize md:w-[150px]"
                   variant="secondary"
                   size="lg"
                 >
@@ -529,9 +507,9 @@ const ProductDetail = () => {
         </div>
       </div>
 
-      <div className=" mx-auto mt-8  flex h-full max-w-[1220px]">
-        <div className="flex-[80%]  md:mr-4">
-          <div className="rounded-md bg-white p-10">
+      <div className="mx-auto mt-8 flex h-full max-w-[1220px] rounded-md  bg-white py-2 ">
+        <div className="flex-[80%]  md:mr-4 ">
+          <div className="rounded-md bg-white px-0 md:p-10">
             <div className="">
               <div className="w-full rounded-md bg-[#fafafa] px-6 py-5 text-xl uppercase">
                 chi tiết sản phẩm
@@ -596,7 +574,7 @@ const ProductDetail = () => {
             </div>
           </div>
 
-          <div className="rounded-md bg-white p-10">
+          <div className="rounded-md bg-white px-6 md:p-10">
             <div className="">
               <div className="w-full rounded-md bg-white text-xl uppercase">
                 đánh giá sản phẩm

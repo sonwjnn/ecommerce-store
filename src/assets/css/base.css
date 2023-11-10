@@ -461,11 +461,7 @@ html {
   justify-content: space-evenly;
 }
 
-.footer-list__app .footer-list-item__link {
-  display: block;
-  width: 88px;
-  margin-top: 0;
-}
+
 
 .footer-list__app .footer-list-item__link img {
   width: 100%;

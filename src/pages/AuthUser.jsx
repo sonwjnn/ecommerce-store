@@ -1,8 +1,5 @@
 import SigninForm from '@/components/SigninForm'
 import SignupForm from '@/components/SignupForm'
-import { setGlobalLoading } from '@/redux/features/globalLoadingSlice'
-import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 
 const actionState = {
@@ -12,10 +9,6 @@ const actionState = {
 
 const AuthUser = () => {
   const { sign } = useParams()
-  const dispatch = useDispatch()
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
 
   const history = useNavigate()
   const toHomePage = () => {

@@ -6,7 +6,6 @@ import { BsFillSendFill } from 'react-icons/bs'
 import { LuTrash } from 'react-icons/lu'
 import { useSelector } from 'react-redux'
 
-import LoadingButton from './LoadingButton'
 import { Spinner } from './Spinner'
 import Star from './Star'
 import StarVote from './StarVote'
@@ -94,10 +93,7 @@ const ProductReview = ({ reviews, product, reviewCount, setReviewCount }) => {
     if (onRequest) return
     const body = {
       productId: product._id,
-      typeId: product.typeId._id,
-      cateId: product.cateId._id,
-      productName: product.name,
-      productImage: product.imageName,
+
       rating,
       content,
     }

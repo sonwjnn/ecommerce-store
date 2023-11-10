@@ -6,7 +6,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        roboto: ['Roboto', 'sans-serif'],
+        be: ['Be Vietnam Pro', 'sans-serif'],
       },
       colors: {
         border: 'hsl(var(--border))',

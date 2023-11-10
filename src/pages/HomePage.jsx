@@ -7,7 +7,7 @@ const HomePage = () => {
     <>
       <div className="bg-bg_page mt-[64px] lg:mt-[150px] ">
         <div className=" mb-8 w-full bg-white ">
-          <div className="mx-auto flex min-h-[280px] max-w-[1200px] gap-2 py-4">
+          <div className="mx-auto flex min-h-[280px] max-w-[1200px] gap-2  py-4">
             <div className="mx-0 flex-[66%] flex-wrap overflow-hidden rounded-sm sm:mx-14 lg:mx-0 lg:flex-nowrap">
               <HomeSlide />
             </div>
@@ -38,11 +38,11 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-        <div className="mx-auto h-full  max-w-[1200px] bg-white ">
+        <div className="mx-auto h-full  max-w-[1200px] rounded-md bg-white py-4">
           <Category />
         </div>
 
-        <div className="product-hint-bar sticky top-0 mx-auto   mt-4 h-full  max-w-[1200px] bg-white ">
+        <div className="product-hint-bar sticky top-0 mx-auto mt-4 h-full max-w-[1200px] rounded-md bg-white ">
           <div className="border-b-4 border-primary px-8 py-4 text-center text-xl font-semibold uppercase text-primary">
             gợi ý hôm nay
           </div>

@@ -43,7 +43,7 @@ const HeaderMenu = () => {
             <span className="nav-list-item-user-name text-base">
               {user.name ? user.name : 'null'}
             </span>
-            <ul className="nav-list-item-user-menu text-base">
+            <ul className="nav-list-item-user-menu overflow-hidden rounded-md text-base">
               <li className="px-3 py-2 text-base text-black transition hover:bg-accent hover:text-primary">
                 <button>
                   <Link

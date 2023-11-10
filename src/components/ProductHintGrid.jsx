@@ -1,11 +1,11 @@
-import ProductItem from './ProductItem'
+import ProductCard from './ProductCard'
 
 const ProductHintGrid = ({ products }) => {
   return (
     <div className=" min-h-[700px]">
       <div className="relative grid grid-cols-12 gap-3">
         {products.map(product => (
-          <ProductItem
+          <ProductCard
             className={'col-span-6 sm:col-span-4 md:col-span-3 lg:col-span-2'}
             product={product}
             key={product._id}

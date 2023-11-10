@@ -10,6 +10,7 @@ import './assets/css/base.css'
 import './assets/css/grid.css'
 import './assets/css/main.css'
 import './assets/css/responsive.css'
+import NotFound from './components/NotFound'
 import PageWrapper from './components/PageWrapper'
 import ProductList from './components/ProductList'
 import MainLayout from './layouts/MainLayout'
@@ -74,7 +75,7 @@ const App = () => {
                 />
               )
             )}
-            {/* <Route path="*" element={<NotFound />} /> */}
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </Router>
