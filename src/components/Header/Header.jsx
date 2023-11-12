@@ -1,13 +1,12 @@
 import { cn } from '@/lib/utils'
 import { useLocation, useParams } from 'react-router-dom'
 
-import HeaderNavigate from './HeaderNavigate'
-import SearchMain from './SearchMain'
+import HeaderContent from './HeaderContent/HeaderContent'
+import HeaderNavigate from './HeaderNavigate/HeaderNavigate'
 
 const Header = () => {
   const location = useLocation()
   const { sign, productId, accountType, keyword, authCate } = useParams()
-  const carts = location.pathname === '/user/carts'
 
   return (
     <>
@@ -28,7 +27,7 @@ const Header = () => {
       >
         <div className="wide grid">
           <HeaderNavigate />
-          <SearchMain />
+          <HeaderContent />
         </div>
       </div>
     </>

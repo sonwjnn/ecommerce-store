@@ -11,7 +11,7 @@ const NavigateMobile = () => {
 
   const handleAccountPage = () => {
     if (!user) {
-      navigate('/authUser/signin')
+      navigate('/auth/signin')
       toast.warning('You must login first!', { toastId: 'warning-login' })
       return
     }

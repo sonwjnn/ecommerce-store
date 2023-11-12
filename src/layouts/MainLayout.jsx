@@ -4,7 +4,7 @@ import shopApi from '@/apis/modules/shop.api'
 import userApi from '@/apis/modules/user.api'
 import Footer from '@/components/Footer'
 import GlobalLoading from '@/components/GlobalLoading'
-import Header from '@/components/Header'
+import Header from '@/components/Header/Header'
 import NavigateMobile from '@/components/NavigateMobile'
 import {
   setListCarts,
@@ -24,13 +24,13 @@ const MainLayout = () => {
 
   //get user from redux store with JWT
   useEffect(() => {
-    const authUser = async () => {
+    const auth = async () => {
       const { response, err } = await userApi.getInfo()
       if (response) {
         dispatch(setUser(response))
       } else dispatch(setUser(null))
     }
-    authUser()
+    auth()
   }, [dispatch])
 
   useEffect(() => {
@@ -66,7 +66,7 @@ const MainLayout = () => {
     if (!user) {
       dispatch(setShop(null))
     }
-  }, [dispatch])
+  }, [dispatch, user])
 
   return (
     <>
@@ -74,11 +74,7 @@ const MainLayout = () => {
       <GlobalLoading />
       {/* global loading*/}
 
-      {/* login loading*/}
-      {/* <AuthModal /> */}
-      {/* login loading*/}
-
-      <div className="font-be flex  flex-col ">
+      <div className="flex flex-col  font-be ">
         {/* header */}
         <Header />
         {/* header */}

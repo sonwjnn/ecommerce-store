@@ -2,13 +2,13 @@ import PageWrapper from '@/components/PageWrapper'
 import PasswordUpdate from '@/components/PasswordUpdate'
 import ProtectedPage from '@/components/ProtectedPage'
 import AccountPage from '@/pages/AccountPage'
-import AuthUser from '@/pages/AuthUser'
+import AuthPage from '@/pages/AuthPage'
 import CartList from '@/pages/CartList'
 import HomePage from '@/pages/HomePage'
 import OrderPage from '@/pages/OrderPage'
 import ProductDetail from '@/pages/ProductDetail'
 import ProductSearch from '@/pages/ProductSearch'
-import ReviewList from '@/pages/ReviewList'
+import ShopPage from '@/pages/ShopPage'
 
 export const routesGen = {
   home: '/',
@@ -53,7 +53,7 @@ const routes = [
     state: 'password.update',
   },
   {
-    path: 'user/carts',
+    path: '/user/carts',
     element: (
       <ProtectedPage>
         <CartList />
@@ -73,13 +73,13 @@ const routes = [
   },
 
   {
-    path: '/authUser/:sign',
+    path: '/auth/:sign',
     element: (
       <ProtectedPage>
-        <AuthUser />
+        <AuthPage />
       </ProtectedPage>
     ),
-    state: 'authUser',
+    state: 'auth',
   },
   {
     path: '/user/account/:accountType',
@@ -118,6 +118,15 @@ const routes = [
       </ProtectedPage>
     ),
     state: 'order',
+  },
+  {
+    path: '/shops/:shopId',
+    element: (
+      <PageWrapper>
+        <ShopPage />
+      </PageWrapper>
+    ),
+    state: 'shop.detail',
   },
 ]
 

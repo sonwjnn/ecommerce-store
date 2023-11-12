@@ -14,8 +14,8 @@ import { Input } from './ui/input'
 const SigninForm = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const authUserPage = value => {
-    navigate(`/authUser/${value}`)
+  const authPage = value => {
+    navigate(`/auth/${value}`)
   }
   const [isLoginRequest, setIsLoginRequest] = useState(false)
   const [errorMessage, setErrorMessage] = useState()
@@ -99,7 +99,7 @@ const SigninForm = () => {
         <Button
           className="uppercase"
           variant="outline"
-          onClick={() => authUserPage('signup')}
+          onClick={() => authPage('signup')}
         >
           đăng kí
         </Button>

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { PulseLoader } from 'react-spinners'
 
-import Header from './Header'
+import Header from './Header/Header'
 
 const override = css`
   display: 'block';

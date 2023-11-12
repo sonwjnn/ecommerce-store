@@ -18,8 +18,8 @@ const SignupForm = () => {
   const [isLoginRequest, setIsLoginRequest] = useState(false)
   const [errorMessage, setErrorMessage] = useState()
   const history = useNavigate()
-  const authUserPage = value => {
-    history(`/authUser/${value}`)
+  const authPage = value => {
+    history(`/auth/${value}`)
   }
   const signupForm = useFormik({
     initialValues: {
@@ -136,7 +136,7 @@ const SignupForm = () => {
         <Button
           className="uppercase"
           variant="outline"
-          onClick={() => authUserPage('signin')}
+          onClick={() => authPage('signin')}
         >
           đăng nhập
         </Button>
