@@ -1,6 +1,7 @@
 import { toast } from 'react-hot-toast'
-import { FaBell, FaUserAlt } from 'react-icons/fa'
-import { HiHome } from 'react-icons/hi'
+import { FaUserAlt } from 'react-icons/fa'
+import { GoHomeFill } from 'react-icons/go'
+import { HiBell } from 'react-icons/hi'
 import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -20,12 +21,12 @@ const NavigateMobile = () => {
   }
 
   return (
-    <div className=" flex h-full items-center justify-around bg-white p-4 text-3xl text-primary shadow-md shadow-gray-600">
+    <div className=" z-10 flex h-full items-center justify-around bg-white p-4 text-4xl text-primary shadow-md shadow-gray-600">
       <Link to={'/'}>
-        <HiHome />
+        <GoHomeFill />
       </Link>
       <Link>
-        <FaBell />
+        <HiBell />
       </Link>
       <button onClick={handleAccountPage}>
         <FaUserAlt />

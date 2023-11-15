@@ -145,16 +145,16 @@ const ProductDetail = () => {
       <div className="mx-auto h-full max-w-[1220px] space-y-6 bg-accent">
         <div className="h-full w-full  rounded-md bg-white">
           <div className="flex flex-col gap-x-6  bg-accent md:flex-row">
-            <div className=" flex flex-[33%] flex-col gap-y-6 bg-accent">
+            <div className=" flex flex-[20%] flex-col gap-y-6 bg-accent lg:flex-[33%]">
               <div className="w-full  rounded-md bg-white p-4">
                 <div
-                  className="aspect-square  bg-cover bg-center md:min-h-[450px] md:min-w-[450px]"
+                  className="aspect-square  w-full rounded-md border  border-accent bg-cover bg-center lg:min-w-[450px]"
                   style={{
                     backgroundImage: `url(${imageUrl})`,
                   }}
                 ></div>
 
-                <div className="hidden items-center   justify-center  bg-white p-2 md:flex">
+                <div className="hidden flex-wrap   items-center  justify-center gap-y-2 bg-white p-2 md:flex">
                   <h3 className="text-base">Chia sẻ:</h3>
                   <div className="border-right-ab relative ml-4 flex gap-4 text-2xl after:right-[-2rem]">
                     <button className="text-[#0384ff]">
@@ -192,16 +192,16 @@ const ProductDetail = () => {
                   </div>
                 </div>
 
-                <div className="scrollbar-hide hidden max-w-[100%] gap-4 overflow-x-scroll md:flex">
+                {/* <div className="scrollbar-hide hidden max-w-[100%] gap-4 overflow-x-scroll md:flex">
                   <DetailImage />
                   <DetailImage />
                   <DetailImage />
                   <DetailImage />
-                </div>
+                </div> */}
               </div>
               <ShopPreview product={product} />
             </div>
-            <div className="flex-[66%] rounded-md bg-white p-4">
+            <div className="flex-[80%] rounded-md bg-white p-4 lg:flex-[66%]">
               <ProductInfo
                 product={product}
                 reviewCount={reviewCount}

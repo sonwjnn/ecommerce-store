@@ -4,8 +4,8 @@ import ProtectedPage from '@/components/ProtectedPage'
 import AccountPage from '@/pages/AccountPage'
 import AuthPage from '@/pages/AuthPage'
 import CartList from '@/pages/CartList'
+import CheckoutPage from '@/pages/CheckoutPage'
 import HomePage from '@/pages/HomePage'
-import OrderPage from '@/pages/OrderPage'
 import ProductDetail from '@/pages/ProductDetail'
 import ProductSearch from '@/pages/ProductSearch'
 import ShopPage from '@/pages/ShopPage'
@@ -111,13 +111,13 @@ const routes = [
     state: 'search',
   },
   {
-    path: '/order',
+    path: '/checkout',
     element: (
       <ProtectedPage>
-        <OrderPage />
+        <CheckoutPage />
       </ProtectedPage>
     ),
-    state: 'order',
+    state: 'checkout',
   },
   {
     path: '/shops/:shopId',

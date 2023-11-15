@@ -74,7 +74,7 @@ const MainLayout = () => {
       <GlobalLoading />
       {/* global loading*/}
 
-      <div className="flex flex-col  font-be ">
+      <div className="flex flex-col font-be">
         {/* header */}
         <Header />
         {/* header */}
@@ -84,7 +84,7 @@ const MainLayout = () => {
           <Outlet />
         </main>
         {/* main */}
-        <div className=" z-100 fixed bottom-0 left-0 right-0 h-[64px] lg:hidden">
+        <div className=" fixed bottom-0 left-0 right-0 z-50 h-[64px] lg:hidden">
           <NavigateMobile />
         </div>
       </div>

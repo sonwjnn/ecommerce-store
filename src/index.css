@@ -84,7 +84,7 @@
   }
 
   .btn-cart-solid {
-    @apply rounded-md px-8 py-2 text-gray-500  transition-all  hover:text-primary;
+    @apply rounded-md py-2 text-gray-500  transition-all  hover:text-primary;
   }
 
   .errMsg {

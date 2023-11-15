@@ -1,7 +1,7 @@
 import CartPreview from '@/components/CartPreview'
 import { Button } from '@/components/ui/button'
 import toast from 'react-hot-toast'
-import { CgShoppingCart } from 'react-icons/cg'
+import { LuShoppingBag } from 'react-icons/lu'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -17,10 +17,16 @@ const HeaderCart = () => {
     }
   }
   return (
-    <div className="header__cart">
-      <div onClick={handleCarts} className="header__cart-wrap cursor-pointer">
-        <CgShoppingCart size={28} className=" text-white" />
-        <span className="header__cart-length  pointer-events-none select-none border-none bg-secondary text-xs text-white">
+    <div className="header__cart ">
+      <div
+        onClick={handleCarts}
+        className="header__cart-wrap group flex cursor-pointer items-center"
+      >
+        <LuShoppingBag
+          size={26}
+          className=" text-white group-hover:opacity-70"
+        />
+        <span className="pointer-events-none absolute right-[-4px] top-[-2px] flex h-5 w-5 select-none items-center justify-center  rounded-full border border-primary bg-secondary  text-xs font-medium text-white">
           {listCarts.length}
         </span>
 

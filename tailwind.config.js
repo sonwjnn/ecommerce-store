@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-
-export default {
+module.exports = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'class',
   theme: {
@@ -69,7 +68,8 @@ export default {
       gridTemplateColumns: {
         15: 'repeat(15, minmax(0, 1fr))',
         'list-2': 'minmax(200px, 4fr) 50px !important',
-        'list-3': '[index] 20px [first] 6fr [last] minmax(120px,1fr)',
+        'list-3':
+          ' [first] 6fr [second] minmax(80px,1fr) [last] minmax(120px,1fr)',
         'favorite-3':
           '[first] 6fr [second] minmax(120px,1fr) [last] minmax(120px,1fr)',
         'list-4':
@@ -78,11 +78,13 @@ export default {
           '[index] 16px [first] 6fr [var1] 4fr [var2] 3fr [last] minmax(120px,1fr)',
         'list-6':
           '[check] 24px [first] 6fr [var1] 3fr [var2] 2fr [var3] 3fr [last] minmax(120px,1fr)',
+        'cart-5':
+          '[first] minmax(120px, 1fr) [second] minmax(120px, 1fr) [var1] minmax(120px, 1fr) [var2] 4fr [last] minmax(130px,1fr)',
       },
       gridColumn: {
         'span-15': 'span 15 / span 15',
       },
     },
   },
-  plugins: [],
+  plugins: [require('tailwindcss-animate')],
 }

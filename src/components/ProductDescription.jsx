@@ -5,11 +5,11 @@ const ProductDescription = ({ product }) => {
   return (
     <div className="rounded-md bg-white px-0 md:p-10">
       <div className="h-full w-full">
-        <div className="w-full rounded-md bg-[#fafafa]  px-6 py-5 text-xl font-medium uppercase">
+        <div className="w-full rounded-md bg-[#fafafa]  px-6 py-5 text-xl font-medium capitalize text-[#242424]">
           chi tiết sản phẩm
         </div>
         <div className="flex gap-4 px-6 py-5 capitalize">
-          <span className="w-[120px] text-sm font-semibold text-gray-500">
+          <span className="w-[120px] text-sm font-medium text-[#242424]">
             danh mục
           </span>
           <span className="text-sm">
@@ -34,21 +34,21 @@ const ProductDescription = ({ product }) => {
         </div>
 
         <div className="flex gap-4 px-6 py-5 capitalize">
-          <span className="w-[120px] text-sm font-semibold text-gray-500">
+          <span className="w-[120px] text-sm font-medium text-[#242424]">
             kho hàng
           </span>
           <span className=" text-sm font-normal text-gray-600">6454</span>
         </div>
 
         <div className="flex gap-4 px-6 py-5 capitalize">
-          <span className="w-[120px] text-sm font-semibold text-gray-500">
+          <span className="w-[120px] text-sm font-medium text-[#242424]">
             gửi từ
           </span>
           <span className=" text-sm font-normal text-gray-600">Hà Nội</span>
         </div>
       </div>
       <div className="mt-8">
-        <div className="w-full rounded-md bg-[#fafafa] px-6  py-5 text-xl font-medium uppercase">
+        <div className="w-full rounded-md bg-[#fafafa] px-6  py-5 text-xl font-medium capitalize text-[#242424]">
           mô tả sản phẩm
         </div>
 

@@ -20,10 +20,10 @@ const ShopPreview = ({ product }) => {
         {/* avatar */}
 
         <div className="flex flex-col  justify-center gap-2">
-          <h6 className="truncate text-base font-medium">
+          <h6 className="truncate text-base font-medium text-[#242424]">
             {product?.shopId?.title}
           </h6>
-          <div className="flex flex-col gap-3 md:flex-row">
+          <div className="flex flex-col gap-3 lg:flex-row">
             <Button
               onClick={onClick}
               variant="outline"
@@ -33,17 +33,17 @@ const ShopPreview = ({ product }) => {
               Xem Shop
             </Button>
             <div className="flex flex-wrap  gap-x-4">
-              <p className="text-sm text-gray-500">
-                <span className="font-semibold">Sản phẩm: </span>{' '}
+              <p className="text-sm  text-[#242424]">
+                <span className="font-medium">Sản phẩm: </span>{' '}
                 {product?.shopId?.productCount}
               </p>
 
-              <p className="text-sm text-gray-500">
-                <span className="font-semibold">Đánh giá: </span>
+              <p className="text-sm  text-[#242424]">
+                <span className="font-medium">Đánh giá: </span>
                 {product?.shopId?.reviewCount}
               </p>
-              <p className="text-sm text-gray-500">
-                <span className="font-semibold">Ngày tạo: </span>
+              <p className="text-sm  text-[#242424]">
+                <span className="font-medium">Ngày tạo: </span>
                 {dayjs(product?.shopId?.createdAt).format('DD-MM-YYYY')}
               </p>
             </div>

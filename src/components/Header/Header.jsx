@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils'
 import { useLocation, useParams } from 'react-router-dom'
 
 import HeaderContent from './HeaderContent/HeaderContent'
-import HeaderNavigate from './HeaderNavigate/HeaderNavigate'
+import HeaderNav from './HeaderNav/HeaderNav'
 
 const Header = () => {
   const location = useLocation()
@@ -26,7 +26,7 @@ const Header = () => {
         )}
       >
         <div className="wide grid">
-          <HeaderNavigate />
+          <HeaderNav />
           <HeaderContent />
         </div>
       </div>

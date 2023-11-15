@@ -17,11 +17,11 @@ const UserDropdown = () => {
     dispatch(setUser(null))
   }
   return (
-    <>
+    <div className="group flex items-center">
       <span className="h-[30px] w-[30px] ">
         <TextAvatar text={user.name} />
       </span>
-      <span className="nav-list-item-user-name text-base">
+      <span className="nav-list-item-user-name text-base group-hover:opacity-70">
         {user.name ? user.name : 'null'}
       </span>
       <ul className="nav-list-item-user-menu overflow-hidden rounded-md text-base">
@@ -56,7 +56,7 @@ const UserDropdown = () => {
           </Link>
         </li>
       </ul>
-    </>
+    </div>
   )
 }
 

@@ -91,7 +91,9 @@ const ProductInfo = props => {
             </span>
           ) : null}
 
-          <span className="line-clamp-2 text-xl">{product?.name}</span>
+          <span className="line-clamp-2 text-xl font-medium text-[#242424]">
+            {product?.name}
+          </span>
         </div>
 
         <div className="flex flex-wrap items-center  gap-4">
@@ -147,11 +149,11 @@ const ProductInfo = props => {
       <div className="mt-5 hidden bg-[#fafafa] p-6 sm:block">
         <div className="flex flex-wrap gap-4">
           <span className="flex items-start text-base font-normal text-neutral-400 line-through">
-            <span className="mr-1 text-[11px]">₫</span>
+            <span className="mr-1 text-[11px] ">₫</span>
             {product?.price?.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
           </span>
 
-          <span className="flex items-start text-3xl font-normal text-black">
+          <span className="flex items-start text-3xl font-medium text-[#242424]">
             <span className="text-lg ">₫</span>
             {product?.discountPrice?.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
           </span>
@@ -190,7 +192,7 @@ const ProductInfo = props => {
 
       <div className="px-0 md:p-4 ">
         <div className="flex gap-4 py-3 capitalize">
-          <span className="hidden w-[120px] text-sm text-gray-500 md:block">
+          <span className="mdock hidden w-[120px] text-sm font-medium text-[#242424]">
             deal sốc
           </span>
           <span className="tag-shopee bg-[#ffeee8] font-normal text-primary">
@@ -199,7 +201,7 @@ const ProductInfo = props => {
         </div>
 
         <div className="flex flex-wrap gap-4 py-3 text-sm">
-          <span className="mt-1 hidden w-[120px] capitalize text-gray-500 md:block">
+          <span className="mt-1 hidden w-[120px] font-medium capitalize text-[#242424] md:block">
             vận chuyển
           </span>
           <span>
@@ -245,7 +247,9 @@ const ProductInfo = props => {
         </div>
 
         <div className="mt-4 flex flex-col flex-wrap gap-4 py-3 capitalize md:flex-row">
-          <span className="w-[120px] text-sm text-gray-500">số lượng</span>
+          <span className="w-[120px] text-sm font-medium text-[#242424]">
+            số lượng
+          </span>
           <div className="flex items-center justify-start ">
             <button
               onClick={() =>
@@ -273,12 +277,12 @@ const ProductInfo = props => {
         <div className="mt-8 flex min-w-0 flex-wrap gap-4">
           <Button
             onClick={onCartClick}
-            className="w-full py-4  text-base capitalize md:w-[250px]"
+            className="w-full py-4  text-base capitalize md:w-[230px]"
             size="lg"
             variant="outline"
           >
             <BsCartPlus className="mr-2" />
-            thêm vào giỏ hàng
+            thêm vào giỏ
           </Button>
 
           <Button
@@ -288,12 +292,6 @@ const ProductInfo = props => {
           >
             mua ngay
           </Button>
-        </div>
-
-        <div className="mt-[40px] flex items-center gap-4 border-t border-gray-200 p-8 text-sm capitalize">
-          <BiSolidShieldAlt2 size={22} color="#cccccc" />
-          <span>shop đảm bảo</span>
-          <span className="">3 ngày trả hàng / hoàn tiền</span>
         </div>
       </div>
     </div>

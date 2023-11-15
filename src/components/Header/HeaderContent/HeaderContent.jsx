@@ -15,12 +15,14 @@ const HeaderContent = () => {
     <div className="header-with-search">
       <HeaderLogo />
       <div
-        className={`back flex w-[50px] items-center justify-start md:hidden ${
+        className={`back mr-2 flex items-center justify-start md:hidden ${
           location.pathname === '/' ? 'hidden' : 'block'
         }`}
         onClick={goBackPage}
       >
-        <IoMdArrowBack className={`text-4xl text-white `} />
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl  bg-accent p-2">
+          <IoMdArrowBack size={24} className=" text-primary" />
+        </div>
       </div>
 
       <input

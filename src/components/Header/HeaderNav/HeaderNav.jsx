@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { Button } from '../../ui/button'
 import UserDropdown from './UserDropdown'
 
-const HeaderNavigate = () => {
+const HeaderNav = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { user } = useSelector(state => state.user)
@@ -74,4 +74,4 @@ const HeaderNavigate = () => {
   )
 }
 
-export default HeaderNavigate
+export default HeaderNav

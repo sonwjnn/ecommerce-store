@@ -98,12 +98,12 @@ const ReviewList = props => {
   return (
     <>
       <div className="rounded-md bg-white px-6 md:p-10">
-        <div className="w-full rounded-md bg-[#fafafa] px-6 py-5 text-xl font-medium uppercase">
+        <div className="w-full rounded-md bg-[#fafafa] px-6 py-5 text-xl font-medium capitalize text-[#242424]">
           đánh giá sản phẩm
         </div>
         <div className="mt-8   gap-4 bg-white px-0 capitalize  md:px-6 ">
           <div className="flex items-center gap-x-2">
-            <span className="w-[120px] py-2 text-sm font-semibold text-gray-500 md:w-[120px]">
+            <span className="w-[120px] py-2 text-sm font-medium text-[#242424] md:w-[120px]">
               Tổng quan
             </span>
             <div className="flex items-center gap-x-2">
@@ -119,7 +119,7 @@ const ReviewList = props => {
           </div>
 
           <div className="mt-4  hidden items-center justify-start   gap-3 border-b border-neutral-200 pb-6 pt-3 md:flex">
-            <span className=" w-[120px] py-2 text-sm font-semibold text-gray-500 ">
+            <span className=" w-[120px] py-2 text-sm font-medium text-[#242424] ">
               Bộ lọc
             </span>
             <div className="flex flex-wrap items-center gap-3">
@@ -158,7 +158,7 @@ const ReviewList = props => {
           <div>
             <div className="mb-2 mt-4 gap-4">
               {filteredReviews.map(item => (
-                <div key={item?._id}>
+                <div key={item?._id || item?.id}>
                   <ReviewItem review={item} onRemoved={onRemoved} />
                 </div>
               ))}

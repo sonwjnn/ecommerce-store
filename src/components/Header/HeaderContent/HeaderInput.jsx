@@ -27,13 +27,13 @@ const HeaderInput = () => {
   }
 
   return (
-    <div className="header__search-wrap">
-      <div className="header__search rounded-sm">
-        <div className="header__search-input-wrap">
+    <div className="flex flex-1">
+      <div className="header__search w-full rounded-sm">
+        <div className="header__search-input-wrap ">
           <form onSubmit={handleSubmitSearch} className="relative h-full">
             <Input
               type="text"
-              className="h-full border-none focus-visible:ring-0"
+              className="h-full  border-none focus-visible:ring-0"
               placeholder="Nhập sản phẩm để tìm kiếm"
               value={keyword}
               ref={searchInput}

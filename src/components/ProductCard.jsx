@@ -52,7 +52,7 @@ const ProductCard = ({ product, className }) => {
           style={{ backgroundImage: `url(${imageUrl})` }}
         ></div>
       </div>
-      <div className="home-product-item__title line-clamp-2 min-h-[32px]  pb-0 text-xs">
+      <div className="home-product-item__title line-clamp-2 min-h-[32px]  pb-0 text-xs font-medium text-[#242424]">
         {product.name}
       </div>
 
@@ -82,10 +82,14 @@ const ProductCard = ({ product, className }) => {
         </span>
         <span className="home-product-item__rate flex items-center">
           <Star stars={product.rating} className="text-[11px]" />
-          <span className="home-product-item__buy-num text-xs">Đã bán 989</span>
+          <span className="home-product-item__buy-num text-xs text-[#242424]">
+            Đã bán 989
+          </span>
         </span>
       </div>
-      <div className="home-product-item__location text-xs">TP. Hồ Chí Minh</div>
+      <div className="home-product-item__location text-xs text-[#242424]">
+        TP. Hồ Chí Minh
+      </div>
       {+product.favorites > 1 && (
         <div className="home-product-item__love bg-secondary text-sm">
           <span>Yêu thích</span>

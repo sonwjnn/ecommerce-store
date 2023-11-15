@@ -623,9 +623,7 @@
   width: 150px;
 }
 
-.header__search-wrap {
-  flex: 1;
-}
+
 
 .header__search {
   height: 40px;
@@ -674,7 +672,6 @@
   padding: 4px 8px;
   height: 100%;
   position: relative;
-  top: -9%;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -687,8 +684,8 @@
   padding: 0px 7px;
   position: absolute;
   border-radius: 10px;
-  top: 2px;
-  left: 24px;
+  top: 0px;
+  left: 26px;
   border: 2px solid #ee4d2d;
   color: var(--primary-color);
   font-weight: 500;
@@ -721,15 +718,7 @@
   will-change: transform opacity;
 }
 
-.header__cart-list::after {
-  content: '';
-  border-style: solid;
-  border-width: 20px 30px;
-  border-color: transparent transparent var(--white-color) transparent;
-  position: absolute;
-  top: -30px;
-  right: 0;
-}
+
 
 .header__cart-list-container {
   padding: 60px 0;
