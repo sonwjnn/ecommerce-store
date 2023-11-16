@@ -3,7 +3,8 @@ import CartItem from '@/components/CartItem'
 import { Button } from '@/components/ui/button'
 import { removeCarts } from '@/redux/features/userSlice'
 import { setOrder } from '@/redux/features/userSlice'
-import { useEffect, useState } from 'react'
+import { formatPriceToVND } from '@/utilities/constants'
+import { useCallback, useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -20,7 +21,7 @@ const CartList = () => {
 
   useEffect(() => {
     setCarts(listCarts)
-  }, [])
+  }, [listCarts])
 
   const onRemoved = ({ id, ids }) => {
     if (id) {
@@ -40,27 +41,27 @@ const CartList = () => {
     }
   }, [isCheckedAll])
 
-  const handleCheckedCart = (
-    { id, currPrice, isCartValue, quantity, imageUrl, title, shopId },
-    isChecked
-  ) => {
-    if (isCartValue) {
-      let checkedCartChange = checkedCarts.find(item => item.id === id)
-      if (checkedCartChange) {
-        let newCheckedCarts = checkedCarts.slice()
-
-        setCheckedCarts(newCheckedCarts)
-      }
-      return
-    }
+  const updateCheckedCarts = (cart, isChecked) => {
     if (isChecked) {
-      setCheckedCarts([
-        ...checkedCarts,
-        { id, currPrice, quantity, imageUrl, title, shopId },
-      ])
+      const existingCartIndex = checkedCarts.findIndex(
+        item => item.id === cart.id
+      )
+      if (existingCartIndex !== -1) {
+        // Update the existing cart
+        return checkedCarts.map((item, index) =>
+          index === existingCartIndex ? cart : item
+        )
+      } else {
+        // Add the new cart
+        return [...checkedCarts, cart]
+      }
     } else {
-      setCheckedCarts(checkedCarts.filter(item => item.id !== id))
+      return checkedCarts.filter(item => item.id !== cart.id)
     }
+  }
+
+  const handleCheckedCart = (cart, isChecked) => {
+    setCheckedCarts(updateCheckedCarts(cart, isChecked))
   }
 
   const onCheckedAll = () => {
@@ -73,9 +74,6 @@ const CartList = () => {
       newCarts.filter(e => e._id !== id)
     })
     setCarts(newCarts)
-  }
-  const handleDotPrice = price => {
-    return price?.replace(/\B(?=(\d{3})+(?!\d))/g, '.')
   }
 
   const handleRemoveCarts = async () => {
@@ -97,10 +95,21 @@ const CartList = () => {
   }
 
   const handleCheckout = () => {
-    if (!checkedCarts.length) return
+    if (!checkedCarts.length) {
+      toast.error('You must choose at least one product!')
+      return
+    }
     dispatch(setOrder({ products: checkedCarts }))
     navigate('/checkout')
   }
+
+  const handlePrice = useCallback(() => {
+    let price = 0
+    checkedCarts.forEach(item => {
+      price += item.totalPrice
+    })
+    return price
+  }, [checkedCarts])
 
   return (
     <div className="bg-accent">
@@ -134,22 +143,13 @@ const CartList = () => {
           <div className="mt-4 h-full min-h-[40vh] w-full rounded-md bg-white py-4">
             {carts.map(cart => (
               <CartItem
-                id={cart._id}
                 key={cart._id}
-                userId={cart.user}
-                productId={cart.productId._id}
-                price={cart.productId.discountPrice}
-                shopId={cart.productId.shopId}
-                title={cart.productId.name}
-                type={cart.productId.type}
-                imageName={cart.productId.imageName}
-                quantity={cart.quantity}
+                cart={cart}
                 onRemoved={onRemoved}
                 onCheckRemoved={onCheckRemoved}
                 handleCheckedCart={handleCheckedCart}
                 isCheckedAll={isCheckedAll}
                 checkedCarts={checkedCarts}
-                handleDotPrice={handleDotPrice}
               />
             ))}
           </div>
@@ -172,15 +172,7 @@ const CartList = () => {
                   Tổng tiền:
                 </span>
                 <span className="flex items-start text-xl font-semibold text-primary  lg:text-2xl">
-                  <span className="mt-2 text-base">₫</span>
-                  {handleDotPrice(
-                    checkedCarts
-                      .reduce(
-                        (currValue, item) => item.currPrice + currValue,
-                        0
-                      )
-                      .toString()
-                  )}
+                  {formatPriceToVND(handlePrice())}
                 </span>
               </div>
               <Button

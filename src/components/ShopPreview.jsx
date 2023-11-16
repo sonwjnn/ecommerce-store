@@ -48,12 +48,6 @@ const ShopPreview = ({ product }) => {
               </p>
             </div>
           </div>
-
-          {/* <div className=" flex flex-row justify-between gap-4">
-              <div className="flex justify-center text-sm">
-                {review.content}
-              </div>
-            </div> */}
         </div>
       </div>
     </div>

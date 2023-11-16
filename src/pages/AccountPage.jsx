@@ -81,20 +81,6 @@ const AccountPage = () => {
               </button>
 
               <button className="account-item flex items-center gap-3">
-                <BsBell className="text-3xl text-yellow-500 md:text-[22px]" />
-                <span className="w-full text-left text-base capitalize">
-                  thông báo
-                </span>
-              </button>
-
-              <button className="account-item flex items-center gap-3">
-                <AiOutlineTags className="text-[32px] text-purple-500 md:text-xl" />
-                <span className="w-full text-left text-base capitalize">
-                  kho vouncher
-                </span>
-              </button>
-
-              <button className="account-item flex items-center gap-3">
                 <MdOutlineFavoriteBorder className="text-3xl text-red-500 md:text-xl" />
                 <span className="w-full text-left text-base capitalize">
                   <Link to={'/user/favorite'}>yêu thích</Link>

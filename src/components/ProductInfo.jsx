@@ -1,8 +1,8 @@
 import cartApi from '@/apis/modules/cart.api'
 import { addCart } from '@/redux/features/userSlice'
+import { formatPriceToVND } from '@/utilities/constants'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
-import { BiSolidShieldAlt2 } from 'react-icons/bi'
 import { BsCartPlus, BsTruck } from 'react-icons/bs'
 import { LuMinus, LuPlus } from 'react-icons/lu'
 import { MdOutlineFavorite, MdOutlineFavoriteBorder } from 'react-icons/md'
@@ -81,6 +81,11 @@ const ProductInfo = props => {
       setCartValue(+value)
     }
   }
+
+  const onBuyClick = async () => {
+    await onCartClick()
+    navigate('/user/carts')
+  }
   return (
     <div className="rounded-md bg-white">
       <div className="flex  flex-col gap-y-3 px-4">
@@ -149,13 +154,11 @@ const ProductInfo = props => {
       <div className="mt-5 hidden bg-[#fafafa] p-6 sm:block">
         <div className="flex flex-wrap gap-4">
           <span className="flex items-start text-base font-normal text-neutral-400 line-through">
-            <span className="mr-1 text-[11px] ">₫</span>
-            {product?.price?.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
+            {formatPriceToVND(product?.price)}
           </span>
 
           <span className="flex items-start text-3xl font-medium text-[#242424]">
-            <span className="text-lg ">₫</span>
-            {product?.discountPrice?.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
+            {formatPriceToVND(product?.discountPrice)}
           </span>
           {product?.discount !== '0' && (
             <div className="flex items-center">
@@ -253,7 +256,7 @@ const ProductInfo = props => {
           <div className="flex items-center justify-start ">
             <button
               onClick={() =>
-                setCartValue(prev => (prev - 1 < 1 ? 1 : prev - 1))
+                setCartValue(prev => (+prev - 1 < 1 ? 1 : +prev - 1))
               }
               className="flex h-8 w-8 items-center justify-center rounded-l-md border border-neutral-300 bg-transparent outline-none"
             >
@@ -266,7 +269,7 @@ const ProductInfo = props => {
               onChange={handleInputQuantity}
             />
             <button
-              onClick={() => setCartValue(prev => prev + 1)}
+              onClick={() => setCartValue(prev => ++prev + 1)}
               className="flex h-8 w-8 items-center justify-center rounded-r-md border border-neutral-300 bg-transparent outline-none"
             >
               <LuPlus />
@@ -286,6 +289,7 @@ const ProductInfo = props => {
           </Button>
 
           <Button
+            onClick={onBuyClick}
             className="w-full py-4   text-base capitalize md:w-[150px]"
             variant="secondary"
             size="lg"

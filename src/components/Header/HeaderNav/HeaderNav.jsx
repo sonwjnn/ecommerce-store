@@ -1,4 +1,5 @@
 import { socialNetworkLinks } from '@/utilities/constants'
+import { LuStore } from 'react-icons/lu'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -22,8 +23,9 @@ const HeaderNav = () => {
         <a
           href="https://admin-shopee-clone.onrender.com/"
           target="_blank"
-          className="nav-list-item"
+          className="flex items-center bg-transparent text-white no-underline hover:opacity-70"
         >
+          <LuStore size={20} className="mr-2" color="#ffffff" />
           Kênh người bán
         </a>
 

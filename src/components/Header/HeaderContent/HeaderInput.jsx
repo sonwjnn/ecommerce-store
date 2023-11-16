@@ -28,12 +28,12 @@ const HeaderInput = () => {
 
   return (
     <div className="flex flex-1">
-      <div className="header__search w-full rounded-sm">
+      <div className="header__search w-full rounded-full ">
         <div className="header__search-input-wrap ">
           <form onSubmit={handleSubmitSearch} className="relative h-full">
             <Input
               type="text"
-              className="h-full  border-none focus-visible:ring-0"
+              className="h-full  rounded-l-full border-none px-4 focus-visible:ring-0"
               placeholder="Nhập sản phẩm để tìm kiếm"
               value={keyword}
               ref={searchInput}
@@ -41,11 +41,12 @@ const HeaderInput = () => {
             />
           </form>
         </div>
-        <div className="m-1">
-          <Button className="h-full px-6" onClick={handleSubmitSearch}>
-            <BiSearch size={18} />
-          </Button>
-        </div>
+        <Button
+          className="h-full rounded-r-full bg-accent px-6 text-muted-foreground hover:bg-accent"
+          onClick={handleSubmitSearch}
+        >
+          <BiSearch size={18} />
+        </Button>
       </div>
       <div className="header__search-decription hide-on-mobile-tablet">
         <ul className="header__search-decription-list pointer-events-none select-none text-sm"></ul>

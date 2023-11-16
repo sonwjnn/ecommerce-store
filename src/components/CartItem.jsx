@@ -1,7 +1,7 @@
 import cartApi from '@/apis/modules/cart.api'
 import productApi from '@/apis/modules/product.api'
-import { removeCart } from '@/redux/features/userSlice'
-import { updateQuantityCart } from '@/redux/features/userSlice'
+import { removeCart, updateQuantityCart } from '@/redux/features/userSlice'
+import { formatPriceToVND } from '@/utilities/constants'
 import { useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 import { LuMinus, LuPlus, LuTrash } from 'react-icons/lu'
@@ -14,31 +14,22 @@ import { Button } from './ui/button'
 import { Input } from './ui/input'
 
 const CartItem = props => {
-  const {
-    title,
-    imageName,
-    quantity,
-    id,
-    price,
-    onRemoved,
-    shopId,
-    handleCheckedCart,
-    isCheckedAll,
-    productId,
-    handleDotPrice,
-  } = props
+  const { cart, onRemoved, handleCheckedCart, isCheckedAll } = props
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const inputRef = useRef()
   const [isChecked, setIsChecked] = useState(false)
   const [onRequest, setOnRequest] = useState(false)
-  const [cartValue, setCartValue] = useState(1)
+  const [cartValue, setCartValue] = useState(+cart?.quantity || 1)
   const [imageUrl, setImageUrl] = useState('')
+  const [totalPrice, setTotalPrice] = useState(0)
 
   useEffect(() => {
     const getImage = async () => {
-      const { response, err } = await productApi.getImage({ imageName })
+      const { response, err } = await productApi.getImage({
+        imageName: cart?.productId?.imageName,
+      })
 
       if (err) toast.error(err.message)
       if (response) {
@@ -50,27 +41,19 @@ const CartItem = props => {
   }, [])
 
   useEffect(() => {
-    setCartValue(+quantity)
-  }, [quantity])
+    setTotalPrice(+cart?.productId?.discountPrice * cartValue)
+  }, [cartValue])
 
   useEffect(() => {
-    if (isChecked) {
-      const currPrice = +price * cartValue
-      handleCheckedCart({
-        id,
-        title,
-        currPrice,
-        shopId,
-        quantity: cartValue,
-        imageUrl,
-        isCartValue: true,
-      })
-    }
-  }, [cartValue])
+    handleCheckedCart(
+      { ...cart, totalPrice, imageUrl, quantity: cartValue },
+      isChecked
+    )
+  }, [totalPrice])
 
   const handleChangeQuantity = async () => {
     const body = {
-      cartId: id,
+      cartId: cart?.id,
       quantity: cartValue,
     }
 
@@ -86,7 +69,7 @@ const CartItem = props => {
   const debouncedCallback = useDebouncedCallback(handleChangeQuantity, 500)
 
   const handleIncreaseQuantity = () => {
-    setCartValue(prev => prev + 1)
+    setCartValue(prev => +prev + 1)
     debouncedCallback()
   }
 
@@ -106,7 +89,7 @@ const CartItem = props => {
 
   const handleDecreaseQuantity = () => {
     const isUpdate = cartValue - 1 < 1 ? false : true
-    setCartValue(prev => (prev - 1 < 1 ? 1 : prev - 1))
+    setCartValue(prev => (+prev - 1 < 1 ? 1 : +prev - 1))
     if (isUpdate) {
       debouncedCallback()
     }
@@ -114,31 +97,24 @@ const CartItem = props => {
 
   const handleCheckCart = () => {
     setIsChecked(!isChecked)
-    const currPrice = +price * cartValue
-    handleCheckedCart(
-      { id, title, currPrice, quantity: cartValue, imageUrl, shopId },
-      !isChecked
-    )
+    handleCheckedCart({ ...cart, totalPrice, imageUrl }, !isChecked)
   }
 
   const onRemove = async () => {
     if (onRequest) return
     setOnRequest(true)
     const { response, err } = await cartApi.remove({
-      cartId: id,
+      cartId: cart?.id,
     })
     setOnRequest(false)
 
     if (err) toast.error(err.message)
     if (response) {
-      dispatch(removeCart({ cartId: id }))
-      onRemoved({ id })
+      dispatch(removeCart({ cartId: cart?.id }))
+      onRemoved({ id: cart?.id })
       toast.success('Remove cart success!')
     }
   }
-
-  let prevPrice = price && handleDotPrice(price)
-  let currPrice = price && handleDotPrice((+price * cartValue).toString())
 
   return (
     <div className="border-b-gray-2006 w-full border-b px-6 py-2">
@@ -152,7 +128,7 @@ const CartItem = props => {
         />
         <div className="group flex cursor-pointer items-center gap-x-2">
           <div
-            onClick={() => navigate(`/products/detail/${productId}`)}
+            onClick={() => navigate(`/products/detail/${cart?.productId}`)}
             className="aspect-square h-[80px] w-[80px] bg-cover bg-center bg-no-repeat md:h-[56px] md:w-[56px] "
             style={{
               backgroundImage: `url(${imageUrl})`,
@@ -160,14 +136,14 @@ const CartItem = props => {
           ></div>
           <div className="flex flex-col justify-center gap-y-4 md:gap-y-0 ">
             <div
-              onClick={() => navigate(`/products/detail/${productId}`)}
+              onClick={() => navigate(`/products/detail/${cart?.productId}`)}
               className="line-clamp-2 text-base text-gray-500 group-hover:underline md:text-sm"
             >
-              {title}
+              {cart?.productId?.name}
             </div>
             {/* <div className="text-sm">{type}</div> */}
             <div className="text-left text-base text-primary md:hidden">
-              ₫{currPrice}
+              ₫{}
             </div>
             <div className="flex items-center justify-start md:hidden">
               <button
@@ -193,7 +169,7 @@ const CartItem = props => {
         </div>
 
         <div className="hidden text-center text-sm text-gray-500 md:block">
-          ₫{prevPrice}
+          {formatPriceToVND(+cart?.productId?.discountPrice)}
         </div>
 
         <div className="hidden items-center justify-center md:flex">
@@ -218,7 +194,7 @@ const CartItem = props => {
         </div>
 
         <div className="hidden text-center text-sm text-primary md:block">
-          ₫{currPrice}
+          {formatPriceToVND(totalPrice)}
         </div>
 
         <Button

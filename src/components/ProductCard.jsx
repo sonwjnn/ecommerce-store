@@ -1,4 +1,5 @@
 import productApi from '@/apis/modules/product.api'
+import { formatPriceToVND } from '@/utilities/constants'
 import favoriteUtils from '@/utilities/favorite.utils'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
@@ -16,7 +17,7 @@ const ProductCard = ({ product, className }) => {
   useEffect(() => {
     const getImage = async () => {
       const { response, err } = await productApi.getImage({
-        imageName: product.imageName,
+        imageName: product?.imageName,
       })
 
       if (err) toast.error(err.message)
@@ -35,7 +36,7 @@ const ProductCard = ({ product, className }) => {
   const navigate = useNavigate()
 
   const handleClick = () => {
-    return navigate(`/products/detail/${product.id}`)
+    return navigate(`/products/detail/${product?.id}`)
   }
 
   return (
@@ -53,35 +54,29 @@ const ProductCard = ({ product, className }) => {
         ></div>
       </div>
       <div className="home-product-item__title line-clamp-2 min-h-[32px]  pb-0 text-xs font-medium text-[#242424]">
-        {product.name}
+        {product?.name}
       </div>
 
       <div className="home-product-item__price flex-nowrap">
-        {product.discount && product.discount !== '0' && (
+        {product?.discount !== '0' && (
           <span className="home-product-item__sale-price mr-1 min-w-0 truncate text-sm text-gray-500 line-through">
-            <a href="" className="text-sm text-gray-500">
-              đ
-            </a>
-            {product.price.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
+            {formatPriceToVND(product?.price)}
           </span>
         )}
 
         <span className="home-product-item__sale-price text-base text-secondary">
-          <a href="" className="text-sm">
-            đ
-          </a>
-          {product.discountPrice.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
+          {formatPriceToVND(product?.discountPrice)}
         </span>
       </div>
       <div className="home-product-item__action items-center">
         <span className="home-product-item__favorite home-product-item__favorite--liked">
           {favoriteUtils.check({
             listFavorites,
-            productId: product.id,
+            productId: product?.id,
           }) && <AiFillHeart className="text-[13px] text-secondary" />}
         </span>
         <span className="home-product-item__rate flex items-center">
-          <Star stars={product.rating} className="text-[11px]" />
+          <Star stars={product?.rating} className="text-[11px]" />
           <span className="home-product-item__buy-num text-xs text-[#242424]">
             Đã bán 989
           </span>
@@ -90,15 +85,15 @@ const ProductCard = ({ product, className }) => {
       <div className="home-product-item__location text-xs text-[#242424]">
         TP. Hồ Chí Minh
       </div>
-      {+product.favorites > 1 && (
+      {+product?.favorites > 1 && (
         <div className="home-product-item__love bg-secondary text-sm">
           <span>Yêu thích</span>
         </div>
       )}
-      {product.discount && product.discount !== '0' && (
+      {product?.discount && product?.discount !== '0' && (
         <div className="home-product-item__sale-off-percent">
           <span className="home-product-item__percent text-xs">
-            {product.discount}%
+            {product?.discount}%
           </span>
           <span className="home-product-item__up text-xs">GIẢM</span>
         </div>
