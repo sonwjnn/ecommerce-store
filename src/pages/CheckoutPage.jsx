@@ -23,6 +23,13 @@ const CheckoutPage = () => {
       return navigate('/auth/signin')
     }
 
+    if (!user.address || !user.district || !user.city) {
+      toast.error('You must add your address first!', {
+        toastId: 'warning-address',
+      })
+      return navigate('/user/account/profile')
+    }
+
     if (!order?.products?.length) {
       toast.error('You must choose at least one product!')
       return

@@ -1,4 +1,5 @@
 import productApi from '@/apis/modules/product.api'
+import { formatPriceToVND } from '@/utilities/constants'
 import { useEffect, useState } from 'react'
 
 import { Alert } from './Alert'
@@ -42,7 +43,7 @@ const CartPreview = ({ cart }) => {
         <span className="line-clamp-2 text-left text-base">{name}</span>
       </span>
       <span className="header__cart-list--have-items-price text-base text-secondary">
-        đ{discountPrice?.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
+        {formatPriceToVND(discountPrice)}
       </span>
     </li>
   )

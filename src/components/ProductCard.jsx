@@ -43,7 +43,7 @@ const ProductCard = ({ product, className }) => {
     <div
       onClick={handleClick}
       className={twMerge(
-        'relative cursor-pointer rounded-xl border bg-white p-2 hover:shadow-md',
+        'relative cursor-pointer rounded-md border bg-white p-2 hover:shadow-md',
         className
       )}
     >
@@ -58,7 +58,7 @@ const ProductCard = ({ product, className }) => {
       </div>
 
       <div className="home-product-item__price flex-nowrap">
-        {product?.discount !== '0' && (
+        {product?.discount !== 0 && (
           <span className="home-product-item__sale-price mr-1 min-w-0 truncate text-sm text-gray-500 line-through">
             {formatPriceToVND(product?.price)}
           </span>
@@ -78,19 +78,19 @@ const ProductCard = ({ product, className }) => {
         <span className="home-product-item__rate flex items-center">
           <Star stars={product?.rating} className="text-[11px]" />
           <span className="home-product-item__buy-num text-xs text-[#242424]">
-            Đã bán 989
+            Đã bán {product?.sold}
           </span>
         </span>
       </div>
       <div className="home-product-item__location text-xs text-[#242424]">
         TP. Hồ Chí Minh
       </div>
-      {+product?.favorites > 1 && (
+      {product?.favorites > 1 && (
         <div className="home-product-item__love bg-secondary text-sm">
           <span>Yêu thích</span>
         </div>
       )}
-      {product?.discount && product?.discount !== '0' && (
+      {product?.discount !== 0 && (
         <div className="home-product-item__sale-off-percent">
           <span className="home-product-item__percent text-xs">
             {product?.discount}%

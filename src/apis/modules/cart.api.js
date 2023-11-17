@@ -44,8 +44,8 @@ const cartApi = {
   },
   removeCarts: async ({ cartIds }) => {
     try {
-      const response = await privateClient.put(cartEndpoints.removeCarts, {
-        data: cartIds,
+      const response = await privateClient.delete(cartEndpoints.removeCarts, {
+        cartIds,
       })
       return { response }
     } catch (error) {

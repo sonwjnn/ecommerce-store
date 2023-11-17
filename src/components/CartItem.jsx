@@ -128,7 +128,7 @@ const CartItem = props => {
         />
         <div className="group flex cursor-pointer items-center gap-x-2">
           <div
-            onClick={() => navigate(`/products/detail/${cart?.productId}`)}
+            onClick={() => navigate(`/products/detail/${cart?.productId?._id}`)}
             className="aspect-square h-[80px] w-[80px] bg-cover bg-center bg-no-repeat md:h-[56px] md:w-[56px] "
             style={{
               backgroundImage: `url(${imageUrl})`,
@@ -136,7 +136,9 @@ const CartItem = props => {
           ></div>
           <div className="flex flex-col justify-center gap-y-4 md:gap-y-0 ">
             <div
-              onClick={() => navigate(`/products/detail/${cart?.productId}`)}
+              onClick={() =>
+                navigate(`/products/detail/${cart?.productId?._id}`)
+              }
               className="line-clamp-2 text-base text-gray-500 group-hover:underline md:text-sm"
             >
               {cart?.productId?.name}

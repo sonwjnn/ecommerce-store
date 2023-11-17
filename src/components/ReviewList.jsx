@@ -108,11 +108,11 @@ const ReviewList = props => {
             </span>
             <div className="flex items-center gap-x-2">
               <span className="text-[28px] font-bold text-primary">
-                {product && product.rating}
+                {product?.rating}
               </span>
 
               <Star
-                stars={product && product.rating}
+                stars={product?.rating}
                 className="text-2xl text-yellow-500"
               />
             </div>
