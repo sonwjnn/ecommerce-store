@@ -228,7 +228,7 @@ const ProfileUpdate = () => {
             </label>
 
             <select
-              className="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring  disabled:cursor-not-allowed disabled:opacity-50"
+              className="flex h-10 w-full cursor-pointer rounded-md border border-input bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2  focus-visible:ring-ring  disabled:cursor-not-allowed disabled:opacity-50"
               name="city"
               id="city"
               value={form.values.city}
@@ -255,13 +255,16 @@ const ProfileUpdate = () => {
             </label>
 
             <select
-              className="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring  disabled:cursor-not-allowed disabled:opacity-50"
+              className="flex h-10 w-full cursor-pointer rounded-md border border-input bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2  focus-visible:ring-ring  disabled:cursor-not-allowed disabled:opacity-50"
               disabled={!selectedProvince}
-              value={form.values.district || 'District'}
+              value={form.values.district || ''}
               name="district"
               id="district"
               onChange={form.handleChange}
             >
+              <option className="hidden" value={form.values.district || ''}>
+                {form.values.district || 'Chọn'}
+              </option>
               {districtOptions?.map((district, index) => (
                 <option key={index} value={district}>
                   {district}
@@ -276,12 +279,12 @@ const ProfileUpdate = () => {
           <div className="flex flex-col items-center gap-2 md:flex-row">
             <label
               htmlFor="sex"
-              className="w-[160px] self-start text-base capitalize text-gray-500"
+              className="w-[180px] self-start text-base capitalize text-gray-500"
             >
               giới tính
             </label>
             <div className="flex justify-start gap-8 self-start">
-              <div className="flex gap-2">
+              <div className="flex items-center gap-2">
                 <label
                   htmlFor="male"
                   className="text-base capitalize text-gray-500"
@@ -298,7 +301,7 @@ const ProfileUpdate = () => {
                   onChange={form.handleChange}
                 />
               </div>
-              <div className="flex gap-2">
+              <div className="flex items-center gap-2">
                 <label
                   htmlFor="female"
                   className="text-base capitalize text-gray-500"
@@ -330,12 +333,18 @@ const ProfileUpdate = () => {
               <DatePicker
                 id="birthday"
                 name="birthday"
-                className="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring  disabled:cursor-not-allowed disabled:opacity-50"
+                placeholderText="Chọn"
+                className="flex h-10 w-full cursor-pointer rounded-md border border-input bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-black hover:bg-accent focus-visible:outline-none  focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 "
                 selected={form.values.birthday}
                 onChange={date => form.setFieldValue('birthday', date)}
+                onFocus={e => {
+                  e.preventDefault()
+                  document.getElementById('birthday').blur()
+                }}
                 showYearDropdown
                 dateFormat="dd/MM/yyyy"
               />
+
               {form.errors.birthday && (
                 <p className="errMsg ">{form.errors.birthday}</p>
               )}

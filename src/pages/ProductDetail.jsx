@@ -1,6 +1,5 @@
 import favoriteApi from '@/apis/modules/favorite.api'
 import productApi from '@/apis/modules/product.api'
-import DetailImage from '@/components/DetailImage'
 import ProductDescription from '@/components/ProductDescription'
 import ProductInfo from '@/components/ProductInfo'
 import ReviewList from '@/components/ReviewList'
@@ -24,7 +23,6 @@ const ProductDetail = () => {
   const [isFavorite, setIsFavorite] = useState(false)
   const [onRequest, setOnRequest] = useState(false)
   const [imageUrl, setImageUrl] = useState('')
-  const [reviewCount, setReviewCount] = useState(0)
   const [favoriteCount, setFavoriteCount] = useState(0)
   const [reviews, setReviews] = useState([])
   const [starCount, setStarCount] = useState([])
@@ -204,7 +202,7 @@ const ProductDetail = () => {
             <div className="flex-[80%] rounded-md bg-white p-4 lg:flex-[66%]">
               <ProductInfo
                 product={product}
-                reviewCount={reviewCount}
+                reviewCount={reviews.length || 0}
                 onFavoriteClick={onFavoriteClick}
                 favoriteCount={favoriteCount}
                 isFavorite={isFavorite}
@@ -222,7 +220,6 @@ const ProductDetail = () => {
               reviews={reviews ?? []}
               setReviews={setReviews}
               product={product}
-              setReviewCount={setReviewCount}
               starCount={starCount}
             />
           </div>

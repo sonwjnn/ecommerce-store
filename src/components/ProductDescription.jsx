@@ -37,14 +37,18 @@ const ProductDescription = ({ product }) => {
           <span className="w-[120px] text-sm font-medium text-[#242424]">
             kho hàng
           </span>
-          <span className=" text-sm font-normal text-gray-600">6454</span>
+          <span className=" text-sm font-normal text-gray-600">
+            {product?.quantity}
+          </span>
         </div>
 
         <div className="flex gap-4 px-6 py-5 capitalize">
           <span className="w-[120px] text-sm font-medium text-[#242424]">
             gửi từ
           </span>
-          <span className=" text-sm font-normal text-gray-600">Hà Nội</span>
+          <span className=" text-sm font-normal text-gray-600">
+            {product?.shopId?.city}
+          </span>
         </div>
       </div>
       <div className="mt-8">

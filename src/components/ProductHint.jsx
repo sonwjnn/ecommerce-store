@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { useDispatch } from 'react-redux'
 
+import NotFound from './NotFound'
 import ProductHintGrid from './ProductHintGrid'
-import ProductNotFound from './ProductNotFound'
 
 const ProductHint = () => {
   const dispatch = useDispatch()
@@ -55,7 +55,7 @@ const ProductHint = () => {
           )}
         </>
       ) : (
-        <ProductNotFound text={'Hiện tại chưa có sản phẩm nào.'} />
+        <NotFound text={'Hiện tại chưa có sản phẩm nào.'} />
       )}
     </>
   )

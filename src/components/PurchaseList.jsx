@@ -1,13 +1,11 @@
 import orderApi from '@/apis/modules/order.api'
-import { setGlobalLoading } from '@/redux/features/globalLoadingSlice'
-import { removeOrder } from '@/redux/features/userSlice'
 import { formatPriceToVND } from '@/utilities/constants'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { LuTrash } from 'react-icons/lu'
-import { SlEmotsmile } from 'react-icons/sl'
 import { useDispatch } from 'react-redux'
 
+import NotFound from './NotFound'
 import { Spinner } from './Spinner'
 import { Button } from './ui/button'
 
@@ -131,13 +129,8 @@ const PurchaseList = () => {
                   ))}
                 </>
               ) : (
-                <div className="mt-8 flex flex-col items-center justify-center gap-y-4">
-                  <SlEmotsmile className="text-[150px] text-zinc-300" />
-                  <div className="gap-4 text-center text-xl">
-                    <div className="text-gray-500">
-                      Bạn không có đơn hàng nào.
-                    </div>
-                  </div>
+                <div className="flex flex-col items-center justify-center gap-y-4">
+                  <NotFound text={'Bạn chưa có đơn hàng nào'} />
                 </div>
               )}
             </>

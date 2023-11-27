@@ -8,9 +8,9 @@ import { useDispatch } from 'react-redux'
 import { useParams, useSearchParams } from 'react-router-dom'
 
 import BoardBar from './BoardBar'
+import NotFound from './NotFound'
 import Pagination from './Pagination'
 import ProductGrid from './ProductGrid'
-import ProductNotFound from './ProductNotFound'
 
 const ProductList = () => {
   const dispatch = useDispatch()
@@ -99,7 +99,7 @@ const ProductList = () => {
           )}
         </>
       ) : (
-        <ProductNotFound text={'Danh mục hiện tại chưa có sản phẩm nào.'} />
+        <NotFound text={'Danh mục hiện tại chưa có sản phẩm nào.'} />
       )}
     </>
   )

@@ -6,6 +6,7 @@ import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
 import { useDispatch } from 'react-redux'
 
 import CategoryItem from './CategoryItem'
+import NotFound from './NotFound'
 
 const Categoryy = () => {
   const [categories, setCategories] = useState([])
@@ -57,18 +58,26 @@ const Categoryy = () => {
         className="scrollbar-hide  flex flex-nowrap overflow-auto scroll-smooth "
         ref={ref}
       >
-        {catePairs.map((catePair, index) => (
-          <div className="flex min-w-[120px] flex-col" key={index}>
-            {catePair.map(cate => (
-              <CategoryItem
-                key={cate.index}
-                index={cate.index}
-                cateName={cate.name}
-                // disable={disableCategories.includes(cate.name)}
-              />
+        {categories.length > 0 ? (
+          <>
+            {catePairs.map((catePair, index) => (
+              <div className="flex min-w-[120px] flex-col" key={index}>
+                {catePair.map(cate => (
+                  <CategoryItem
+                    key={cate.index}
+                    index={cate.index}
+                    cateName={cate.name}
+                    // disable={disableCategories.includes(cate.name)}
+                  />
+                ))}
+              </div>
             ))}
+          </>
+        ) : (
+          <div className="flex h-[300px]  w-full items-center justify-center">
+            <NotFound className="h-fit" text={'Không có danh mục nào'} />
           </div>
-        ))}
+        )}
       </div>
       <button
         className="absolute bottom-[34%] right-[-25px] z-10 flex h-[50px] w-[50px] items-center justify-center rounded-[50%] bg-white shadow-md focus:outline-none"

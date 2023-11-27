@@ -1,4 +1,5 @@
 import CartPreview from '@/components/CartPreview'
+import NotFound from '@/components/NotFound'
 import { Button } from '@/components/ui/button'
 import toast from 'react-hot-toast'
 import { LuShoppingBag } from 'react-icons/lu'
@@ -16,6 +17,7 @@ const HeaderCart = () => {
       navigate('/auth/signin')
     }
   }
+
   return (
     <div className="header__cart ">
       <div
@@ -47,11 +49,13 @@ const HeaderCart = () => {
             </div>
             <div className="header__cart-list--have-items-body max-h-[50vh] overflow-hidden">
               <ul className="header__cart-list--have-items-items">
-                {listCarts.length
-                  ? listCarts.map(cart => (
-                      <CartPreview key={cart._id} cart={cart} />
-                    ))
-                  : []}
+                {Array.isArray(listCarts) && listCarts.length ? (
+                  listCarts.map(cart => (
+                    <CartPreview key={cart._id} cart={cart} />
+                  ))
+                ) : (
+                  <NotFound text={'Giỏ hàng của bạn đang trống!'} />
+                )}
               </ul>
             </div>
             <div className="header__cart-list--have-items-footer mt-2">

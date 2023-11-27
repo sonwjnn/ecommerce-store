@@ -13,7 +13,7 @@ import TextAvatar from './TextAvatar'
 import { Button } from './ui/button'
 
 const ReviewList = props => {
-  const { reviews, setReviews, product, setReviewCount, starCount } = props
+  const { reviews, setReviews, product, starCount } = props
   const { user } = useSelector(state => state.user)
 
   const [filteredReviews, setFilteredReviews] = useState([])
@@ -24,15 +24,13 @@ const ReviewList = props => {
   const [activeReview, setActiveReview] = useState(0)
   const reviewRef = useRef()
 
-  const skip = 4
+  // const skip = 4
 
   useEffect(() => {
     if (reviews.length) {
       const newFilteredReviews = activeReview
-        ? reviews
-            .filter(review => +review.rating === activeReview)
-            .slice(0, skip)
-        : reviews.slice(0, skip)
+        ? reviews.filter(review => +review.rating === activeReview)
+        : reviews
 
       setFilteredReviews(newFilteredReviews)
     }
@@ -66,31 +64,29 @@ const ReviewList = props => {
       toast.success('Post review success')
 
       setReviews([...reviews, response])
-      setReviewCount(prev => prev + 1)
       setContent('')
       setRating(null)
     }
   }
 
-  const onLoadMore = () => {
-    setFilteredReviews([
-      ...filteredReviews,
-      ...[...reviews].splice(page * skip, skip),
-      ,
-    ])
-    setPage(page + 1)
-  }
+  // const onLoadMore = () => {
+  //   setFilteredReviews([
+  //     ...filteredReviews,
+  //     ...[...reviews].splice(page * skip, skip),
+  //     ,
+  //   ])
+  //   setPage(page + 1)
+  // }
 
   const onRemoved = id => {
     if (reviews.findIndex(e => e.id === id) !== -1) {
       const newReviews = [...reviews].filter(e => e.id !== id)
       setReviews(newReviews)
-      setFilteredReviews([...newReviews].splice(0, page * skip))
+      // setFilteredReviews([...newReviews].splice(0, page * skip))
+      setFilteredReviews([...newReviews])
     } else {
       setFilteredReviews([...filteredReviews].filter(e => e.id !== id))
     }
-
-    setReviewCount(prev => (prev - 1 < 0 ? 0 : prev - 1))
 
     toast.success('Remove review success')
   }
@@ -162,9 +158,9 @@ const ReviewList = props => {
                   <ReviewItem review={item} onRemoved={onRemoved} />
                 </div>
               ))}
-              {filteredReviews.length < reviews.length && (
+              {/* {filteredReviews.length < reviews.length && (
                 <button onClick={onLoadMore}>load more</button>
-              )}
+              )} */}
             </div>
             {user && (
               <>
