@@ -11,7 +11,6 @@ import { toast } from 'react-hot-toast'
 import { useDispatch, useSelector } from 'react-redux'
 import * as Yup from 'yup'
 
-import LoadingButton from './LoadingButton'
 import { Button } from './ui/button'
 import { Input } from './ui/input'
 
@@ -235,8 +234,8 @@ const ProfileUpdate = () => {
               value={form.values.city}
               onChange={form.handleChange}
             >
-              <option value={form.values.city || ''}>
-                {form.values.city || 'Provinces/City'}
+              <option className="hidden" value={form.values.city || ''}>
+                {form.values.city || 'Chọn'}
               </option>
               {provinceOptions?.map((province, index) => (
                 <option key={index} value={province}>

@@ -1,6 +1,7 @@
 import favoriteApi from '@/apis/modules/favorite.api'
 import productApi from '@/apis/modules/product.api'
 import { removeFavorite } from '@/redux/features/userSlice'
+import { formatPriceToVND } from '@/utilities/constants'
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { LuTrash } from 'react-icons/lu'
@@ -57,7 +58,7 @@ const FavoriteItem = props => {
 
   return (
     <div className="w-full px-4 pb-0 pt-0">
-      <div className="grid-cols-favorite-3 grid min-h-[56px]  items-center  border-b border-b-gray-200  p-1 ">
+      <div className="grid min-h-[56px] grid-cols-favorite-3  items-center  border-b border-b-gray-200  p-1 ">
         <div
           onClick={() => navigate(`/products/detail/${productId}`)}
           className="group flex  cursor-pointer items-center gap-x-2"
@@ -77,7 +78,7 @@ const FavoriteItem = props => {
         </div>
 
         <div className="text-center  text-lg text-primary md:text-base">
-          ₫{price?.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
+          {formatPriceToVND(price)}
         </div>
 
         <Button

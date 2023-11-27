@@ -6,10 +6,11 @@ import { formatPriceToVND } from '@/utilities/constants'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useLocation, useParams } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 
 const CheckoutPage = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const { user, order } = useSelector(state => state.user)
   const [onRequest, setOnRequest] = useState(false)
   const location = useLocation()
