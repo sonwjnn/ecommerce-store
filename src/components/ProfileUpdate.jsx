@@ -110,7 +110,7 @@ const ProfileUpdate = () => {
   }, [form.values.city])
 
   return (
-    <div className="flex items-start justify-center">
+    <div className="flex items-center justify-center">
       <div className="mt-[50px] max-w-[600px] px-4 md:ml-[-50px]  ">
         <form onSubmit={form.handleSubmit} className="flex flex-col gap-6">
           <div className="flex flex-col items-center gap-2  md:flex-row">
@@ -127,6 +127,7 @@ const ProfileUpdate = () => {
                 id="username"
                 value={form.values.username}
                 onChange={form.handleChange}
+                disabled
               />
               {form.errors.username && (
                 <p className="errMsg ">{form.errors.username}</p>

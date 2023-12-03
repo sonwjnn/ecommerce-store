@@ -25,7 +25,7 @@ const OrderItem = ({ order, onRemoved }) => {
     if (response) {
       // dispatch(removeOrder({ orderId: order?.id }))
       onRemoved({ id: order?.id })
-      toast.success('Remove favorite success!')
+      toast.success('Remove order success!')
     }
   }
 
@@ -86,11 +86,11 @@ const PurchaseList = () => {
       phone: item.phone,
       address: item.address,
       products: item.orderItems
-        .map(orderItem => orderItem.productId.name)
+        .map(orderItem => orderItem.productId?.name)
         .join(', '),
       totalPrice: formatPriceToVND(
         item.orderItems.reduce((total, item) => {
-          return total + Number(item.productId.discountPrice) * +item.quantity
+          return total + Number(item.productId?.discountPrice) * +item.quantity
         }, 0)
       ),
       isPaid: item.isPaid,

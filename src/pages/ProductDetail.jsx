@@ -5,8 +5,10 @@ import ProductInfo from '@/components/ProductInfo'
 import ReviewList from '@/components/ReviewList'
 import ShopPreview from '@/components/ShopPreview'
 import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 import { setGlobalLoading } from '@/redux/features/globalLoadingSlice'
 import { addFavorite, removeFavorite } from '@/redux/features/userSlice'
+import { socialNetworkLinks } from '@/utilities/constants'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { MdOutlineFavorite, MdOutlineFavoriteBorder } from 'react-icons/md'
@@ -19,7 +21,7 @@ const ProductDetail = () => {
   const navigate = useNavigate()
   const { productId } = useParams()
   const [product, setProduct] = useState(null)
-  const { listFavorites, user, listCarts } = useSelector(state => state.user)
+  const { listFavorites, user } = useSelector(state => state.user)
   const [isFavorite, setIsFavorite] = useState(false)
   const [onRequest, setOnRequest] = useState(false)
   const [imageUrl, setImageUrl] = useState('')
@@ -48,29 +50,18 @@ const ProductDetail = () => {
   }, [dispatch])
 
   useEffect(() => {
-    const getImage = async () => {
-      if (product && product.imageName) {
-        const { response, err } = await productApi.getImage({
-          imageName: product.imageName,
-        })
-
-        if (err) toast.error(err.message)
-        if (response) {
-          setImageUrl(`data:image/png;base64,${response}`)
-        }
-      }
-    }
-
-    getImage()
-  }, [product])
-
-  useEffect(() => {
     if (product && product.reviews) {
       let starCount = Array(6).fill(0)
       product.reviews.forEach(review => {
         starCount[review.rating]++
       })
       setStarCount(starCount)
+    }
+  }, [product])
+
+  useEffect(() => {
+    if (product) {
+      setImageUrl(product?.images[0]?.url)
     }
   }, [product])
 
@@ -152,21 +143,38 @@ const ProductDetail = () => {
                   }}
                 ></div>
 
-                <div className="hidden flex-wrap   items-center  justify-center gap-y-2 bg-white p-2 md:flex">
+                <div className="flex gap-x-2 ">
+                  {product?.images?.map(image => (
+                    <div
+                      className={cn(
+                        'aspect-square h-[100px] w-[100px] cursor-pointer rounded-md bg-cover bg-center',
+                        imageUrl === image.url && 'border-2 border-primary'
+                      )}
+                      onClick={() => setImageUrl(image.url)}
+                      style={{
+                        backgroundImage: `url(${image.url})`,
+                      }}
+                      key={image.public_id}
+                    ></div>
+                  ))}
+                </div>
+
+                <div className="mt-2 hidden flex-wrap  items-center  justify-center gap-y-2 bg-white p-2 md:flex">
                   <h3 className="text-base">Chia sẻ:</h3>
                   <div className="border-right-ab relative ml-4 flex gap-4 text-2xl after:right-[-2rem]">
-                    <button className="text-[#0384ff]">
-                      <i className="fa-brands fa-facebook-messenger"></i>
-                    </button>
-                    <button className="text-[#3b5999]">
-                      <i className="fa-brands fa-facebook"></i>
-                    </button>
-                    <button className="text-[#de0217]">
-                      <i className="fa-brands fa-pinterest"></i>
-                    </button>
-                    <button className="text-[#10c2ff]">
-                      <i className="fa-brands fa-twitter"></i>
-                    </button>
+                    {socialNetworkLinks.map(item => {
+                      const Icon = item.icon
+                      return (
+                        <a
+                          className="flex items-center justify-center gap-x-2 rounded-full text-[#605f5f] hover:brightness-110"
+                          key={item.title}
+                          href={item.link}
+                          target="_blank"
+                        >
+                          <Icon className="text-2xl " />
+                        </a>
+                      )
+                    })}
                   </div>
 
                   <div
@@ -189,13 +197,6 @@ const ProductDetail = () => {
                     </span>
                   </div>
                 </div>
-
-                {/* <div className="scrollbar-hide hidden max-w-[100%] gap-4 overflow-x-scroll md:flex">
-                  <DetailImage />
-                  <DetailImage />
-                  <DetailImage />
-                  <DetailImage />
-                </div> */}
               </div>
               <ShopPreview product={product} />
             </div>

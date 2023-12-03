@@ -22,23 +22,8 @@ const CartItem = props => {
   const [isChecked, setIsChecked] = useState(false)
   const [onRequest, setOnRequest] = useState(false)
   const [cartValue, setCartValue] = useState(+cart?.quantity || 1)
-  const [imageUrl, setImageUrl] = useState('')
   const [totalPrice, setTotalPrice] = useState(0)
-
-  useEffect(() => {
-    const getImage = async () => {
-      const { response, err } = await productApi.getImage({
-        imageName: cart?.productId?.imageName,
-      })
-
-      if (err) toast.error(err.message)
-      if (response) {
-        setImageUrl(`data:image/png;base64,${response}`)
-      }
-    }
-
-    getImage()
-  }, [])
+  const [imageUrl, setImageUrl] = useState(cart.productId?.images[0]?.url)
 
   useEffect(() => {
     setTotalPrice(+cart?.productId?.discountPrice * cartValue)

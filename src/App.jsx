@@ -14,6 +14,7 @@ import PageNotFound from './components/PageNotFound'
 import PageWrapper from './components/PageWrapper'
 import ProductList from './components/ProductList'
 import MainLayout from './layouts/MainLayout'
+import ShopLayout from './layouts/ShopLayout'
 import SubLayout from './layouts/SubLayout'
 import routes from './routes/routes'
 
@@ -56,6 +57,19 @@ const App = () => {
                       key={`products_${route.cateName}_${route.typeName}`}
                       path={`/products/:cateName/:typeName`}
                       element={<ProductList />}
+                    />
+                  </Route>
+
+                  <Route key="shop-layout" path="/" element={<ShopLayout />}>
+                    <Route
+                      key={`/shops/:shopId`}
+                      path={`/shops/:shopId`}
+                      element={<ProductList type="shop" />}
+                    />
+                    <Route
+                      key={`/shops/:shopId/:shopCollection`}
+                      path={`/shops/:shopId/:shopCollection`}
+                      element={<ProductList type="shop" />}
                     />
                   </Route>
                 </React.Fragment>

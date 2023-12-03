@@ -2,7 +2,7 @@ import FavoriteList from '@/components/FavoriteList'
 import PasswordUpdate from '@/components/PasswordUpdate'
 import ProfileUpdate from '@/components/ProfileUpdate'
 import PurchaseList from '@/components/PurchaseList'
-import ShowUserShop from '@/components/ShowUserShop'
+import SignupShopForm from '@/components/SignupShopForm'
 import TextAvatar from '@/components/TextAvatar'
 import { useEffect, useState } from 'react'
 import { AiOutlineTags, AiTwotoneShop } from 'react-icons/ai'
@@ -117,7 +117,7 @@ const AccountPage = () => {
             {accountType === 'password' && <PasswordUpdate />}
             {authCate === 'purchase' && <PurchaseList />}
             {authCate === 'favorite' && <FavoriteList />}
-            {authCate === 'shop' && <ShowUserShop />}
+            {authCate === 'shop' && <SignupShopForm />}
           </div>
         </div>
       </div>

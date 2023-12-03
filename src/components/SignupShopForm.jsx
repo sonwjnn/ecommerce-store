@@ -10,7 +10,7 @@ import * as Yup from 'yup'
 import { Button } from './ui/button'
 import { Input } from './ui/input'
 
-const ShowUserShop = () => {
+const SignupShopForm = () => {
   const { shop } = useSelector(state => state.user)
   const [onRequest, setOnRequest] = useState(false)
   const [selectedProvince, setSelectedProvince] = useState('')
@@ -128,8 +128,8 @@ const ShowUserShop = () => {
               value={form.values.city}
               onChange={form.handleChange}
             >
-              <option value={form.values.city || ''}>
-                {form.values.city || 'Provinces/City'}
+              <option className="hidden" value={form.values.city || ''}>
+                {form.values.city || 'Chọn'}
               </option>
               {provinceOptions?.map((province, index) => (
                 <option key={index} value={province}>
@@ -155,6 +155,9 @@ const ShowUserShop = () => {
               id="district"
               onChange={form.handleChange}
             >
+              <option className="hidden" value={form.values.district || ''}>
+                {form.values.district || 'Chọn'}
+              </option>
               {districtOptions?.map((district, index) => (
                 <option key={index} value={district}>
                   {district}
@@ -179,4 +182,4 @@ const ShowUserShop = () => {
   )
 }
 
-export default ShowUserShop
+export default SignupShopForm

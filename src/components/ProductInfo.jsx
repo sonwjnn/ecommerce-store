@@ -122,7 +122,7 @@ const ProductInfo = props => {
 
           <span className="ml-[3rem] flex items-center ">
             <span className="border-bottom-ab  relative mr-2 text-base after:bg-gray-500 sm:text-lg">
-              2,3k
+              {product?.sold}
             </span>
             <span className="text-sm  text-gray-500">Đã bán</span>
           </span>

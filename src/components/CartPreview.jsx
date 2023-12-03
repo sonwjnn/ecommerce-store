@@ -1,30 +1,11 @@
-import productApi from '@/apis/modules/product.api'
 import { formatPriceToVND } from '@/utilities/constants'
-import { useEffect, useState } from 'react'
 
 import { Alert } from './Alert'
 
 const CartPreview = ({ cart }) => {
-  const [imageUrl, setImageUrl] = useState('')
-
   if (!cart) return <Alert type="wrong" />
 
-  const { imageName, discountPrice, name } = cart.productId
-
-  useEffect(() => {
-    const getImage = async () => {
-      const { response, err } = await productApi.getImage({
-        imageName,
-      })
-
-      if (err) toast.error(err.message)
-      if (response) {
-        setImageUrl(`data:image/png;base64,${response}`)
-      }
-    }
-
-    getImage()
-  }, [])
+  const { images, discountPrice, name } = cart?.productId
 
   return (
     <li
@@ -36,7 +17,7 @@ const CartPreview = ({ cart }) => {
           <div
             className="h-[50px] w-[50px] bg-cover bg-center bg-no-repeat "
             style={{
-              backgroundImage: `url(${imageUrl})`,
+              backgroundImage: `url(${images[0]?.url})`,
             }}
           ></div>
         </span>

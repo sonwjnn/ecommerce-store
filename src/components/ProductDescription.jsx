@@ -1,4 +1,4 @@
-import parse from 'html-react-parser'
+// import parse from 'html-react-parser'
 import { Link } from 'react-router-dom'
 
 const ProductDescription = ({ product }) => {
@@ -57,7 +57,8 @@ const ProductDescription = ({ product }) => {
         </div>
 
         <div className="flex gap-4 px-6 py-5 capitalize">
-          {parse(product?.info || '')}
+          {/* {parse(product?.info || '')} */}
+          <div dangerouslySetInnerHTML={{ __html: product?.info }} />
         </div>
       </div>
     </div>

@@ -9,6 +9,7 @@ import { SlEmotsmile } from 'react-icons/sl'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
+import NotFound from './NotFound'
 import { Spinner } from './Spinner'
 import { Button } from './ui/button'
 
@@ -18,26 +19,6 @@ const FavoriteItem = props => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [onRequest, setOnRequest] = useState(false)
-  const [imageUrl, setImageUrl] = useState('')
-
-  useEffect(() => {
-    const getImage = async () => {
-      const { response, err } = await productApi.getImage({
-        imageName: productImage,
-      })
-
-      if (err) toast.error(err.message)
-      if (response) {
-        setImageUrl(`data:image/png;base64,${response}`)
-      } else {
-        setImageUrl(
-          new URL('@/assets/img/thumnails/no_image.jpg', import.meta.url).href
-        )
-      }
-    }
-
-    getImage()
-  }, [])
 
   const onRemove = async () => {
     if (onRequest) return
@@ -66,7 +47,7 @@ const FavoriteItem = props => {
           <div
             className="aspect-square h-[56px] min-w-[56px] bg-cover bg-center bg-no-repeat "
             style={{
-              backgroundImage: `url(${imageUrl})`,
+              backgroundImage: `url(${productImage})`,
             }}
           ></div>
           <div className="flex flex-col justify-center self-center">
@@ -182,7 +163,7 @@ const FavoriteList = () => {
           price={fav.productId.price}
           title={fav.productId.name}
           type={fav.productId.type}
-          productImage={fav.productId.imageName}
+          productImage={fav.productId.images[0].url}
           quantity={fav.quantity}
           onRemoved={onRemoved}
           onCheckRemoved={onCheckRemoved}
@@ -192,15 +173,8 @@ const FavoriteList = () => {
         />
       ))}
       {!favs.length && (
-        <div className="flex h-[50vh] w-full items-center justify-center ">
-          <div className="flex flex-col items-center justify-center gap-8">
-            <SlEmotsmile className="text-[150px] text-zinc-300" />
-            <div className="gap-4 text-center text-xl">
-              <div className="text-gray-500">
-                Bạn không có sản phẩm yêu thích nào
-              </div>
-            </div>
-          </div>
+        <div className="flex flex-col items-center justify-center gap-y-4">
+          <NotFound text={'Bạn chưa có sản phẩm yêu thích nào!'} />
         </div>
       )}
     </div>

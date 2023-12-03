@@ -12,9 +12,9 @@ import NotFound from './NotFound'
 import Pagination from './Pagination'
 import ProductGrid from './ProductGrid'
 
-const ProductList = () => {
+const ProductList = ({ type }) => {
   const dispatch = useDispatch()
-  const { typeName, cateName } = useParams()
+  const { typeName, cateName, shopId, shopCollection } = useParams()
   const [products, setProducts] = useState([])
   const [filteredProducts, setFilteredProducts] = useState([])
   const [payloadProducts, setPayloadProducts] = useState([])
@@ -35,17 +35,36 @@ const ProductList = () => {
         setProducts(response)
       }
     }
-    getProducts()
+
+    const getProductsByShopId = async () => {
+      dispatch(setGlobalLoading(true))
+      const { response, err } = await productApi.getProductsByShopId({ shopId })
+      dispatch(setGlobalLoading(false))
+
+      if (err) toast.error(err.message)
+      if (response) {
+        setProducts(response)
+      }
+    }
+    if (type === 'shop') {
+      getProductsByShopId()
+    } else {
+      getProducts()
+    }
   }, [dispatch])
 
   useEffect(() => {
-    if (typeName === 'Tất cả sản phẩm') {
+    if (!shopCollection) {
       setFilteredProducts(products)
     } else {
-      const newFilteredProducts = filterTypeOrder(products, typeName, 'typeId')
+      const newFilteredProducts = filterTypeOrder(
+        products,
+        shopCollection,
+        'typeId'
+      )
       setFilteredProducts(newFilteredProducts)
     }
-  }, [typeName, products])
+  }, [shopCollection, products])
 
   useEffect(() => {
     if (priceOption === 'Thấp đến cao') {

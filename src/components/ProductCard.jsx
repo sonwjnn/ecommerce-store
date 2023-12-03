@@ -11,27 +11,7 @@ import { twMerge } from 'tailwind-merge'
 import Star from './Star'
 
 const ProductCard = ({ product, className }) => {
-  const [imageUrl, setImageUrl] = useState('')
   const { listFavorites } = useSelector(state => state.user)
-
-  useEffect(() => {
-    const getImage = async () => {
-      const { response, err } = await productApi.getImage({
-        imageName: product?.imageName,
-      })
-
-      if (err) toast.error(err.message)
-      if (response) {
-        setImageUrl(`data:image/png;base64,${response}`)
-      } else {
-        setImageUrl(
-          new URL('@/assets/img/thumnails/no_image.jpg', import.meta.url).href
-        )
-      }
-    }
-
-    getImage()
-  }, [])
 
   const navigate = useNavigate()
 
@@ -49,8 +29,8 @@ const ProductCard = ({ product, className }) => {
     >
       <div className=" aspect-square overflow-hidden rounded-xl">
         <div
-          className="home-product-item__img aspect-square rounded-md bg-cover bg-center bg-no-repeat transition-all "
-          style={{ backgroundImage: `url(${imageUrl})` }}
+          className="home-product-item__img aspect-square rounded-md bg-contain  bg-center bg-no-repeat transition-all "
+          style={{ backgroundImage: `url(${product?.images[0].url})` }}
         ></div>
       </div>
       <div className="home-product-item__title line-clamp-2 min-h-[32px]  pb-0 text-xs font-medium text-[#242424]">
