@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "client-shopee-clone"
-  }
+    "default": "client-shopee-clone-7cde5",
+    "client-shopee-clone": "client-shopee-clone-7cde5"
+  },
+  "targets": {},
+  "etags": {}
 }

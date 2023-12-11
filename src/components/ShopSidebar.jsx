@@ -38,9 +38,9 @@ const ShopSidebar = () => {
     <>
       {productTypes.length ? (
         <nav className="category  w-[200px]">
-          <header className="category__heading pointer-events-none flex select-none items-center text-base font-bold uppercase">
+          <header className="category__heading pointer-events-none flex select-none items-center text-base font-medium ">
             <BiCategory className="mr-2 text-lg" />
-            loại sản phẩm
+            Loại sản phẩm
           </header>
           <ul className="category-list relative">
             <ProductLoading className="absolute bottom-0 left-0 right-0 top-0" />

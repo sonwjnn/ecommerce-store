@@ -2,6 +2,7 @@ import favoriteApi from '@/apis/modules/favorite.api'
 import productApi from '@/apis/modules/product.api'
 import ProductDescription from '@/components/ProductDescription'
 import ProductInfo from '@/components/ProductInfo'
+import ReviewImages from '@/components/ReviewImages'
 import ReviewList from '@/components/ReviewList'
 import ShopPreview from '@/components/ShopPreview'
 import { Button } from '@/components/ui/button'
@@ -24,7 +25,7 @@ const ProductDetail = () => {
   const { listFavorites, user } = useSelector(state => state.user)
   const [isFavorite, setIsFavorite] = useState(false)
   const [onRequest, setOnRequest] = useState(false)
-  const [imageUrl, setImageUrl] = useState('')
+
   const [favoriteCount, setFavoriteCount] = useState(0)
   const [reviews, setReviews] = useState([])
   const [starCount, setStarCount] = useState([])
@@ -56,12 +57,6 @@ const ProductDetail = () => {
         starCount[review.rating]++
       })
       setStarCount(starCount)
-    }
-  }, [product])
-
-  useEffect(() => {
-    if (product) {
-      setImageUrl(product?.images[0]?.url)
     }
   }, [product])
 
@@ -136,28 +131,7 @@ const ProductDetail = () => {
           <div className="flex flex-col gap-x-6  bg-accent md:flex-row">
             <div className=" flex flex-[20%] flex-col gap-y-6 bg-accent lg:flex-[33%]">
               <div className="w-full  rounded-md bg-white p-4">
-                <div
-                  className="aspect-square  w-full rounded-md border  border-accent bg-cover bg-center lg:min-w-[450px]"
-                  style={{
-                    backgroundImage: `url(${imageUrl})`,
-                  }}
-                ></div>
-
-                <div className="flex gap-x-2 ">
-                  {product?.images?.map(image => (
-                    <div
-                      className={cn(
-                        'aspect-square h-[100px] w-[100px] cursor-pointer rounded-md bg-cover bg-center',
-                        imageUrl === image.url && 'border-2 border-primary'
-                      )}
-                      onClick={() => setImageUrl(image.url)}
-                      style={{
-                        backgroundImage: `url(${image.url})`,
-                      }}
-                      key={image.public_id}
-                    ></div>
-                  ))}
-                </div>
+                <ReviewImages images={product?.images || []} />
 
                 <div className="mt-2 hidden flex-wrap  items-center  justify-center gap-y-2 bg-white p-2 md:flex">
                   <h3 className="text-base">Chia sẻ:</h3>

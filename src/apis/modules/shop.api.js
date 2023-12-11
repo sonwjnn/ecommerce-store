@@ -5,6 +5,7 @@ const shopEndpoints = {
   add: 'shops',
   info: 'shops/info',
   update: 'shops',
+  detail: ({ shopId }) => `shops/detail/${shopId}`,
 }
 
 const shopApi = {
@@ -46,6 +47,15 @@ const shopApi = {
         city,
         district,
       })
+      return { response }
+    } catch (error) {
+      return { error }
+    }
+  },
+
+  getDetail: async ({ shopId }) => {
+    try {
+      const response = await privateClient.get(shopEndpoints.detail({ shopId }))
       return { response }
     } catch (error) {
       return { error }

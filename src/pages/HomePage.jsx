@@ -33,18 +33,22 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-      <div className="mx-auto h-full  max-w-[1200px] rounded-md bg-white py-4">
-        <Category />
-      </div>
-
-      <div className="product-hint-bar sticky top-0 mx-auto mt-4 h-full max-w-[1200px] rounded-md bg-white ">
-        <div className="border-b-4 border-primary px-8 py-4 text-center text-xl font-semibold uppercase text-primary">
-          gợi ý hôm nay
+      <div className="container mx-auto flex justify-between gap-x-4">
+        <div className="h-full  rounded-md bg-white">
+          <Category />
         </div>
-      </div>
 
-      <div className="mx-auto mt-4 h-full max-w-[1200px] pb-[50px]">
-        <ProductHint />
+        <div className="flex w-[calc(100%-254px)] flex-col">
+          <div className="product-hint-bar sticky top-0 mx-auto  w-full rounded-md bg-white">
+            <div className="border-b-4 border-primary px-8 py-4 text-center text-xl font-semibold uppercase text-primary">
+              gợi ý hôm nay
+            </div>
+          </div>
+
+          <div className="mx-auto mt-4 h-full max-w-[1200px] pb-[50px]">
+            <ProductHint />
+          </div>
+        </div>
       </div>
     </div>
   )

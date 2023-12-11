@@ -29,48 +29,27 @@ const Categoryy = () => {
     dispatch(setCates(categories))
   }, [categories])
 
-  // Gộp các phần tử thành các cặp
-  const catePairs = categories.reduce((acc, cate, index) => {
-    if (index % 2 === 0) {
-      acc.push([{ name: cate.name, index }])
-    } else {
-      acc[acc.length - 1].push({ name: cate.name, index })
-    }
-    return acc
-  }, [])
-
   const scroll = scrollOffset => {
     ref.current.scrollLeft += scrollOffset
   }
 
   return (
-    <div className=" relative">
-      <div className="px-8 py-2 pb-4 text-lg uppercase text-gray-500">
-        danh mục
-      </div>
-      <button
-        className="absolute bottom-[34%] left-[-25px] z-10 flex h-[50px] w-[50px] items-center justify-center rounded-[50%] bg-white text-lg shadow-md  focus:outline-none"
-        onClick={() => scroll(-1000)}
-      >
-        <IoIosArrowBack className="text-[26px] text-gray-600" />
-      </button>
+    <div className="relative w-[230px]">
+      <div className="px-8 py-3 text-lg  text-[#020817]">Danh mục</div>
+
       <div
-        className="scrollbar-hide  flex flex-nowrap overflow-auto scroll-smooth "
+        className="scrollbar-hide flex flex-col-reverse flex-nowrap overflow-auto scroll-smooth px-2 py-3 "
         ref={ref}
       >
         {categories.length > 0 ? (
           <>
-            {catePairs.map((catePair, index) => (
-              <div className="flex min-w-[120px] flex-col" key={index}>
-                {catePair.map(cate => (
-                  <CategoryItem
-                    key={cate.index}
-                    index={cate.index}
-                    cateName={cate.name}
-                    // disable={disableCategories.includes(cate.name)}
-                  />
-                ))}
-              </div>
+            {categories.map((item, index) => (
+              <CategoryItem
+                key={index}
+                index={index}
+                cateName={item.name}
+                // disable={disableCategories.includes(cate.name)}
+              />
             ))}
           </>
         ) : (
@@ -79,12 +58,6 @@ const Categoryy = () => {
           </div>
         )}
       </div>
-      <button
-        className="absolute bottom-[34%] right-[-25px] z-10 flex h-[50px] w-[50px] items-center justify-center rounded-[50%] bg-white shadow-md focus:outline-none"
-        onClick={() => scroll(1000)}
-      >
-        <IoIosArrowForward className="text-[26px] text-gray-600" />
-      </button>
     </div>
   )
 }
