@@ -7,18 +7,10 @@ const ProductGrid = ({ products }) => {
     window.scrollTo(0, 0)
   }, [products])
   return (
-    <div>
-      <div className="relative flex flex-wrap gap-3 sm:grid sm:grid-cols-15">
-        {products.map(product => (
-          <ProductCard
-            className={
-              'flex-[49%] sm:col-span-5 md:col-span-5 product_md:col-span-3'
-            }
-            product={product}
-            key={product._id}
-          />
-        ))}
-      </div>
+    <div className="relative grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6">
+      {products.map(product => (
+        <ProductCard product={product} key={product._id} />
+      ))}
     </div>
   )
 }

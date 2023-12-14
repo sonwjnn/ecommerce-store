@@ -12,7 +12,7 @@ const ProductHint = () => {
   const [products, setProducts] = useState([])
   const [filteredProducts, setFilteredProducts] = useState([])
   const [page, setPage] = useState(1)
-  const skip = 12
+  const skip = 60
 
   useEffect(() => {
     const getProducts = async () => {

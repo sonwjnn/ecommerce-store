@@ -7,7 +7,7 @@ const ShopInfo = ({ shop }) => {
   return (
     <div className="mb-[-16px] mt-4 flex min-h-[130px] w-full items-center justify-center rounded-md bg-white  py-4 ">
       <div className="flex w-full flex-col items-center  gap-4">
-        <div className="flex w-full items-center justify-center gap-x-4  bg-accent p-4">
+        <div className="flex w-full items-center justify-center gap-x-4 bg-accent p-4">
           <div className="aspect-square h-[80px] w-[80px]">
             <TextAvatar text={shop?.title} />
           </div>

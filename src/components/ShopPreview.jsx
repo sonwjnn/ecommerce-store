@@ -8,7 +8,7 @@ import { Button } from './ui/button'
 const ShopPreview = ({ product }) => {
   const navigate = useNavigate()
   const onClick = () => {
-    navigate(`/shops/${product?.shopId?._id}`)
+    navigate(`/shops/${product?.shopId?._id}/all`)
   }
   return (
     <div className="flex min-h-[130px] w-full items-center rounded-md bg-white px-6 py-4">

@@ -22,7 +22,7 @@ const ProductList = ({ type }) => {
   const [pageLimits, setPageLimits] = useState(1)
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page')
-  const skip = 10
+  const skip = 18
 
   useEffect(() => {
     const getProducts = async () => {

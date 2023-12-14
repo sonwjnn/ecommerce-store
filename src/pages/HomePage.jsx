@@ -33,7 +33,7 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-      <div className="container mx-auto flex justify-between gap-x-4">
+      <div className="mx-auto flex max-w-[1440px] justify-between gap-x-4">
         <div className="h-full  rounded-md bg-white">
           <Category />
         </div>

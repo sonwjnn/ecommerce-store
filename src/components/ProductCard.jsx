@@ -1,8 +1,6 @@
-import productApi from '@/apis/modules/product.api'
 import { formatPriceToVND } from '@/utilities/constants'
 import favoriteUtils from '@/utilities/favorite.utils'
 import { useEffect, useState } from 'react'
-import { toast } from 'react-hot-toast'
 import { AiFillHeart } from 'react-icons/ai'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -12,12 +10,24 @@ import Star from './Star'
 
 const ProductCard = ({ product, className }) => {
   const { listFavorites } = useSelector(state => state.user)
+  const [imageUrl, setImageUrl] = useState(product?.images[0].url)
 
   const navigate = useNavigate()
 
   const handleClick = () => {
     return navigate(`/products/detail/${product?.id}`)
   }
+
+  const noImageUrl = new URL(
+    `../assets/img/thumnails/no_image.jpg`,
+    import.meta.url
+  ).href
+
+  useEffect(() => {
+    const img = new Image()
+    img.src = imageUrl
+    img.onerror = () => setImageUrl(noImageUrl)
+  }, [imageUrl, noImageUrl])
 
   return (
     <div
@@ -30,7 +40,9 @@ const ProductCard = ({ product, className }) => {
       <div className=" aspect-square overflow-hidden rounded-xl">
         <div
           className="home-product-item__img aspect-square rounded-md bg-contain  bg-center bg-no-repeat transition-all "
-          style={{ backgroundImage: `url(${product?.images[0].url})` }}
+          style={{
+            backgroundImage: `url(${imageUrl})`,
+          }}
         ></div>
       </div>
       <div className="home-product-item__title line-clamp-2 min-h-[32px]  pb-0 text-xs font-medium text-[#242424]">
@@ -57,13 +69,13 @@ const ProductCard = ({ product, className }) => {
         </span>
         <span className="home-product-item__rate flex items-center">
           <Star stars={product?.rating} className="text-[11px]" />
-          <span className="home-product-item__buy-num text-xs text-[#242424]">
+          <span className="home-product-item__buy-num line-clamp-1 text-xs text-[#242424]">
             Đã bán {product?.sold}
           </span>
         </span>
       </div>
       <div className="home-product-item__location text-xs text-[#242424]">
-        TP. Hồ Chí Minh
+        {product?.shopId?.city}
       </div>
       {product?.favorites > 1 && (
         <div className="home-product-item__love bg-secondary text-sm">

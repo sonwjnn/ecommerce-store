@@ -21,7 +21,7 @@ const CartPreview = ({ cart }) => {
             }}
           ></div>
         </span>
-        <span className="line-clamp-2 text-left text-base">{name}</span>
+        <span className="line-clamp-2 text-left text-sm">{name}</span>
       </span>
       <span className="header__cart-list--have-items-price text-base text-secondary">
         {formatPriceToVND(discountPrice)}

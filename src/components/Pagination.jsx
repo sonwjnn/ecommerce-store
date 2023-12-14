@@ -1,8 +1,14 @@
+import { cn } from '@/lib/utils'
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { LuArrowLeft, LuArrowRight } from 'react-icons/lu'
+import { Link, useLocation, useParams } from 'react-router-dom'
+
+import { Button } from './ui/button'
 
 const Pagination = props => {
   const { pageLimits, currentPage, typeName, cateName } = props
+  const { shopId } = useParams()
+  const pathname = useLocation().pathname
   const [activePage, setActivePage] = useState(0)
 
   useEffect(() => {
@@ -14,26 +20,53 @@ const Pagination = props => {
     (_, index) => index + 1
   )
 
+  const handleNavigate = number => {
+    if (pathname.includes('shops')) {
+      if (!typeName) {
+        return `/shops/${shopId}/all?page=${number}`
+      }
+      return `/shops/${shopId}/${typeName}?page=${number}`
+    } else {
+      if (!typeName) {
+        return `/products/${cateName}/all?page=${number}`
+      }
+      return `/products/${cateName}/${typeName}?page=${number}`
+    }
+  }
+
   return (
     <div className="mt-12">
-      <div className="flex items-center justify-center gap-8">
-        <button className="pagination-item__link">
-          <i className="pagination-item__icon ti-angle-left"></i>
-        </button>
+      <div className="flex items-center justify-center gap-4">
+        <Button
+          variant="ghost"
+          className="flex items-center gap-2 rounded-lg hover:bg-gray-900/10"
+          // onClick={prev}
+          // disabled={active === 1}
+        >
+          <LuArrowLeft strokeWidth={2} className="h-4 w-4" /> Trước
+        </Button>
         {pageNumbers.map((number, index) => (
-          <Link
-            key={number}
-            to={`/products/${cateName}/${typeName}?page=${number}`}
-            className={`pagination-item__link ${
-              activePage === index ? 'pagination-item__link--active' : ''
-            }`}
-          >
-            {number}
+          <Link key={number} to={handleNavigate(number)}>
+            <Button
+              size="icon"
+              className={cn(
+                'rounded-lg',
+                activePage !== index && 'hover:bg-gray-900/10'
+              )}
+              variant={`${activePage === index ? 'default' : 'ghost'}`}
+            >
+              {number}
+            </Button>
           </Link>
         ))}
-        <button className="pagination-item__link">
-          <i className="pagination-item__icon ti-angle-right"></i>
-        </button>
+        <Button
+          variant="ghost"
+          className="flex items-center gap-2 rounded-lg hover:bg-gray-900/10"
+          // onClick={prev}
+          // disabled={active === 1}
+        >
+          <LuArrowRight strokeWidth={2} className="h-4 w-4" /> Sau
+        </Button>
       </div>
     </div>
   )

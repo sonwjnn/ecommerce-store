@@ -29,7 +29,7 @@ const provinces = [
     'Hòa Bình',
     'Hậu Giang',
     'Hưng Yên',
-    'Thành phố Hồ Chí Minh',
+    'TP. Hồ Chí Minh',
     'Khánh Hòa',
     'Kiên Giang',
     'Kon Tum',

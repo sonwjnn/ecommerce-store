@@ -47,7 +47,9 @@ const ReviewItem = ({ review, onRemoved }) => {
             </p>
           </div>
           <div className=" flex flex-row justify-between gap-4">
-            <div className="flex justify-center text-sm">{review.content}</div>
+            <div className="flex justify-center text-sm normal-case">
+              {review.content}
+            </div>
           </div>
         </div>
 

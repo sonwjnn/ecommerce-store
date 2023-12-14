@@ -70,6 +70,8 @@ module.exports = {
         'list-2': 'minmax(200px, 4fr) 50px !important',
         'list-3':
           ' [first] 6fr [second] minmax(80px,1fr) [last] minmax(120px,1fr)',
+        'list-3-2':
+          ' [first] 6fr [second] minmax(80px,1fr) minmax(80px,1fr) [last] minmax(120px,1fr)',
         'favorite-3':
           '[first] 6fr [second] minmax(120px,1fr) [last] minmax(120px,1fr)',
         'list-4':

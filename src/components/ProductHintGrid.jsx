@@ -3,13 +3,9 @@ import ProductCard from './ProductCard'
 const ProductHintGrid = ({ products }) => {
   return (
     <div className=" min-h-[700px]">
-      <div className="relative grid grid-cols-12 gap-3">
+      <div className="relative grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6">
         {products.map(product => (
-          <ProductCard
-            className={'col-span-6 sm:col-span-4 md:col-span-3 lg:col-span-2'}
-            product={product}
-            key={product._id}
-          />
+          <ProductCard product={product} key={product._id} />
         ))}
       </div>
     </div>

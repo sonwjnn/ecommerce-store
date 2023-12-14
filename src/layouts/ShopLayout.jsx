@@ -25,8 +25,8 @@ const ShopLayout = () => {
 
   return (
     <>
-      <div className="app__container">
-        <div className="mx-auto max-w-[1200px]">
+      <div className="app__container bg-accent">
+        <div className="mx-auto max-w-[1440px]">
           <ShopDetail shop={shop} />
           <div className="sm-gutter app__content flex pt-0 lg:pt-[36px]">
             <div className="col hidden md:block">

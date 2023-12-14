@@ -31,12 +31,16 @@ const OrderItem = ({ order, onRemoved }) => {
 
   return (
     <div className="border-b-gray-2006 w-full border-b px-2 py-2 md:px-6">
-      <div className=" grid min-h-[56px] grid-cols-list-3  items-center   ">
+      <div className=" grid min-h-[56px] grid-cols-list-3-2  items-center   ">
         <div className="group flex w-full  min-w-0 items-center gap-x-2">
           <div className="line-clamp-2 text-base text-[#242424]  md:text-sm">
             {order?.products}
           </div>
         </div>
+
+        <Button onClick={() => {}} variant="ghost">
+          Show
+        </Button>
 
         <div className="text-center text-sm text-[#242424]">
           {order?.totalPrice}
@@ -93,6 +97,7 @@ const PurchaseList = () => {
           return total + Number(item.productId?.discountPrice) * +item.quantity
         }, 0)
       ),
+      status: item.status,
       isPaid: item.isPaid,
     }))
     setFormatedOrders(formattedOrders)
@@ -115,8 +120,9 @@ const PurchaseList = () => {
             <>
               {formatedOrders.length ? (
                 <>
-                  <div className=" grid  min-h-[40px]   w-full  grid-cols-list-3  rounded-md bg-white px-2 py-4 text-base text-gray-500 md:px-6">
+                  <div className=" grid  min-h-[40px]   w-full  grid-cols-list-3-2  rounded-md bg-white px-2 py-4 text-base text-gray-500 md:px-6">
                     <div>Tên sản phẩm</div>
+                    <div>Xem chi tiết</div>
                     <div className="text-center">Số tiền</div>
                     <div className="text-center">Huỷ đơn</div>
                   </div>
