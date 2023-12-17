@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { LuTrash } from 'react-icons/lu'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 import NotFound from './NotFound'
 import { Spinner } from './Spinner'
@@ -11,6 +12,7 @@ import { Button } from './ui/button'
 
 const OrderItem = ({ order, onRemoved }) => {
   const [onRequest, setOnRequest] = useState(false)
+  const navigate = useNavigate()
 
   const onRemove = async () => {
     if (onRequest) return
@@ -30,20 +32,29 @@ const OrderItem = ({ order, onRemoved }) => {
   }
 
   return (
-    <div className="border-b-gray-2006 w-full border-b px-2 py-2 md:px-6">
-      <div className=" grid min-h-[56px] grid-cols-list-3-2  items-center   ">
-        <div className="group flex w-full  min-w-0 items-center gap-x-2">
-          <div className="line-clamp-2 text-base text-[#242424]  md:text-sm">
-            {order?.products}
+    <div className=" w-full  cursor-pointer rounded-md px-2 py-2 transition hover:bg-accent md:px-6">
+      <div className=" grid min-h-[56px] grid-cols-list-3  items-center   ">
+        <div
+          onClick={() => navigate(`/order/${order?.id}`)}
+          className="group flex w-full  min-w-0 items-center gap-x-2"
+        >
+          <div
+            className="aspect-square h-[56px] min-w-[56px] bg-cover bg-center bg-no-repeat "
+            style={{
+              backgroundImage: `url(${order?.thumbnail})`,
+            }}
+          ></div>
+          <div className=" text-base  text-gray-500  md:text-sm">
+            Order <span className="text-[#242424]">#{order?.id}</span> <br />
+            Order on{' '}
+            <span className="text-[#242424]">
+              {new Date(order?.createdAt).toLocaleDateString()}{' '}
+            </span>
           </div>
         </div>
 
-        <Button onClick={() => {}} variant="ghost">
-          Show
-        </Button>
-
         <div className="text-center text-sm text-[#242424]">
-          {order?.totalPrice}
+          {formatPriceToVND(order?.total)}
         </div>
 
         <Button
@@ -64,7 +75,7 @@ const OrderItem = ({ order, onRemoved }) => {
   )
 }
 
-const PurchaseList = () => {
+const OrderList = () => {
   const [orders, setOrders] = useState([])
   const [formatedOrders, setFormatedOrders] = useState([])
   const dispatch = useDispatch()
@@ -87,18 +98,13 @@ const PurchaseList = () => {
   useEffect(() => {
     const formattedOrders = orders.map(item => ({
       id: item.id,
+      user: item.user,
       phone: item.phone,
       address: item.address,
-      products: item.orderItems
-        .map(orderItem => orderItem.productId?.name)
-        .join(', '),
-      totalPrice: formatPriceToVND(
-        item.orderItems.reduce((total, item) => {
-          return total + Number(item.productId?.discountPrice) * +item.quantity
-        }, 0)
-      ),
-      status: item.status,
+      total: item.total,
+      thumbnail: item.thumbnail,
       isPaid: item.isPaid,
+      createdAt: item.createdAt,
     }))
     setFormatedOrders(formattedOrders)
   }, [orders])
@@ -120,9 +126,8 @@ const PurchaseList = () => {
             <>
               {formatedOrders.length ? (
                 <>
-                  <div className=" grid  min-h-[40px]   w-full  grid-cols-list-3-2  rounded-md bg-white px-2 py-4 text-base text-gray-500 md:px-6">
-                    <div>Tên sản phẩm</div>
-                    <div>Xem chi tiết</div>
+                  <div className=" grid  min-h-[40px]   w-full  grid-cols-list-3  rounded-md bg-white px-2 py-4 text-base text-gray-500 md:px-6">
+                    <div>Tên đơn hàng</div>
                     <div className="text-center">Số tiền</div>
                     <div className="text-center">Huỷ đơn</div>
                   </div>
@@ -147,4 +152,4 @@ const PurchaseList = () => {
   )
 }
 
-export default PurchaseList
+export default OrderList

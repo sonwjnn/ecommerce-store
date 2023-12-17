@@ -6,7 +6,8 @@ const userSlice = createSlice({
     user: null,
     listCarts: [],
     listFavorites: [],
-    order: null,
+    checkedCarts: [],
+    listOrders: [],
     shop: null,
   },
   reducers: {
@@ -98,11 +99,21 @@ const userSlice = createSlice({
     },
 
     //order
-    setOrder: (state, action) => {
-      state.order = action.payload
+    setListOrders: (state, action) => {
+      state.listOrders = action.payload
     },
     removeOrder: (state, action) => {
-      state.order = null
+      const { orderId } = action.payload
+
+      state.listOrders = [...state.listOrders].filter(e => e._id !== orderId)
+    },
+
+    //checkedCarts
+    setCheckedCarts: (state, action) => {
+      state.checkedCarts = action.payload
+    },
+    clearCheckedCarts: state => {
+      state.checkedCarts = []
     },
   },
 })
@@ -121,8 +132,10 @@ export const {
   setShop,
   updateShop,
   updateQuantityCart,
-  setOrder,
+  setListOrders,
   removeOrder,
+  setCheckedCarts,
+  clearCheckedCarts,
 } = userSlice.actions
 
 export default userSlice.reducer

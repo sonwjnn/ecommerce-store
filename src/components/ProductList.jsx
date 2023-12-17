@@ -12,9 +12,9 @@ import NotFound from './NotFound'
 import Pagination from './Pagination'
 import ProductGrid from './ProductGrid'
 
-const ProductList = ({ type }) => {
+const ProductList = ({ type = 'product' }) => {
   const dispatch = useDispatch()
-  const { typeName, cateName, shopId, shopCollection } = useParams()
+  const { cateName, shopId, shopCollection } = useParams()
   const [products, setProducts] = useState([])
   const [filteredProducts, setFilteredProducts] = useState([])
   const [payloadProducts, setPayloadProducts] = useState([])
@@ -112,8 +112,7 @@ const ProductList = ({ type }) => {
               currentPage={page}
               pageLimits={pageLimits}
               // onPageSelect={onPageSelect}
-              typeName={typeName}
-              cateName={cateName}
+              type={type}
             />
           )}
         </>

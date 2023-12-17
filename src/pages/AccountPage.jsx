@@ -1,13 +1,12 @@
 import FavoriteList from '@/components/FavoriteList'
+import OrderList from '@/components/OrderList'
 import PasswordUpdate from '@/components/PasswordUpdate'
 import ProfileUpdate from '@/components/ProfileUpdate'
-import PurchaseList from '@/components/PurchaseList'
 import SignupShopForm from '@/components/SignupShopForm'
 import TextAvatar from '@/components/TextAvatar'
 import { useEffect, useState } from 'react'
-import { AiOutlineTags, AiTwotoneShop } from 'react-icons/ai'
-import { BsBell } from 'react-icons/bs'
-import { FaRegUser, FaUserCircle } from 'react-icons/fa'
+import { AiTwotoneShop } from 'react-icons/ai'
+import { FaRegUser } from 'react-icons/fa'
 import { MdOutlineFavoriteBorder } from 'react-icons/md'
 import { SiReacthookform } from 'react-icons/si'
 import { useSelector } from 'react-redux'
@@ -32,15 +31,15 @@ const AccountPage = () => {
   }, [])
 
   return (
-    <div className="md:bg-bg_page min-h-[80vh] bg-white px-0 py-0 sm:py-[56px]   xl:px-[136px]">
-      <div className=" h-full max-w-[1220px] rounded-md ">
-        <div className="flex min-h-[66vh]">
+    <div className=" min-h-[80vh] bg-accent ">
+      <div className="mx-auto mt-8 h-full max-w-[1440px] rounded-md">
+        <div className="flex min-h-[66vh] gap-4">
           <div
-            className={`md:bg-bg_page bg-white ${
+            className={`  ${
               accountType || authCate ? 'hidden' : ''
-            } w-full md:block md:w-[250px]   md:p-4`}
+            } w-full md:block md:w-[250px]   `}
           >
-            <div className="mt-10 flex flex-col md:mt-0  md:gap-6 md:px-0">
+            <div className="mt-10 flex h-full flex-col rounded-md bg-white  md:mt-0 md:gap-6 md:p-4 ">
               <div className="flex gap-2 p-4">
                 <div className="min-h-[50px] min-w-[50px] ">
                   <TextAvatar text={user.name} />
@@ -76,7 +75,7 @@ const AccountPage = () => {
               <button className="account-item flex items-center gap-3">
                 <SiReacthookform className="text-3xl text-orange-700 md:text-[22px]" />
                 <span className="w-full text-left text-base capitalize">
-                  <Link to={'/user/purchase'}>đơn mua</Link>
+                  <Link to={'/user/orders'}>đơn mua</Link>
                 </span>
               </button>
 
@@ -105,7 +104,7 @@ const AccountPage = () => {
                 ? 'đổi mật khẩu'
                 : accountType === 'profile'
                 ? 'hồ sơ'
-                : location.pathname === '/user/purchase'
+                : location.pathname === '/user/orders'
                 ? 'đơn hàng'
                 : location.pathname === '/user/favorite'
                 ? 'yêu thích'
@@ -115,7 +114,7 @@ const AccountPage = () => {
             </div>
             {accountType === 'profile' && <ProfileUpdate />}
             {accountType === 'password' && <PasswordUpdate />}
-            {authCate === 'purchase' && <PurchaseList />}
+            {authCate === 'orders' && <OrderList />}
             {authCate === 'favorite' && <FavoriteList />}
             {authCate === 'shop' && <SignupShopForm />}
           </div>

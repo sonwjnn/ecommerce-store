@@ -26,9 +26,9 @@ const HeaderCart = () => {
       >
         <LuShoppingBag
           size={26}
-          className=" text-white group-hover:opacity-70"
+          className=" text-primary group-hover:opacity-70"
         />
-        <span className="pointer-events-none absolute right-[-4px] top-[-2px] flex h-5 w-5 select-none items-center justify-center  rounded-full border border-primary bg-secondary  text-xs font-medium text-white">
+        <span className="pointer-events-none absolute right-[-4px] top-[-2px] flex h-5 w-5 select-none items-center justify-center  rounded-full  bg-secondary  text-xs font-medium text-white">
           {listCarts.length}
         </span>
 

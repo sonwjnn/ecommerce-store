@@ -56,7 +56,7 @@ const App = () => {
                     <Route
                       key={`products_${route.cateName}_${route.typeName}`}
                       path={`/products/:cateName/:typeName`}
-                      element={<ProductList />}
+                      element={<ProductList type="product" />}
                     />
                   </Route>
 

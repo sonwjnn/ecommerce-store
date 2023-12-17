@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils'
 
-const NotFound = ({ className, text }) => {
+const NotFound = ({ className, text, size = 128 }) => {
   return (
     <div
       className={cn(
@@ -10,8 +10,8 @@ const NotFound = ({ className, text }) => {
     >
       <div className="flex flex-col items-center justify-center gap-8">
         <svg
-          width="128"
-          height="128"
+          width={size}
+          height={size}
           viewBox="0 0 1792 1792"
           xmlns="http://www.w3.org/2000/svg"
         >

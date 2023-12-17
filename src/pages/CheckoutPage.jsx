@@ -1,20 +1,22 @@
 import orderApi from '@/apis/modules/order.api'
 import { Spinner } from '@/components/Spinner'
 import { Button } from '@/components/ui/button'
-import { removeOrder } from '@/redux/features/userSlice'
+import { clearCheckedCarts } from '@/redux/features/userSlice'
 import { formatPriceToVND } from '@/utilities/constants'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
+import { FaCircleCheck } from 'react-icons/fa6'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 const CheckoutPage = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { user, order } = useSelector(state => state.user)
+  const { user, checkedCarts } = useSelector(state => state.user)
   const [onRequest, setOnRequest] = useState(false)
   const location = useLocation()
   const queryParams = new URLSearchParams(location.search)
+  const orderId = queryParams.get('orderId')
   const canceled = queryParams.get('canceled')
   const success = queryParams.get('success')
 
@@ -31,7 +33,7 @@ const CheckoutPage = () => {
       return navigate('/user/account/profile')
     }
 
-    if (!order?.products?.length) {
+    if (!checkedCarts?.length) {
       toast.error('You must choose at least one product!')
       return
     }
@@ -40,8 +42,9 @@ const CheckoutPage = () => {
     setOnRequest(true)
 
     const body = {
-      products: order?.products?.map(product => ({
+      products: checkedCarts?.map(product => ({
         productId: product.productId.id,
+        images: product.productId.images,
         shopId: product.productId.shopId,
         name: product.productId.name,
         price: product.totalPrice,
@@ -62,7 +65,7 @@ const CheckoutPage = () => {
 
   useEffect(() => {
     if (success || canceled) {
-      dispatch(removeOrder())
+      dispatch(clearCheckedCarts())
     }
   }, [success, canceled])
 
@@ -75,10 +78,29 @@ const CheckoutPage = () => {
           Thanh Toán
         </h1>
         {success || canceled ? (
-          <div className="flex min-h-[40vh] items-center justify-center">
-            <Link to={'/user/carts'}>
-              <Button variant="outline">Tiếp tục mua hàng</Button>
-            </Link>
+          <div className="mt-4 flex min-h-[40vh] flex-col items-center gap-y-3">
+            <div className="flex items-center gap-x-2">
+              <div className="text-xl">Bạn đã đặt hàng thành công</div>
+              <FaCircleCheck size={20} className="text-green-500" />
+            </div>
+            <p className="text-sm text-gray-500">
+              Order{' '}
+              <span
+                className=" cursor-pointer font-medium transition hover:text-[#242424]"
+                onClick={() => navigate(`/order/${orderId}`)}
+              >
+                #{orderId}
+              </span>{' '}
+              đã được tạo
+            </p>
+            <div className="flex gap-x-2">
+              <Link to={`/order/${orderId}`}>
+                <Button variant="outline">Quản lý đơn hàng</Button>
+              </Link>
+              <Link to={'/user/carts'}>
+                <Button variant="outline">Tiếp tục mua hàng</Button>
+              </Link>
+            </div>
           </div>
         ) : (
           <div className="flex flex-col gap-4 md:flex-row">
@@ -90,7 +112,7 @@ const CheckoutPage = () => {
               </div>
 
               <div className="mt-4 h-full min-h-[40vh] w-full rounded-md bg-white py-4">
-                {order?.products.map((product, index) => (
+                {checkedCarts.map((product, index) => (
                   <div
                     key={index}
                     className="border-b-gray-2006 w-full border-b px-2 py-2 md:px-6"
@@ -136,7 +158,7 @@ const CheckoutPage = () => {
                   </div>
 
                   <div className="text-base text-gray-500">
-                    {order?.products.length || 0} sản phẩm
+                    {checkedCarts.length || 0} sản phẩm
                   </div>
 
                   <div className="flex items-center gap-x-2">
@@ -145,7 +167,7 @@ const CheckoutPage = () => {
                     </span>
                     <span className="flex items-start text-xl font-semibold text-primary  lg:text-2xl">
                       {formatPriceToVND(
-                        order?.products.reduce(
+                        checkedCarts.reduce(
                           (currValue, item) => item.totalPrice + currValue,
                           0
                         )

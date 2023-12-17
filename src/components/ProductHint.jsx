@@ -2,10 +2,12 @@ import productApi from '@/apis/modules/product.api'
 import { setGlobalLoading } from '@/redux/features/globalLoadingSlice'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
+import { FiPlus } from 'react-icons/fi'
 import { useDispatch } from 'react-redux'
 
 import NotFound from './NotFound'
-import ProductHintGrid from './ProductHintGrid'
+import ProductGrid from './ProductGrid'
+import { Button } from './ui/button'
 
 const ProductHint = () => {
   const dispatch = useDispatch()
@@ -41,16 +43,14 @@ const ProductHint = () => {
     <>
       {filteredProducts.length ? (
         <>
-          <ProductHintGrid products={filteredProducts} />
+          <ProductGrid products={filteredProducts} />
 
           {filteredProducts.length < products.length && (
-            <div className="flex items-center justify-center pb-8">
-              <button
-                className="mt-2 border border-gray-300 bg-white px-8 py-2 text-sm capitalize outline-none hover:bg-gray-100"
-                onClick={onLoadMore}
-              >
-                xem thêm
-              </button>
+            <div className="mt-4 flex items-center justify-center pb-8">
+              <Button variant="outline" onClick={onLoadMore}>
+                Xem thêm
+                <FiPlus size={18} className="ml-1" />
+              </Button>
             </div>
           )}
         </>

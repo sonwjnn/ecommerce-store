@@ -6,7 +6,7 @@ const HomePage = () => {
   return (
     <div className="bg-bg_page mt-[64px] lg:mt-[150px] ">
       <div className=" mb-8 w-full bg-white ">
-        <div className="mx-auto flex min-h-[280px] max-w-[1200px] gap-2  py-4">
+        <div className="mx-auto flex min-h-[280px] max-w-[1440px] gap-2  py-4">
           <div className="mx-0 flex-[66%] flex-wrap overflow-hidden rounded-sm sm:mx-14 lg:mx-0 lg:flex-nowrap">
             <HomeSlide />
           </div>

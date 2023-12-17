@@ -12,7 +12,7 @@ const HeaderContent = () => {
     navigate(-1)
   }
   return (
-    <div className="header-with-search">
+    <div className="header-with-search mx-auto max-w-[1200px] bg-white px-6">
       <HeaderLogo />
       <div
         className={`back mr-2 flex items-center justify-start md:hidden ${

@@ -9,7 +9,7 @@ const HeaderLogo = () => {
           style={{
             backgroundImage: `url(${
               new URL(
-                `../../../assets/img/logos/logo_header.svg`,
+                `../../../assets/img/logos/logo_header_2.svg`,
                 import.meta.url
               ).href
             })`,

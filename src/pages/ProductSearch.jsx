@@ -1,37 +1,22 @@
 import productApi from '@/apis/modules/product.api'
 import BoardBar from '@/components/BoardBar'
 import Pagination from '@/components/Pagination'
-import ProductCard from '@/components/ProductCard'
-import ProductHintGrid from '@/components/ProductHintGrid'
-import Category from '@/components/ProductSidebar'
+import ProductGrid from '@/components/ProductGrid'
 import { setGlobalLoading } from '@/redux/features/globalLoadingSlice'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { TbFileSearch } from 'react-icons/tb'
 import { useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 
 const ProductSearch = () => {
   const { keyword } = useParams()
   const dispatch = useDispatch()
-  const [onSearch, setOnSearch] = useState(false)
   const [products, setProducts] = useState([])
-  const [page, setPage] = useState(1)
-
-  // const search = useCallback(async () => {
-  //   setOnSearch(true)
-
-  //   const { response, err } = await productApi.search({
-  //     query,
-  //     page
-  //   })
-  //   setOnSearch(false)
-
-  //   if (err) toast.error(err.message)
-  //   if (response) {
-  //     if (page > 1) setProducts(m => [...m, ...response.results])
-  //     else setProducts([...response.results])
-  //   }
-  // }, [query, page])
+  const [payloadProducts, setPayloadProducts] = useState([])
+  const [pageLimits, setPageLimits] = useState(1)
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page')
+  const skip = 18
 
   useEffect(() => {
     const getProducts = async () => {
@@ -44,19 +29,29 @@ const ProductSearch = () => {
           setProducts([])
           setPage(1)
         } else {
-          setProducts(
-            response.filter(product =>
-              removeVietnameseDiacritics(product.name).includes(
-                removeVietnameseDiacritics(keyword)
-              )
+          const newProducts = response.filter(product =>
+            removeVietnameseDiacritics(product.name).includes(
+              removeVietnameseDiacritics(keyword)
             )
           )
+          setProducts(newProducts)
         }
       }
-      // if (response.msg) toast.error(response.msg)
     }
     getProducts()
   }, [dispatch, keyword])
+
+  useEffect(() => {
+    setPayloadProducts([...products].splice(0, skip))
+
+    // set page limits value
+    const pageLimits = Math.ceil(products.length / skip)
+    setPageLimits(pageLimits)
+  }, [products])
+
+  useEffect(() => {
+    if (page) setPayloadProducts([...products].splice((page - 1) * skip, skip))
+  }, [page])
 
   const removeVietnameseDiacritics = str => {
     return str
@@ -89,7 +84,7 @@ const ProductSearch = () => {
                   handleSortPriceUpDown={handleSortPriceUpDown}
                 />
               ) : null}
-              <ProductHintGrid products={products} />
+              <ProductGrid products={payloadProducts} />
               {!products.length && (
                 <div className="flex h-[50vh] w-full items-center justify-center ">
                   <div className="flex flex-col items-center justify-center gap-8">
@@ -108,7 +103,14 @@ const ProductSearch = () => {
               )}
             </div>
           </div>
-          {products.length ? <Pagination /> : null}
+          {pageLimits > 1 && (
+            <Pagination
+              currentPage={page}
+              pageLimits={pageLimits}
+              type="search"
+              // onPageSelect={onPageSelect}
+            />
+          )}
         </div>
       </div>
     </>

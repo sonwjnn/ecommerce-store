@@ -35,7 +35,7 @@ const UserDropdown = () => {
           </Link>
         </li>
         <li className="px-3 py-2 text-base text-black transition hover:bg-accent hover:text-primary">
-          <Link to={'/user/purchase'} className="flex items-center gap-x-2">
+          <Link to={'/user/orders'} className="flex items-center gap-x-2">
             <BiNotepad />
             <button>Đơn mua</button>
           </Link>

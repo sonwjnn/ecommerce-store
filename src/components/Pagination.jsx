@@ -6,7 +6,7 @@ import { Link, useLocation, useParams } from 'react-router-dom'
 import { Button } from './ui/button'
 
 const Pagination = props => {
-  const { pageLimits, currentPage, typeName, cateName } = props
+  const { pageLimits, currentPage, typeName, cateName, type } = props
   const { shopId } = useParams()
   const pathname = useLocation().pathname
   const [activePage, setActivePage] = useState(0)
@@ -21,16 +21,18 @@ const Pagination = props => {
   )
 
   const handleNavigate = number => {
-    if (pathname.includes('shops')) {
+    if (type === 'shop') {
       if (!typeName) {
         return `/shops/${shopId}/all?page=${number}`
       }
       return `/shops/${shopId}/${typeName}?page=${number}`
-    } else {
+    } else if (type === 'product') {
       if (!typeName) {
         return `/products/${cateName}/all?page=${number}`
       }
       return `/products/${cateName}/${typeName}?page=${number}`
+    } else {
+      return `${pathname}?page=${number}`
     }
   }
 

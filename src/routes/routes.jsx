@@ -1,3 +1,4 @@
+import OrderDetails from '@/components/OrderDetails'
 import PageWrapper from '@/components/PageWrapper'
 import PasswordUpdate from '@/components/PasswordUpdate'
 import ProtectedPage from '@/components/ProtectedPage'
@@ -127,6 +128,15 @@ const routes = [
       </PageWrapper>
     ),
     state: 'shop.detail',
+  },
+  {
+    path: '/order/:orderId',
+    element: (
+      <PageWrapper>
+        <OrderDetails />
+      </PageWrapper>
+    ),
+    state: 'order.detail',
   },
 ]
 

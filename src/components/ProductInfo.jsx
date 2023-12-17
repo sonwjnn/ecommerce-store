@@ -4,7 +4,7 @@ import { formatPriceToVND } from '@/utilities/constants'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { BsCartPlus, BsTruck } from 'react-icons/bs'
-import { LuMinus, LuPlus } from 'react-icons/lu'
+import { LuMinus, LuPlus, LuShoppingBag } from 'react-icons/lu'
 import { MdOutlineFavorite, MdOutlineFavoriteBorder } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -284,7 +284,7 @@ const ProductInfo = props => {
             size="lg"
             variant="outline"
           >
-            <BsCartPlus className="mr-2" />
+            <LuShoppingBag size={18} className="mr-2" />
             thêm vào giỏ
           </Button>
 

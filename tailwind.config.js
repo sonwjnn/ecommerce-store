@@ -82,6 +82,13 @@ module.exports = {
           '[check] 24px [first] 6fr [var1] 3fr [var2] 2fr [var3] 3fr [last] minmax(120px,1fr)',
         'cart-5':
           '[first] minmax(120px, 1fr) [second] minmax(120px, 1fr) [var1] minmax(120px, 1fr) [var2] 4fr [last] minmax(130px,1fr)',
+        'order-2-2': '[first] 120px [last] 1fr',
+        'order-4':
+          ' [first] 6fr [val1] minmax(120px,1fr)  [second] minmax(80px,1fr) [last] minmax(120px,1fr)',
+        'order-3':
+          ' [first] 6fr  [second] minmax(80px,1fr) [last] minmax(120px,1fr)',
+        'order-2': ' [first] 6fr  [last] minmax(120px,1fr)',
+        'order-1': ' [first] 6fr',
       },
       gridColumn: {
         'span-15': 'span 15 / span 15',

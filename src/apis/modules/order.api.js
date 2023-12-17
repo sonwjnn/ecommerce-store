@@ -3,6 +3,7 @@ import privateClient from '../client/private.client'
 const orderEndpoints = {
   list: 'user/orders',
   add: 'user/orders',
+  detail: ({ orderId }) => `user/order/${orderId}`,
   remove: ({ orderId }) => `user/orders/${orderId}`,
   removeOrders: `user/orders`,
   updateOrder: `user/orders`,
@@ -33,6 +34,18 @@ const orderApi = {
     try {
       const response = await privateClient.delete(
         orderEndpoints.remove({
+          orderId,
+        })
+      )
+      return { response }
+    } catch (error) {
+      return { error }
+    }
+  },
+  getDetail: async ({ orderId }) => {
+    try {
+      const response = await privateClient.get(
+        orderEndpoints.detail({
           orderId,
         })
       )

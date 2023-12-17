@@ -2,7 +2,7 @@ import cartApi from '@/apis/modules/cart.api'
 import CartItem from '@/components/CartItem'
 import { Button } from '@/components/ui/button'
 import { removeCarts } from '@/redux/features/userSlice'
-import { setOrder } from '@/redux/features/userSlice'
+import { setCheckedCarts as setCheckedCartsStore } from '@/redux/features/userSlice'
 import { formatPriceToVND } from '@/utilities/constants'
 import { useCallback, useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
@@ -99,7 +99,7 @@ const CartList = () => {
       toast.error('You must choose at least one product!')
       return
     }
-    dispatch(setOrder({ products: checkedCarts }))
+    dispatch(setCheckedCartsStore(checkedCarts))
     navigate('/checkout')
   }
 
@@ -113,7 +113,7 @@ const CartList = () => {
 
   return (
     <div className="bg-accent">
-      <header className="flex h-[85px] items-center justify-between bg-white px-16 py-6 sm:px-24">
+      <header className="flex h-[85px] max-w-[1440px] items-center justify-between  bg-white py-6">
         <div className="mx-auto flex items-center md:mx-0">
           <span className="ml-4 mt-4 h-full text-[22px] font-normal text-gray-400">
             Giỏ Hàng
@@ -126,7 +126,7 @@ const CartList = () => {
       </header>
 
       <div className="min-h-screen w-full ">
-        <div className=" mx-auto h-full max-w-[1200px] overflow-hidden ">
+        <div className=" mx-auto h-full max-w-[1440px] overflow-hidden ">
           <h1 className="mt-4 px-2 py-4 text-2xl  font-medium text-[#242424] lg:mt-12">
             Giỏ Hàng
           </h1>

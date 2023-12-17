@@ -84,7 +84,7 @@ const MainLayout = () => {
           <Outlet />
         </main>
         {/* main */}
-        <div className=" fixed bottom-0 left-0 right-0 z-50 h-[64px] lg:hidden">
+        <div className=" fixed bottom-0 left-0 right-0 z-50 h-[64px] md:hidden">
           <NavigateMobile />
         </div>
       </div>

@@ -54,7 +54,11 @@ const Categoryy = () => {
           </>
         ) : (
           <div className="flex h-[300px]  w-full items-center justify-center">
-            <NotFound className="h-fit" text={'Không có danh mục nào'} />
+            <NotFound
+              className="h-fit"
+              text={'Không có danh mục nào'}
+              size={80}
+            />
           </div>
         )}
       </div>

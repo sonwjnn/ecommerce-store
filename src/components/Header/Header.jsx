@@ -12,7 +12,7 @@ const Header = () => {
     <>
       <div
         className={cn(
-          `header w-full bg-primary 
+          `header w-full 
         `,
           !sign && !productId ? 'fixed' : '',
           productId ||
@@ -25,7 +25,7 @@ const Header = () => {
           sign ? 'hidden' : ''
         )}
       >
-        <div className="wide grid">
+        <div className="bg-white shadow-sm">
           <HeaderNav />
           <HeaderContent />
         </div>
