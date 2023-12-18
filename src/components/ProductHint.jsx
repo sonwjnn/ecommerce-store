@@ -18,9 +18,7 @@ const ProductHint = () => {
 
   useEffect(() => {
     const getProducts = async () => {
-      dispatch(setGlobalLoading(true))
       const { response, err } = await productApi.getList()
-      dispatch(setGlobalLoading(false))
 
       if (err) toast.error(err.message)
       if (response) {
@@ -41,21 +39,15 @@ const ProductHint = () => {
 
   return (
     <>
-      {filteredProducts.length ? (
-        <>
-          <ProductGrid products={filteredProducts} />
+      <ProductGrid products={filteredProducts} />
 
-          {filteredProducts.length < products.length && (
-            <div className="mt-4 flex items-center justify-center pb-8">
-              <Button variant="outline" onClick={onLoadMore}>
-                Xem thêm
-                <FiPlus size={18} className="ml-1" />
-              </Button>
-            </div>
-          )}
-        </>
-      ) : (
-        <NotFound text={'Hiện tại chưa có sản phẩm nào.'} />
+      {filteredProducts.length < products.length && (
+        <div className="mt-4 flex items-center justify-center pb-8">
+          <Button variant="outline" onClick={onLoadMore}>
+            Xem thêm
+            <FiPlus size={18} className="ml-1" />
+          </Button>
+        </div>
       )}
     </>
   )

@@ -1,7 +1,12 @@
 import ProductSidebar from '@/components/ProductSidebar'
+import { useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 
 const SubLayout = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
     <>
       <div className="app__container">

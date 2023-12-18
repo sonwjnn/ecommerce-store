@@ -6,6 +6,7 @@ import ReviewImages from '@/components/ReviewImages'
 import ReviewList from '@/components/ReviewList'
 import ShopPreview from '@/components/ShopPreview'
 import { Button } from '@/components/ui/button'
+import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
 import { setGlobalLoading } from '@/redux/features/globalLoadingSlice'
 import { addFavorite, removeFavorite } from '@/redux/features/userSlice'
@@ -32,11 +33,11 @@ const ProductDetail = () => {
 
   useEffect(() => {
     const getProduct = async () => {
-      dispatch(setGlobalLoading(true))
+      // dispatch(setGlobalLoading(true))
       const { response, err } = await productApi.getDetail({
         productId,
       })
-      dispatch(setGlobalLoading(false))
+      // dispatch(setGlobalLoading(false))
 
       if (response) {
         setProduct(response)
@@ -134,42 +135,52 @@ const ProductDetail = () => {
                 <ReviewImages images={product?.images || []} />
 
                 <div className="mt-2 hidden flex-wrap  items-center  justify-center gap-y-2 bg-white p-2 md:flex">
-                  <h3 className="text-base">Chia sẻ:</h3>
-                  <div className="border-right-ab relative ml-4 flex gap-4 text-2xl after:right-[-2rem]">
-                    {socialNetworkLinks.map(item => {
-                      const Icon = item.icon
-                      return (
-                        <a
-                          className="flex items-center justify-center gap-x-2 rounded-full text-[#605f5f] hover:brightness-110"
-                          key={item.title}
-                          href={item.link}
-                          target="_blank"
-                        >
-                          <Icon className="text-2xl " />
-                        </a>
-                      )
-                    })}
-                  </div>
+                  {product ? (
+                    <>
+                      <h3 className="text-base">Chia sẻ:</h3>
+                      <div className="border-right-ab relative ml-4 flex gap-4 text-2xl after:right-[-2rem]">
+                        {socialNetworkLinks.map(item => {
+                          const Icon = item.icon
+                          return (
+                            <a
+                              className="flex items-center justify-center gap-x-2 rounded-full text-[#605f5f] hover:brightness-110"
+                              key={item.title}
+                              href={item.link}
+                              target="_blank"
+                            >
+                              <Icon className="text-2xl " />
+                            </a>
+                          )
+                        })}
+                      </div>
 
-                  <div
-                    className="flex cursor-pointer select-none items-center capitalize"
-                    onClick={onFavoriteClick}
-                  >
-                    {!isFavorite ? (
-                      <MdOutlineFavoriteBorder
-                        className="ml-[4rem] mr-3 text-2xl text-red-600"
-                        onClick={() => setIsFavorite(!isFavorite)}
-                      />
-                    ) : (
-                      <MdOutlineFavorite
-                        className="ml-[4rem] mr-3 text-2xl text-red-600"
-                        onClick={() => setIsFavorite(!isFavorite)}
-                      />
-                    )}
-                    <span className="text-base">
-                      đã thích ({favoriteCount})
-                    </span>
-                  </div>
+                      <div
+                        className="flex cursor-pointer select-none items-center capitalize"
+                        onClick={onFavoriteClick}
+                      >
+                        <Button
+                          className="ml-[4rem] mr-3 bg-transparent text-2xl text-red-600 hover:bg-transparent hover:text-red-600"
+                          variant="ghost"
+                          size="icon"
+                        >
+                          {!isFavorite ? (
+                            <MdOutlineFavoriteBorder
+                              onClick={() => setIsFavorite(!isFavorite)}
+                            />
+                          ) : (
+                            <MdOutlineFavorite
+                              onClick={() => setIsFavorite(!isFavorite)}
+                            />
+                          )}
+                        </Button>
+                        <span className="text-base">
+                          đã thích ({favoriteCount})
+                        </span>
+                      </div>
+                    </>
+                  ) : (
+                    <Skeleton className="h-[20px] w-full" />
+                  )}
                 </div>
               </div>
               <ShopPreview product={product} />
@@ -198,36 +209,40 @@ const ProductDetail = () => {
               starCount={starCount}
             />
           </div>
-          <div className=" hidden h-full  flex-[20%] rounded-md bg-white px-6 py-8 md:block">
-            <span className="w-[120px] text-sm text-gray-500 ">
-              Mã giảm giá của shop
-            </span>
+          {product ? (
+            <div className=" hidden h-full  flex-[20%] rounded-md bg-white px-6 py-8 md:block">
+              <span className="w-[120px] text-sm text-gray-500 ">
+                Mã giảm giá của shop
+              </span>
 
-            {Array(3)
-              .fill(0)
-              .map((_, index) => (
-                <div key={index} className="px-2 py-4">
-                  <span className="flex flex-wrap items-center justify-center gap-4 rounded-sm bg-[#fafafa] px-2 py-4">
-                    <div>
-                      <div className="mb-4 font-medium capitalize text-primary">
-                        <div className="text-center text-sm">giảm 10%</div>
-                        <div className="text-xs">đơn tối thiểu 69k</div>
+              {Array(3)
+                .fill(0)
+                .map((_, index) => (
+                  <div key={index} className="px-2 py-4">
+                    <span className="flex flex-wrap items-center justify-center gap-4 rounded-sm bg-[#fafafa] px-2 py-4">
+                      <div>
+                        <div className="mb-4 font-medium capitalize text-primary">
+                          <div className="text-center text-sm">giảm 10%</div>
+                          <div className="text-xs">đơn tối thiểu 69k</div>
+                        </div>
+
+                        <div className="text-sm text-gray-500">
+                          HSD 04.06.2023
+                        </div>
                       </div>
 
-                      <div className="text-sm text-gray-500">
-                        HSD 04.06.2023
+                      <div className="flex items-center">
+                        <Button className="px-6" size="sm">
+                          Lưu
+                        </Button>
                       </div>
-                    </div>
-
-                    <div className="flex items-center">
-                      <Button className="px-6" size="sm">
-                        Lưu
-                      </Button>
-                    </div>
-                  </span>
-                </div>
-              ))}
-          </div>
+                    </span>
+                  </div>
+                ))}
+            </div>
+          ) : (
+            <div className="flex-[20%]"></div>
+          )}
         </div>
       </div>
     </div>

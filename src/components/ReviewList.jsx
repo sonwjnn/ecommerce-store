@@ -11,6 +11,7 @@ import Star from './Star'
 import StarVote from './StarVote'
 import TextAvatar from './TextAvatar'
 import { Button } from './ui/button'
+import { Skeleton } from './ui/skeleton'
 
 const ReviewList = props => {
   const { reviews, setReviews, product, starCount } = props
@@ -94,75 +95,114 @@ const ReviewList = props => {
   return (
     <>
       <div className="rounded-md bg-white px-6 md:p-10">
-        <div className="w-full rounded-md bg-[#fafafa] px-6 py-5 text-xl font-medium capitalize text-[#242424]">
-          đánh giá sản phẩm
-        </div>
-        <div className="mt-8   gap-4 bg-white px-0 capitalize  md:px-6 ">
-          <div className="flex items-center gap-x-2">
-            <span className="w-[120px] py-2 text-sm font-medium text-[#242424] md:w-[120px]">
-              Tổng quan
-            </span>
-            <div className="flex items-center gap-x-2">
-              <span className="text-[28px] font-bold text-primary">
-                {product?.rating}
-              </span>
-
-              <Star
-                stars={product?.rating}
-                className="text-2xl text-yellow-500"
-              />
-            </div>
+        {product ? (
+          <div className="w-full rounded-md bg-[#fafafa] px-6 py-5 text-xl font-medium capitalize text-[#242424]">
+            đánh giá sản phẩm
           </div>
+        ) : (
+          <Skeleton className="mb-6  h-[68px] w-full" />
+        )}
+        <div className="mt-8   gap-4 bg-white px-0 capitalize  md:px-6 ">
+          {product ? (
+            <div className="flex items-center gap-x-2">
+              <span className="w-[120px] py-2 text-sm font-medium text-[#242424] md:w-[120px]">
+                Tổng quan
+              </span>
+              <div className="flex items-center gap-x-2">
+                <span className="text-[28px] font-bold text-primary">
+                  {product?.rating}
+                </span>
 
-          <div className="mt-4  hidden items-center justify-start   gap-3 border-b border-neutral-200 pb-6 pt-3 md:flex">
-            <span className=" w-[120px] py-2 text-sm font-medium text-[#242424] ">
-              Bộ lọc
-            </span>
-            <div className="flex flex-wrap items-center gap-3">
-              <Button
-                variant="outline"
-                className={cn(
-                  `border-accent capitalize text-accent-foreground`,
-                  activeReview === 0 ? 'border-primary text-primary' : ''
-                )}
-                key={0}
-                onClick={() => setActiveReview(0)}
-              >
-                tất cả
-              </Button>
-              {starCount.map((star, index) => {
-                if (index > 0) {
-                  return (
-                    <Button
-                      variant="outline"
-                      className={cn(
-                        `border-accent text-accent-foreground`,
-                        activeReview === index
-                          ? 'border-primary text-primary'
-                          : ''
-                      )}
-                      key={index}
-                      onClick={() => setActiveReview(index)}
-                    >
-                      {`${index} sao (${star})`}
-                    </Button>
-                  )
-                }
-              })}
+                <Star
+                  stars={product?.rating}
+                  className="text-2xl text-yellow-500"
+                />
+              </div>
             </div>
+          ) : (
+            <Skeleton className="h-[30px] w-full md:w-[300px]" />
+          )}
+
+          <div className="mt-4  hidden items-center justify-start   gap-3 border-b border-gray-200 pb-6 pt-3 md:flex">
+            {product ? (
+              <>
+                <span className=" w-[120px] py-2 text-sm font-medium text-[#242424] ">
+                  Bộ lọc
+                </span>
+                <div className="flex flex-wrap items-center gap-3">
+                  <Button
+                    variant="outline"
+                    className={cn(
+                      `border-accent capitalize text-accent-foreground`,
+                      activeReview === 0 ? 'border-primary text-primary' : ''
+                    )}
+                    key={0}
+                    onClick={() => setActiveReview(0)}
+                  >
+                    tất cả
+                  </Button>
+                  {starCount.map((star, index) => {
+                    if (index > 0) {
+                      return (
+                        <Button
+                          variant="outline"
+                          className={cn(
+                            `border-accent text-accent-foreground`,
+                            activeReview === index
+                              ? 'border-primary text-primary'
+                              : ''
+                          )}
+                          key={index}
+                          onClick={() => setActiveReview(index)}
+                        >
+                          {`${index} sao (${star})`}
+                        </Button>
+                      )
+                    }
+                  })}
+                </div>
+              </>
+            ) : (
+              <Skeleton className="h-[30px] w-full " />
+            )}
           </div>
           <div>
             <div className="mb-2 mt-4 gap-4">
-              {filteredReviews.map(item => (
-                <div key={item?._id || item?.id}>
-                  <ReviewItem review={item} onRemoved={onRemoved} />
+              {filteredReviews.length
+                ? filteredReviews.map(item => (
+                    <div key={item?._id || item?.id}>
+                      <ReviewItem review={item} onRemoved={onRemoved} />
+                    </div>
+                  ))
+                : null}
+              {!product ? (
+                <div className="flex flex-col gap-y-3">
+                  {Array(3)
+                    .fill(0)
+                    .map((_, index) => (
+                      <div key={index} className="flex gap-4">
+                        <div className="h-[40px] w-[40px]">
+                          <Skeleton className="aspect-square h-full w-full rounded-full" />
+                        </div>
+                        {/* avatar */}
+
+                        <div className="flex grow flex-col justify-center gap-2">
+                          <div className="flex flex-col gap-1">
+                            <Skeleton className="h-[20px] w-[200px]" />
+                            <Skeleton className="h-[20px] w-[100px]" />
+                            <Skeleton className="h-[20px] w-[100px]" />
+                          </div>
+                          <Skeleton className="h-[80px] w-full" />
+                        </div>
+                      </div>
+                    ))}
                 </div>
-              ))}
+              ) : null}
               {/* {filteredReviews.length < reviews.length && (
                 <button onClick={onLoadMore}>load more</button>
               )} */}
             </div>
-            {user && (
+            {product && user && (
               <>
                 <div className="mt-4 flex flex-row gap-2">
                   <div className="h-[40px] w-[40px]">

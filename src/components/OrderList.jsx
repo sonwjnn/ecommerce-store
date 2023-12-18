@@ -1,9 +1,10 @@
 import orderApi from '@/apis/modules/order.api'
+import { setListOrders } from '@/redux/features/userSlice'
 import { formatPriceToVND } from '@/utilities/constants'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { LuTrash } from 'react-icons/lu'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import NotFound from './NotFound'
@@ -76,43 +77,30 @@ const OrderItem = ({ order, onRemoved }) => {
 }
 
 const OrderList = () => {
-  const [orders, setOrders] = useState([])
   const [formatedOrders, setFormatedOrders] = useState([])
-  const dispatch = useDispatch()
   const [onLoading, setLoading] = useState(false)
+  const { listOrders: orders } = useSelector(state => state.user)
 
   useEffect(() => {
-    const getOrders = async () => {
-      setLoading(true)
-      const { response, err } = await orderApi.getList()
-      setLoading(false)
-
-      if (err) toast.error(err.message)
-      if (response) {
-        setOrders(response)
-      }
+    if (orders.length) {
+      const formattedOrders = orders.map(item => ({
+        id: item.id,
+        user: item.user,
+        phone: item.phone,
+        address: item.address,
+        total: item.total,
+        thumbnail: item.thumbnail,
+        isPaid: item.isPaid,
+        createdAt: item.createdAt,
+      }))
+      setFormatedOrders(formattedOrders)
     }
-    getOrders()
-  }, [dispatch])
-
-  useEffect(() => {
-    const formattedOrders = orders.map(item => ({
-      id: item.id,
-      user: item.user,
-      phone: item.phone,
-      address: item.address,
-      total: item.total,
-      thumbnail: item.thumbnail,
-      isPaid: item.isPaid,
-      createdAt: item.createdAt,
-    }))
-    setFormatedOrders(formattedOrders)
   }, [orders])
 
   const onRemoved = ({ id }) => {
     if (id) {
       const newOrders = [...orders].filter(e => e._id !== id)
-      setOrders(newOrders)
+      setListOrders(newOrders)
     }
   }
 

@@ -4,7 +4,7 @@ const OrderItems = ({ order }) => {
   const [onRequest, setOnRequest] = useState(false)
   return (
     <>
-      <div className="sm:grid-cols-order-3 md:grid-cols-order-4 hidden min-h-[40px]   w-full   grid-cols-order-2  rounded-md bg-white px-2 py-4 text-center text-sm font-medium text-gray-500 sm:grid md:px-6">
+      <div className="hidden min-h-[40px] w-full grid-cols-order-2   rounded-md   bg-white  px-2 py-4 text-center text-sm font-medium text-gray-500 sm:grid sm:grid-cols-order-3 md:grid-cols-order-4 md:px-6">
         <div className="hidden text-left sm:block">Tên đơn hàng</div>
         <div className="hidden md:block ">Trạng thái</div>
         <div className="hidden sm:block ">Số lượng</div>
@@ -15,8 +15,8 @@ const OrderItems = ({ order }) => {
           key={item.id}
           className=" w-full  cursor-pointer rounded-md px-2 py-2 transition hover:bg-accent md:px-6"
         >
-          <div className="sm:grid-cols-order-3 md:grid-cols-order-4 grid-cols-order-1 grid min-h-[56px]  items-center   ">
-            <div className="group flex w-full  min-w-0 items-center gap-x-2">
+          <div className="grid min-h-[56px] grid-cols-order-1 items-center sm:grid-cols-order-3  md:grid-cols-order-4   ">
+            <div className="group flex w-full  min-w-0 items-center gap-x-2 ">
               <div
                 className="aspect-square h-[56px] min-w-[56px] bg-cover bg-center bg-no-repeat "
                 style={{

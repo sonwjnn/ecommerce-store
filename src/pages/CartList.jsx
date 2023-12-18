@@ -115,7 +115,7 @@ const CartList = () => {
     <div className="bg-accent">
       <header className="flex h-[85px] max-w-[1440px] items-center justify-between  bg-white py-6">
         <div className="mx-auto flex items-center md:mx-0">
-          <span className="ml-4 mt-4 h-full text-[22px] font-normal text-gray-400">
+          <span className="ml-4 mt-4 h-full text-xl font-normal text-gray-400">
             Giỏ Hàng
           </span>
         </div>

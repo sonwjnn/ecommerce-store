@@ -33,7 +33,7 @@ const HeaderInput = () => {
           <form onSubmit={handleSubmitSearch} className="relative h-full">
             <Input
               type="text"
-              className="h-full rounded-l-md  border-none bg-accent px-4 focus-visible:ring-0"
+              className="h-full rounded-l-md   bg-accent px-4 "
               placeholder="Nhập sản phẩm để tìm kiếm"
               value={keyword}
               ref={searchInput}

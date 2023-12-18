@@ -43,7 +43,7 @@ const HeaderCart = () => {
               Bạn chưa có sản phẩm nào.
             </div>
             <div className="header__cart-list--have-items-header select-none py-4 ">
-              <h3 className="header__cart-list--have-items-title text-base">
+              <h3 className="header__cart-list--have-items-title text-base font-medium text-[#242424]">
                 Sản phẩm mới thêm
               </h3>
             </div>

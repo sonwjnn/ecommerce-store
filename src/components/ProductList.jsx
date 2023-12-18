@@ -26,9 +26,7 @@ const ProductList = ({ type = 'product' }) => {
 
   useEffect(() => {
     const getProducts = async () => {
-      dispatch(setGlobalLoading(true))
       const { response, err } = await productApi.getProductsOfCate({ cateName })
-      dispatch(setGlobalLoading(false))
 
       if (err) toast.error(err.message)
       if (response) {
@@ -37,9 +35,7 @@ const ProductList = ({ type = 'product' }) => {
     }
 
     const getProductsByShopId = async () => {
-      dispatch(setGlobalLoading(true))
       const { response, err } = await productApi.getProductsByShopId({ shopId })
-      dispatch(setGlobalLoading(false))
 
       if (err) toast.error(err.message)
       if (response) {
@@ -103,22 +99,20 @@ const ProductList = ({ type = 'product' }) => {
 
   return (
     <>
-      {payloadProducts.length ? (
-        <>
-          <BoardBar handleSelectPriceOption={handleSelectPriceOption} />
-          <ProductGrid products={payloadProducts} />
-          {pageLimits > 1 && (
-            <Pagination
-              currentPage={page}
-              pageLimits={pageLimits}
-              // onPageSelect={onPageSelect}
-              type={type}
-            />
-          )}
-        </>
+      <BoardBar handleSelectPriceOption={handleSelectPriceOption} />
+      <ProductGrid products={payloadProducts} />
+      {pageLimits > 1 && (
+        <Pagination
+          currentPage={page}
+          pageLimits={pageLimits}
+          // onPageSelect={onPageSelect}
+          type={type}
+        />
+      )}
+      {/* </>
       ) : (
         <NotFound text={'Danh mục hiện tại chưa có sản phẩm nào.'} />
-      )}
+      )} */}
     </>
   )
 }

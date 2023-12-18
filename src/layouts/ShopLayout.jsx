@@ -12,6 +12,10 @@ const ShopLayout = () => {
   const [shop, setShop] = useState(null)
 
   useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
+  useEffect(() => {
     const getShop = async () => {
       const { response, error } = await shopApi.getDetail({ shopId })
       if (response) {

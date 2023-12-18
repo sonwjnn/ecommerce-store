@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 import TextAvatar from './TextAvatar'
 import { Button } from './ui/button'
+import { Skeleton } from './ui/skeleton'
 
 const ShopPreview = ({ product }) => {
   const navigate = useNavigate()
@@ -12,40 +13,59 @@ const ShopPreview = ({ product }) => {
   }
   return (
     <div className="flex min-h-[130px] w-full items-center rounded-md bg-white px-6 py-4">
-      <div className="flex flex-row items-center gap-4">
-        {/* avatar */}
+      <div className="flex w-full flex-row items-center gap-4">
         <div className="aspect-square h-[80px] w-[80px]">
-          <TextAvatar text={product?.shopId?.title} />
+          {product ? (
+            <TextAvatar text={product?.shopId?.title} />
+          ) : (
+            <Skeleton className="h-full w-full rounded-full" />
+          )}
         </div>
-        {/* avatar */}
 
-        <div className="flex flex-col  justify-center gap-2">
+        <div className="flex  w-full flex-col justify-center gap-2">
           <h6 className="truncate text-base font-medium text-[#242424]">
-            {product?.shopId?.title}
+            {product ? (
+              product?.shopId?.title
+            ) : (
+              <Skeleton className="h-[28px] w-[200px]" />
+            )}
           </h6>
           <div className="flex flex-col gap-3 lg:flex-row">
-            <Button
-              onClick={onClick}
-              variant="outline"
-              className="min-w-[130px] border-primary px-3 text-primary"
-            >
-              <LuStore className="mr-2" />
-              Xem Shop
-            </Button>
+            {product ? (
+              <Button
+                onClick={onClick}
+                variant="outline"
+                className="min-w-[130px] border-primary px-3 text-primary"
+              >
+                <LuStore className="mr-2" />
+                Xem Shop
+              </Button>
+            ) : (
+              <Skeleton className="h-[40px] w-full md:w-[130px]" />
+            )}
             <div className="flex flex-wrap  gap-x-4">
-              <p className="text-sm  text-[#242424]">
-                <span className="font-medium">Sản phẩm: </span>{' '}
-                {product?.shopId?.productCount}
-              </p>
+              {product ? (
+                <>
+                  <p className="text-sm  text-[#242424]">
+                    <span className="font-medium">Sản phẩm: </span>{' '}
+                    {product?.shopId?.productCount}
+                  </p>
 
-              <p className="text-sm  text-[#242424]">
-                <span className="font-medium">Đánh giá: </span>
-                {product?.shopId?.reviewCount}
-              </p>
-              <p className="text-sm  text-[#242424]">
-                <span className="font-medium">Ngày tạo: </span>
-                {dayjs(product?.shopId?.createdAt).format('DD-MM-YYYY')}
-              </p>
+                  <p className="text-sm  text-[#242424]">
+                    <span className="font-medium">Đánh giá: </span>
+                    {product?.shopId?.reviewCount}
+                  </p>
+                  <p className="text-sm  text-[#242424]">
+                    <span className="font-medium">Ngày tạo: </span>
+                    {dayjs(product?.shopId?.createdAt).format('DD-MM-YYYY')}
+                  </p>
+                </>
+              ) : (
+                <div className="flex w-full flex-col gap-y-1">
+                  <Skeleton className="h-[20px] w-full md:w-[200px]" />
+                  <Skeleton className="h-[18px] w-full md:w-[100px]" />
+                </div>
+              )}
             </div>
           </div>
         </div>

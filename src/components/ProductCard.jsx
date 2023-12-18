@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { twMerge } from 'tailwind-merge'
 
 import Star from './Star'
+import { Skeleton } from './ui/skeleton'
 
 const ProductCard = ({ product, className }) => {
   const { listFavorites } = useSelector(state => state.user)
@@ -84,10 +85,9 @@ const ProductCard = ({ product, className }) => {
       )}
       {product?.discount !== 0 && (
         <div className="home-product-item__sale-off-percent">
-          <span className="home-product-item__percent text-xs">
-            {product?.discount}%
+          <span className="home-product-item__percent text-xs font-medium text-[#242424]">
+            -{product?.discount}%
           </span>
-          <span className="home-product-item__up text-xs">GIẢM</span>
         </div>
       )}
     </div>

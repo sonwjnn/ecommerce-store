@@ -1443,8 +1443,8 @@ i.home-product-item__icon-heart-fill {
 .home-product-item__sale-off-percent {
   position: absolute;
   background-color: rgba(255, 216, 57, 0.94);
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 32px;
   right: 0;
   top: 0;
   display: flex;
@@ -1454,16 +1454,16 @@ i.home-product-item__icon-heart-fill {
   border-top-right-radius: 2px;
 }
 
-.home-product-item__sale-off-percent::after {
+/* .home-product-item__sale-off-percent::after {
   content: '';
   position: absolute;
   bottom: -4px;
-  right: 0;
-  border-width: 0 18px 4px 19px;
+  right: 0px;
+  border-width: 0 19px 4px 19px;
   border-style: solid;
   border-color: transparent rgba(255, 216, 57, 0.94) transparent
     rgba(255, 216, 57, 0.94);
-}
+} */
 
 .home-product-item__percent {
   font-size: 1.2rem;
