@@ -8,8 +8,8 @@ const ProductSidebar = () => {
   const [rating, setRating] = useState(3)
 
   return (
-    <>
-      <nav className="category   w-[200px]">
+    <div className="category   w-[200px]">
+      <div className="rounded-md bg-white">
         <header className="category__heading pointer-events-none flex select-none items-center text-base font-medium ">
           <BiCategory className="mr-2 text-lg" />
           Lọc sản phẩm
@@ -59,8 +59,8 @@ const ProductSidebar = () => {
             Lọc
           </Button>
         </div>
-      </nav>
-    </>
+      </div>
+    </div>
   )
 }
 

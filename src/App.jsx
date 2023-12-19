@@ -18,85 +18,64 @@ import ShopLayout from './layouts/ShopLayout'
 import SubLayout from './layouts/SubLayout'
 import routes from './routes/routes'
 
-const App = () => {
-  return (
-    <>
-      {/* config toastify */}
-      <Toaster
-        toastOptions={{
-          style: {
-            background: '#fff',
-            color: '#333',
-            fontSize: '16px',
-          },
-          position: 'bottom-center',
-        }}
-      />
+const toastOptions = {
+  style: {
+    background: '#fff',
+    color: '#333',
+    fontSize: '16px',
+  },
+  position: 'bottom-center',
+}
 
-      {/* app routes */}
-      <Router>
-        <Routes>
-          <Route path="/" element={<MainLayout />}>
-            {routes.map((route, index) =>
-              route.index ? (
-                <React.Fragment key={`main_${index}`}>
-                  <Route
-                    index
-                    element={
-                      route.state ? (
-                        <PageWrapper state={route.state}>
-                          {route.element}
-                        </PageWrapper>
-                      ) : (
-                        route.element
-                      )
-                    }
-                  />
-                  <Route key="sublayout" path="/" element={<SubLayout />}>
-                    <Route
-                      key={`products_${route.cateName}_${route.typeName}`}
-                      path={`/products/:cateName/:typeName`}
-                      element={<ProductList type="product" />}
-                    />
-                  </Route>
+const renderRoute = (route, index) => {
+  const element = route.state ? (
+    <PageWrapper state={route.state}>{route.element}</PageWrapper>
+  ) : (
+    route.element
+  )
 
-                  <Route key="shop-layout" path="/" element={<ShopLayout />}>
-                    <Route
-                      key={`/shops/:shopId`}
-                      path={`/shops/:shopId`}
-                      element={<ProductList type="shop" />}
-                    />
-                    <Route
-                      key={`/shops/:shopId/:shopCollection`}
-                      path={`/shops/:shopId/:shopCollection`}
-                      element={<ProductList type="shop" />}
-                    />
-                  </Route>
-                </React.Fragment>
-              ) : (
-                <Route
-                  path={route.path}
-                  key={`route_${index}`}
-                  element={
-                    route.state ? (
-                      <PageWrapper state={route.state}>
-                        {route.element}
-                      </PageWrapper>
-                    ) : (
-                      route.element
-                    )
-                  }
-                />
-              )
-            )}
-            <Route path="*" element={<PageNotFound />} />
-          </Route>
-        </Routes>
-      </Router>
+  return route.index ? (
+    <React.Fragment key={`main_${index}`}>
+      <Route index element={element} />
+      <Route key="sublayout" path="/" element={<SubLayout />}>
+        <Route
+          key={`products_/products/:cateSlug/:typeSlug`}
+          path={`/products/:cateSlug/:typeSlug`}
+          element={<ProductList type="product" />}
+        />
+      </Route>
 
-      {/* app routes */}
-    </>
+      <Route key="shop-layout" path="/" element={<ShopLayout />}>
+        <Route
+          key={`/shops/:shopId`}
+          path={`/shops/:shopId`}
+          element={<ProductList type="shop" />}
+        />
+        <Route
+          key={`/shops/:shopId/:typeSlug`}
+          path={`/shops/:shopId/:typeSlug`}
+          element={<ProductList type="shop" />}
+        />
+      </Route>
+    </React.Fragment>
+  ) : (
+    <Route path={route.path} key={`route_${index}`} element={element} />
   )
 }
+
+const App = () => (
+  <>
+    <Toaster toastOptions={toastOptions} />
+
+    <Router>
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          {routes.map(renderRoute)}
+          <Route path="*" element={<PageNotFound />} />
+        </Route>
+      </Routes>
+    </Router>
+  </>
+)
 
 export default App

@@ -5,7 +5,7 @@ const productEndpoints = {
   detail: ({ productId }) => `products/detail/${productId}`,
   search: ({ productType, query, page }) =>
     `${productType}/search?query=${query}&page=${page}}`,
-  productsOfCate: ({ cateName }) => `products/list/${cateName}`,
+  productsOfCateBySlug: ({ cateSlug }) => `products/list/slug/${cateSlug}`,
   getImage: ({ imageName }) => `products/image/${imageName}`,
   productsByShopId: ({ shopId }) => `products/list/shop/${shopId}`,
 }
@@ -42,10 +42,10 @@ const productApi = {
       return { error }
     }
   },
-  getProductsOfCate: async ({ cateName }) => {
+  getProductsOfCateBySlug: async ({ cateSlug }) => {
     try {
       const response = await privateClient.get(
-        productEndpoints.productsOfCate({ cateName })
+        productEndpoints.productsOfCateBySlug({ cateSlug })
       )
       return { response }
     } catch (error) {

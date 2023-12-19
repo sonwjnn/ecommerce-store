@@ -36,11 +36,7 @@ export const productType = [
 const routes = [
   {
     index: true,
-    element: (
-      <PageWrapper>
-        <HomePage />
-      </PageWrapper>
-    ),
+    element: <HomePage />,
     state: 'home',
   },
 
@@ -65,11 +61,7 @@ const routes = [
 
   {
     path: '/products/detail/:productId',
-    element: (
-      <PageWrapper>
-        <ProductDetail />
-      </PageWrapper>
-    ),
+    element: <ProductDetail />,
     state: 'product.detail',
   },
 
@@ -122,20 +114,12 @@ const routes = [
   },
   {
     path: '/shops/:shopId',
-    element: (
-      <PageWrapper>
-        <ShopPage />
-      </PageWrapper>
-    ),
+    element: <ShopPage />,
     state: 'shop.detail',
   },
   {
     path: '/order/:orderId',
-    element: (
-      <PageWrapper>
-        <OrderDetails />
-      </PageWrapper>
-    ),
+    element: <OrderDetails />,
     state: 'order.detail',
   },
 ]

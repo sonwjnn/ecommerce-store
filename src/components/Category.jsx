@@ -40,7 +40,7 @@ const Categoryy = () => {
         {categories.length ? (
           <>
             {categories.map((item, index) => (
-              <CategoryItem key={index} index={index} cateName={item.name} />
+              <CategoryItem key={index} index={index} cate={item} />
             ))}
           </>
         ) : (

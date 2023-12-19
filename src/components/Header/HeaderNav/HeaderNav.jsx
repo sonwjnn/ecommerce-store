@@ -18,7 +18,7 @@ const HeaderNav = () => {
     navigate(`/auth/signin`)
   }
   return (
-    <nav className="header__nav  hidden  bg-primary md:flex">
+    <nav className="header__nav  hidden  md:flex">
       <div className="mx-auto flex w-full max-w-[1440px] justify-between px-6">
         <ul className="nav-list  text-sm">
           <a

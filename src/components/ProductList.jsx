@@ -8,13 +8,12 @@ import { useDispatch } from 'react-redux'
 import { useParams, useSearchParams } from 'react-router-dom'
 
 import BoardBar from './BoardBar'
-import NotFound from './NotFound'
 import Pagination from './Pagination'
 import ProductGrid from './ProductGrid'
 
 const ProductList = ({ type = 'product' }) => {
   const dispatch = useDispatch()
-  const { cateName, shopId, shopCollection } = useParams()
+  const { cateSlug, shopId, typeSlug } = useParams()
   const [products, setProducts] = useState([])
   const [filteredProducts, setFilteredProducts] = useState([])
   const [payloadProducts, setPayloadProducts] = useState([])
@@ -26,7 +25,9 @@ const ProductList = ({ type = 'product' }) => {
 
   useEffect(() => {
     const getProducts = async () => {
-      const { response, err } = await productApi.getProductsOfCate({ cateName })
+      const { response, err } = await productApi.getProductsOfCateBySlug({
+        cateSlug,
+      })
 
       if (err) toast.error(err.message)
       if (response) {
@@ -50,17 +51,13 @@ const ProductList = ({ type = 'product' }) => {
   }, [dispatch])
 
   useEffect(() => {
-    if (!shopCollection) {
+    if (!typeSlug) {
       setFilteredProducts(products)
     } else {
-      const newFilteredProducts = filterTypeOrder(
-        products,
-        shopCollection,
-        'typeId'
-      )
+      const newFilteredProducts = filterTypeOrder(products, typeSlug, 'typeId')
       setFilteredProducts(newFilteredProducts)
     }
-  }, [shopCollection, products])
+  }, [typeSlug, products])
 
   useEffect(() => {
     if (priceOption === 'Thấp đến cao') {

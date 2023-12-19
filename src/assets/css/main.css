@@ -10,6 +10,7 @@
 }
 
 .header__nav {
+  background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(253,193,104,1) 0%, rgba(251,128,128,1) 90% );
   display: flex;
   height: var(--nav-height);
   justify-content: space-between;
@@ -990,7 +991,6 @@
 }
 
 .category {
-  background-color: var(--white-color);
   border-radius: 2px;
   border: 1px solid rgba(0, 0, 0, 0.05);
 }
