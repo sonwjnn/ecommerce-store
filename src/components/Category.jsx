@@ -50,7 +50,9 @@ const Categoryy = () => {
               .map((_, index) => (
                 <div
                   key={index}
-                  onClick={() => navigate(`/products/undefined/undefined`)}
+                  onClick={() =>
+                    navigate(`/products/${undefined}/${undefined}`)
+                  }
                   className="w-full cursor-pointer"
                 >
                   <Skeleton className="h-[50px] w-full" />

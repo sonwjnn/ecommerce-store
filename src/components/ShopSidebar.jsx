@@ -47,14 +47,15 @@ const ShopSidebar = () => {
           <BiCategory className="mr-2 text-lg" />
           Loại sản phẩm
         </header>
-        <ul className="category-list relative">
+        <ul className="category-list relative p-2">
           {productTypes.length && (
             <li className="category-item select-none">
               <Link
                 to={`/shops/${shopId}/all`}
                 className={cn(
-                  `category-item__link  text-sm`,
-                  (activeLink === 0 || shopCollection === 'all') && 'active'
+                  `category-item__link rounded-md text-sm transition  hover:bg-gray-100 active:bg-gray-200`,
+                  (activeLink === 0 || shopCollection === 'all') &&
+                    'bg-gray-100/75'
                 )}
                 onClick={() => setActiveLink(0)}
               >
@@ -66,12 +67,12 @@ const ShopSidebar = () => {
             productTypes.map((type, index) => (
               <li className="category-item select-none" key={type._id}>
                 <Link
-                  to={`/shops/${shopId}/${type.name}`}
+                  to={`/shops/${shopId}/${type.slug}`}
                   className={cn(
-                    `category-item__link  text-sm`,
+                    `category-item__link rounded-md text-sm transition hover:bg-gray-100 active:bg-gray-200`,
                     (activeLink === index + 1 ||
-                      shopCollection === type.name) &&
-                      'active'
+                      shopCollection === type.slug) &&
+                      'bg-gray-100/75'
                   )}
                   onClick={() => setActiveLink(index + 1)}
                 >
@@ -86,7 +87,7 @@ const ShopSidebar = () => {
                 .map((_, index) => (
                   <div
                     key={index}
-                    onClick={() => navigate(`/shops/${undefined}/{undefined}`)}
+                    onClick={() => navigate(`/shops/${undefined}/${undefined}`)}
                     className="w-full cursor-pointer"
                   >
                     <Skeleton className="h-[32px] w-full" />

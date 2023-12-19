@@ -127,7 +127,7 @@ const ProductDetail = () => {
 
   return (
     <div className="bg-bg_page  h-full space-y-6 px-0 py-0 sm:py-[56px]   xl:px-[136px]">
-      <div className="mx-auto h-full max-w-[1440px] space-y-6 bg-accent">
+      <div className="mx-auto h-full max-w-[1200px] space-y-6 bg-accent">
         <div className="h-full w-full  rounded-md bg-white">
           <div className="flex flex-col gap-x-6  bg-accent md:flex-row">
             <div className=" flex flex-[20%] flex-col gap-y-6 bg-accent lg:flex-[33%]">

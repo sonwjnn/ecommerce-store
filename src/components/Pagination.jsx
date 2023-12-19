@@ -12,6 +12,10 @@ const Pagination = props => {
   const [activePage, setActivePage] = useState(0)
 
   useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [currentPage])
+
+  useEffect(() => {
     if (currentPage) setActivePage(currentPage - 1)
   }, [currentPage])
 

@@ -5,7 +5,7 @@ const CategoryItem = ({ index, cateName, disable }) => {
     <Link
       className={`cursor-pointer ${
         disable && 'cate-disable pointer-events-none select-none'
-      } relative flex  h-[50%] items-center gap-x-2  rounded-md px-4  py-2 transition hover:bg-accent`}
+      } relative flex  h-[50%] items-center gap-x-2  rounded-md px-4  py-2 transition hover:bg-gray-100 active:bg-gray-200`}
       to={`/products/${cateName}/Tất cả sản phẩm`}
     >
       <div

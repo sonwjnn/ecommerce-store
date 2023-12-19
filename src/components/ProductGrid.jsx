@@ -18,7 +18,7 @@ const ProductGrid = ({ products }) => {
           .fill(0)
           .map((_, index) => (
             <div
-              onClick={() => navigate(`/products/detail/undefinded`)}
+              onClick={() => navigate(`/products/detail/${undefined}`)}
               key={index}
               className={
                 'flex cursor-pointer flex-col gap-y-2 rounded-md border bg-white p-2 hover:shadow-md'

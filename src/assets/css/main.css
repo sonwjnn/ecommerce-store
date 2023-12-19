@@ -1024,25 +1024,15 @@
   display: none;
 }
 
-.category-item--active .category-item__link {
-  color: var(--primary-color);
-}
-
 .category-item__link {
-  position: relative;
   text-decoration: none;
   color: var(--text-color);
   display: block;
   font-size: 1.4rem;
   padding: 12px 16px;
   right: 0;
-  transition: right linear 0.1s;
 }
 
-.category-item__link:hover {
-  right: -4px;
-  color: var(--primary-color);
-}
 
 .category-item__link.active {
   right: -4px;
