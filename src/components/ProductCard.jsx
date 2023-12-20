@@ -46,50 +46,44 @@ const ProductCard = ({ product, className }) => {
           }}
         ></div>
       </div>
-      <div className="home-product-item__title line-clamp-2 min-h-[32px]  pb-0 text-xs font-medium text-[#242424]">
-        {product?.name}
-      </div>
+      <div className="flex flex-col gap-y-2 px-1 pb-1">
+        <div className="line-clamp-2  min-h-[32px]   text-sm font-medium text-[#242424]">
+          {product?.name}
+        </div>
 
-      <div className="home-product-item__price flex-nowrap">
-        {product?.discount !== 0 && (
-          <span className="home-product-item__sale-price mr-1 min-w-0 truncate text-sm text-gray-500 line-through">
-            {formatPriceToVND(product?.price)}
-          </span>
-        )}
-
-        <span className="home-product-item__sale-price text-base text-secondary">
+        <span className="text-right text-base leading-6 text-secondary">
           {formatPriceToVND(product?.discountPrice)}
         </span>
-      </div>
-      <div className="home-product-item__action items-center">
-        <span className="home-product-item__favorite home-product-item__favorite--liked">
-          {favoriteUtils.check({
-            listFavorites,
-            productId: product?.id,
-          }) && <AiFillHeart className="text-[13px] text-secondary" />}
-        </span>
-        <span className="home-product-item__rate flex items-center">
-          <Star stars={product?.rating} className="text-[11px]" />
-          <span className="home-product-item__buy-num line-clamp-1 text-xs text-[#242424]">
-            Đã bán {product?.sold}
+        <div className="flex items-center justify-between">
+          <span className="home-product-item__favorite home-product-item__favorite--liked">
+            {favoriteUtils.check({
+              listFavorites,
+              productId: product?.id,
+            }) && <AiFillHeart className="text-[13px] text-secondary" />}
           </span>
-        </span>
-      </div>
-      <div className="home-product-item__location text-xs text-[#242424]">
-        {product?.shopId?.city}
-      </div>
-      {product?.favorites > 1 && (
-        <div className="home-product-item__love bg-secondary text-sm">
-          <span>Yêu thích</span>
-        </div>
-      )}
-      {product?.discount !== 0 && (
-        <div className="home-product-item__sale-off-percent">
-          <span className="home-product-item__percent text-xs font-medium text-[#242424]">
-            -{product?.discount}%
+          <span className="flex items-center gap-x-1">
+            <Star stars={product?.rating} className="text-xs" />
+            <span className=" line-clamp-1 text-xs text-[#242424]">
+              Đã bán {product?.sold}
+            </span>
           </span>
         </div>
-      )}
+        <div className="text-right text-xs text-[#242424]">
+          {product?.shopId?.city}
+        </div>
+        {product?.favorites > 1 && (
+          <div className="home-product-item__love bg-secondary text-sm">
+            <span>Yêu thích</span>
+          </div>
+        )}
+        {product?.discount !== 0 && (
+          <div className="home-product-item__sale-off-percent">
+            <span className="home-product-item__percent text-xs font-medium text-[#242424]">
+              -{product?.discount}%
+            </span>
+          </div>
+        )}
+      </div>
     </div>
   )
 }

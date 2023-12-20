@@ -18,7 +18,7 @@ const ProductDescription = ({ product }) => {
   }
 
   return (
-    <div className="rounded-md bg-white p-10">
+    <div className="rounded-md bg-white p-4 sm:p-10">
       <div className="h-full w-full">
         {product ? (
           <div className="w-full rounded-md bg-[#fafafa]  px-6 py-5 text-xl font-medium capitalize text-[#242424]">

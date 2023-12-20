@@ -6,7 +6,7 @@ import { Skeleton } from './ui/skeleton'
 const ProductGrid = ({ products }) => {
   const navigate = useNavigate()
   return (
-    <div className="relative grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6">
+    <div className="relative grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6">
       {products.length ? (
         <>
           {products.map(product => (

@@ -94,7 +94,7 @@ const ReviewList = props => {
 
   return (
     <>
-      <div className="rounded-md bg-white px-6 md:p-10">
+      <div className="rounded-md bg-white px-4 sm:p-10">
         {product ? (
           <div className="w-full rounded-md bg-[#fafafa] px-6 py-5 text-xl font-medium capitalize text-[#242424]">
             đánh giá sản phẩm
