@@ -17,7 +17,7 @@ const Star = ({ stars, className }) => {
     )
   })
 
-  return <div className="flex gap-x-0.5">{ratingStar}</div>
+  return <div className="flex items-center gap-x-0.5">{ratingStar}</div>
 }
 
 export default Star

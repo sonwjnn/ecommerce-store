@@ -62,7 +62,7 @@ const ProductCard = ({ product, className }) => {
             }) && <AiFillHeart className="text-[13px] text-secondary" />}
           </span>
           <span className="flex items-center gap-x-1">
-            <Star stars={product?.rating} className="text-xs" />
+            <Star stars={product?.rating} className="text-sm" />
             <span className=" line-clamp-1 text-xs text-[#242424]">
               Đã bán {product?.sold}
             </span>

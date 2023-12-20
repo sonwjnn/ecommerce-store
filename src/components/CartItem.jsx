@@ -11,6 +11,7 @@ import { useDebouncedCallback } from 'use-debounce'
 
 import { Spinner } from './Spinner'
 import { Button } from './ui/button'
+import Checkbox from './ui/checkbox'
 import { Input } from './ui/input'
 
 const CartItem = props => {
@@ -18,7 +19,6 @@ const CartItem = props => {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const inputRef = useRef()
   const [isChecked, setIsChecked] = useState(false)
   const [onRequest, setOnRequest] = useState(false)
   const [cartValue, setCartValue] = useState(+cart?.quantity || 1)
@@ -104,12 +104,9 @@ const CartItem = props => {
   return (
     <div className="border-b-gray-2006 w-full border-b px-6 py-2">
       <div className=" grid min-h-[56px] grid-cols-list-3  items-center   md:grid-cols-list-6">
-        <input
-          type="checkbox"
+        <Checkbox
           checked={isChecked || isCheckedAll}
-          ref={inputRef}
-          className="h-4 w-4"
-          onChange={handleCheckCart}
+          onCheckedChange={handleCheckCart}
         />
         <div className="group flex cursor-pointer items-center gap-x-2">
           <div
@@ -124,7 +121,7 @@ const CartItem = props => {
               onClick={() =>
                 navigate(`/products/detail/${cart?.productId?._id}`)
               }
-              className="line-clamp-2 text-base text-gray-500 group-hover:underline md:text-sm"
+              className="line-clamp-2 text-base text-gray-500 transition group-hover:text-primary/75 md:text-sm"
             >
               {cart?.productId?.name}
             </div>

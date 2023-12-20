@@ -3,12 +3,12 @@ import { addCart } from '@/redux/features/userSlice'
 import { formatPriceToVND } from '@/utilities/constants'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
-import { BsCartPlus, BsTruck } from 'react-icons/bs'
+import { BsTruck } from 'react-icons/bs'
 import { LuMinus, LuPlus, LuShoppingBag } from 'react-icons/lu'
-import { MdOutlineFavorite, MdOutlineFavoriteBorder } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
+import LikeButton from './LikeButton'
 import Star from './Star'
 import { Button } from './ui/button'
 import { Input } from './ui/input'
@@ -21,7 +21,7 @@ const ProductInfo = props => {
     reviewCount,
     onFavoriteClick,
     isFavorite,
-    setIsFavorite,
+    loading,
   } = props
   const { user, listCarts } = useSelector(state => state.user)
   const [onRequest, setOnRequest] = useState(false)
@@ -135,24 +135,15 @@ const ProductInfo = props => {
               </span>
 
               <span className="4 flex items-center gap-8 sm:hidden">
-                <div
-                  className="flex cursor-pointer select-none items-center capitalize"
-                  onClick={onFavoriteClick}
-                >
-                  {!isFavorite ? (
-                    <MdOutlineFavoriteBorder
-                      size={28}
-                      className="ml-2 mr-1  text-red-600"
-                      onClick={() => setIsFavorite(!isFavorite)}
-                    />
-                  ) : (
-                    <MdOutlineFavorite
-                      size={28}
-                      className="ml-2 mr-1  text-red-600"
-                      onClick={() => setIsFavorite(!isFavorite)}
-                    />
-                  )}
-                  <span className="text-base">đã thích ({favoriteCount})</span>
+                <div className="flex items-center gap-x-2">
+                  <LikeButton
+                    isFavorite={isFavorite}
+                    onFavoriteClick={onFavoriteClick}
+                    loading={onRequest}
+                  />
+                  <span className="text-base capitalize">
+                    đã thích ({favoriteCount})
+                  </span>
                 </div>
               </span>
             </>

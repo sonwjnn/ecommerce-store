@@ -1,5 +1,6 @@
 import favoriteApi from '@/apis/modules/favorite.api'
 import productApi from '@/apis/modules/product.api'
+import LikeButton from '@/components/LikeButton'
 import ProductDescription from '@/components/ProductDescription'
 import ProductInfo from '@/components/ProductInfo'
 import ReviewImages from '@/components/ReviewImages'
@@ -7,13 +8,10 @@ import ReviewList from '@/components/ReviewList'
 import ShopPreview from '@/components/ShopPreview'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
-import { cn } from '@/lib/utils'
-import { setGlobalLoading } from '@/redux/features/globalLoadingSlice'
 import { addFavorite, removeFavorite } from '@/redux/features/userSlice'
 import { socialNetworkLinks } from '@/utilities/constants'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
-import { MdOutlineFavorite, MdOutlineFavoriteBorder } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
@@ -33,11 +31,9 @@ const ProductDetail = () => {
 
   useEffect(() => {
     const getProduct = async () => {
-      // dispatch(setGlobalLoading(true))
       const { response, err } = await productApi.getDetail({
         productId,
       })
-      // dispatch(setGlobalLoading(false))
 
       if (response) {
         setProduct(response)
@@ -136,48 +132,37 @@ const ProductDetail = () => {
 
                 <div className="mt-2 hidden flex-wrap  items-center  justify-center gap-y-2 bg-white p-2 md:flex">
                   {product ? (
-                    <>
-                      <h3 className="text-base">Chia sẻ:</h3>
-                      <div className="border-right-ab relative ml-4 flex gap-4 text-2xl after:right-[-2rem]">
-                        {socialNetworkLinks.map(item => {
-                          const Icon = item.icon
-                          return (
-                            <a
-                              className="flex items-center justify-center gap-x-2 rounded-full text-[#605f5f] hover:brightness-110"
-                              key={item.title}
-                              href={item.link}
-                              target="_blank"
-                            >
-                              <Icon className="text-2xl " />
-                            </a>
-                          )
-                        })}
+                    <div className="flex w-full justify-between">
+                      <div className="flex items-center">
+                        <h3 className="text-base">Chia sẻ:</h3>
+                        <div className=" relative ml-4 flex gap-4 text-2xl ">
+                          {socialNetworkLinks.map(item => {
+                            const Icon = item.icon
+                            return (
+                              <a
+                                className="flex items-center justify-center gap-x-2 rounded-full text-[#605f5f] hover:brightness-110"
+                                key={item.title}
+                                href={item.link}
+                                target="_blank"
+                              >
+                                <Icon className="text-2xl " />
+                              </a>
+                            )
+                          })}
+                        </div>
                       </div>
 
-                      <div
-                        className="flex cursor-pointer select-none items-center capitalize"
-                        onClick={onFavoriteClick}
-                      >
-                        <Button
-                          className="ml-[4rem] mr-3 bg-transparent text-2xl text-red-600 hover:bg-transparent hover:text-red-600"
-                          variant="ghost"
-                          size="icon"
-                        >
-                          {!isFavorite ? (
-                            <MdOutlineFavoriteBorder
-                              onClick={() => setIsFavorite(!isFavorite)}
-                            />
-                          ) : (
-                            <MdOutlineFavorite
-                              onClick={() => setIsFavorite(!isFavorite)}
-                            />
-                          )}
-                        </Button>
-                        <span className="text-base">
+                      <div className="flex items-center gap-x-2">
+                        <LikeButton
+                          isFavorite={isFavorite}
+                          onFavoriteClick={onFavoriteClick}
+                          loading={onRequest}
+                        />
+                        <span className="text-base capitalize">
                           đã thích ({favoriteCount})
                         </span>
                       </div>
-                    </>
+                    </div>
                   ) : (
                     <Skeleton className="h-[20px] w-full" />
                   )}

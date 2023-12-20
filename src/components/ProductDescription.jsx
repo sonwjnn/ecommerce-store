@@ -15,6 +15,10 @@ const ProductDescription = ({ product }) => {
 
   const toggleExpanded = () => {
     setIsExpanded(!isExpanded)
+
+    if (isExpanded) {
+      descRef.current.scrollIntoView({ behavior: 'smooth' })
+    }
   }
 
   return (
