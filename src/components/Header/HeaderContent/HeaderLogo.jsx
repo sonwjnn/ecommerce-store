@@ -1,15 +1,16 @@
+import { cn } from '@/lib/utils'
 import { Link } from 'react-router-dom'
 
-const HeaderLogo = () => {
+const HeaderLogo = ({ className }) => {
   return (
-    <div className="header__logo h-full ">
+    <div className={cn(' flex h-full w-[200px] p-2', className)}>
       <Link to="/" className="block h-full w-full">
         <div
-          className="!md:mt-0 !mt-1 h-[50px] w-[150px] bg-center bg-no-repeat"
+          className=" mx-auto h-[50px] w-[150px] bg-center bg-no-repeat"
           style={{
             backgroundImage: `url(${
               new URL(
-                `../../../assets/img/logos/logo_header_2.svg`,
+                `../../../assets/images/logos/logo_header_2.svg`,
                 import.meta.url
               ).href
             })`,

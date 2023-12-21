@@ -12,7 +12,7 @@ const Header = () => {
     <>
       <div
         className={cn(
-          `header w-full 
+          `inset-x-0 z-[51] h-[150px] w-full  md:h-[120px] 
         `,
           !sign && !productId ? 'fixed' : '',
           productId ||

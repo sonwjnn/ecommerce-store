@@ -6,7 +6,7 @@ import { Skeleton } from './ui/skeleton'
 const ProductGrid = ({ products }) => {
   const navigate = useNavigate()
   return (
-    <div className="relative grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6">
+    <div className="relative grid w-full grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 ">
       {products.length ? (
         <>
           {products.map(product => (
@@ -31,10 +31,10 @@ const ProductGrid = ({ products }) => {
                 <Skeleton className="h-[28px] w-full " />
               </div>
 
-              <div className="home-product-item__price m-0 flex-nowrap">
+              <div className=" m-0 flex-nowrap">
                 <Skeleton className="ml-auto h-[20px] w-[70%]" />
               </div>
-              <div className="home-product-item__action m-0 items-center">
+              <div className=" m-0 items-center">
                 <Skeleton className="ml-auto h-[20px] w-[50%]  " />
               </div>
               <Skeleton className="h-[20px] w-full  " />

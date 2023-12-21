@@ -50,6 +50,10 @@
   }
 }
 
+@layer base {
+  :root {
+  }
+}
 @layer components {
   .border-right-ab {
     @apply after:absolute after:bottom-0 after:right-0 after:top-0 after:w-[1px] after:bg-gray-300;

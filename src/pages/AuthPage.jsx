@@ -20,7 +20,7 @@ const AuthPage = () => {
               style={{
                 backgroundImage: `url(${
                   new URL(
-                    `@/assets/img/logos/logo_header_2.svg`,
+                    `@/assets/images/logos/logo_header_2.svg`,
                     import.meta.url
                   ).href
                 })`,
@@ -34,14 +34,15 @@ const AuthPage = () => {
         </div>
       </header>
 
-      <main className="relative h-[600px] w-full bg-primary bg-contain bg-center bg-no-repeat ">
+      <main className="relative h-[600px] w-full bg-[radial-gradient(_circle_farthest-corner_at_10%_20%,rgba(253,193,104,1)_0%,rgba(251,128,128,1)_90%_)] bg-contain bg-center bg-no-repeat ">
         <div className="flex ">
           <div className="absolute left-[10%] top-0 hidden auth:block">
             <div
               className="h-[600px] w-[600px] bg-center bg-no-repeat"
               style={{
                 backgroundImage: `url(${
-                  new URL(`../assets/img/logos/girl.svg`, import.meta.url).href
+                  new URL(`../assets/images/logos/girl.svg`, import.meta.url)
+                    .href
                 })`,
               }}
             ></div>

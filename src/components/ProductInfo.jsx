@@ -15,14 +15,7 @@ import { Input } from './ui/input'
 import { Skeleton } from './ui/skeleton'
 
 const ProductInfo = props => {
-  const {
-    product,
-    favoriteCount,
-    reviewCount,
-    onFavoriteClick,
-    isFavorite,
-    loading,
-  } = props
+  const { product, favoriteCount, reviewCount } = props
   const { user, listCarts } = useSelector(state => state.user)
   const [onRequest, setOnRequest] = useState(false)
   const [cartValue, setCartValue] = useState(1)
@@ -91,12 +84,6 @@ const ProductInfo = props => {
     <div className="rounded-md bg-white">
       <div className="flex  flex-col gap-y-3 px-4">
         <div className="flex min-h-[46px] items-center ">
-          {favoriteCount > 1 ? (
-            <span className="tag-shopee  min-w-[66px] rounded-sm  bg-secondary text-sm text-white">
-              Yêu thích
-            </span>
-          ) : null}
-
           {product ? (
             <span className="line-clamp-2 text-xl font-medium text-[#242424]">
               {product?.name}
@@ -136,11 +123,7 @@ const ProductInfo = props => {
 
               <span className="4 flex items-center gap-8 sm:hidden">
                 <div className="flex items-center gap-x-2">
-                  <LikeButton
-                    isFavorite={isFavorite}
-                    onFavoriteClick={onFavoriteClick}
-                    loading={onRequest}
-                  />
+                  <LikeButton product={product} />
                   <span className="text-base capitalize">
                     đã thích ({favoriteCount})
                   </span>
@@ -154,7 +137,7 @@ const ProductInfo = props => {
       </div>
 
       {product ? (
-        <div className="mt-5 hidden bg-[#fafafa] p-6 sm:block">
+        <div className="mt-5  bg-[#fafafa] p-6 ">
           <div className="flex flex-wrap gap-4">
             <span className="flex items-start text-base font-normal text-neutral-400 line-through">
               {formatPriceToVND(product?.price)}
@@ -177,7 +160,8 @@ const ProductInfo = props => {
               className="aspect-square h-6 w-6 bg-cover bg-no-repeat"
               style={{
                 backgroundImage: `url( ${
-                  new URL(`../assets/img/logos/sale.png`, import.meta.url).href
+                  new URL(`../assets/images/logos/sale.png`, import.meta.url)
+                    .href
                 })`,
               }}
             ></div>
@@ -225,7 +209,7 @@ const ProductInfo = props => {
                       backgroundImage: `url(
                       ${
                         new URL(
-                          `@/assets/img/logos/free-ship.png`,
+                          `@/assets/images/logos/free-ship.png`,
                           import.meta.url
                         ).href
                       }

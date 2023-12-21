@@ -1,4 +1,3 @@
-import favoriteApi from '@/apis/modules/favorite.api'
 import productApi from '@/apis/modules/product.api'
 import LikeButton from '@/components/LikeButton'
 import ProductDescription from '@/components/ProductDescription'
@@ -8,22 +7,16 @@ import ReviewList from '@/components/ReviewList'
 import ShopPreview from '@/components/ShopPreview'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
-import { addFavorite, removeFavorite } from '@/redux/features/userSlice'
 import { socialNetworkLinks } from '@/utilities/constants'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 const ProductDetail = () => {
   const dispatch = useDispatch()
-  const navigate = useNavigate()
   const { productId } = useParams()
   const [product, setProduct] = useState(null)
-  const { listFavorites, user } = useSelector(state => state.user)
-  const [isFavorite, setIsFavorite] = useState(false)
-  const [onRequest, setOnRequest] = useState(false)
 
   const [favoriteCount, setFavoriteCount] = useState(0)
   const [reviews, setReviews] = useState([])
@@ -57,64 +50,6 @@ const ProductDetail = () => {
     }
   }, [product])
 
-  const onFavoriteClick = async () => {
-    if (!user) {
-      toast.error('You must login first!', { toastId: 'warning-login' })
-      navigate('/auth/signin')
-      return
-    }
-    if (onRequest) return
-    if (isFavorite) {
-      onRemoveFavorite()
-      return
-    }
-
-    setOnRequest(true)
-
-    const body = {
-      productId: product._id,
-    }
-    const { response, err } = await favoriteApi.add(body)
-    if (err) toast.error(err.message)
-
-    setOnRequest(false)
-
-    if (response) {
-      dispatch(
-        addFavorite({
-          ...response,
-          productId: { ...product },
-        })
-      )
-      setIsFavorite(true)
-      toast.success('Add favorite success')
-      setFavoriteCount(favoriteCount + 1)
-    }
-  }
-
-  const onRemoveFavorite = async () => {
-    if (onRequest) return
-
-    setOnRequest(true)
-    const favorite = listFavorites.find(
-      item => item.productId._id === product._id
-    )
-
-    const { response, err } = await favoriteApi.remove({
-      favoriteId: favorite.id,
-    })
-
-    setOnRequest(false)
-
-    if (err) toast.error(err.message)
-
-    if (response) {
-      dispatch(removeFavorite({ favoriteId: favorite.id }))
-      setIsFavorite(false)
-      setFavoriteCount(favoriteCount - 1)
-    }
-  }
-
   useEffect(() => {
     if (product && product.favorites) {
       setFavoriteCount(product.favorites.length)
@@ -123,7 +58,7 @@ const ProductDetail = () => {
 
   return (
     <div className="bg-bg_page  h-full space-y-6 px-0 py-0 sm:py-[56px]   xl:px-[136px]">
-      <div className="mx-auto h-full max-w-[1200px] space-y-6 bg-accent">
+      <div className="mx-auto h-full max-w-[1280px] space-y-6 bg-accent">
         <div className="h-full w-full  rounded-md bg-white">
           <div className="flex flex-col gap-x-6  bg-accent md:flex-row">
             <div className=" flex flex-[20%] flex-col gap-y-6 bg-accent lg:flex-[33%]">
@@ -145,7 +80,7 @@ const ProductDetail = () => {
                                 href={item.link}
                                 target="_blank"
                               >
-                                <Icon className="text-2xl " />
+                                <Icon size={28} />
                               </a>
                             )
                           })}
@@ -153,11 +88,7 @@ const ProductDetail = () => {
                       </div>
 
                       <div className="flex items-center gap-x-2">
-                        <LikeButton
-                          isFavorite={isFavorite}
-                          onFavoriteClick={onFavoriteClick}
-                          loading={onRequest}
-                        />
+                        <LikeButton product={product} />
                         <span className="text-base capitalize">
                           đã thích ({favoriteCount})
                         </span>
@@ -174,10 +105,7 @@ const ProductDetail = () => {
               <ProductInfo
                 product={product}
                 reviewCount={reviews.length || 0}
-                onFavoriteClick={onFavoriteClick}
                 favoriteCount={favoriteCount}
-                isFavorite={isFavorite}
-                setIsFavorite={setIsFavorite}
               />
             </div>
           </div>

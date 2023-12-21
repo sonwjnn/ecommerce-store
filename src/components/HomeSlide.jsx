@@ -23,7 +23,8 @@ const HomeSlide = () => {
               )}
               style={{
                 backgroundImage: `url(${
-                  new URL(`../assets/img/banners/${link}`, import.meta.url).href
+                  new URL(`../assets/images/banners/${link}`, import.meta.url)
+                    .href
                 })`,
               }}
             ></div>

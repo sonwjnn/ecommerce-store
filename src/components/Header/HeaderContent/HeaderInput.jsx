@@ -27,30 +27,17 @@ const HeaderInput = () => {
   }
 
   return (
-    <div className="flex flex-1">
-      <div className="header__search w-full ">
-        <div className="header__search-input-wrap ">
-          <form onSubmit={handleSubmitSearch} className="relative h-full">
-            <Input
-              type="text"
-              className="h-full rounded-l-md   bg-accent px-4 "
-              placeholder="Nhập sản phẩm để tìm kiếm"
-              value={keyword}
-              ref={searchInput}
-              onChange={event => setKeyword(event.target.value)}
-            />
-          </form>
-        </div>
-        {/* <Button
-          className="h-full rounded-r-md bg-accent px-6 text-muted-foreground hover:bg-accent"
-          onClick={handleSubmitSearch}
-        >
-          <BiSearch size={18} />
-        </Button> */}
-      </div>
-      <div className="header__search-decription hide-on-mobile-tablet">
-        <ul className="header__search-decription-list pointer-events-none select-none text-sm"></ul>
-      </div>
+    <div className="flex w-full max-w-[700px]">
+      <form onSubmit={handleSubmitSearch} className="relative h-full w-full">
+        <Input
+          type="text"
+          className=" rounded-l-md   bg-accent px-4 "
+          placeholder="Nhập sản phẩm để tìm kiếm"
+          value={keyword}
+          ref={searchInput}
+          onChange={event => setKeyword(event.target.value)}
+        />
+      </form>
     </div>
   )
 }

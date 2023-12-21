@@ -1,5 +1,4 @@
 import productApi from '@/apis/modules/product.api'
-import { setGlobalLoading } from '@/redux/features/globalLoadingSlice'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { FiPlus } from 'react-icons/fi'

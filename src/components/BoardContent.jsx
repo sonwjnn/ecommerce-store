@@ -1,5 +1,4 @@
 import productApi from '@/apis/modules/product.api'
-import { setGlobalLoading } from '@/redux/features/globalLoadingSlice'
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
@@ -17,10 +16,7 @@ const BoardContent = () => {
 
   useEffect(() => {
     const getProducts = async () => {
-      dispatch(setGlobalLoading(true))
       const { response, err } = await productApi.getProductsOfCate({ cateName })
-
-      dispatch(setGlobalLoading(false))
 
       if (err) toast.error(err.message)
       if (response) {

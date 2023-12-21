@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { BiCategory } from 'react-icons/bi'
+import { LuFilter } from 'react-icons/lu'
 
 import StarVote from './StarVote'
 import { Button } from './ui/button'
@@ -8,10 +8,10 @@ const ProductSidebar = () => {
   const [rating, setRating] = useState(3)
 
   return (
-    <div className="category   w-[200px]">
+    <div className="w-[200px]">
       <div className="rounded-md bg-white">
-        <header className="category__heading pointer-events-none flex select-none items-center text-base font-medium ">
-          <BiCategory className="mr-2 text-lg" />
+        <header className="pointer-events-none flex select-none items-center p-3 text-base font-medium ">
+          <LuFilter className="mr-2 text-lg" />
           Lọc sản phẩm
         </header>
 

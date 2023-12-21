@@ -32,7 +32,7 @@ const AccountPage = () => {
 
   return (
     <div className=" min-h-[80vh] bg-accent ">
-      <div className="mx-auto mt-8 h-full max-w-[1200px] rounded-md">
+      <div className="mx-auto mt-8 h-full max-w-[1280px] rounded-md">
         <div className="flex min-h-[66vh] gap-4">
           <div
             className={`  ${

@@ -1,4 +1,3 @@
-import PageWrapper from '@/components/PageWrapper'
 import PasswordUpdate from '@/components/PasswordUpdate'
 import ProtectedPage from '@/components/ProtectedPage'
 import AccountPage from '@/pages/AccountPage'
@@ -9,7 +8,6 @@ import HomePage from '@/pages/HomePage'
 import OrderDetails from '@/pages/OrderDetails'
 import ProductDetail from '@/pages/ProductDetail'
 import ProductSearch from '@/pages/ProductSearch'
-import ShopPage from '@/pages/ShopPage'
 
 export const routesGen = {
   home: '/',
@@ -21,17 +19,6 @@ export const routesGen = {
   reviewList: '/reviews',
   passwordUpdate: '/password-update',
 }
-
-export const productType = [
-  'Tất cả sản phẩm',
-  'Chuột + Lót chuột',
-  'Màn hình',
-  'Tai nghe + Loa',
-  'Laptop',
-  'Laptop gaming',
-  'Apple',
-  'Bàn phím',
-]
 
 const routes = [
   {
@@ -112,11 +99,7 @@ const routes = [
     ),
     state: 'checkout',
   },
-  {
-    path: '/shops/:shopId',
-    element: <ShopPage />,
-    state: 'shop.detail',
-  },
+
   {
     path: '/order/:orderId',
     element: <OrderDetails />,

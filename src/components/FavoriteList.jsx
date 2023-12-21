@@ -154,17 +154,17 @@ const FavoriteList = () => {
 
   return (
     <div className="mt-4 min-h-[50vh] w-full rounded-md bg-white">
-      {favs.map((fav, index) => (
+      {favs.map(fav => (
         <FavoriteItem
-          id={fav._id}
-          key={fav._id}
-          userId={fav.user}
-          productId={fav.productId._id}
-          price={fav.productId.price}
-          title={fav.productId.name}
-          type={fav.productId.type}
-          productImage={fav.productId.images[0].url}
-          quantity={fav.quantity}
+          id={fav?.id}
+          key={fav?.id}
+          userId={fav?.user}
+          productId={fav?.productId?._id}
+          price={fav?.productId?.price}
+          title={fav?.productId?.name}
+          type={fav?.productId?.type}
+          productImage={fav?.productId?.images[0]?.url}
+          quantity={fav?.quantity}
           onRemoved={onRemoved}
           onCheckRemoved={onCheckRemoved}
           handleCheckedFav={handleCheckedFav}

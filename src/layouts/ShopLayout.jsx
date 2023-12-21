@@ -29,15 +29,15 @@ const ShopLayout = () => {
 
   return (
     <>
-      <div className="app__container bg-accent">
-        <div className="mx-auto max-w-[1440px]">
+      <div className="mt-[150px] bg-accent ">
+        <div className="mx-auto max-w-[1280px]">
           <ShopDetail shop={shop} />
-          <div className="sm-gutter app__content flex pt-0 lg:pt-[36px]">
-            <div className="col hidden md:block">
+          <div className="flex gap-4 pt-0 lg:pt-[36px]">
+            <div className="hidden md:block">
               <ShopSidebar />
             </div>
 
-            <div className="col col-span-10 grow overflow-hidden">
+            <div className="grow overflow-hidden">
               {/* <ProductList /> */}
               <Outlet />
             </div>

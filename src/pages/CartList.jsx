@@ -113,7 +113,7 @@ const CartList = () => {
 
   return (
     <div className="bg-accent">
-      <header className="flex h-[85px] max-w-[1440px] items-center justify-between  bg-white py-6">
+      <header className="flex h-[85px] max-w-[1280px] items-center justify-between  bg-white py-6">
         <div className="mx-auto flex items-center md:mx-0">
           <span className="ml-4 mt-4 h-full text-xl font-normal text-gray-400">
             Giỏ Hàng
@@ -126,7 +126,7 @@ const CartList = () => {
       </header>
 
       <div className="min-h-screen w-full ">
-        <div className=" mx-auto h-full max-w-[1440px] overflow-hidden ">
+        <div className=" mx-auto h-full max-w-[1280px] overflow-hidden ">
           <h1 className="mt-4 px-2 py-4 text-2xl  font-medium text-[#242424] lg:mt-12">
             Giỏ Hàng
           </h1>

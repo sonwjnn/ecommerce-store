@@ -1,13 +1,12 @@
 import { socialNetworkLinks } from '@/utilities/constants'
 import { LuStore } from 'react-icons/lu'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { Button } from '../../ui/button'
 import UserDropdown from './UserDropdown'
 
 const HeaderNav = () => {
-  const dispatch = useDispatch()
   const navigate = useNavigate()
   const { user } = useSelector(state => state.user)
 
@@ -18,21 +17,28 @@ const HeaderNav = () => {
     navigate(`/auth/signin`)
   }
   return (
-    <nav className="header__nav  hidden  md:flex">
-      <div className="mx-auto flex w-full max-w-[1440px] justify-between px-6">
-        <ul className="nav-list  text-sm">
-          <a
-            href="https://admin-shopee-clone.onrender.com/"
-            target="_blank"
-            className="flex items-center bg-transparent text-white no-underline hover:opacity-70"
+    <nav className="hidden h-[50px] items-center justify-between bg-[radial-gradient(_circle_farthest-corner_at_10%_20%,rgba(253,193,104,1)_0%,rgba(251,128,128,1)_90%_)] md:flex">
+      <div className="mx-auto flex w-full max-w-[1280px] justify-between px-6">
+        <div className="flex items-center gap-x-4  text-sm">
+          <Button
+            className="text-white hover:bg-transparent hover:opacity-80"
+            variant="ghost"
           >
-            <LuStore size={20} className="mr-2" color="#ffffff" />
-            Kênh người bán
-          </a>
+            <a
+              href="https://admin-shopee-clone.onrender.com/"
+              target="_blank"
+              className=" flex gap-x-1 no-underline"
+            >
+              <LuStore size={20} className="mr-2" />
+              Kênh người bán
+            </a>
+          </Button>
 
-          <li className="nav-list-item nav-list-item--separate flex gap-x-2">
-            <span className="header__nav-title--no-pointer">Kết nối</span>
-            <div className="flex gap-x-1">
+          <div className=" flex items-center gap-x-2">
+            <span className="mt-0.5 text-sm font-medium text-white">
+              Kết nối
+            </span>
+            <div className="flex  gap-x-1">
               {socialNetworkLinks.map(item => {
                 const Icon = item.icon
                 return (
@@ -42,29 +48,28 @@ const HeaderNav = () => {
                     href={item.link}
                     target="_blank"
                   >
-                    <Icon className="text-lg text-white" />
+                    <Icon size={20} className="text-lg text-white" />
                   </a>
                 )
               })}
             </div>
-          </li>
-        </ul>
+          </div>
+        </div>
         <ul className="nav-list text-sm">
-          <li className="nav-list-item nav-list-item-user">
+          <li className="">
             {user ? (
               <UserDropdown />
             ) : (
               <>
                 <Button
-                  className="hover:bg-transparent hover:text-white hover:opacity-80"
+                  className="text-white hover:bg-transparent hover:opacity-80"
                   variant="ghost"
                   onClick={onSignupClick}
                 >
                   Đăng kí
                 </Button>
                 <Button
-                  className="hover:bg-transparent hover:text-white hover:opacity-80"
-                  variant="ghost"
+                  className="rounded-full bg-white text-[#242424] hover:bg-transparent hover:bg-white  hover:opacity-80"
                   onClick={onSigninClick}
                 >
                   Đăng nhập

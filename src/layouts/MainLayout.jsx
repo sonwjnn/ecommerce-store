@@ -4,7 +4,6 @@ import orderApi from '@/apis/modules/order.api'
 import shopApi from '@/apis/modules/shop.api'
 import userApi from '@/apis/modules/user.api'
 import Footer from '@/components/Footer'
-import GlobalLoading from '@/components/GlobalLoading'
 import Header from '@/components/Header/Header'
 import NavigateMobile from '@/components/NavigateMobile'
 import {
@@ -84,10 +83,6 @@ const MainLayout = () => {
 
   return (
     <>
-      {/* global loading*/}
-      <GlobalLoading />
-      {/* global loading*/}
-
       <div className="flex flex-col font-be">
         {/* header */}
         <Header />

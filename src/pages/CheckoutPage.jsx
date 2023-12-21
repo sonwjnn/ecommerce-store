@@ -73,7 +73,7 @@ const CheckoutPage = () => {
     <div className="min-w-screen bg-accent">
       <header className="flex h-[85px] items-center justify-between bg-white px-16 py-6 sm:px-24"></header>
 
-      <div className=" mx-auto h-full max-w-[1200px] overflow-hidden">
+      <div className=" mx-auto h-full max-w-[1280px] overflow-hidden">
         <h1 className="mt-4 px-2 py-4 text-2xl  font-medium text-[#242424] lg:mt-12">
           Thanh Toán
         </h1>

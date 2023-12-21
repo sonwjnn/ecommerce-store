@@ -2,7 +2,6 @@ import productApi from '@/apis/modules/product.api'
 import BoardBar from '@/components/BoardBar'
 import Pagination from '@/components/Pagination'
 import ProductGrid from '@/components/ProductGrid'
-import { setGlobalLoading } from '@/redux/features/globalLoadingSlice'
 import { useEffect, useState } from 'react'
 import { TbFileSearch } from 'react-icons/tb'
 import { useDispatch } from 'react-redux'
@@ -16,13 +15,11 @@ const ProductSearch = () => {
   const [pageLimits, setPageLimits] = useState(1)
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page')
-  const skip = 18
+  const skip = 15
 
   useEffect(() => {
     const getProducts = async () => {
-      dispatch(setGlobalLoading(true))
       const { response, err } = await productApi.getList()
-      dispatch(setGlobalLoading(false))
 
       if (response) {
         if (keyword.trim().length === 0) {
@@ -71,49 +68,45 @@ const ProductSearch = () => {
   }
 
   return (
-    <>
-      <div className="app__container pt-0">
-        <div className="mx-auto max-w-[1200px]">
-          <div className="sm-gutter app__content flex pt-0 lg:pt-[36px]">
-            <div className="col hidden md:block"></div>
+    <div className="mx-auto min-h-screen max-w-[1280px]">
+      <div className="flex pt-0 lg:pt-[36px]">
+        <div className="col hidden md:block"></div>
 
-            <div className="col col-span-10 grow overflow-hidden">
-              {products.length ? (
-                <BoardBar
-                  handleSortPriceDownUp={handleSortPriceDownUp}
-                  handleSortPriceUpDown={handleSortPriceUpDown}
-                />
-              ) : null}
-              <ProductGrid products={payloadProducts} />
-              {!products.length && (
-                <div className="flex h-[50vh] w-full items-center justify-center ">
-                  <div className="flex flex-col items-center justify-center gap-8">
-                    <TbFileSearch className="text-[150px] text-gray-300" />
-                    <div className="gap-4 text-center text-xl">
-                      <div className="text-gray-600">
-                        Không tìm thấy kết quả nào
-                      </div>
-                      <div className="text-gray-500">
-                        {' '}
-                        Hãy thử sử dụng các từ khóa chung chung hơn
-                      </div>
-                    </div>
+        <div className="col col-span-10 grow overflow-hidden">
+          {products.length ? (
+            <BoardBar
+              handleSortPriceDownUp={handleSortPriceDownUp}
+              handleSortPriceUpDown={handleSortPriceUpDown}
+            />
+          ) : null}
+          <ProductGrid products={payloadProducts} />
+          {!products.length && (
+            <div className="flex h-[50vh] w-full items-center justify-center ">
+              <div className="flex flex-col items-center justify-center gap-8">
+                <TbFileSearch className="text-[150px] text-gray-300" />
+                <div className="gap-4 text-center text-xl">
+                  <div className="text-gray-600">
+                    Không tìm thấy kết quả nào
+                  </div>
+                  <div className="text-gray-500">
+                    {' '}
+                    Hãy thử sử dụng các từ khóa chung chung hơn
                   </div>
                 </div>
-              )}
+              </div>
             </div>
-          </div>
-          {pageLimits > 1 && (
-            <Pagination
-              currentPage={page}
-              pageLimits={pageLimits}
-              type="search"
-              // onPageSelect={onPageSelect}
-            />
           )}
         </div>
       </div>
-    </>
+      {pageLimits > 1 && (
+        <Pagination
+          currentPage={page}
+          pageLimits={pageLimits}
+          type="search"
+          // onPageSelect={onPageSelect}
+        />
+      )}
+    </div>
   )
 }
 

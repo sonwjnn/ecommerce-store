@@ -14,7 +14,6 @@ import storage from 'redux-persist/lib/storage'
 import appStateSlice from './features/appStateSlice'
 import authModalSlice from './features/authModelSlice'
 import cateSlice from './features/cateSlice'
-import globalLoadingSlice from './features/globalLoadingSlice'
 import productLoadingSlice from './features/productLoading'
 import productSlice from './features/productSlice'
 import signStateSlice from './features/signStateSlice'
@@ -30,7 +29,6 @@ const rootReducer = combineReducers({
   user: userSlice,
   authModal: authModalSlice,
   appState: appStateSlice,
-  globalLoading: globalLoadingSlice,
   signState: signStateSlice,
   products: productSlice,
   productLoading: productLoadingSlice,

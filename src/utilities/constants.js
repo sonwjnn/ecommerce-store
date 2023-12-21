@@ -1,5 +1,4 @@
-import { BsFacebook } from 'react-icons/bs'
-import { FaGithub, FaInstagram } from 'react-icons/fa'
+import { FacebookIcon, GithubIcon, InstagramIcon } from '../components/Icon'
 
 export const handleLinkImage = link => {
   return new URL(link, import.meta.url).href
@@ -34,17 +33,17 @@ export const socialNetworkLinks = [
   {
     title: 'Facebook',
     link: 'https://www.facebook.com/profile.php?id=100011436148089',
-    icon: BsFacebook,
+    icon: FacebookIcon,
   },
   {
     title: 'Instagram',
     link: 'https://www.instagram.com/sonn_wjh/',
-    icon: FaInstagram,
+    icon: InstagramIcon,
   },
   {
     title: 'Github',
     link: 'https://github.com/sonwjnn',
-    icon: FaGithub,
+    icon: GithubIcon,
   },
 ]
 

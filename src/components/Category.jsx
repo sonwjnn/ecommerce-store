@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import CategoryItem from './CategoryItem'
 import { Skeleton } from './ui/skeleton'
 
-const Categoryy = () => {
+const Category = () => {
   const [categories, setCategories] = useState([])
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -28,7 +28,7 @@ const Categoryy = () => {
   }, [categories])
 
   return (
-    <div className="relative w-[230px] p-2">
+    <div className="relative w-[230px] p-2 ">
       <div className="border-b border-b-gray-200  px-4 py-3 text-xl text-[#020817]">
         Danh mục
       </div>
@@ -65,4 +65,4 @@ const Categoryy = () => {
   )
 }
 
-export default Categoryy
+export default Category

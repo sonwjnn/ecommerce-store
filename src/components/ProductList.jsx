@@ -1,5 +1,4 @@
 import productApi from '@/apis/modules/product.api'
-import { setGlobalLoading } from '@/redux/features/globalLoadingSlice'
 import { filterTypeOrder } from '@/utilities/filters'
 import { mapOrder } from '@/utilities/sorts'
 import { useEffect, useState } from 'react'
@@ -21,7 +20,7 @@ const ProductList = ({ type = 'product' }) => {
   const [pageLimits, setPageLimits] = useState(1)
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page')
-  const skip = 18
+  const skip = 15
 
   useEffect(() => {
     const getProducts = async () => {
@@ -106,10 +105,6 @@ const ProductList = ({ type = 'product' }) => {
           type={type}
         />
       )}
-      {/* </>
-      ) : (
-        <NotFound text={'Danh mục hiện tại chưa có sản phẩm nào.'} />
-      )} */}
     </>
   )
 }

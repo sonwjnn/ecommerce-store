@@ -53,7 +53,7 @@ const OrderDetails = () => {
   }
 
   return (
-    <div className="mx-auto mt-[100px] flex min-h-screen flex-col gap-y-4 md:mt-[150px] lg:max-w-[930px] xl:max-w-[1200px]">
+    <div className="mx-auto mt-[100px] flex min-h-screen flex-col gap-y-4 md:mt-[150px] lg:max-w-[930px] xl:max-w-[1280px]">
       <span className="ml-4 mt-4 h-full text-xl font-medium capitalize text-[#242424]">
         chi tiết đơn hàng
       </span>
