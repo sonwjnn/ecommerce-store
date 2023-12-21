@@ -1,6 +1,5 @@
 import typeApi from '@/apis/modules/type.api'
 import { cn } from '@/lib/utils'
-import { setProductLoading } from '@/redux/features/productLoading'
 import { setTypes } from '@/redux/features/typeSlice'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
@@ -23,9 +22,7 @@ const ShopSidebar = () => {
 
   useEffect(() => {
     const getProductTypes = async () => {
-      dispatch(setProductLoading(true))
       const { response, err } = await typeApi.getTypesByShopId({ shopId })
-      dispatch(setProductLoading(false))
       if (err) toast.error(err.message)
       if (response) {
         setProductTypes(response)

@@ -27,7 +27,7 @@ const HeaderInput = () => {
   }
 
   return (
-    <div className="flex w-full max-w-[700px]">
+    <div className="flex w-full max-w-[800px]">
       <form onSubmit={handleSubmitSearch} className="relative h-full w-full">
         <Input
           type="text"

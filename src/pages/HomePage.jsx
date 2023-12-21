@@ -1,6 +1,6 @@
 import Category from '@/components/Category'
 import HomeSlide from '@/components/HomeSlide'
-import ProductHint from '@/components/ProductHint'
+import ProductRecommend from '@/components/ProductRecommend'
 
 const HomePage = () => {
   return (
@@ -50,7 +50,7 @@ const HomePage = () => {
           </div>
 
           <div className="mt-4 h-full max-w-[1200px] pb-[50px]">
-            <ProductHint />
+            <ProductRecommend />
           </div>
         </div>
       </div>

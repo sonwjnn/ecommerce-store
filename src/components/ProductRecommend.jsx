@@ -4,11 +4,10 @@ import { toast } from 'react-hot-toast'
 import { FiPlus } from 'react-icons/fi'
 import { useDispatch } from 'react-redux'
 
-import NotFound from './NotFound'
 import ProductGrid from './ProductGrid'
 import { Button } from './ui/button'
 
-const ProductHint = () => {
+const ProductRecommend = () => {
   const dispatch = useDispatch()
   const [products, setProducts] = useState([])
   const [filteredProducts, setFilteredProducts] = useState([])
@@ -52,4 +51,4 @@ const ProductHint = () => {
   )
 }
 
-export default ProductHint
+export default ProductRecommend

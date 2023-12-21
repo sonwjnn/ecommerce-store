@@ -14,7 +14,6 @@ import storage from 'redux-persist/lib/storage'
 import appStateSlice from './features/appStateSlice'
 import authModalSlice from './features/authModelSlice'
 import cateSlice from './features/cateSlice'
-import productLoadingSlice from './features/productLoading'
 import productSlice from './features/productSlice'
 import signStateSlice from './features/signStateSlice'
 import typeSlice from './features/typeSlice'
@@ -31,7 +30,6 @@ const rootReducer = combineReducers({
   appState: appStateSlice,
   signState: signStateSlice,
   products: productSlice,
-  productLoading: productLoadingSlice,
   cates: cateSlice,
   types: typeSlice,
 })

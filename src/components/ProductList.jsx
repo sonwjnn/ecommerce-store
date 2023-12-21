@@ -10,7 +10,7 @@ import BoardBar from './BoardBar'
 import Pagination from './Pagination'
 import ProductGrid from './ProductGrid'
 
-const ProductList = ({ type = 'product' }) => {
+const ProductList = ({ type = 'product', skip = 15 }) => {
   const dispatch = useDispatch()
   const { cateSlug, shopId, typeSlug } = useParams()
   const [products, setProducts] = useState([])
@@ -20,7 +20,6 @@ const ProductList = ({ type = 'product' }) => {
   const [pageLimits, setPageLimits] = useState(1)
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page')
-  const skip = 15
 
   useEffect(() => {
     const getProducts = async () => {

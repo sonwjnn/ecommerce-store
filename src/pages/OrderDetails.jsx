@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { BiArrowBack } from 'react-icons/bi'
 import { LuTrash } from 'react-icons/lu'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import OrderItems from '../components/OrderItems'
