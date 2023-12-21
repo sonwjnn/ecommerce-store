@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useDebouncedCallback } from 'use-debounce'
 
-import { Spinner } from './Spinner'
+import { Spinner } from './spinner'
 import { Button } from './ui/button'
 import Checkbox from './ui/checkbox'
 import { Input } from './ui/input'

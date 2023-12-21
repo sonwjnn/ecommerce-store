@@ -1,5 +1,5 @@
 import orderApi from '@/apis/modules/order.api'
-import { Spinner } from '@/components/Spinner'
+import { Spinner } from '@/components/spinner'
 import { Button } from '@/components/ui/button'
 import { clearCheckedCarts } from '@/redux/features/userSlice'
 import { formatPriceToVND } from '@/utilities/constants'

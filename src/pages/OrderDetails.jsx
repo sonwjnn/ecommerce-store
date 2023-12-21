@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import OrderItems from '../components/OrderItems'
-import { Spinner } from '../components/Spinner'
+import { Spinner } from '../components/spinner'
 import { Button } from '../components/ui/button'
 
 const OrderDetails = () => {

@@ -4,9 +4,9 @@ import { useState } from 'react'
 import { LuTrash } from 'react-icons/lu'
 import { useSelector } from 'react-redux'
 
-import { Spinner } from './Spinner'
 import Star from './Star'
 import TextAvatar from './TextAvatar'
+import { Spinner } from './spinner'
 import { Button } from './ui/button'
 
 const ReviewItem = ({ review, onRemoved }) => {

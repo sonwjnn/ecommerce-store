@@ -6,10 +6,10 @@ import { BsFillSendFill } from 'react-icons/bs'
 import { useSelector } from 'react-redux'
 
 import ReviewItem from './ReviewItem'
-import { Spinner } from './Spinner'
 import Star from './Star'
 import StarVote from './StarVote'
 import TextAvatar from './TextAvatar'
+import { Spinner } from './spinner'
 import { Button } from './ui/button'
 import { Skeleton } from './ui/skeleton'
 

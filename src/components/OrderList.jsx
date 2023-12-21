@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import NotFound from './NotFound'
-import { Spinner } from './Spinner'
+import { Spinner } from './spinner'
 import { Button } from './ui/button'
 
 const OrderItem = ({ order, onRemoved }) => {
