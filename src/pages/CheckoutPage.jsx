@@ -1,6 +1,7 @@
 import orderApi from '@/apis/modules/order.api'
 import { Spinner } from '@/components/spinner'
 import { Button } from '@/components/ui/button'
+import Container from '@/components/ui/container'
 import { clearCheckedCarts } from '@/redux/features/userSlice'
 import { formatPriceToVND } from '@/utilities/constants'
 import { useEffect, useState } from 'react'
@@ -70,128 +71,122 @@ const CheckoutPage = () => {
   }, [success, canceled])
 
   return (
-    <div className="min-w-screen bg-accent">
-      <header className="flex h-[85px] items-center justify-between bg-white px-16 py-6 sm:px-24"></header>
-
-      <div className=" mx-auto h-full max-w-[1280px] overflow-hidden">
-        <h1 className="mt-4 px-2 py-4 text-2xl  font-medium text-[#242424] lg:mt-12">
-          Thanh Toán
-        </h1>
-        {success || canceled ? (
-          <div className="mt-4 flex min-h-[40vh] flex-col items-center gap-y-3">
-            <div className="flex items-center gap-x-2">
-              <div className="text-xl">Bạn đã đặt hàng thành công</div>
-              <FaCircleCheck size={20} className="text-green-500" />
-            </div>
-            <p className="text-sm text-gray-500">
-              Order{' '}
-              <span
-                className=" cursor-pointer font-medium transition hover:text-[#242424]"
-                onClick={() => navigate(`/order/${orderId}`)}
-              >
-                #{orderId}
-              </span>{' '}
-              đã được tạo
-            </p>
-            <div className="flex gap-x-2">
-              <Link to={`/order/${orderId}`}>
-                <Button variant="outline">Quản lý đơn hàng</Button>
-              </Link>
-              <Link to={'/user/carts'}>
-                <Button variant="outline">Tiếp tục mua hàng</Button>
-              </Link>
-            </div>
+    <Container>
+      <h1 className="mt-4 px-2 py-4 text-2xl  font-medium text-[#242424] lg:mt-12">
+        Thanh Toán
+      </h1>
+      {success || canceled ? (
+        <div className="mt-4 flex min-h-[40vh] flex-col items-center gap-y-3">
+          <div className="flex items-center gap-x-2">
+            <div className="text-xl">Bạn đã đặt hàng thành công</div>
+            <FaCircleCheck size={20} className="text-green-500" />
           </div>
-        ) : (
-          <div className="flex flex-col gap-4 md:flex-row">
-            <div className="flex flex-[66%] flex-col">
-              <div className=" grid  min-h-[40px]   w-full  grid-cols-list-3  rounded-md bg-white px-2 py-4 text-base text-gray-500 md:px-6">
-                <div>Tất cả sản phẩm</div>
-                <div className="text-center">Số lượng</div>
-                <div className="text-center">Số tiền</div>
-              </div>
+          <p className="text-sm text-gray-500">
+            Order{' '}
+            <span
+              className=" cursor-pointer font-medium transition hover:text-[#242424]"
+              onClick={() => navigate(`/order/${orderId}`)}
+            >
+              #{orderId}
+            </span>{' '}
+            đã được tạo
+          </p>
+          <div className="flex gap-x-2">
+            <Link to={`/order/${orderId}`}>
+              <Button variant="outline">Quản lý đơn hàng</Button>
+            </Link>
+            <Link to={'/user/carts'}>
+              <Button variant="outline">Tiếp tục mua hàng</Button>
+            </Link>
+          </div>
+        </div>
+      ) : (
+        <div className="flex flex-col gap-4 md:flex-row">
+          <div className="flex flex-[66%] flex-col">
+            <div className=" grid  min-h-[40px]   w-full  grid-cols-list-3  rounded-md bg-white px-2 py-4 text-base text-gray-500 md:px-6">
+              <div>Tất cả sản phẩm</div>
+              <div className="text-center">Số lượng</div>
+              <div className="text-center">Số tiền</div>
+            </div>
 
-              <div className="mt-4 h-full min-h-[40vh] w-full rounded-md bg-white py-4">
-                {checkedCarts.map((product, index) => (
-                  <div
-                    key={index}
-                    className="border-b-gray-2006 w-full border-b px-2 py-2 md:px-6"
-                  >
-                    <div className=" grid min-h-[56px] grid-cols-list-3  items-center   ">
-                      <div className="group flex w-full  min-w-0 items-center gap-x-2">
-                        <div
-                          className="aspect-square h-[80px] w-[80px] bg-cover bg-center bg-no-repeat md:h-[56px] md:w-[56px] "
-                          style={{
-                            backgroundImage: `url(${product?.imageUrl})`,
-                          }}
-                        ></div>
-                        <div className="line-clamp-2 text-base text-[#242424]  md:text-sm">
-                          {product?.productId?.name}
-                        </div>
-                      </div>
-
-                      <div className="text-center text-sm text-[#242424]">
-                        {product?.quantity}
-                      </div>
-                      <div className="text-center text-sm text-[#242424]">
-                        {formatPriceToVND(product?.totalPrice)}
+            <div className="mt-4 h-full min-h-[40vh] w-full rounded-md bg-white py-4">
+              {checkedCarts.map((product, index) => (
+                <div
+                  key={index}
+                  className="border-b-gray-2006 w-full border-b px-2 py-2 md:px-6"
+                >
+                  <div className=" grid min-h-[56px] grid-cols-list-3  items-center   ">
+                    <div className="group flex w-full  min-w-0 items-center gap-x-2">
+                      <div
+                        className="aspect-square h-[80px] w-[80px] bg-cover bg-center bg-no-repeat md:h-[56px] md:w-[56px] "
+                        style={{
+                          backgroundImage: `url(${product?.imageUrl})`,
+                        }}
+                      ></div>
+                      <div className="line-clamp-2 text-base text-[#242424]  md:text-sm">
+                        {product?.productId?.name}
                       </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-            </div>
 
-            <div className=" w-full  flex-[33%] rounded-md ">
-              <div className="flex flex-col items-center gap-8  rounded-md bg-white p-4">
-                <div className="flex w-full flex-col gap-x-2 gap-y-4">
-                  <div className="flex justify-between">
-                    <h1 className="text-xl font-medium capitalize text-[#242424]">
-                      Đơn hàng
-                    </h1>
-                    <Link
-                      to="/user/carts"
-                      className="cursor-pointer text-sm text-primary hover:underline"
-                    >
-                      Thay đổi
-                    </Link>
-                  </div>
-
-                  <div className="text-base text-gray-500">
-                    {checkedCarts.length || 0} sản phẩm
-                  </div>
-
-                  <div className="flex items-center gap-x-2">
-                    <span className="text-base text-gray-500 ">
-                      Tổng tiền :
-                    </span>
-                    <span className="flex items-start text-xl font-semibold text-primary  lg:text-2xl">
-                      {formatPriceToVND(
-                        checkedCarts.reduce(
-                          (currValue, item) => item.totalPrice + currValue,
-                          0
-                        )
-                      )}
-                    </span>
+                    <div className="text-center text-sm text-[#242424]">
+                      {product?.quantity}
+                    </div>
+                    <div className="text-center text-sm text-[#242424]">
+                      {formatPriceToVND(product?.totalPrice)}
+                    </div>
                   </div>
                 </div>
-                <Button
-                  onClick={handlePayment}
-                  variant="secondary"
-                  className="w-full text-base capitalize"
-                  disabled={onRequest}
-                >
-                  <div className="mr-2">
-                    {onRequest ? <Spinner size="lg" /> : ''}
-                  </div>
-                  Đặt hàng
-                </Button>
-              </div>
+              ))}
             </div>
           </div>
-        )}
-      </div>
-    </div>
+
+          <div className=" w-full  flex-[33%] rounded-md ">
+            <div className="flex flex-col items-center gap-8  rounded-md bg-white p-4">
+              <div className="flex w-full flex-col gap-x-2 gap-y-4">
+                <div className="flex justify-between">
+                  <h1 className="text-xl font-medium capitalize text-[#242424]">
+                    Đơn hàng
+                  </h1>
+                  <Link
+                    to="/user/carts"
+                    className="cursor-pointer text-sm text-primary hover:underline"
+                  >
+                    Thay đổi
+                  </Link>
+                </div>
+
+                <div className="text-base text-gray-500">
+                  {checkedCarts.length || 0} sản phẩm
+                </div>
+
+                <div className="flex items-center gap-x-2">
+                  <span className="text-base text-gray-500 ">Tổng tiền :</span>
+                  <span className="flex items-start text-xl font-semibold text-primary  lg:text-2xl">
+                    {formatPriceToVND(
+                      checkedCarts.reduce(
+                        (currValue, item) => item.totalPrice + currValue,
+                        0
+                      )
+                    )}
+                  </span>
+                </div>
+              </div>
+              <Button
+                onClick={handlePayment}
+                variant="secondary"
+                className="w-full text-base capitalize"
+                disabled={onRequest}
+              >
+                <div className="mr-2">
+                  {onRequest ? <Spinner size="lg" /> : ''}
+                </div>
+                Đặt hàng
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+    </Container>
   )
 }
 

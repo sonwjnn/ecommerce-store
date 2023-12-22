@@ -1,6 +1,7 @@
 import cartApi from '@/apis/modules/cart.api'
 import CartItem from '@/components/CartItem'
 import { Button } from '@/components/ui/button'
+import Container from '@/components/ui/container'
 import { removeCarts } from '@/redux/features/userSlice'
 import { setCheckedCarts as setCheckedCartsStore } from '@/redux/features/userSlice'
 import { formatPriceToVND } from '@/utilities/constants'
@@ -112,103 +113,70 @@ const CartList = () => {
   }, [checkedCarts])
 
   return (
-    <div className="bg-accent">
-      <header className="flex h-[85px] max-w-[1280px] items-center justify-between  bg-white py-6">
-        <div className="mx-auto flex items-center md:mx-0">
-          <span className="ml-4 mt-4 h-full text-xl font-normal text-gray-400">
-            Giỏ Hàng
-          </span>
-        </div>
+    <Container>
+      <h1 className="mt-4 px-2 py-4 text-2xl  font-medium text-[#242424] lg:mt-12">
+        Giỏ Hàng
+      </h1>
+      <div className=" hidden min-h-[40px]  w-full   grid-cols-list-6  rounded-md  bg-white px-6 py-4 text-base text-gray-500 md:grid">
+        <div></div>
+        <div>Tất cả sản phẩm</div>
 
-        <div className="help hidden cursor-pointer text-base text-primary underline md:block">
-          Bạn cần giúp đỡ ?
-        </div>
-      </header>
+        <div className="text-center">Đơn giá</div>
+        <div className="text-center">Số lượng</div>
+        <div className="text-center">Số tiền</div>
+        <div className="text-center">Thao tác</div>
+      </div>
 
-      <div className="min-h-screen w-full ">
-        <div className=" mx-auto h-full max-w-[1280px] overflow-hidden ">
-          <h1 className="mt-4 px-2 py-4 text-2xl  font-medium text-[#242424] lg:mt-12">
-            Giỏ Hàng
-          </h1>
-          <div className=" hidden min-h-[40px]  w-full   grid-cols-list-6  rounded-md  bg-white px-6 py-4 text-base text-gray-500 md:grid">
-            <div></div>
-            <div>Tất cả sản phẩm</div>
+      <div className="mt-4 h-full min-h-[40vh] w-full rounded-md bg-white py-4">
+        {carts.map(cart => (
+          <CartItem
+            key={cart._id}
+            cart={cart}
+            onRemoved={onRemoved}
+            onCheckRemoved={onCheckRemoved}
+            handleCheckedCart={handleCheckedCart}
+            isCheckedAll={isCheckedAll}
+            checkedCarts={checkedCarts}
+          />
+        ))}
+      </div>
 
-            <div className="text-center">Đơn giá</div>
-            <div className="text-center">Số lượng</div>
-            <div className="text-center">Số tiền</div>
-            <div className="text-center">Thao tác</div>
+      <div className="sticky bottom-0 mb-20 mt-4 h-full w-full rounded-md bg-white ">
+        <div className="grid grid-cols-cart-5 items-center p-4 lg:p-8">
+          <button
+            className="btn-cart-solid pointer-events-none hidden select-none px-0 md:block"
+            onClick={onCheckedAll}
+          >
+            Chọn tất cả ({carts.length})
+          </button>
+          <button
+            className="btn-cart-solid hidden md:block"
+            onClick={handleRemoveCarts}
+          >
+            Xoá đã chọn
+          </button>
+          <button className="btn-cart-solid hidden md:block">
+            Thêm đã thích
+          </button>
+
+          <div className="mr-4 flex items-center justify-end gap-x-2">
+            <span className=" text-sm text-gray-500 lg:text-[17px]">
+              Tổng tiền:
+            </span>
+            <span className="flex items-start text-xl font-semibold text-primary  lg:text-2xl">
+              {formatPriceToVND(handlePrice())}
+            </span>
           </div>
-
-          <div className="mt-4 h-full min-h-[40vh] w-full rounded-md bg-white py-4">
-            {carts.map(cart => (
-              <CartItem
-                key={cart._id}
-                cart={cart}
-                onRemoved={onRemoved}
-                onCheckRemoved={onCheckRemoved}
-                handleCheckedCart={handleCheckedCart}
-                isCheckedAll={isCheckedAll}
-                checkedCarts={checkedCarts}
-              />
-            ))}
-          </div>
-
-          <div className="sticky bottom-0 mb-20 mt-4 hidden h-full w-full rounded-md bg-white md:block">
-            <div className="grid grid-cols-cart-5 items-center p-4 lg:p-8">
-              <button
-                className="btn-cart-solid pointer-events-none select-none px-0"
-                onClick={onCheckedAll}
-              >
-                Chọn tất cả ({carts.length})
-              </button>
-              <button className="btn-cart-solid" onClick={handleRemoveCarts}>
-                Xoá đã chọn
-              </button>
-              <button className="btn-cart-solid">Thêm đã thích</button>
-
-              <div className="mr-4 flex items-center justify-end gap-x-2">
-                <span className=" text-sm text-gray-500 lg:text-[17px]">
-                  Tổng tiền:
-                </span>
-                <span className="flex items-start text-xl font-semibold text-primary  lg:text-2xl">
-                  {formatPriceToVND(handlePrice())}
-                </span>
-              </div>
-              <Button
-                onClick={handleCheckout}
-                variant="secondary"
-                className=" capitalize "
-              >
-                mua hàng {checkedCarts.length ? `(${checkedCarts.length})` : ''}
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        <div className="bottom-0 mb-20 mt-4 h-full w-full rounded-md bg-white md:hidden">
-          <div className="flex items-center justify-between  pl-2">
-            <div className="flex items-center text-sm">
-              <button className="btn-cart-solid p-0" onClick={onCheckedAll}>
-                Tất cả
-              </button>
-            </div>
-
-            <div className="flex items-center gap-2 ">
-              <span className="text-[13px] text-gray-500">
-                Tổng thanh toán:
-              </span>
-              <span className="text-base font-semibold text-primary">
-                ₫52.000
-              </span>
-              <Button onClick={handleCheckout} variant="secondary">
-                Mua hàng
-              </Button>
-            </div>
-          </div>
+          <Button
+            onClick={handleCheckout}
+            variant="secondary"
+            className=" capitalize "
+          >
+            mua hàng {checkedCarts.length ? `(${checkedCarts.length})` : ''}
+          </Button>
         </div>
       </div>
-    </div>
+    </Container>
   )
 }
 

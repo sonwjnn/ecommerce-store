@@ -2,7 +2,7 @@ import ProductSidebar from '@/components/ProductSidebar'
 import { useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 
-const SubLayout = () => {
+const CategoryLayout = () => {
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -23,4 +23,4 @@ const SubLayout = () => {
   )
 }
 
-export default SubLayout
+export default CategoryLayout

@@ -15,10 +15,14 @@ import { useLocation, useNavigate } from 'react-router-dom'
 const UserDropdown = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const pathname = useLocation().pathname
   const { user } = useSelector(state => state.user)
 
   const handleLogout = () => {
     dispatch(setUser(null))
+    if (pathname.includes('/user')) {
+      navigate('/')
+    }
   }
 
   return (

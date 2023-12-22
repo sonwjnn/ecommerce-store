@@ -2,6 +2,7 @@ import productApi from '@/apis/modules/product.api'
 import BoardBar from '@/components/BoardBar'
 import Pagination from '@/components/Pagination'
 import ProductGrid from '@/components/ProductGrid'
+import Container from '@/components/ui/container'
 import { useEffect, useState } from 'react'
 import { TbFileSearch } from 'react-icons/tb'
 import { useDispatch } from 'react-redux'
@@ -68,7 +69,7 @@ const ProductSearch = () => {
   }
 
   return (
-    <div className="mx-auto min-h-screen max-w-[1280px]">
+    <Container className="mt-0">
       <div className="flex pt-0 lg:pt-[36px]">
         <div className="col hidden md:block"></div>
 
@@ -79,8 +80,8 @@ const ProductSearch = () => {
               handleSortPriceUpDown={handleSortPriceUpDown}
             />
           ) : null}
-          <ProductGrid products={payloadProducts} />
-          {!products.length && (
+
+          {!products.length ? (
             <div className="flex h-[50vh] w-full items-center justify-center ">
               <div className="flex flex-col items-center justify-center gap-8">
                 <TbFileSearch className="text-[150px] text-gray-300" />
@@ -95,6 +96,8 @@ const ProductSearch = () => {
                 </div>
               </div>
             </div>
+          ) : (
+            <ProductGrid products={payloadProducts} />
           )}
         </div>
       </div>
@@ -106,7 +109,7 @@ const ProductSearch = () => {
           // onPageSelect={onPageSelect}
         />
       )}
-    </div>
+    </Container>
   )
 }
 

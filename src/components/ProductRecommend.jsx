@@ -12,7 +12,7 @@ const ProductRecommend = () => {
   const [products, setProducts] = useState([])
   const [filteredProducts, setFilteredProducts] = useState([])
   const [page, setPage] = useState(1)
-  const skip = 60
+  const skip = 20
 
   useEffect(() => {
     const getProducts = async () => {

@@ -27,15 +27,15 @@ const ProfileUpdate = () => {
   const phoneRegex = /(84|0[3|5|7|8|9])+([0-9]{8})\b/
 
   const initialValues = {
-    username: user.username,
-    displayName: user.name,
-    email: user.email ? maskedEmail(user.email) : '',
-    phone: user.phone ? user.phone : '',
-    address: user.address ? user.address : '',
-    city: user.city ? user.city : '',
-    district: user.district ? user.district : '',
-    sex: user.sex ? user.sex : '',
-    birthday: user.birthday ? new Date(user.birthday) : null,
+    username: user?.username,
+    displayName: user?.name,
+    email: user?.email ? maskedEmail(user?.email) : '',
+    phone: user?.phone ? user?.phone : '',
+    address: user?.address ? user?.address : '',
+    city: user?.city ? user?.city : '',
+    district: user?.district ? user?.district : '',
+    sex: user?.sex ? user.sex : '',
+    birthday: user?.birthday ? new Date(user?.birthday) : null,
   }
 
   const form = useFormik({

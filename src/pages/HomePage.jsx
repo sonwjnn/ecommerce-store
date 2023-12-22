@@ -1,14 +1,15 @@
 import Category from '@/components/Category'
-import HomeSlide from '@/components/HomeSlide'
+import HomeSlider from '@/components/HomeSlider'
 import ProductRecommend from '@/components/ProductRecommend'
+import Container from '@/components/ui/container'
 
 const HomePage = () => {
   return (
-    <div className="bg-bg_page mt-[64px] lg:mt-[150px] ">
-      <div className=" mb-8 w-full bg-white ">
-        <div className="mx-auto flex min-h-[280px] max-w-[1280px] gap-2  py-4">
+    <Container className="mt-36">
+      <div className=" mb-8 w-full bg-white">
+        <div className="flex min-h-[280px] gap-2">
           <div className="mx-0 flex-[66%] flex-wrap overflow-hidden rounded-sm sm:mx-14 lg:mx-0 lg:flex-nowrap">
-            <HomeSlide />
+            <HomeSlider />
           </div>
 
           <div className="flex flex-col gap-2 lg:flex-[33%] ">
@@ -54,7 +55,7 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </Container>
   )
 }
 

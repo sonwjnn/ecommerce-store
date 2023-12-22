@@ -1,5 +1,4 @@
 import React from 'react'
-import { Toaster } from 'react-hot-toast'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import 'swiper/css'
 import 'swiper/css/navigation'
@@ -9,19 +8,11 @@ import './assets/css/styles.css'
 import PageNotFound from './components/PageNotFound'
 import PageWrapper from './components/PageWrapper'
 import ProductList from './components/ProductList'
+import CategoryLayout from './layouts/CategoryLayout'
 import MainLayout from './layouts/MainLayout'
 import ShopLayout from './layouts/ShopLayout'
-import SubLayout from './layouts/SubLayout'
+import { ToasterProvider } from './providers/ToasterProvider'
 import routes from './routes/routes'
-
-const toastOptions = {
-  style: {
-    background: '#fff',
-    color: '#333',
-    fontSize: '16px',
-  },
-  position: 'bottom-center',
-}
 
 const renderRoute = (route, index) => {
   const element = route.state ? (
@@ -33,7 +24,7 @@ const renderRoute = (route, index) => {
   return route.index ? (
     <React.Fragment key={`main_${index}`}>
       <Route index element={element} />
-      <Route key="sublayout" path="/" element={<SubLayout />}>
+      <Route key="CategoryLayout" path="/" element={<CategoryLayout />}>
         <Route
           key={`products_/products/:cateSlug/:typeSlug`}
           path={`/products/:cateSlug/:typeSlug`}
@@ -61,7 +52,7 @@ const renderRoute = (route, index) => {
 
 const App = () => (
   <>
-    <Toaster toastOptions={toastOptions} />
+    <ToasterProvider />
 
     <Router>
       <Routes>

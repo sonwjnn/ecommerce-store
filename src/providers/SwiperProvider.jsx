@@ -2,7 +2,7 @@ import { Autoplay } from 'swiper'
 import { Navigation, Pagination } from 'swiper'
 import { Swiper } from 'swiper/react'
 
-const AutoSwiper = ({ children }) => {
+const SwiperProvider = ({ children }) => {
   return (
     <div className="auto-swiper h-full w-full">
       <Swiper
@@ -23,4 +23,4 @@ const AutoSwiper = ({ children }) => {
   )
 }
 
-export default AutoSwiper
+export default SwiperProvider
