@@ -170,7 +170,7 @@ const CheckoutPage = () => {
                 onClick={handlePayment}
                 variant="secondary"
                 className="w-full text-base capitalize"
-                disabled={onRequest}
+                disable={onRequest}
               >
                 <div className="mr-2">
                   {onRequest ? <Spinner size="lg" /> : ''}

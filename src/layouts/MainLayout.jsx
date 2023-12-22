@@ -1,6 +1,5 @@
 import cartApi from '@/apis/modules/cart.api'
 import favoriteApi from '@/apis/modules/favorite.api'
-import orderApi from '@/apis/modules/order.api'
 import shopApi from '@/apis/modules/shop.api'
 import userApi from '@/apis/modules/user.api'
 import Footer from '@/components/Footer'
@@ -9,7 +8,6 @@ import NavigateMobile from '@/components/NavigateMobile'
 import {
   setListCarts,
   setListFavorites,
-  setListOrders,
   setShop,
   setUser,
 } from '@/redux/features/userSlice'
@@ -66,18 +64,6 @@ const MainLayout = () => {
     shopOfUser()
     if (!user) {
       dispatch(setShop(null))
-    }
-  }, [dispatch, user])
-
-  useEffect(() => {
-    const getOrders = async () => {
-      const { response, err } = await orderApi.getList()
-      if (response) dispatch(setListOrders(response))
-      else dispatch(setListOrders([]))
-    }
-    getOrders()
-    if (!user) {
-      dispatch(setShop([]))
     }
   }, [dispatch, user])
 

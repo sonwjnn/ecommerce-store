@@ -1,21 +1,21 @@
-import { defineConfig } from 'vite'
+// https://vitejs.dev/config/
 import react from '@vitejs/plugin-react'
 import path from 'path'
+import { defineConfig } from 'vite'
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   server: {
     host: 'localhost',
-    port: '3000'
+    port: '3000',
   },
   optimizeDeps: {
-    exclude: ['react-spinners', 'swiper', 'swiper-react']
+    exclude: ['react-spinners', 'swiper', 'swiper-react'],
   },
   build: {
-    cssCodeSplit: true
+    cssCodeSplit: true,
   },
   resolve: {
-    alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }]
-  }
+    alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }],
+  },
 })

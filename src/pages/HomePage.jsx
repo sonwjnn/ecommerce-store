@@ -16,23 +16,13 @@ const HomePage = () => {
             <div
               className="h-1/2  rounded-sm bg-cover bg-center bg-no-repeat"
               style={{
-                backgroundImage: `url(${
-                  new URL(
-                    '@/assets/images/banners/banner_8.svg',
-                    import.meta.url
-                  ).href
-                })`,
+                backgroundImage: `url(/images/banners/banner_8.svg)`,
               }}
             ></div>
             <div
               className="h-1/2  rounded-sm  bg-cover bg-center bg-no-repeat"
               style={{
-                backgroundImage: `url(${
-                  new URL(
-                    '@/assets/images/banners/banner_9.svg',
-                    import.meta.url
-                  ).href
-                })`,
+                backgroundImage: `url(/images/banners/banner_9.svg)`,
               }}
             ></div>
           </div>

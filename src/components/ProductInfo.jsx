@@ -159,10 +159,7 @@ const ProductInfo = props => {
             <div
               className="aspect-square h-6 w-6 bg-cover bg-no-repeat"
               style={{
-                backgroundImage: `url( ${
-                  new URL(`../assets/images/logos/sale.png`, import.meta.url)
-                    .href
-                })`,
+                backgroundImage: `url(/images/logos/sale.png)`,
               }}
             ></div>
 
@@ -206,14 +203,7 @@ const ProductInfo = props => {
                   <div
                     className="h-6 w-6 bg-cover bg-no-repeat"
                     style={{
-                      backgroundImage: `url(
-                      ${
-                        new URL(
-                          `@/assets/images/logos/free-ship.png`,
-                          import.meta.url
-                        ).href
-                      }
-                    )`,
+                      backgroundImage: `url(/images/logos/free-ship.png)`,
                     }}
                   ></div>
                   <p className="first-letter:uppercase">miễn phí vận chuyển</p>

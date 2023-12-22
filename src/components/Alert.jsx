@@ -1,8 +1,8 @@
-import logo from '@/assets/images/logos/logo_header_2.svg'
 import React, { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 
 import { Button } from './ui/button'
+import logo from '/images/logos/logo_header_2.svg'
 
 export const Alert = props => {
   const { type = 'notfound', text = '' } = props

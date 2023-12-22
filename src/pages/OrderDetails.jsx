@@ -1,7 +1,7 @@
 import orderApi from '@/apis/modules/order.api'
+import { ConfirmModal } from '@/components/modals/confirm-modal'
 import Container from '@/components/ui/container'
 import { Skeleton } from '@/components/ui/skeleton'
-import { removeOrder } from '@/redux/features/userSlice'
 import { formatPriceToVND } from '@/utilities/constants'
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
@@ -43,7 +43,6 @@ const OrderDetails = () => {
 
     if (err) toast.error(err.message)
     if (response) {
-      dispatch(removeOrder({ orderId: order?.id }))
       toast.success('Remove order success!')
       navigate('/user/orders')
     }
@@ -113,21 +112,22 @@ const OrderDetails = () => {
             </div>
             <div className="mt-2 w-full sm:mt-0 sm:w-[200px]">
               {order ? (
-                <Button
-                  className="w-full  border-secondary bg-background text-secondary hover:border-secondary/90  hover:text-secondary/90"
-                  variant="outline"
-                  disable={onRequest}
-                  onClick={onRemove}
-                >
-                  {onRequest ? (
-                    <Spinner className="text-primary" />
-                  ) : (
-                    <div className="flex gap-x-1">
-                      <LuTrash className=" text-secondary" size={16} /> Xoá đơn
-                      hàng
-                    </div>
-                  )}
-                </Button>
+                <ConfirmModal onConfirm={onRemove}>
+                  <Button
+                    className="w-full  border-secondary bg-background text-secondary hover:border-secondary/90  hover:text-secondary/90"
+                    variant="outline"
+                    disable={onRequest}
+                  >
+                    {onRequest ? (
+                      <Spinner className="text-primary" />
+                    ) : (
+                      <div className="flex gap-x-1">
+                        <LuTrash className=" text-secondary" size={16} /> Xoá
+                        đơn hàng
+                      </div>
+                    )}
+                  </Button>
+                </ConfirmModal>
               ) : (
                 <Skeleton className="h-[48px] w-full" />
               )}

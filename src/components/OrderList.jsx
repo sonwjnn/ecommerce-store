@@ -1,5 +1,4 @@
 import orderApi from '@/apis/modules/order.api'
-import { setListOrders } from '@/redux/features/userSlice'
 import { formatPriceToVND } from '@/utilities/constants'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
@@ -79,7 +78,21 @@ const OrderItem = ({ order, onRemoved }) => {
 const OrderList = () => {
   const [formatedOrders, setFormatedOrders] = useState([])
   const [onLoading, setLoading] = useState(false)
-  const { listOrders: orders } = useSelector(state => state.user)
+
+  const [orders, setOrders] = useState([])
+
+  useEffect(() => {
+    const getOrderList = async () => {
+      const { response, err } = await orderApi.getList()
+
+      if (err) toast.error(err.message)
+      if (response) {
+        setOrders(response)
+      }
+    }
+
+    getOrderList()
+  }, [])
 
   useEffect(() => {
     if (orders.length) {
@@ -100,7 +113,7 @@ const OrderList = () => {
   const onRemoved = ({ id }) => {
     if (id) {
       const newOrders = [...orders].filter(e => e._id !== id)
-      setListOrders(newOrders)
+      setOrders(newOrders)
     }
   }
 

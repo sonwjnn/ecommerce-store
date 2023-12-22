@@ -3,13 +3,14 @@ import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { LuTrash } from 'react-icons/lu'
 
+import { ConfirmModal } from './modals/confirm-modal'
 import { Spinner } from './spinner'
 import { Button } from './ui/button'
 
 const OrderItem = ({ item }) => {
   const [onRequest, setOnRequest] = useState(false)
 
-  const handleCancelItem = async itemId => {
+  const onCancelItem = async itemId => {
     if (onRequest) return
     setOnRequest(true)
 
@@ -25,10 +26,11 @@ const OrderItem = ({ item }) => {
       toast.success('Cancelled order item success!')
     }
   }
+
   return (
     <div
       key={item.id}
-      className=" w-full  cursor-pointer rounded-md px-2 py-2 transition hover:bg-accent md:px-6"
+      className=" w-full  cursor-pointer space-y-2 rounded-md px-2 py-2 transition hover:bg-accent md:px-6"
     >
       <div className="grid min-h-[56px] grid-cols-order-1 items-center sm:grid-cols-order-3  md:grid-cols-order-4   ">
         <div className="group flex w-full  min-w-0 items-center gap-x-2 ">
@@ -72,20 +74,15 @@ const OrderItem = ({ item }) => {
       </div>
 
       <div className="flex w-full justify-end">
-        <Button
-          className=" border-secondary text-secondary hover:border-secondary hover:text-secondary"
-          variant="outline"
-          disable={onRequest}
-          onClick={() => handleCancelItem(item?.id)}
-        >
-          {onRequest ? (
-            <Spinner className="text-primary" />
-          ) : (
-            <div className="flex gap-x-1">
-              <LuTrash className=" text-secondary" size={16} /> Hủy
-            </div>
-          )}
-        </Button>
+        <ConfirmModal onConfirm={() => onCancelItem(item.id)}>
+          <div
+            role="button"
+            className="flex w-full items-center justify-center rounded-sm border border-secondary px-4 py-2 text-sm text-secondary  transition hover:bg-neutral-200 active:scale-95 sm:w-[120px]"
+          >
+            <LuTrash className=" mr-1 text-secondary" size={16} />
+            Hủy
+          </div>
+        </ConfirmModal>
       </div>
     </div>
   )

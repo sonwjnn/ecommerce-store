@@ -22,10 +22,7 @@ const HomeSlider = () => {
                 index === 0 || index === 1 ? 'bg-center' : 'bg-left'
               )}
               style={{
-                backgroundImage: `url(${
-                  new URL(`../assets/images/banners/${link}`, import.meta.url)
-                    .href
-                })`,
+                backgroundImage: `url(/images/banners/${link}`,
               }}
             ></div>
           </SwiperSlide>

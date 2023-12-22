@@ -27,62 +27,62 @@ const Footer = () => {
     return () => window.removeEventListener('scroll', toggleVisibility)
   }, [])
   return (
-    <section class="mt-12 bg-white">
-      <div class="relative mx-auto max-w-screen-xl space-y-8 overflow-hidden px-4 py-12 sm:px-6 lg:px-8">
-        <nav class="-mx-5 -my-2 flex flex-wrap justify-center">
-          <div class="px-5 py-2">
+    <section className="mt-12 bg-white">
+      <div className="relative mx-auto max-w-screen-xl space-y-8 overflow-hidden px-4 py-12 sm:px-6 lg:px-8">
+        <nav className="-mx-5 -my-2 flex flex-wrap justify-center">
+          <div className="px-5 py-2">
             <a
               href="#"
-              class="text-base leading-6 text-gray-500 hover:text-gray-900"
+              className="text-base leading-6 text-gray-500 hover:text-gray-900"
             >
               About
             </a>
           </div>
-          <div class="px-5 py-2">
+          <div className="px-5 py-2">
             <a
               href="#"
-              class="text-base leading-6 text-gray-500 hover:text-gray-900"
+              className="text-base leading-6 text-gray-500 hover:text-gray-900"
             >
               Blog
             </a>
           </div>
-          <div class="px-5 py-2">
+          <div className="px-5 py-2">
             <a
               href="#"
-              class="text-base leading-6 text-gray-500 hover:text-gray-900"
+              className="text-base leading-6 text-gray-500 hover:text-gray-900"
             >
               Team
             </a>
           </div>
-          <div class="px-5 py-2">
+          <div className="px-5 py-2">
             <a
               href="#"
-              class="text-base leading-6 text-gray-500 hover:text-gray-900"
+              className="text-base leading-6 text-gray-500 hover:text-gray-900"
             >
               Pricing
             </a>
           </div>
-          <div class="px-5 py-2">
+          <div className="px-5 py-2">
             <a
               href="#"
-              class="text-base leading-6 text-gray-500 hover:text-gray-900"
+              className="text-base leading-6 text-gray-500 hover:text-gray-900"
             >
               Contact
             </a>
           </div>
-          <div class="px-5 py-2">
+          <div className="px-5 py-2">
             <a
               href="#"
-              class="text-base leading-6 text-gray-500 hover:text-gray-900"
+              className="text-base leading-6 text-gray-500 hover:text-gray-900"
             >
               Terms
             </a>
           </div>
         </nav>
-        <p class=" text-center text-base leading-6 text-gray-500">
+        <p className=" text-center text-base leading-6 text-gray-500">
           © {new Date().getFullYear()} Sonwjn Shopping.
         </p>
-        <div class=" flex justify-center space-x-4">
+        <div className=" flex justify-center space-x-4">
           {socialNetworkLinks.map(item => {
             const Icon = item.icon
             return (

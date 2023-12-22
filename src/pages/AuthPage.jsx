@@ -18,12 +18,7 @@ const AuthPage = () => {
             <div
               className="h-[50px] w-[150px] bg-center bg-no-repeat"
               style={{
-                backgroundImage: `url(${
-                  new URL(
-                    `@/assets/images/logos/logo_header_2.svg`,
-                    import.meta.url
-                  ).href
-                })`,
+                backgroundImage: `url(/images/logos/logo_header_2.svg)`,
               }}
             ></div>
           </button>
@@ -40,10 +35,7 @@ const AuthPage = () => {
             <div
               className="h-[600px] w-[600px] bg-center bg-no-repeat"
               style={{
-                backgroundImage: `url(${
-                  new URL(`../assets/images/logos/girl.svg`, import.meta.url)
-                    .href
-                })`,
+                backgroundImage: `url(/images/logos/girl.svg)`,
               }}
             ></div>
           </div>

@@ -4,7 +4,6 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
-import './assets/css/styles.css'
 import PageNotFound from './components/PageNotFound'
 import PageWrapper from './components/PageWrapper'
 import ProductList from './components/ProductList'
@@ -13,6 +12,7 @@ import MainLayout from './layouts/MainLayout'
 import ShopLayout from './layouts/ShopLayout'
 import { ToasterProvider } from './providers/ToasterProvider'
 import routes from './routes/routes'
+import '/public/css/styles.css'
 
 const renderRoute = (route, index) => {
   const element = route.state ? (

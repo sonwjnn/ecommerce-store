@@ -55,7 +55,7 @@ const Pagination = props => {
           variant="ghost"
           className="flex items-center gap-2 rounded-lg hover:bg-gray-900/10"
           onClick={handlePrev}
-          disabled={activePage === 0}
+          disable={activePage === 0}
         >
           <LuArrowLeft strokeWidth={2} className="h-4 w-4" /> Trước
         </Button>
@@ -77,7 +77,7 @@ const Pagination = props => {
           variant="ghost"
           className="flex items-center gap-2 rounded-lg hover:bg-gray-900/10"
           onClick={handleNext}
-          disabled={activePage === pageLimits - 1}
+          disable={activePage === pageLimits - 1}
         >
           <LuArrowRight strokeWidth={2} className="h-4 w-4" /> Sau
         </Button>

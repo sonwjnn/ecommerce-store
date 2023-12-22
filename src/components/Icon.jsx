@@ -13,8 +13,8 @@ const CheckIcon = ({ className, size = 16 }) => {
       <path
         d="M11.4669 3.72684C11.7558 3.91574 11.8369 4.30308 11.648 4.59198L7.39799 11.092C7.29783 11.2452 7.13556 11.3467 6.95402 11.3699C6.77247 11.3931 6.58989 11.3355 6.45446 11.2124L3.70446 8.71241C3.44905 8.48022 3.43023 8.08494 3.66242 7.82953C3.89461 7.57412 4.28989 7.55529 4.5453 7.78749L6.75292 9.79441L10.6018 3.90792C10.7907 3.61902 11.178 3.53795 11.4669 3.72684Z"
         fill="currentColor"
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
       ></path>
     </svg>
   )
@@ -113,12 +113,12 @@ const GithubIcon = ({ size = 18 }) => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <g fill="none">
-        <g clip-path="url(#akarIconsGithubFill0)">
+        <g clipPath="url(#akarIconsGithubFill0)">
           <path
             fill="#000000"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385c.6.105.825-.255.825-.57c0-.285-.015-1.23-.015-2.235c-3.015.555-3.795-.735-4.035-1.41c-.135-.345-.72-1.41-1.23-1.695c-.42-.225-1.02-.78-.015-.795c.945-.015 1.62.87 1.845 1.23c1.08 1.815 2.805 1.305 3.495.99c.105-.78.42-1.305.765-1.605c-2.67-.3-5.46-1.335-5.46-5.925c0-1.305.465-2.385 1.23-3.225c-.12-.3-.54-1.53.12-3.18c0 0 1.005-.315 3.3 1.23c.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23c.66 1.65.24 2.88.12 3.18c.765.84 1.23 1.905 1.23 3.225c0 4.605-2.805 5.625-5.475 5.925c.435.375.81 1.095.81 2.22c0 1.605-.015 2.895-.015 3.3c0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12"
-            clip-rule="evenodd"
+            clipRule="evenodd"
           />
         </g>
         <defs>
@@ -134,12 +134,12 @@ const GithubIcon = ({ size = 18 }) => {
 const InstagramIcon = ({ size = 18 }) => {
   return (
     <svg
-      enable-background="new 0 0 24 24"
+      enableBackground="new 0 0 24 24"
       height={size}
       viewBox="0 0 24 24"
       width={size}
       xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
     >
       <linearGradient
         id="SVGID_1_"
@@ -150,9 +150,9 @@ const InstagramIcon = ({ size = 18 }) => {
         y1="-72.705"
         y2="-84.047"
       >
-        <stop offset="0" stop-color="#fd5" />
-        <stop offset=".5" stop-color="#ff543e" />
-        <stop offset="1" stop-color="#c837ab" />
+        <stop offset="0" stopColor="#fd5" />
+        <stop offset=".5" stopColor="#ff543e" />
+        <stop offset="1" stopColor="#c837ab" />
       </linearGradient>
       <path
         d="m1.5 1.633c-1.886 1.959-1.5 4.04-1.5 10.362 0 5.25-.916 10.513 3.878 11.752 1.497.385 14.761.385 16.256-.002 1.996-.515 3.62-2.134 3.842-4.957.031-.394.031-13.185-.001-13.587-.236-3.007-2.087-4.74-4.526-5.091-.559-.081-.671-.105-3.539-.11-10.173.005-12.403-.448-14.41 1.633z"

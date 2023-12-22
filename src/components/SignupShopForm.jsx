@@ -172,7 +172,7 @@ const SignupShopForm = () => {
           <div className="mt-6 flex ">
             <div className="w-[266px]"></div>
 
-            <Button className="ml-auto px-6" type="submit" disabled={onRequest}>
+            <Button className="ml-auto px-6" type="submit" disable={onRequest}>
               Lưu
             </Button>
           </div>

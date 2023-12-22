@@ -354,7 +354,7 @@ const ProfileUpdate = () => {
           <div className="mt-6 flex ">
             <div className="w-[266px]"></div>
 
-            <Button type="submit" disabled={onRequest} className="ml-auto px-6">
+            <Button type="submit" disable={onRequest} className="ml-auto px-6">
               Lưu
             </Button>
           </div>

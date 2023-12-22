@@ -102,7 +102,7 @@ const CartItem = props => {
   }
 
   return (
-    <div className="border-b-gray-2006 w-full border-b px-6 py-2">
+    <div className="w-full  px-6 py-2">
       <div className=" grid min-h-[56px] grid-cols-list-3  items-center   md:grid-cols-list-6">
         <Checkbox
           checked={isChecked || isCheckedAll}

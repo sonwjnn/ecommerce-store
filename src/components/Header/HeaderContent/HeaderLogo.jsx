@@ -8,12 +8,7 @@ const HeaderLogo = ({ className }) => {
         <div
           className=" mx-auto h-[50px] w-[150px] bg-center bg-no-repeat"
           style={{
-            backgroundImage: `url(${
-              new URL(
-                `../../../assets/images/logos/logo_header_2.svg`,
-                import.meta.url
-              ).href
-            })`,
+            backgroundImage: `url(/images/logos/logo_header_2.svg)`,
           }}
         ></div>
       </Link>

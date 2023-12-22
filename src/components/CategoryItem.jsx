@@ -11,12 +11,7 @@ const CategoryItem = ({ index, cate, disable }) => {
       <div
         className="min-h-[40px] min-w-[40px] self-start bg-contain bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url(${
-            new URL(
-              `../assets/images/cates/cates_${index + 1}.png`,
-              import.meta.url
-            ).href
-          })`,
+          backgroundImage: `url(${`/images/cates/cates_${index + 1}.png`})`,
         }}
       ></div>
       <div

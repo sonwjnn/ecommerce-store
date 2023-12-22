@@ -7,7 +7,6 @@ const userSlice = createSlice({
     listCarts: [],
     listFavorites: [],
     checkedCarts: [],
-    listOrders: [],
     shop: null,
   },
   reducers: {
@@ -98,16 +97,6 @@ const userSlice = createSlice({
       state.shop = { ...state.shop, ...action.payload }
     },
 
-    //order
-    setListOrders: (state, action) => {
-      state.listOrders = action.payload
-    },
-    removeOrder: (state, action) => {
-      const { orderId } = action.payload
-
-      state.listOrders = [...state.listOrders].filter(e => e._id !== orderId)
-    },
-
     //checkedCarts
     setCheckedCarts: (state, action) => {
       state.checkedCarts = action.payload
@@ -132,8 +121,6 @@ export const {
   setShop,
   updateShop,
   updateQuantityCart,
-  setListOrders,
-  removeOrder,
   setCheckedCarts,
   clearCheckedCarts,
 } = userSlice.actions
