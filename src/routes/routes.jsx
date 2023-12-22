@@ -102,7 +102,11 @@ const routes = [
 
   {
     path: '/order/:orderId',
-    element: <OrderDetails />,
+    element: (
+      <ProtectedPage>
+        <OrderDetails />
+      </ProtectedPage>
+    ),
     state: 'order.detail',
   },
 ]

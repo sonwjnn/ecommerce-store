@@ -1,9 +1,10 @@
 import FavoriteList from '@/components/FavoriteList'
+import { UserIcon } from '@/components/Icon'
 import OrderList from '@/components/OrderList'
 import PasswordUpdate from '@/components/PasswordUpdate'
 import ProfileUpdate from '@/components/ProfileUpdate'
 import SignupShopForm from '@/components/SignupShopForm'
-import TextAvatar from '@/components/TextAvatar'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import Container from '@/components/ui/container'
 import { useEffect, useState } from 'react'
 import { AiTwotoneShop } from 'react-icons/ai'
@@ -18,18 +19,11 @@ const AccountPage = () => {
   const [activeAccount, setActiveAccount] = useState(null)
   const { accountType, authCate } = useParams()
   const location = useLocation()
-  const [onChange, setOnChange] = useState(false)
 
   const actionsAccount = [
     ['profile', 'hồ sơ'],
     ['password', 'đổi mật khẩu'],
   ]
-
-  const [onRequest, setOnRequest] = useState(false)
-
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
 
   return (
     <Container className="mt-8">
@@ -41,9 +35,12 @@ const AccountPage = () => {
         >
           <div className="mt-10 flex h-full flex-col rounded-md bg-white  md:mt-0 md:gap-6 md:p-4 ">
             <div className="flex gap-2 p-4">
-              <div className="min-h-[50px] min-w-[50px] ">
-                <TextAvatar text={user?.name} />
-              </div>
+              <Avatar className="size-10">
+                <AvatarImage src={user?.imageUrl} />
+                <AvatarFallback>
+                  <UserIcon />
+                </AvatarFallback>
+              </Avatar>
               <div className="line-clamp-2 text-[26px] font-semibold text-gray-600 md:text-xl lg:text-base">
                 {user?.name}
               </div>

@@ -7,26 +7,14 @@ import { twMerge } from 'tailwind-merge'
 
 import LikeButton from './LikeButton'
 import Star from './Star'
+import { LazyImage } from './ui/lazy-image'
 
 const ProductCard = ({ product, className }) => {
-  const [imageUrl, setImageUrl] = useState(product?.images[0].url)
-
   const navigate = useNavigate()
 
   const handleClick = () => {
     return navigate(`/products/detail/${product?.id}`)
   }
-
-  const noImageUrl = new URL(
-    `../assets/images/thumnails/no_image.jpg`,
-    import.meta.url
-  ).href
-
-  useEffect(() => {
-    const img = new Image()
-    img.src = imageUrl
-    img.onerror = () => setImageUrl(noImageUrl)
-  }, [imageUrl, noImageUrl])
 
   return (
     <div
@@ -37,12 +25,7 @@ const ProductCard = ({ product, className }) => {
     >
       <div onClick={handleClick}>
         <div className=" aspect-square overflow-hidden rounded-xl">
-          <div
-            className="home-product-item__img aspect-square rounded-md bg-contain  bg-center bg-no-repeat transition-all "
-            style={{
-              backgroundImage: `url(${imageUrl})`,
-            }}
-          ></div>
+          <LazyImage src={product?.images[0]?.url || ''} alt={product?.name} />
         </div>
         <div className="flex flex-col gap-y-2 px-1 pb-1">
           <div className="line-clamp-2  min-h-[32px]   text-sm font-medium text-[#242424]">

@@ -5,11 +5,12 @@ import { toast } from 'react-hot-toast'
 import { BsFillSendFill } from 'react-icons/bs'
 import { useSelector } from 'react-redux'
 
+import { UserIcon } from './Icon'
 import ReviewItem from './ReviewItem'
 import Star from './Star'
 import StarVote from './StarVote'
-import TextAvatar from './TextAvatar'
 import { Spinner } from './spinner'
+import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { Button } from './ui/button'
 import { Skeleton } from './ui/skeleton'
 
@@ -205,9 +206,12 @@ const ReviewList = props => {
             {product && user && (
               <>
                 <div className="mt-4 flex flex-row gap-2">
-                  <div className="h-[40px] w-[40px]">
-                    <TextAvatar text={user.name} />
-                  </div>
+                  <Avatar className="h-10 w-10">
+                    <AvatarImage src={user?.imageUrl} />
+                    <AvatarFallback>
+                      <UserIcon />
+                    </AvatarFallback>
+                  </Avatar>
                   <div className="flex w-full flex-col gap-4">
                     <h6 className="text-base font-medium">{user.name}</h6>
                     <div className="flex gap-3">

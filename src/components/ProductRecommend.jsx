@@ -1,7 +1,6 @@
 import productApi from '@/apis/modules/product.api'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
-import { FiPlus } from 'react-icons/fi'
 import { useDispatch } from 'react-redux'
 
 import ProductGrid from './ProductGrid'
@@ -12,7 +11,7 @@ const ProductRecommend = () => {
   const [products, setProducts] = useState([])
   const [filteredProducts, setFilteredProducts] = useState([])
   const [page, setPage] = useState(1)
-  const skip = 20
+  const skip = 60
 
   useEffect(() => {
     const getProducts = async () => {
@@ -41,9 +40,12 @@ const ProductRecommend = () => {
 
       {filteredProducts.length < products.length && (
         <div className="mt-4 flex items-center justify-center pb-8">
-          <Button variant="outline" onClick={onLoadMore}>
+          <Button
+            className="px-12 py-4 hover:bg-primary hover:text-white active:bg-primary/75"
+            variant="outline"
+            onClick={onLoadMore}
+          >
             Xem thêm
-            <FiPlus size={18} className="ml-1" />
           </Button>
         </div>
       )}

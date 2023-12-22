@@ -6,7 +6,7 @@ const orderEndpoints = {
   detail: ({ orderId }) => `user/order/${orderId}`,
   remove: ({ orderId }) => `user/orders/${orderId}`,
   removeOrders: `user/orders`,
-  updateOrder: `user/orders`,
+  updateOrder: ({ itemId }) => `user/orders/item/${itemId}`,
 }
 
 const orderApi = {
@@ -48,6 +48,22 @@ const orderApi = {
         orderEndpoints.detail({
           orderId,
         })
+      )
+      return { response }
+    } catch (error) {
+      return { error }
+    }
+  },
+
+  updateOrder: async ({ itemId, status }) => {
+    try {
+      const response = await privateClient.put(
+        orderEndpoints.updateOrder({
+          itemId,
+        }),
+        {
+          status,
+        }
       )
       return { response }
     } catch (error) {

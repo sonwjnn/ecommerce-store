@@ -22,12 +22,7 @@ const CheckoutPage = () => {
   const success = queryParams.get('success')
 
   const handlePayment = async () => {
-    if (!user) {
-      toast.error('You must login first!', { toastId: 'warning-login' })
-      return navigate('/auth/signin')
-    }
-
-    if (!user.address || !user.district || !user.city) {
+    if (!user?.address || !user?.district || !user?.city) {
       toast.error('You must add your address first!', {
         toastId: 'warning-address',
       })

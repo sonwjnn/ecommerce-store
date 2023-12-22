@@ -48,12 +48,10 @@ const CartList = () => {
         item => item.id === cart.id
       )
       if (existingCartIndex !== -1) {
-        // Update the existing cart
         return checkedCarts.map((item, index) =>
           index === existingCartIndex ? cart : item
         )
       } else {
-        // Add the new cart
         return [...checkedCarts, cart]
       }
     } else {

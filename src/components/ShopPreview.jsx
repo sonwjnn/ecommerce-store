@@ -2,7 +2,8 @@ import dayjs from 'dayjs'
 import { LuStore } from 'react-icons/lu'
 import { useNavigate } from 'react-router-dom'
 
-import TextAvatar from './TextAvatar'
+import { UserIcon } from './Icon'
+import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { Button } from './ui/button'
 import { Skeleton } from './ui/skeleton'
 
@@ -14,9 +15,14 @@ const ShopPreview = ({ product }) => {
   return (
     <div className="flex min-h-[130px] w-full items-center rounded-md bg-white px-6 py-4">
       <div className="flex w-full flex-row items-center gap-4">
-        <div className="aspect-square h-[80px] w-[80px]">
+        <div className="flex aspect-square h-[80px] w-[80px] items-center justify-center">
           {product ? (
-            <TextAvatar text={product?.shopId?.title} />
+            <Avatar className="size-16">
+              <AvatarImage src={product?.shopId?.imageUrl} />
+              <AvatarFallback>
+                <UserIcon size={80} />
+              </AvatarFallback>
+            </Avatar>
           ) : (
             <Skeleton className="h-full w-full rounded-full" />
           )}

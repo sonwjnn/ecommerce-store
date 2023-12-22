@@ -1,7 +1,8 @@
 import dayjs from 'dayjs'
 
+import { UserIcon } from './Icon'
 import Star from './Star'
-import TextAvatar from './TextAvatar'
+import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { Skeleton } from './ui/skeleton'
 
 const ShopInfo = ({ shop }) => {
@@ -9,9 +10,14 @@ const ShopInfo = ({ shop }) => {
     <div className="mb-[-16px] mt-4 flex min-h-[130px] w-full items-center justify-center rounded-md bg-white  py-4 ">
       <div className="flex w-full flex-col items-center  gap-4">
         <div className="flex w-full items-center justify-center gap-x-4 bg-accent p-4">
-          <div className="aspect-square h-[80px] w-[80px]">
+          <div className="aspect-square ">
             {shop ? (
-              <TextAvatar text={shop?.title} />
+              <Avatar className="size-[80px]">
+                <AvatarImage src={shop?.imageUrl} />
+                <AvatarFallback>
+                  <UserIcon size={100} />
+                </AvatarFallback>
+              </Avatar>
             ) : (
               <Skeleton className="aspect-square h-[80px] w-[80px] rounded-full" />
             )}

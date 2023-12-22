@@ -31,7 +31,7 @@ const UserDropdown = () => {
         <div role="button" className="flex w-full items-center p-3 text-sm ">
           <div className="flex cursor-pointer items-center gap-x-2 rounded-full bg-white bg-opacity-70  p-2 py-1 pl-[14px]">
             <LuMenu size={18} className="text-[#717171] " />
-            <Avatar className="h-8 w-8">
+            <Avatar className="size-8">
               <AvatarImage src={user?.imageUrl} />
               <AvatarFallback>
                 <UserIcon />

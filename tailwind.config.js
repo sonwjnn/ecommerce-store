@@ -103,6 +103,10 @@ module.exports = {
             strokeWidth: '0',
           },
         },
+        blur: {
+          '0%': { filter: 'blur(0px)' },
+          '100%': { filter: 'blur(5px)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -110,6 +114,7 @@ module.exports = {
         'heart-out': 'heart-out 0.3s linear forwards',
         heart: 'heart 0.3s linear forwards 0.25s',
         circle: 'circle 0.3s linear forwards',
+        blur: 'blur 0.2s linear ',
       },
       screens: {
         auth: '1175px',

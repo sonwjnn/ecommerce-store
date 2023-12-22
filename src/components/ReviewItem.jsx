@@ -4,9 +4,10 @@ import { useState } from 'react'
 import { LuTrash } from 'react-icons/lu'
 import { useSelector } from 'react-redux'
 
+import { UserIcon } from './Icon'
 import Star from './Star'
-import TextAvatar from './TextAvatar'
 import { Spinner } from './spinner'
+import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { Button } from './ui/button'
 
 const ReviewItem = ({ review, onRemoved }) => {
@@ -33,9 +34,12 @@ const ReviewItem = ({ review, onRemoved }) => {
     <div className="hover:bg-bg_page relative mb-2 rounded-md p-2">
       <div className="flex flex-row gap-4">
         {/* avatar */}
-        <div className="h-[30px] w-[30px]">
-          <TextAvatar text={review.user?.name} />
-        </div>
+        <Avatar className="h-8 w-8">
+          <AvatarImage src={user?.imageUrl} />
+          <AvatarFallback>
+            <UserIcon />
+          </AvatarFallback>
+        </Avatar>
         {/* avatar */}
 
         <div className="flex grow flex-col justify-center gap-2">
