@@ -1,6 +1,6 @@
+import { cn } from '@/lib/utils'
 import { formatPriceToVND } from '@/utilities/constants'
 import favoriteUtils from '@/utilities/favorite.utils'
-import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { twMerge } from 'tailwind-merge'
@@ -11,6 +11,11 @@ import { LazyImage } from './ui/lazy-image'
 
 const ProductCard = ({ product, className }) => {
   const navigate = useNavigate()
+  const { listFavorites } = useSelector(state => state.user)
+  const isFavorite = favoriteUtils.check({
+    listFavorites,
+    productId: product?.id,
+  })
 
   const handleClick = () => {
     return navigate(`/products/detail/${product?.id}`)
@@ -19,16 +24,16 @@ const ProductCard = ({ product, className }) => {
   return (
     <div
       className={twMerge(
-        'relative cursor-pointer rounded-md border bg-white p-2 hover:shadow-md',
+        'group relative cursor-pointer rounded-lg border bg-white  hover:shadow-md',
         className
       )}
     >
       <div onClick={handleClick}>
-        <div className=" aspect-square overflow-hidden rounded-xl">
+        <div className=" aspect-square overflow-hidden rounded-t-lg">
           <LazyImage src={product?.images[0]?.url || ''} alt={product?.name} />
         </div>
-        <div className="flex flex-col gap-y-2 px-1 pb-1">
-          <div className="line-clamp-2  min-h-[32px]   text-sm font-medium text-[#242424]">
+        <div className="flex flex-col gap-y-2 px-3 pb-2 pt-1">
+          <div className="line-clamp-2  min-h-[40px] text-pretty text-sm font-medium text-[#242424]">
             {product?.name}
           </div>
 
@@ -51,8 +56,13 @@ const ProductCard = ({ product, className }) => {
           </div>
         </div>
       </div>
-      <div className="absolute right-0 top-0 z-10  p-1 text-center">
-        <LikeButton product={product} />
+      <div className={cn('absolute right-0 top-0 z-10 p-1 text-center')}>
+        <LikeButton
+          className={cn('tr opacity-0 transition group-hover:opacity-100', {
+            'opacity-100': isFavorite,
+          })}
+          product={{ ...product, isFavorite }}
+        />
       </div>
     </div>
   )

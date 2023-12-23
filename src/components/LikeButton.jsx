@@ -1,4 +1,5 @@
 import favoriteApi from '@/apis/modules/favorite.api'
+import { cn } from '@/lib/utils'
 import { addFavorite, removeFavorite } from '@/redux/features/userSlice'
 import favoriteUtils from '@/utilities/favorite.utils'
 import { useState } from 'react'
@@ -9,7 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import { HeartIcon } from './Icon'
 import { CheckboxHeart } from './ui/checkbox-heart'
 
-const LikeButton = ({ product }) => {
+const LikeButton = ({ product, className }) => {
   const { user, listFavorites } = useSelector(state => state.user)
   const isFavoriteInit = favoriteUtils.check({
     listFavorites,
@@ -79,7 +80,7 @@ const LikeButton = ({ product }) => {
     }
   }
   return (
-    <div className="add-to-wishlist h-10 w-10">
+    <div className={cn('add-to-wishlist h-10 w-10 ', className)}>
       <CheckboxHeart
         id={
           window.location.pathname.includes('detail')

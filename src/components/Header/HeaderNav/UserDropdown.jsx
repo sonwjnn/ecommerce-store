@@ -8,7 +8,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { setUser } from '@/redux/features/userSlice'
-import { LuMenu } from 'react-icons/lu'
+import { LuBox, LuHeart, LuLogOut, LuMenu, LuUserCircle2 } from 'react-icons/lu'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 
@@ -64,30 +64,47 @@ const UserDropdown = () => {
           asChild
           className="w-full cursor-pointer text-muted-foreground "
         >
-          <button onClick={() => navigate('/user/account/profile')}>
-            Quản lí tài khoản
-          </button>
+          <div
+            onClick={() => navigate('/user/account/profile')}
+            className="flex items-center gap-x-2.5"
+          >
+            <LuUserCircle2 />
+            <button>Quản lí tài khoản</button>
+          </div>
         </DropdownMenuItem>
         <DropdownMenuItem
           asChild
           className="w-full cursor-pointer text-muted-foreground "
         >
-          <button onClick={() => navigate('/user/orders')}>Đơn mua</button>
+          <div
+            onClick={() => navigate('/user/orders')}
+            className="flex items-center  gap-x-2.5"
+          >
+            <LuBox className="mt-1" />
+            <button>Đơn mua</button>
+          </div>
         </DropdownMenuItem>
         <DropdownMenuItem
           asChild
           className="w-full cursor-pointer text-muted-foreground "
         >
-          <button onClick={() => navigate('/user/favorite')}>Yêu thích</button>
+          <div
+            onClick={() => navigate('/user/favorite')}
+            className="flex items-center gap-x-2.5"
+          >
+            <LuHeart className="mt-1" />
+            <button>Yêu thích</button>
+          </div>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem
           asChild
           className="w-full cursor-pointer text-muted-foreground focus:bg-red-100/75 focus:text-red-600"
         >
-          <button className=" flex justify-start" onClick={handleLogout}>
-            Đăng xuất
-          </button>
+          <div onClick={handleLogout} className="flex items-center gap-x-2.5">
+            <LuLogOut className="mt-1" />
+            <button className=" flex justify-start">Đăng xuất</button>
+          </div>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

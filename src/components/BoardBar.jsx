@@ -13,7 +13,7 @@ import { Button } from './ui/button'
 const BoardBar = ({ handleSelectPriceOption }) => {
   return (
     <div className="mb-3">
-      <div className=" hidden items-center  rounded-md bg-accent md:flex">
+      <div className=" hidden items-center  rounded-md md:flex">
         <span className="  mr-3 text-sm">Sắp xếp theo</span>
         <div className="flex gap-x-2">
           <Button className="border-none bg-white font-normal text-black  hover:bg-accent">

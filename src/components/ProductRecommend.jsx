@@ -40,11 +40,7 @@ const ProductRecommend = () => {
 
       {filteredProducts.length < products.length && (
         <div className="mt-4 flex items-center justify-center pb-8">
-          <Button
-            className="px-12 py-4 hover:bg-primary hover:text-white active:bg-primary/75"
-            variant="outline"
-            onClick={onLoadMore}
-          >
+          <Button className="px-12 py-4" variant="outline" onClick={onLoadMore}>
             Xem thêm
           </Button>
         </div>

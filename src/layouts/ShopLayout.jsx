@@ -1,6 +1,7 @@
 import shopApi from '@/apis/modules/shop.api'
 import ShopDetail from '@/components/ShopDetail'
 import ShopSidebar from '@/components/ShopSidebar'
+import Container from '@/components/ui/container'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useDispatch } from 'react-redux'
@@ -28,23 +29,19 @@ const ShopLayout = () => {
   }, [dispatch])
 
   return (
-    <>
-      <div className="mt-[150px] bg-accent ">
-        <div className="mx-auto max-w-[1280px]">
-          <ShopDetail shop={shop} />
-          <div className="flex gap-4 pt-0 lg:pt-[36px]">
-            <div className="hidden md:block">
-              <ShopSidebar />
-            </div>
+    <Container>
+      <ShopDetail shop={shop} />
+      <div className="flex gap-4 pt-0 lg:pt-[36px]">
+        <div className="hidden md:block">
+          <ShopSidebar />
+        </div>
 
-            <div className="grow overflow-hidden">
-              {/* <ProductList /> */}
-              <Outlet />
-            </div>
-          </div>
+        <div className="grow overflow-hidden">
+          {/* <ProductList /> */}
+          <Outlet />
         </div>
       </div>
-    </>
+    </Container>
   )
 }
 

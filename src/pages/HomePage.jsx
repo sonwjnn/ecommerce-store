@@ -6,7 +6,7 @@ import Container from '@/components/ui/container'
 const HomePage = () => {
   return (
     <Container className="mt-36">
-      <div className=" mb-8 w-full bg-white">
+      <div className=" mb-8 w-full ">
         <div className="flex min-h-[280px] gap-2">
           <div className="mx-0 flex-[66%] flex-wrap overflow-hidden rounded-sm sm:mx-14 lg:mx-0 lg:flex-nowrap">
             <HomeSlider />
@@ -35,7 +35,7 @@ const HomePage = () => {
 
         <div className="flex w-full flex-col md:w-[calc(100%-254px)]">
           <div className="product-hint-bar sticky top-0 mx-auto  w-full rounded-md bg-white">
-            <div className="border-b-4 border-primary px-8 py-4 text-center text-xl font-semibold uppercase text-primary">
+            <div className=" px-8 py-4 text-center text-xl font-semibold uppercase text-primary">
               tất cả sản phẩm
             </div>
           </div>

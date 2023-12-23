@@ -1,4 +1,5 @@
 import ProductSidebar from '@/components/ProductSidebar'
+import Container from '@/components/ui/container'
 import { useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 
@@ -8,7 +9,7 @@ const CategoryLayout = () => {
   }, [])
 
   return (
-    <div className="mx-auto mt-[150px] max-w-[1280px]">
+    <Container>
       <div className="flex gap-4 pt-0 lg:pt-[36px]">
         <div className="col hidden md:block">
           <ProductSidebar />
@@ -19,7 +20,7 @@ const CategoryLayout = () => {
           <Outlet />
         </div>
       </div>
-    </div>
+    </Container>
   )
 }
 

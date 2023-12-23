@@ -39,7 +39,7 @@ const FavoriteItem = props => {
 
   return (
     <div className="w-full px-4 pb-0 pt-0">
-      <div className="grid min-h-[56px] grid-cols-favorite-3  items-center  border-b border-b-gray-200  p-1 ">
+      <div className="grid min-h-[56px] grid-cols-favorite-3  items-center  p-1 ">
         <div
           onClick={() => navigate(`/products/detail/${productId}`)}
           className="group flex  cursor-pointer items-center gap-x-2"
@@ -51,7 +51,7 @@ const FavoriteItem = props => {
             }}
           ></div>
           <div className="flex flex-col justify-center self-center">
-            <div className="line-clamp-2 text-sm text-gray-500 group-hover:underline">
+            <div className="line-clamp-2 text-sm text-gray-500 transition group-hover:text-primary">
               {title}
             </div>
             {/* <div className="text-sm">{type}</div> */}

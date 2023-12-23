@@ -27,7 +27,7 @@ const Footer = () => {
     return () => window.removeEventListener('scroll', toggleVisibility)
   }, [])
   return (
-    <section className="mt-12 bg-white">
+    <section className=" bg-white">
       <div className="relative mx-auto max-w-screen-xl space-y-8 overflow-hidden px-4 py-12 sm:px-6 lg:px-8">
         <nav className="-mx-5 -my-2 flex flex-wrap justify-center">
           <div className="px-5 py-2">
