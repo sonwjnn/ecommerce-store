@@ -12,6 +12,8 @@ import { useNavigate } from 'react-router-dom'
 import NotFound from './NotFound'
 import { Spinner } from './spinner'
 import { Button } from './ui/button'
+import { Heading } from './ui/heading'
+import { Separator } from './ui/seperator'
 
 const FavoriteItem = props => {
   const { title, productImage, type, id, price, onRemoved, productId } = props
@@ -153,31 +155,41 @@ const FavoriteList = () => {
   }
 
   return (
-    <div className="mt-4 min-h-[50vh] w-full rounded-md bg-white">
-      {favs.map(fav => (
-        <FavoriteItem
-          id={fav?.id}
-          key={fav?.id}
-          userId={fav?.user}
-          productId={fav?.productId?._id}
-          price={fav?.productId?.price}
-          title={fav?.productId?.name}
-          type={fav?.productId?.type}
-          productImage={fav?.productId?.images[0]?.url}
-          quantity={fav?.quantity}
-          onRemoved={onRemoved}
-          onCheckRemoved={onCheckRemoved}
-          handleCheckedFav={handleCheckedFav}
-          isCheckedAll={isCheckedAll}
-          checkedFavs={checkedFavs}
-        />
-      ))}
-      {!favs.length && (
-        <div className="flex flex-col items-center justify-center gap-y-4">
-          <NotFound text={'Bạn chưa có sản phẩm yêu thích nào!'} />
-        </div>
-      )}
-    </div>
+    <>
+      <Heading
+        className={'py-0'}
+        title="Yêu thích"
+        description={'Danh sách sản phẩm yêu thích của bạn.'}
+      />
+      <Separator />
+      <div>
+        {favs.length ? (
+          favs.map(fav => (
+            <FavoriteItem
+              id={fav?.id}
+              key={fav?.id}
+              userId={fav?.user}
+              productId={fav?.productId?._id}
+              price={fav?.productId?.price}
+              title={fav?.productId?.name}
+              type={fav?.productId?.type}
+              productImage={fav?.productId?.images[0]?.url}
+              quantity={fav?.quantity}
+              onRemoved={onRemoved}
+              onCheckRemoved={onCheckRemoved}
+              handleCheckedFav={handleCheckedFav}
+              isCheckedAll={isCheckedAll}
+              checkedFavs={checkedFavs}
+            />
+          ))
+        ) : (
+          <div className="flex flex-col items-center justify-center gap-y-4">
+            <NotFound text={'Bạn chưa có sản phẩm yêu thích nào!'} />
+          </div>
+        )}
+      </div>
+      {}
+    </>
   )
 }
 

@@ -40,10 +40,11 @@ const AuthPage = () => {
             ></div>
           </div>
         </div>
-        <div className="mt-[8%] block h-[492px] w-full  rounded-md bg-white px-12 py-6 sm:mx-auto sm:w-[400px] auth:absolute auth:right-[10%] auth:top-[50%] auth:mx-0 auth:mt-0 auth:translate-y-[-50%] ">
-          {sign === 'signin' && <SigninForm />}
-
-          {sign === 'signup' && <SignupForm />}
+        <div className="mt-[8%] block w-full  rounded-md bg-white sm:mx-auto sm:w-[400px] auth:absolute auth:right-[10%] auth:top-[50%] auth:mx-0 auth:mt-0 auth:translate-y-[-50%] ">
+          <div className="flex-1 space-y-1 p-8 pt-6">
+            {sign === 'signin' && <SigninForm />}
+            {sign === 'signup' && <SignupForm />}
+          </div>
         </div>
       </main>
     </div>

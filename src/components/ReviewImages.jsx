@@ -18,7 +18,7 @@ const ReviewImages = ({ images }) => {
   return (
     <PhotoProvider maskOpacity={0.5}>
       <PhotoView src={imageUrl}>
-        <div className="aspect-square w-full cursor-pointer overflow-hidden rounded-md border border-accent lg:min-w-[450px]">
+        <div className="aspect-square w-full cursor-pointer overflow-hidden rounded-md border border-accent ">
           {imageUrl ? (
             <div
               className="group relative aspect-square  bg-cover bg-center transition duration-500 ease-in-out hover:scale-110 "
@@ -43,7 +43,7 @@ const ReviewImages = ({ images }) => {
           <>
             {images.map(image => (
               <PhotoView key={image.public_id} src={image.url}>
-                <div className="aspect-square h-[100px] w-[100px] overflow-hidden rounded-md">
+                <div className="aspect-square w-[92px] overflow-hidden rounded-md">
                   <div
                     className="group relative aspect-square cursor-pointer bg-cover bg-center transition duration-500 ease-in-out hover:scale-110"
                     onMouseEnter={() => setImageUrl(image.url)}
@@ -62,12 +62,14 @@ const ReviewImages = ({ images }) => {
             ))}
           </>
         ) : (
-          Array.from({ length: 4 }).map((_, index) => (
-            <Skeleton
-              key={index}
-              className="aspect-square h-[100px] w-[100px]  rounded-md"
-            />
-          ))
+          <div className="grid grid-cols-4 gap-x-2">
+            {Array.from({ length: 4 }).map((_, index) => (
+              <Skeleton
+                key={index}
+                className="aspect-square w-[92px] rounded-md"
+              />
+            ))}
+          </div>
         )}
       </div>
     </PhotoProvider>

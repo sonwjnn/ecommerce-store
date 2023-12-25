@@ -61,7 +61,7 @@ const ProductDetail = () => {
       <div className="h-full space-y-6">
         <div className="h-full w-full  rounded-md ">
           <div className="flex flex-col gap-x-6 md:flex-row">
-            <div className=" flex flex-[20%] flex-col gap-y-6 lg:flex-[33%]">
+            <div className=" flex w-[20%] flex-col gap-y-6 lg:w-[33%] ">
               <div className="w-full  rounded-md bg-white p-4">
                 <ReviewImages images={product?.images || []} />
 
@@ -101,62 +101,28 @@ const ProductDetail = () => {
               </div>
               <ShopPreview product={product} />
             </div>
-            <div className="flex-[80%] rounded-md bg-white p-4 lg:flex-[66%]">
+            <div className="flex flex-[80%] flex-col gap-y-6   lg:flex-[66%]">
               <ProductInfo
                 product={product}
                 reviewCount={reviews.length || 0}
                 favoriteCount={favoriteCount}
               />
+
+              <div className="space-y-6 rounded-md bg-white ">
+                <ProductDescription product={product} />
+
+                <ReviewList
+                  reviews={reviews ?? []}
+                  setReviews={setReviews}
+                  product={product}
+                  starCount={starCount}
+                />
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="flex h-full w-full  gap-x-6  rounded-md ">
-          <div className="flex-[80%]  space-y-6">
-            <ProductDescription product={product} />
-
-            <ReviewList
-              reviews={reviews ?? []}
-              setReviews={setReviews}
-              product={product}
-              starCount={starCount}
-            />
-          </div>
-          {product ? (
-            <div className=" hidden h-full  flex-[20%] rounded-md bg-white px-6 py-8 md:block">
-              <span className="w-[120px] text-sm text-gray-500 ">
-                Mã giảm giá của shop
-              </span>
-
-              {Array(3)
-                .fill(0)
-                .map((_, index) => (
-                  <div key={index} className="px-2 py-4">
-                    <span className="flex flex-wrap items-center justify-center gap-4 rounded-sm bg-[#fafafa] px-2 py-4">
-                      <div>
-                        <div className="mb-4 font-medium capitalize text-primary">
-                          <div className="text-center text-sm">giảm 10%</div>
-                          <div className="text-xs">đơn tối thiểu 69k</div>
-                        </div>
-
-                        <div className="text-sm text-gray-500">
-                          HSD 04.06.2023
-                        </div>
-                      </div>
-
-                      <div className="flex items-center">
-                        <Button className="px-6" size="sm">
-                          Lưu
-                        </Button>
-                      </div>
-                    </span>
-                  </div>
-                ))}
-            </div>
-          ) : (
-            <div className="flex-[20%]"></div>
-          )}
-        </div>
+        <div className="flex h-full w-full  gap-x-6  rounded-md "></div>
       </div>
     </Container>
   )

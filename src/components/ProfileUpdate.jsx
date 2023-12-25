@@ -1,366 +1,389 @@
 import userApi from '@/apis/modules/user.api'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { cn } from '@/lib/utils'
 import { updateUser } from '@/redux/features/userSlice'
-import { maskedEmail } from '@/utilities/constants'
 import { districts, provinces } from '@/utilities/provinceCity'
-import dayjs from 'dayjs'
-import { useFormik } from 'formik'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { format } from 'date-fns'
 import { useEffect, useState } from 'react'
-import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
+import { useForm } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
-import { useDispatch, useSelector } from 'react-redux'
-import * as Yup from 'yup'
+import { LuCalendar } from 'react-icons/lu'
+import { useDispatch } from 'react-redux'
+import * as z from 'zod'
 
+import { Spinner } from './spinner'
 import { Button } from './ui/button'
+import { Calendar } from './ui/calendar'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from './ui/form'
+import { Heading } from './ui/heading'
 import { Input } from './ui/input'
+import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
+import { RadioGroup, RadioGroupItem } from './ui/radio-group'
+import { Separator } from './ui/seperator'
 
-const ProfileUpdate = () => {
-  const { user } = useSelector(state => state.user)
-  const [onRequest, setOnRequest] = useState(false)
-  const [originalEmail, setOriginalEmail] = useState('')
+const formSchema = z.object({
+  username: z.string().min(8, 'username minimum 8 character'),
+  name: z.string().min(8, 'display name minimum 8 character'),
+  email: z.string().min(8, 'email minimum 8 character').email('invalid email'),
+  phone: z
+    .string()
+    .min(10, 'phone minimum 10 character')
+    .regex(/(84|0[3|5|7|8|9])+([0-9]{8})\b/, 'invalid phone number'),
+  address: z.string().min(10, 'address minimum 10 character'),
+  city: z.string().trim().min(1, 'city is required'),
+  district: z.string().trim().min(1, 'district is required'),
+  sex: z.string().min(3, 'sex minimum 3 character'),
+  birthday: z.preprocess(arg => {
+    if (typeof arg == 'string' || arg instanceof Date) return new Date(arg)
+  }, z.date()),
+})
+
+const ProfileUpdate = ({ initialData }) => {
+  const [loading, setLoading] = useState(false)
   const [selectedProvince, setSelectedProvince] = useState('')
   const [provinceOptions, setProvinceOptions] = useState(provinces)
   const [districtOptions, setDistrictOptions] = useState(districts)
-
   const dispatch = useDispatch()
 
-  const phoneRegex = /(84|0[3|5|7|8|9])+([0-9]{8})\b/
+  const title = 'Cập nhật hồ sơ'
+  const description = 'Thông tin chi tiết tài khoản'
+  const toastMessage = 'Update profile success!'
+  const action = 'Lưu thay đổi'
 
-  const initialValues = {
-    username: user?.username,
-    displayName: user?.name,
-    email: user?.email ? maskedEmail(user?.email) : '',
-    phone: user?.phone ? user?.phone : '',
-    address: user?.address ? user?.address : '',
-    city: user?.city ? user?.city : '',
-    district: user?.district ? user?.district : '',
-    sex: user?.sex ? user.sex : '',
-    birthday: user?.birthday ? new Date(user?.birthday) : null,
-  }
+  const defaultValues = initialData
+    ? {
+        ...initialData,
+      }
+    : {
+        username: '',
+        name: '',
+        email: '',
+        phone: '',
+        address: '',
+        city: '',
+        district: '',
+        sex: '',
+        birthday: null,
+      }
 
-  const form = useFormik({
-    initialValues: initialValues,
-    validationSchema: Yup.object({
-      username: Yup.string()
-        .min(8, 'username minimum 8 character')
-        .required('username is required'),
-      displayName: Yup.string()
-        .min(8, 'display name minimum 8 character')
-        .required('display name is required'),
-      email: Yup.string()
-        .min(8, 'email minimum 8 character')
-        .required('email is required')
-        .email('invalid email'),
-      phone: Yup.string()
-        .min(10, 'phone minimum 10 character')
-        .required('phone is required')
-        .matches(phoneRegex, 'invalid phone number'),
-      address: Yup.string()
-        .min(10, 'address minimum 10 character')
-        .required('address is required'),
-      sex: Yup.string()
-        .min(3, 'sex minimum 3 character')
-        .required('sex is required'),
-      birthday: Yup.string()
-        .min(10, 'birthday minimum 10 character')
-        .required('birthday is required'),
-    }),
-    onSubmit: async values => onUpdate(values),
+  const form = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues,
   })
 
-  const onUpdate = async values => {
-    if (onRequest) return
-    setOnRequest(true)
-    if (JSON.stringify(values) === JSON.stringify(initialValues)) return
+  const { watch, setValue } = form
+  const city = watch('city')
 
-    const { response, err } = await userApi.profileUpdate({
-      ...values,
-      email: originalEmail ? originalEmail : user.email,
-    })
+  const onSubmit = async values => {
+    try {
+      if (loading) return
+      setLoading(true)
+      if (JSON.stringify(values) === JSON.stringify(defaultValues)) return
 
-    setOnRequest(false)
+      const { response, err } = await userApi.profileUpdate({
+        ...values,
+      })
 
-    if (err) toast.error(err.message)
-    if (response) {
-      setOriginalEmail(response.email)
-
-      dispatch(
-        updateUser({
-          ...values,
-          birthday: dayjs(values.birthday).format('YYYY-MM-DD'),
-        })
-      )
-      toast.success('Update profile success!')
+      if (err) toast.error(err.message)
+      if (response) {
+        dispatch(
+          updateUser({
+            ...values,
+            birthday: format(values.birthday, 'yyyy-MM-dd'),
+          })
+        )
+        toast.success(toastMessage)
+      }
+    } catch (error) {
+      toast.error('Something went wrong.')
+    } finally {
+      setLoading(false)
     }
-  }
-
-  const handleEmailChange = e => {
-    const email = e.target.value
-    setOriginalEmail(email)
-    form.setFieldValue('email', email)
   }
 
   useEffect(() => {
-    if (form.values.city) {
-      const provinceIndex = provinces.indexOf(form.values.city)
+    if (city) {
+      const provinceIndex = provinces.indexOf(city)
       const newDistricts = districts[provinceIndex]
       setDistrictOptions(newDistricts)
-      setSelectedProvince(form.values.city)
+      setSelectedProvince(city)
+      if (city !== defaultValues.city) {
+        setValue('district', '')
+      }
     }
-  }, [form.values.city])
+  }, [city])
 
   return (
-    <div className="flex items-center justify-center">
-      <div className="mt-[50px] max-w-[600px] px-4 md:ml-[-50px]  ">
-        <form onSubmit={form.handleSubmit} className="flex flex-col gap-6">
-          <div className="flex flex-col items-center gap-2  md:flex-row">
-            <label
-              htmlFor="username"
-              className="w-full text-base  capitalize text-gray-500 md:w-[260px]"
-            >
-              tên đăng nhập
-            </label>
-            <div className="flex w-full flex-col">
-              <Input
-                type="username"
-                name="username"
-                id="username"
-                value={form.values.username}
-                onChange={form.handleChange}
-                disabled
-              />
-              {form.errors.username && (
-                <p className="errMsg ">{form.errors.username}</p>
-              )}
-            </div>
-          </div>
+    <>
+      <Heading className="py-0" title={title} description={description} />
+      <Separator />
 
-          <div className="flex flex-col items-center gap-2  md:flex-row">
-            <label
-              htmlFor="displayName"
-              className="w-[260px] self-start text-base capitalize text-gray-500"
-            >
-              tên
-            </label>
-            <div className="flex w-full flex-col">
-              <Input
-                type="text"
-                name="displayName"
-                id="displayName"
-                value={form.values.displayName}
-                onChange={form.handleChange}
-              />
-              {form.errors.displayName && (
-                <p className="errMsg ">{form.errors.displayName}</p>
-              )}
-            </div>
-          </div>
-
-          <div className="flex flex-col items-center gap-2 md:flex-row">
-            <label
-              htmlFor="email"
-              className="w-[260px] self-start text-base capitalize text-gray-500"
-            >
-              email
-            </label>
-            <div className="flex w-full flex-col">
-              <Input
-                type="text"
-                name="email"
-                id="email"
-                value={form.values.email}
-                onChange={handleEmailChange}
-              />
-              {form.errors.email && (
-                <p className="errMsg ">{form.errors.email}</p>
-              )}
-            </div>
-          </div>
-
-          <div className="flex flex-col items-center gap-2 md:flex-row">
-            <label
-              htmlFor="phone"
-              className="w-[260px] self-start text-base capitalize text-gray-500"
-            >
-              số điện thoại
-            </label>
-
-            <div className="flex w-full flex-col">
-              <Input
-                type="text"
-                name="phone"
-                id="phone"
-                value={form.values.phone}
-                onChange={form.handleChange}
-              />
-              {form.errors.phone && (
-                <p className="errMsg ">{form.errors.phone}</p>
-              )}
-            </div>
-          </div>
-
-          <div className="flex flex-col items-center gap-2 md:flex-row">
-            <label
-              htmlFor="address"
-              className="w-[260px] self-start text-base capitalize text-gray-500"
-            >
-              địa chỉ
-            </label>
-            <div className="flex w-full flex-col">
-              <Input
-                type="text"
-                name="address"
-                id="address"
-                value={form.values.address}
-                onChange={form.handleChange}
-              />
-              {form.errors.address && (
-                <p className="errMsg ">{form.errors.address}</p>
-              )}
-            </div>
-          </div>
-
-          <div className="flex flex-col items-center gap-2 md:flex-row">
-            <label
-              htmlFor="city"
-              className="w-[260px] self-start text-base capitalize text-gray-500"
-            >
-              thành phố
-            </label>
-
-            <select
-              className="flex h-10 w-full cursor-pointer rounded-md border border-input bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2  focus-visible:ring-ring  disabled:cursor-not-allowed disabled:opacity-50"
-              name="city"
-              id="city"
-              value={form.values.city}
-              onChange={form.handleChange}
-            >
-              <option className="hidden" value={form.values.city || ''}>
-                {form.values.city || 'Chọn'}
-              </option>
-              {provinceOptions?.map((province, index) => (
-                <option key={index} value={province}>
-                  {province}
-                </option>
-              ))}
-            </select>
-            {form.errors.city && <p className="errMsg ">{form.errors.city}</p>}
-          </div>
-
-          <div className="flex flex-col items-center gap-2 md:flex-row">
-            <label
-              htmlFor="text"
-              className="w-[260px] self-start text-base capitalize text-gray-500"
-            >
-              Quận / Huyện
-            </label>
-
-            <select
-              className="flex h-10 w-full cursor-pointer rounded-md border border-input bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2  focus-visible:ring-ring  disabled:cursor-not-allowed disabled:opacity-50"
-              disabled={!selectedProvince}
-              value={form.values.district || ''}
-              name="district"
-              id="district"
-              onChange={form.handleChange}
-            >
-              <option className="hidden" value={form.values.district || ''}>
-                {form.values.district || 'Chọn'}
-              </option>
-              {districtOptions?.map((district, index) => (
-                <option key={index} value={district}>
-                  {district}
-                </option>
-              ))}
-            </select>
-            {form.errors.district && (
-              <p className="errMsg ">{form.errors.district}</p>
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="w-full space-y-4"
+        >
+          <FormField
+            control={form.control}
+            name="username"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Tên đăng nhập</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Nhập tên đăng nhập ..."
+                    {...field}
+                    disabled
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
             )}
-          </div>
+          />
 
-          <div className="flex flex-col items-center gap-2 md:flex-row">
-            <label
-              htmlFor="sex"
-              className="w-[180px] self-start text-base capitalize text-gray-500"
-            >
-              giới tính
-            </label>
-            <div className="flex justify-start gap-8 self-start">
-              <div className="flex items-center gap-2">
-                <label
-                  htmlFor="male"
-                  className="text-base capitalize text-gray-500"
-                >
-                  nam
-                </label>
-                <Input
-                  className="text-base"
-                  type="radio"
-                  name="sex"
-                  checked={form.values.sex === 'male'}
-                  id="sex"
-                  value={'male'}
-                  onChange={form.handleChange}
-                />
-              </div>
-              <div className="flex items-center gap-2">
-                <label
-                  htmlFor="female"
-                  className="text-base capitalize text-gray-500"
-                >
-                  nữ
-                </label>
-                <Input
-                  className="text-base"
-                  type="radio"
-                  name="sex"
-                  checked={form.values.sex === 'female'}
-                  id="sex"
-                  value={'female'}
-                  onChange={form.handleChange}
-                />
-              </div>
-              {form.errors.sex && <p className="errMsg ">{form.errors.sex}</p>}
-            </div>
-          </div>
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Tên tài khoản</FormLabel>
+                <FormControl>
+                  <Input
+                    disabled={loading}
+                    placeholder="Nhập tên tài khoản ..."
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-          <div className="flex flex-col items-center gap-2 md:flex-row">
-            <label
-              htmlFor="district"
-              className="w-[260px] self-start text-base capitalize text-gray-500"
-            >
-              ngày sinh
-            </label>
-            <div className="flex  w-full flex-col">
-              <DatePicker
-                id="birthday"
-                name="birthday"
-                placeholderText="Chọn"
-                className="flex h-10 w-full cursor-pointer rounded-md border border-input bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-black hover:bg-accent focus-visible:outline-none  focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 "
-                selected={form.values.birthday}
-                onChange={date => form.setFieldValue('birthday', date)}
-                onFocus={e => {
-                  e.preventDefault()
-                  document.getElementById('birthday').blur()
-                }}
-                showYearDropdown
-                dateFormat="dd/MM/yyyy"
-              />
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input
+                    disabled={loading}
+                    placeholder="Nhập email ..."
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-              {form.errors.birthday && (
-                <p className="errMsg ">{form.errors.birthday}</p>
+          <FormField
+            control={form.control}
+            name="phone"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Số điện thoại</FormLabel>
+                <FormControl>
+                  <Input
+                    disabled={loading}
+                    placeholder="Nhập số điện thoại ..."
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="address"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Địa chỉ</FormLabel>
+                <FormControl>
+                  <Input
+                    disabled={loading}
+                    placeholder="Nhập địa chỉ ..."
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <div className="grid grid-cols-2 gap-4">
+            <FormField
+              control={form.control}
+              name="city"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Thành phố</FormLabel>
+                  <Select
+                    disabled={loading}
+                    onValueChange={field.onChange}
+                    value={field.value}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue
+                          defaultValue={field.value}
+                          placeholder="Chọn Thành phố"
+                        />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent className="max-h-[16rem] overflow-y-auto">
+                      {provinceOptions.map((province, index) => (
+                        <SelectItem key={index} value={province}>
+                          {province}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
               )}
-            </div>
+            />
+            <FormField
+              control={form.control}
+              name="district"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Quận / Huyện</FormLabel>
+                  <Select
+                    disabled={loading || !selectedProvince}
+                    onValueChange={field.onChange}
+                    value={field.value}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue
+                          defaultValue={field.value}
+                          placeholder="Chọn Quận/Huyện"
+                        />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent className="max-h-[16rem] overflow-y-auto">
+                      {districtOptions?.map((district, index) => (
+                        <SelectItem key={index} value={district}>
+                          {district}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </div>
-          <div className="mt-6 flex ">
-            <div className="w-[266px]"></div>
 
-            <Button type="submit" disable={onRequest} className="ml-auto px-6">
-              Lưu
+          <FormField
+            control={form.control}
+            name="sex"
+            render={({ field }) => (
+              <FormItem className="space-y-3">
+                <FormLabel>Giới tính</FormLabel>
+                <FormControl>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    className="flex flex-col space-y-1"
+                  >
+                    <div className="flex items-center gap-x-6 ">
+                      <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <RadioGroupItem value="male" />
+                        </FormControl>
+                        <FormLabel className="font-normal">Nam</FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <RadioGroupItem value="female" />
+                        </FormControl>
+                        <FormLabel className="font-normal">Nữ</FormLabel>
+                      </FormItem>
+                    </div>
+                  </RadioGroup>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="birthday"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel>Ngày sinh</FormLabel>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant="outline"
+                        className={cn(
+                          'w-[240px] border-input pl-3 text-left font-normal text-[#242424]',
+                          !field.value && 'text-muted-foreground'
+                        )}
+                      >
+                        {field.value ? (
+                          format(field.value, 'dd/MM/yyyy')
+                        ) : (
+                          <span>Chọn ngày sinh</span>
+                        )}
+                        <LuCalendar className="ml-auto size-4 opacity-50" />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={field.value}
+                      onSelect={field.onChange}
+                      disabled={date =>
+                        date > new Date() || date < new Date('1900-01-01')
+                      }
+                      initialFocus
+                      captionLayout="dropdown-buttons"
+                      fromYear={1923}
+                      toYear={2023}
+                      // numberOfMonths={2} //Add this line, if you want, can be 2 or more
+                      className="rounded-md border"
+                    />
+                  </PopoverContent>
+                </Popover>
+
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <div className="flex w-full justify-end">
+            <Button disabled={loading} type="submit">
+              {loading && <Spinner className="text-white" />}
+              {action}
             </Button>
           </div>
         </form>
-      </div>
-    </div>
+      </Form>
+    </>
   )
 }
 

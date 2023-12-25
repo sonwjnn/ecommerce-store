@@ -1,4 +1,4 @@
-import dayjs from 'dayjs'
+import { format } from 'date-fns'
 
 import { UserIcon } from './Icon'
 import Star from './Star'
@@ -54,7 +54,7 @@ const ShopInfo = ({ shop }) => {
                 </p>
                 <p className="text-sm  text-[#242424]">
                   <span className="font-medium">Ngày tạo: </span>
-                  {dayjs(shop?.createdAt).format('DD-MM-YYYY')}
+                  {format(shop?.createdAt, 'dd/MM/yyyy')}
                 </p>
               </div>
             </div>

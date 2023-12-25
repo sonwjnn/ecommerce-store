@@ -2,8 +2,11 @@ import orderApi from '@/apis/modules/order.api'
 import { Spinner } from '@/components/spinner'
 import { Button } from '@/components/ui/button'
 import Container from '@/components/ui/container'
+import { Heading } from '@/components/ui/heading'
+import { Label } from '@/components/ui/label'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { clearCheckedCarts } from '@/redux/features/userSlice'
-import { formatPriceToVND } from '@/utilities/constants'
+import { SHIPPING_PRICE, formatPriceToVND } from '@/utilities/constants'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { FaCircleCheck } from 'react-icons/fa6'
@@ -67,9 +70,7 @@ const CheckoutPage = () => {
 
   return (
     <Container>
-      <h1 className="mt-4 px-2 py-4 text-2xl  font-medium text-[#242424] lg:mt-12">
-        Thanh Toán
-      </h1>
+      <Heading title={'Thanh toán'} description={'Thanh toán đơn hàng.'} />
       {success || canceled ? (
         <div className="mt-4 flex min-h-[40vh] flex-col items-center gap-y-3">
           <div className="flex items-center gap-x-2">
@@ -106,10 +107,7 @@ const CheckoutPage = () => {
 
             <div className="mt-4 h-full min-h-[40vh] w-full rounded-md bg-white py-4">
               {checkedCarts.map((product, index) => (
-                <div
-                  key={index}
-                  className="border-b-gray-2006 w-full border-b px-2 py-2 md:px-6"
-                >
+                <div key={index} className="w-full px-2 py-2 md:px-6">
                   <div className=" grid min-h-[56px] grid-cols-list-3  items-center   ">
                     <div className="group flex w-full  min-w-0 items-center gap-x-2">
                       <div
@@ -152,6 +150,37 @@ const CheckoutPage = () => {
 
                 <div className="text-base text-gray-500">
                   {checkedCarts.length || 0} sản phẩm
+                </div>
+
+                <div className="flex items-center gap-x-2">
+                  <span className="text-base text-gray-500 ">Tổng phụ :</span>
+                  <span className="flex items-start text-sm font-medium text-[#242424]  lg:text-base">
+                    {formatPriceToVND(
+                      checkedCarts.reduce(
+                        (currValue, item) => item.totalPrice + currValue,
+                        0
+                      )
+                    )}
+                  </span>
+                </div>
+
+                <div className="flex  gap-x-2">
+                  <span className="text-base text-gray-500 ">Vận chuyển :</span>
+
+                  <RadioGroup defaultValue={SHIPPING_PRICE[0].price}>
+                    {SHIPPING_PRICE.map(item => (
+                      <div
+                        key={item.name}
+                        className="flex  items-center space-x-2"
+                      >
+                        <RadioGroupItem value={item.price} id={item.name} />
+                        <Label htmlFor={item.name}>{item.name}</Label>
+                        <Label className="ml-auto" htmlFor={item.name}>
+                          {formatPriceToVND(item.price)}
+                        </Label>
+                      </div>
+                    ))}
+                  </RadioGroup>
                 </div>
 
                 <div className="flex items-center gap-x-2">

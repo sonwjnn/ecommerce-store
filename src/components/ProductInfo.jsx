@@ -81,7 +81,7 @@ const ProductInfo = props => {
     navigate('/user/carts')
   }
   return (
-    <div className="rounded-md bg-white">
+    <div className="rounded-md bg-white p-4">
       <div className="flex  flex-col gap-y-3 px-4">
         <div className="flex min-h-[46px] items-center ">
           {product ? (

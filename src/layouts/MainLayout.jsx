@@ -69,7 +69,7 @@ const MainLayout = () => {
 
   return (
     <>
-      <div className="flex flex-col bg-black bg-[url('/images/background.png')] font-be">
+      <div className="flex flex-col bg-accent bg-[url('/images/background.png')] font-be">
         {/* header */}
         <Header />
         {/* header */}

@@ -1,5 +1,5 @@
 import reviewApi from '@/apis/modules/review.api'
-import dayjs from 'dayjs'
+import { format } from 'date-fns'
 import { useState } from 'react'
 import { LuTrash } from 'react-icons/lu'
 import { useSelector } from 'react-redux'
@@ -47,7 +47,7 @@ const ReviewItem = ({ review, onRemoved }) => {
             <h6 className="text-sm font-medium">{review.user.name}</h6>
             <Star stars={review.rating} />
             <p className="text-[11px] text-gray-500">
-              {dayjs(review.createdAt).format('DD-MM-YYYY HH:mm:ss')}
+              {format(review.createdAt, 'dd/MM/yyyy HH:mm:ss')}
             </p>
           </div>
           <div className=" flex flex-row justify-between gap-4">

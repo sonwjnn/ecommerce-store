@@ -9,6 +9,8 @@ import { useNavigate } from 'react-router-dom'
 import NotFound from './NotFound'
 import { Spinner } from './spinner'
 import { Button } from './ui/button'
+import { Heading } from './ui/heading'
+import { Separator } from './ui/seperator'
 
 const OrderItem = ({ order, onRemoved }) => {
   const [onRequest, setOnRequest] = useState(false)
@@ -118,8 +120,14 @@ const OrderList = () => {
   }
 
   return (
-    <div className="flex min-h-[50vh] w-full ">
-      <div className="flex w-full   flex-col ">
+    <>
+      <Heading
+        className={'py-0'}
+        title="Đơn mua"
+        description="Danh sách đơn mua của bạn."
+      />
+      <Separator />
+      <div className="flex min-h-[50vh] w-full   flex-col ">
         <div className=" h-full min-h-[40vh] w-full rounded-md bg-white py-4">
           {onLoading ? (
             <Spinner size="icon" />
@@ -127,7 +135,7 @@ const OrderList = () => {
             <>
               {formatedOrders.length ? (
                 <>
-                  <div className=" grid  min-h-[40px]   w-full  grid-cols-list-3  rounded-md bg-white px-2 py-4 text-base text-gray-500 md:px-6">
+                  <div className=" grid  min-h-[40px]   w-full  grid-cols-list-3  rounded-md bg-white px-2 text-base text-gray-500 md:px-6">
                     <div>Tên đơn hàng</div>
                     <div className="text-center">Số tiền</div>
                     <div className="text-center">Huỷ đơn</div>
@@ -149,7 +157,7 @@ const OrderList = () => {
           )}
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

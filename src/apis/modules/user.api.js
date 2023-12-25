@@ -56,7 +56,7 @@ const userApi = {
     }
   },
   profileUpdate: async ({
-    displayName,
+    name,
     email,
     phone,
     address,
@@ -67,7 +67,7 @@ const userApi = {
   }) => {
     try {
       const response = await privateClient.put(userEndpoints.profileUpdate, {
-        displayName,
+        name,
         email,
         phone,
         address,

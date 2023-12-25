@@ -1,118 +1,156 @@
 import userApi from '@/apis/modules/user.api'
 import { setUser } from '@/redux/features/userSlice'
-import { useFormik } from 'formik'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import * as Yup from 'yup'
+import * as z from 'zod'
 
+import { Spinner } from './spinner'
 import { Button } from './ui/button'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from './ui/form'
+import { Heading } from './ui/heading'
 import { Input } from './ui/input'
+import { Separator } from './ui/seperator'
+
+const formSchema = z
+  .object({
+    password: z.string().min(8, 'password minimum 8 character'),
+    newPassword: z.string().min(8, 'new password minimum 8 character'),
+    confirmNewPassword: z
+      .string()
+      .min(8, 'confirm new password minimum 8 character'),
+  })
+  .refine(data => data.newPassword === data.confirmNewPassword, {
+    message: "Passwords don't match",
+    path: ['confirmNewPassword'],
+  })
 
 const PasswordUpdate = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const [onRequest, setOnRequest] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-  const form = useFormik({
-    initialValues: {
-      password: '',
-      newPassword: '',
-      confirmNewPassword: '',
-    },
-    validationSchema: Yup.object({
-      password: Yup.string()
-        .min(8, 'password minimum 8 character')
-        .required('password is required'),
-      newPassword: Yup.string()
-        .min(8, 'new password minimum 8 character')
-        .required('new password is required'),
-      confirmNewPassword: Yup.string()
-        .oneOf([Yup.ref('newPassword')], 'confirmNewPassword not match')
-        .min(8, 'confirm new password minimum 8 character')
-        .required('confirm new password is required'),
-    }),
-    onSubmit: async values => onUpdate(values),
+  const title = 'Đổi mật khẩu'
+  const description = 'Đổi mật khẩu tài khoản của bạn.'
+  const toastMessage = 'Update password success! Please re-login'
+  const action = 'Lưu thay đổi'
+
+  const defaultValues = {
+    password: '',
+    newPassword: '',
+    confirmNewPassword: '',
+  }
+
+  const form = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues,
   })
 
-  const onUpdate = async values => {
-    if (onRequest) return
-    setOnRequest(true)
+  const onSubmit = async values => {
+    try {
+      if (loading) return
+      setLoading(true)
 
-    const { response, err } = await userApi.passwordUpdate(values)
+      const { response, err } = await userApi.passwordUpdate(values)
 
-    setOnRequest(false)
-
-    if (err) toast.error(err.message)
-    if (response) {
-      form.resetForm()
-      navigate('/')
-      dispatch(setUser(null))
-      toast.success('Update password success! Please re-login')
+      if (err) toast.error(err.message)
+      if (response) {
+        navigate('/')
+        dispatch(setUser(null))
+        toast.success(toastMessage)
+      }
+    } catch (error) {
+      toast.error('Something went wrong.')
+    } finally {
+      setLoading(false)
     }
   }
 
   return (
-    <div className="flex items-start justify-center">
-      <div className="mt-[50px] max-w-[600px] px-4 md:ml-[-50px]  ">
-        <form onSubmit={form.handleSubmit} className="flex flex-col gap-6">
-          <div className="flex flex-col items-center gap-2  md:flex-row">
-            <label
-              htmlFor="password"
-              className="w-[260px] self-start text-base capitalize text-gray-500"
-            >
-              mật khẩu
-            </label>
-            <Input
-              type="password"
-              name="password"
-              id="password"
-              value={form.values.password}
-              onChange={form.handleChange}
-            />
-          </div>
+    <>
+      <Heading className="py-0" title={title} description={description} />
+      <Separator />
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="w-full space-y-4"
+        >
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Mật khẩu cũ</FormLabel>
+                <FormControl>
+                  <Input
+                    type="password"
+                    disabled={loading}
+                    placeholder="Nhập mật khẩu cũ ..."
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-          <div className="flex flex-col items-center gap-2  md:flex-row">
-            <label
-              htmlFor="newPassword"
-              className="w-[260px] self-start text-base capitalize text-gray-500"
-            >
-              mật khẩu mới
-            </label>
-            <Input
-              type="password"
-              name="newPassword"
-              id="newPassword"
-              value={form.values.newPassword}
-              onChange={form.handleChange}
-            />
-          </div>
+          <FormField
+            control={form.control}
+            name="newPassword"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Mật khẩu mới</FormLabel>
+                <FormControl>
+                  <Input
+                    type="password"
+                    disabled={loading}
+                    placeholder="Nhập mật khẩu mới ..."
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-          <div className="flex flex-col items-center gap-2 md:flex-row">
-            <label
-              htmlFor="confirmNewPassword"
-              className="w-[260px] self-start text-base capitalize text-gray-500"
-            >
-              xác nhận mật khẩu
-            </label>
-            <Input
-              type="password"
-              name="confirmNewPassword"
-              id="confirmNewPassword"
-              value={form.values.confirmNewPassword}
-              onChange={form.handleChange}
-            />
-          </div>
+          <FormField
+            control={form.control}
+            name="confirmNewPassword"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Nhập lại</FormLabel>
+                <FormControl>
+                  <Input
+                    type="password"
+                    disabled={loading}
+                    placeholder="Nhập lại mật khẩu mới ..."
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-          <div className="mt-6 flex ">
-            <Button type="submit" disable={onRequest} className="ml-auto px-6 ">
-              Lưu
+          <div className="flex w-full justify-end">
+            <Button disabled={loading} type="submit">
+              {loading && <Spinner className="text-white" />}
+              {action}
             </Button>
           </div>
         </form>
-      </div>
-    </div>
+      </Form>
+    </>
   )
 }
 

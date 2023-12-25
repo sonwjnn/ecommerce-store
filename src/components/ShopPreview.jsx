@@ -1,4 +1,4 @@
-import dayjs from 'dayjs'
+import { format } from 'date-fns'
 import { LuStore } from 'react-icons/lu'
 import { useNavigate } from 'react-router-dom'
 
@@ -63,7 +63,7 @@ const ShopPreview = ({ product }) => {
                   </p>
                   <p className="text-sm  text-[#242424]">
                     <span className="font-medium">Ngày tạo: </span>
-                    {dayjs(product?.shopId?.createdAt).format('DD-MM-YYYY')}
+                    {format(product?.shopId?.createdAt, 'dd/MM/yyyy')}
                   </p>
                 </>
               ) : (

@@ -46,18 +46,18 @@ const UserDropdown = () => {
         alignOffset={11}
         forceMount
       >
-        <div className="flex items-center gap-x-2 p-2">
-          <div className="rounded-md bg-accent p-1">
-            <Avatar className="h-8 w-8">
+        <div className=" flex min-w-0 items-center gap-x-2 p-2">
+          <div className="rounded-md p-1">
+            <Avatar className="size-8">
               <AvatarImage src={user?.imageUrl} />
               <AvatarFallback>
-                <UserIcon />
+                <UserIcon size={32} />
               </AvatarFallback>
             </Avatar>
           </div>
-          <div className="space-y-1">
-            <p className="line-clamp-1 text-sm">{user?.name}</p>
-          </div>
+          <span className="line-clamp-1 text-pretty text-start font-medium">
+            {user?.name}
+          </span>
         </div>
         <DropdownMenuSeparator />
         <DropdownMenuItem

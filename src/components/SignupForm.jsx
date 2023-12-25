@@ -1,147 +1,177 @@
 import userApi from '@/apis/modules/user.api'
 import { setUser } from '@/redux/features/userSlice'
-import { useFormik } from 'formik'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import * as Yup from 'yup'
+import * as z from 'zod'
 
 import { Spinner } from './spinner'
 import { Button } from './ui/button'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from './ui/form'
+import { Heading } from './ui/heading'
 import { Input } from './ui/input'
+import { Separator } from './ui/seperator'
 
-const SignupForm = () => {
+const formSchema = z.object({
+  displayName: z.string().min(8, 'password minimum 8 character'),
+  username: z.string().min(8, 'password minimum 8 character'),
+  password: z.string().min(8, 'new password minimum 8 character'),
+  confirmPassword: z.string().min(8, 'new password minimum 8 character'),
+})
+
+const SigninForm = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [isLoginRequest, setIsLoginRequest] = useState(false)
-  const [errorMessage, setErrorMessage] = useState()
-  const history = useNavigate()
   const authPage = value => {
-    history(`/auth/${value}`)
+    navigate(`/auth/${value}`)
   }
-  const signupForm = useFormik({
-    initialValues: {
-      displayName: '',
-      username: '',
-      password: '',
-      confirmPassword: '',
-    },
-    validationSchema: Yup.object({
-      displayName: Yup.string()
-        .min(8, 'display name minimum 8 character')
-        .required('display name is required'),
-      username: Yup.string()
-        .min(8, 'user name minimum 8 character')
-        .required('user name is required'),
-      password: Yup.string()
-        .min(8, 'password minimum 8 character')
-        .required('password is required'),
-      confirmPassword: Yup.string()
-        .oneOf([Yup.ref('password')], 'confirm new password not match')
-        .min(8, 'confirm password minimum 8 character')
-        .required('confirm password is required'),
-    }),
-    onSubmit: async values => {
-      setErrorMessage(undefined)
-      setIsLoginRequest(true)
-      const { response, error } = await userApi.signup(values)
-      setIsLoginRequest(false)
+  const [loading, setLoading] = useState(false)
+
+  const title = 'Đăng kí'
+  const description = 'Đăng kí tài khoản cho bạn'
+  const toastMessage = 'Signup success!'
+  const action = 'Đăng kí'
+
+  const defaultValues = {
+    displayName: '',
+    username: '',
+    password: '',
+    confirmPassword: '',
+  }
+
+  const form = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues,
+  })
+
+  const onSubmit = async values => {
+    try {
+      if (loading) return
+      setLoading(true)
+      const { response } = await userApi.signup(values)
 
       if (response) {
-        signupForm.resetForm()
         dispatch(setUser(response))
+        toast.success(toastMessage)
 
         setTimeout(() => {
           navigate('/')
         }, 2000)
-        toast.success('Sign up success')
       }
+    } catch (error) {
+      toast.error(error)
+    } finally {
+      setLoading(false)
+    }
+  }
 
-      if (error) setErrorMessage(error.message)
-    },
-  })
   return (
-    <form onSubmit={signupForm.handleSubmit}>
-      <h1 className="mb-6 text-[22px]">Đăng Kí</h1>
-
-      <div className="mb-5 mt-2">
-        <Input
-          type="text"
-          name="displayName"
-          placeholder="Display name"
-          id="displayName"
-          value={signupForm.values.displayName}
-          onChange={signupForm.handleChange}
-        />
-        {!isLoginRequest && signupForm.errors.displayName && (
-          <p className="errMsg ">{signupForm.errors.displayName}</p>
-        )}
-      </div>
-
-      <div className="mb-5 mt-2">
-        <Input
-          type="text"
-          name="username"
-          placeholder="User name"
-          id="username"
-          autoComplete="given-name"
-          value={signupForm.values.username}
-          onChange={signupForm.handleChange}
-        />
-        {!isLoginRequest &&
-          ((signupForm.errors.username && (
-            <p className="errMsg ">{signupForm.errors.username}</p>
-          )) ||
-            (errorMessage && <p className="errMsg ">{errorMessage}</p>))}
-      </div>
-
-      <div className="mb-5 mt-2">
-        <Input
-          type="password"
-          placeholder="Password"
-          name="password"
-          id="password"
-          value={signupForm.values.password}
-          onChange={signupForm.handleChange}
-        />
-        {!isLoginRequest && signupForm.errors.password && (
-          <p className="errMsg ">{signupForm.errors.password}</p>
-        )}
-      </div>
-
-      <div className="mt-2">
-        <Input
-          type="password"
-          placeholder="Confirm password"
-          name="confirmPassword"
-          id="confirmPassword"
-          value={signupForm.values.confirmPassword}
-          onChange={signupForm.handleChange}
-        />
-        {!isLoginRequest && signupForm.errors.confirmPassword && (
-          <p className="errMsg ">{signupForm.errors.confirmPassword}</p>
-        )}
-      </div>
-
-      <div className="mt-6 flex flex-col gap-4">
-        <Button className="uppercase" type="submit" disable={isLoginRequest}>
-          <div className="mr-2">
-            {isLoginRequest ? <Spinner size="lg" /> : ''}
-          </div>
-          đăng ký
-        </Button>
-
-        <Button
-          className="uppercase"
-          variant="outline"
-          onClick={() => authPage('signin')}
+    <>
+      <Heading className="px-0 py-0" title={title} description={description} />
+      <Separator />
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="w-full space-y-4"
         >
-          đăng nhập
-        </Button>
-      </div>
-    </form>
+          <FormField
+            control={form.control}
+            name="displayName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Tên user</FormLabel>
+                <FormControl>
+                  <Input
+                    disabled={loading}
+                    placeholder="Nhập tên user ..."
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="username"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Tên tài khoản</FormLabel>
+                <FormControl>
+                  <Input
+                    disabled={loading}
+                    placeholder="Nhập tài khoản ..."
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Mật khẩu</FormLabel>
+                <FormControl>
+                  <Input
+                    type="password"
+                    disabled={loading}
+                    placeholder="Nhập mật khẩu ..."
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="confirmPassword"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Nhập lại mật khẩu</FormLabel>
+                <FormControl>
+                  <Input
+                    type="password"
+                    disabled={loading}
+                    placeholder="Nhập lại mật khẩu ..."
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <div className="mt-6 flex flex-col gap-4">
+            <Button type="submit" disable={loading}>
+              {loading && <Spinner className="text-white" />}
+              {action}
+            </Button>
+
+            <Button variant="outline" onClick={() => authPage('signin')}>
+              Đăng nhập
+            </Button>
+          </div>
+        </form>
+      </Form>
+    </>
   )
 }
 
-export default SignupForm
+export default SigninForm

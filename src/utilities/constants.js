@@ -54,3 +54,9 @@ export const formatPriceToVND = price => {
   })
   return formatter.format(price)
 }
+
+export const SHIPPING_PRICE = [
+  { name: 'Free', price: 0 },
+  { name: 'Standard', price: 5000 },
+  { name: 'Express', price: 10000 },
+]

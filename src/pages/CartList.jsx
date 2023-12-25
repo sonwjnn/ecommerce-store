@@ -2,6 +2,7 @@ import cartApi from '@/apis/modules/cart.api'
 import CartItem from '@/components/CartItem'
 import { Button } from '@/components/ui/button'
 import Container from '@/components/ui/container'
+import { Heading } from '@/components/ui/heading'
 import { removeCarts } from '@/redux/features/userSlice'
 import { setCheckedCarts as setCheckedCartsStore } from '@/redux/features/userSlice'
 import { formatPriceToVND } from '@/utilities/constants'
@@ -112,9 +113,7 @@ const CartList = () => {
 
   return (
     <Container>
-      <h1 className="mt-4 px-2 py-4 text-2xl  font-medium text-[#242424] lg:mt-12">
-        Giỏ Hàng
-      </h1>
+      <Heading title="Giỏ hàng" description={'Danh sách sản phẩm trong giỏ.'} />
       <div className=" hidden min-h-[40px]  w-full   grid-cols-list-6  rounded-md  bg-white px-6 py-4 text-base text-gray-500 md:grid">
         <div></div>
         <div>Tất cả sản phẩm</div>

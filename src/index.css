@@ -50,10 +50,6 @@
   }
 }
 
-@layer base {
-  :root {
-  }
-}
 @layer components {
   .border-right-ab {
     @apply after:absolute after:bottom-0 after:right-0 after:top-0 after:w-[1px] after:bg-gray-300;
@@ -100,6 +96,9 @@
 
   .star {
     @apply text-[13px] text-yellow-500;
+  }
+  .user-nav-item {
+    @apply flex items-center gap-3 hover:bg-neutral-900 hover:bg-opacity-10 active:scale-100;
   }
 }
 
