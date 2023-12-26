@@ -4,13 +4,7 @@ import { SwiperSlide } from 'swiper/react'
 import SwiperProvider from '../providers/SwiperProvider'
 
 const HomeSlider = () => {
-  const images = [
-    'banner_1.jpg',
-    'banner_2.jpg',
-    'banner_3.jpg',
-    'banner_4.jpg',
-    'banner_5.jpg',
-  ]
+  const images = ['banner_3.jpg', 'banner_4.jpg']
   return (
     <SwiperProvider>
       {images.map((link, index) => {

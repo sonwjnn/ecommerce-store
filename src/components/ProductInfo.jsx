@@ -214,7 +214,7 @@ const ProductInfo = props => {
                     <div className="hidden items-center gap-4 py-2 md:flex">
                       <span className="text-gray-500 ">vận chuyển tới</span>
                       <span>
-                        {`${user?.district}, ${user?.city}`}
+                        {`${user?.district || ''}, ${user?.citya || ''}`}
                         {/* <i className="ti-angle-down ml-2"></i> */}
                       </span>
                     </div>
