@@ -168,7 +168,7 @@ const OrderDetails = () => {
               </div>
             )}
           </div>
-          <div className="flex-[33%] gap-y-2 rounded-md bg-white px-4 pb-4 pt-2">
+          <div className="flex-[33%] gap-y-2 rounded-md bg-white px-4 pb-4  pt-2">
             {order ? (
               <h2 className="mb-4 border-b border-b-gray-200 py-2 text-lg font-medium text-[#242424]">
                 Thanh toán
@@ -179,22 +179,28 @@ const OrderDetails = () => {
               </div>
             )}
             {order ? (
-              <>
+              <div className="flex flex-col gap-y-2">
                 <div className=" flex items-center text-base md:text-sm">
                   <p className=" font-medium capitalize text-gray-500">
-                    Subtotal
+                    Tổng ban đầu
                   </p>
                   <p className="ml-auto text-[#242424]">
-                    {formatPriceToVND(order?.total)}
+                    {formatPriceToVND(
+                      order?.products.reduce(
+                        (acc, product) =>
+                          acc + product.price * product.quantity,
+                        0
+                      )
+                    )}
                   </p>
                 </div>
 
                 <div className=" flex items-center text-base md:text-sm">
                   <p className="font-medium capitalize text-gray-500">
-                    Shipping & Handling
+                    Phí vận chuyển:
                   </p>
                   <p className="ml-auto text-[#242424]">
-                    {formatPriceToVND(0)}
+                    {formatPriceToVND(order?.shippingPrice)}
                   </p>
                 </div>
 
@@ -202,11 +208,11 @@ const OrderDetails = () => {
                   <p className="font-medium capitalize text-gray-500">
                     Tổng cộng
                   </p>
-                  <p className=" ml-auto  text-[#242424]">
+                  <p className=" ml-auto text-2xl font-semibold text-primary">
                     {formatPriceToVND(order?.total)}
                   </p>
                 </div>
-              </>
+              </div>
             ) : (
               <div className="mt-4 flex flex-col gap-y-3">
                 <Skeleton className="h-[20px] w-full" />

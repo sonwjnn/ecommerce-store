@@ -65,7 +65,7 @@ const SigninForm = () => {
         }, 2000)
       }
     } catch (error) {
-      toast.error(error)
+      toast.error(error.message)
     } finally {
       setLoading(false)
     }

@@ -3,6 +3,7 @@ import privateClient from '../client/private.client'
 const orderEndpoints = {
   list: 'user/orders',
   add: 'user/orders',
+  addCOD: 'user/orders/cod',
   detail: ({ orderId }) => `user/order/${orderId}`,
   remove: ({ orderId }) => `user/orders/${orderId}`,
   removeOrders: `user/orders`,
@@ -19,11 +20,19 @@ const orderApi = {
     }
   },
 
-  add: async ({ products }) => {
+  add: async values => {
     try {
-      const response = await privateClient.post(orderEndpoints.add, {
-        products,
-      })
+      const response = await privateClient.post(orderEndpoints.add, values)
+      return { response }
+    } catch (error) {
+      return { error }
+    }
+  },
+
+  addCOD: async values => {
+    try {
+      console.log(values)
+      const response = await privateClient.post(orderEndpoints.addCOD, values)
       return { response }
     } catch (error) {
       return { error }

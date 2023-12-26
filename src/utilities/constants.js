@@ -56,7 +56,12 @@ export const formatPriceToVND = price => {
 }
 
 export const SHIPPING_PRICE = [
-  { name: 'Free', price: 0 },
-  { name: 'Standard', price: 5000 },
-  { name: 'Express', price: 10000 },
+  { name: 'Miễn phí', price: 0 },
+  { name: 'Tiêu chuẩn', price: 5000 },
+  { name: 'Hỏa tốc', price: 10000 },
+]
+
+export const PAYMENTS = [
+  { name: 'Thanh toán khi nhận hàng', value: 'COD' },
+  { name: 'Thanh toán qua Stripe', value: 'PREPAID' },
 ]

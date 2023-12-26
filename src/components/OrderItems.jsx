@@ -1,4 +1,5 @@
 import orderApi from '@/apis/modules/order.api'
+import { formatPriceToVND } from '@/utilities/constants'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { LuTrash } from 'react-icons/lu'
@@ -44,7 +45,9 @@ const OrderItem = ({ item }) => {
             <span className="line-clamp-1 text-[#242424] md:line-clamp-2">
               {item?.name}
             </span>
-            <span className="text-[#242424]">{item?.price}</span>
+            <span className="text-[#242424]">
+              {formatPriceToVND(item?.price)}
+            </span>
             <span className="block text-[#242424] md:hidden">
               <span className="font-medium text-gray-500">Trạng thái: </span>{' '}
               {item?.status}
@@ -56,7 +59,7 @@ const OrderItem = ({ item }) => {
 
             <span className="block text-[#242424] sm:hidden">
               <span className="font-medium text-gray-500">Tổng: </span>{' '}
-              {item?.totalPrice}
+              {formatPriceToVND(item?.totalPrice)}
             </span>
           </div>
         </div>
@@ -69,7 +72,7 @@ const OrderItem = ({ item }) => {
         </div>
 
         <div className="hidden text-center text-sm text-[#242424] sm:block">
-          {item?.totalPrice}
+          {formatPriceToVND(item?.totalPrice)}
         </div>
       </div>
 

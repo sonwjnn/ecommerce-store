@@ -5,60 +5,101 @@ import Container from '@/components/ui/container'
 import { Heading } from '@/components/ui/heading'
 import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { Separator } from '@/components/ui/seperator'
 import { clearCheckedCarts } from '@/redux/features/userSlice'
-import { SHIPPING_PRICE, formatPriceToVND } from '@/utilities/constants'
+import {
+  PAYMENTS,
+  SHIPPING_PRICE,
+  formatPriceToVND,
+} from '@/utilities/constants'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { FaCircleCheck } from 'react-icons/fa6'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import * as z from 'zod'
+
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '../components/ui/form'
+
+const formSchema = z.object({
+  shipping: z.coerce.number().min(0),
+  payment: z.string().min(1, 'payment minimum 8 character'),
+})
 
 const CheckoutPage = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { user, checkedCarts } = useSelector(state => state.user)
-  const [onRequest, setOnRequest] = useState(false)
+  const [loading, setLoading] = useState(false)
   const location = useLocation()
   const queryParams = new URLSearchParams(location.search)
   const orderId = queryParams.get('orderId')
   const canceled = queryParams.get('canceled')
   const success = queryParams.get('success')
+  const [totalPrice, setTotalPrice] = useState(0)
 
-  const handlePayment = async () => {
-    if (!user?.address || !user?.district || !user?.city) {
-      toast.error('You must add your address first!', {
-        toastId: 'warning-address',
-      })
-      return navigate('/user/account/profile')
-    }
+  const defaultValues = {
+    shipping: SHIPPING_PRICE[0].price,
+    payment: PAYMENTS[0].value,
+  }
 
-    if (!checkedCarts?.length) {
-      toast.error('You must choose at least one product!')
-      return
-    }
-    if (onRequest) return
+  const form = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues,
+  })
 
-    setOnRequest(true)
+  const shipping = form.watch('shipping')
 
-    const body = {
-      products: checkedCarts?.map(product => ({
-        productId: product.productId.id,
-        images: product.productId.images,
-        shopId: product.productId.shopId,
-        name: product.productId.name,
-        price: product.totalPrice,
-        quantity: product.quantity,
-      })),
-    }
+  const onSubmit = async values => {
+    try {
+      if (!user?.address || !user?.district || !user?.city) {
+        toast.error('You must add your address first!', {
+          toastId: 'warning-address',
+        })
+        return navigate('/user/account/profile')
+      }
 
-    const { response, err } = await orderApi.add(body)
+      if (!checkedCarts?.length) {
+        toast.error('You must choose at least one product!')
+        return
+      }
+      if (loading) return
 
-    setOnRequest(false)
+      setLoading(true)
 
-    if (err) toast.error(err.message)
+      const body = {
+        products: checkedCarts?.map(product => ({
+          productId: product.productId.id,
+          images: product.productId.images,
+          shopId: product.productId.shopId,
+          name: product.productId.name,
+          price: product.totalPrice,
+          quantity: product.quantity,
+        })),
+        shippingPrice: values.shipping,
+      }
 
-    if (response) {
-      window.location = response.url
+      const { response } =
+        values.payment === 'COD'
+          ? await orderApi.addCOD(body)
+          : await orderApi.add(body)
+
+      if (response) {
+        navigate(`/checkout?orderId=${response?.id}&success=1`)
+      }
+    } catch (error) {
+      toast.error(error.message)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -67,6 +108,17 @@ const CheckoutPage = () => {
       dispatch(clearCheckedCarts())
     }
   }, [success, canceled])
+
+  useEffect(() => {
+    if (shipping !== undefined) {
+      setTotalPrice(
+        checkedCarts.reduce(
+          (currValue, item) => item.totalPrice + currValue,
+          0
+        ) + shipping
+      )
+    }
+  }, [shipping])
 
   return (
     <Container>
@@ -148,44 +200,20 @@ const CheckoutPage = () => {
                   </Link>
                 </div>
 
-                <div className="text-base text-gray-500">
-                  {checkedCarts.length || 0} sản phẩm
-                </div>
-
-                <div className="flex items-center gap-x-2">
-                  <span className="text-base text-gray-500 ">Tổng phụ :</span>
-                  <span className="flex items-start text-sm font-medium text-[#242424]  lg:text-base">
-                    {formatPriceToVND(
-                      checkedCarts.reduce(
-                        (currValue, item) => item.totalPrice + currValue,
-                        0
-                      )
-                    )}
+                <div className="flex items-center justify-between pr-2">
+                  <span className="text-sm font-medium text-[#242424]">
+                    Số lượng sản phẩm:
+                  </span>
+                  <span className="flex items-start text-sm font-medium text-[#242424] ">
+                    {checkedCarts.length || 0}
                   </span>
                 </div>
 
-                <div className="flex  gap-x-2">
-                  <span className="text-base text-gray-500 ">Vận chuyển :</span>
-
-                  <RadioGroup defaultValue={SHIPPING_PRICE[0].price}>
-                    {SHIPPING_PRICE.map(item => (
-                      <div
-                        key={item.name}
-                        className="flex  items-center space-x-2"
-                      >
-                        <RadioGroupItem value={item.price} id={item.name} />
-                        <Label htmlFor={item.name}>{item.name}</Label>
-                        <Label className="ml-auto" htmlFor={item.name}>
-                          {formatPriceToVND(item.price)}
-                        </Label>
-                      </div>
-                    ))}
-                  </RadioGroup>
-                </div>
-
-                <div className="flex items-center gap-x-2">
-                  <span className="text-base text-gray-500 ">Tổng tiền :</span>
-                  <span className="flex items-start text-xl font-semibold text-primary  lg:text-2xl">
+                <div className="flex items-center justify-between gap-x-2 pr-2">
+                  <span className="text-sm font-medium text-[#242424]">
+                    Tổng phụ :
+                  </span>
+                  <span className="flex items-start text-sm font-medium text-[#242424] ">
                     {formatPriceToVND(
                       checkedCarts.reduce(
                         (currValue, item) => item.totalPrice + currValue,
@@ -195,17 +223,106 @@ const CheckoutPage = () => {
                   </span>
                 </div>
               </div>
-              <Button
-                onClick={handlePayment}
-                variant="secondary"
-                className="w-full text-base capitalize"
-                disable={onRequest}
-              >
-                <div className="mr-2">
-                  {onRequest ? <Spinner size="lg" /> : ''}
-                </div>
-                Đặt hàng
-              </Button>
+
+              <Form {...form}>
+                <form
+                  onSubmit={form.handleSubmit(onSubmit)}
+                  className="w-full space-y-4"
+                >
+                  <FormField
+                    control={form.control}
+                    name="shipping"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Vận chuyển:</FormLabel>
+                        <FormControl>
+                          <RadioGroup
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                            className="flex flex-col justify-center gap-y-4 px-2"
+                          >
+                            {SHIPPING_PRICE.map(item => (
+                              <FormItem
+                                key={item.name}
+                                className=" flex items-center gap-x-3"
+                              >
+                                <FormControl>
+                                  <RadioGroupItem value={item.price} />
+                                </FormControl>
+
+                                <FormLabel
+                                  className="!m-0 flex w-full items-center justify-between"
+                                  htmlFor={item.name}
+                                >
+                                  <div>{item.name}</div>
+                                  <div>{formatPriceToVND(item.price)}</div>
+                                </FormLabel>
+                              </FormItem>
+                            ))}
+                          </RadioGroup>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="payment"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Phương thức thanh toán:</FormLabel>
+                        <FormControl>
+                          <RadioGroup
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                            className="flex flex-col justify-center gap-y-4 px-2"
+                          >
+                            {PAYMENTS.map(item => (
+                              <FormItem
+                                key={item.name}
+                                className=" flex items-center gap-x-3"
+                              >
+                                <FormControl>
+                                  <RadioGroupItem value={item.value} />
+                                </FormControl>
+
+                                <FormLabel
+                                  className="!m-0 flex w-full items-center "
+                                  htmlFor={item.name}
+                                >
+                                  <div>{item.name}</div>
+                                </FormLabel>
+                              </FormItem>
+                            ))}
+                          </RadioGroup>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <Separator />
+
+                  <div className="flex items-center justify-between gap-x-2 pr-2">
+                    <span className="text-sm font-medium text-[#242424]">
+                      Tổng tiền :
+                    </span>
+                    <span className="flex items-start text-xl font-semibold text-primary  lg:text-2xl">
+                      {formatPriceToVND(totalPrice)}
+                    </span>
+                  </div>
+
+                  <div className="mt-6 flex flex-col gap-4">
+                    <Button variant="secondary" type="submit" disable={loading}>
+                      <div className="mr-2">
+                        {loading ? <Spinner size="lg" /> : ''}
+                      </div>
+                      Đặt hàng
+                    </Button>
+                  </div>
+                </form>
+              </Form>
             </div>
           </div>
         </div>

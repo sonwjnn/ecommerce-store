@@ -34,7 +34,7 @@ const AccountPage = () => {
   ]
 
   return (
-    <Container className="mt-8">
+    <Container className="mt-4">
       <Heading
         title="Tài khoản"
         description="Trang quản lí tài khoản của bạn."
