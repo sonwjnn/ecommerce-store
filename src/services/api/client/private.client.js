@@ -1,26 +1,27 @@
 import axios from 'axios'
 import queryString from 'query-string'
 
-// const baseURL = 'http://localhost:8017/'
-const baseURL = 'https://admin-shopee-clone.onrender.com/'
+const baseURL = 'http://localhost:8017/'
+// const baseURL = 'https://admin-shopee-clone.onrender.com/'
 
-const publicClient = axios.create({
+const privateClient = axios.create({
   baseURL,
   paramsSerializer: {
     encode: params => queryString.stringify(params),
   },
 })
 
-publicClient.interceptors.request.use(async config => {
+privateClient.interceptors.request.use(async config => {
   return {
     ...config,
     headers: {
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('actkn')}`,
     },
   }
 })
 
-publicClient.interceptors.response.use(
+privateClient.interceptors.response.use(
   response => {
     if (response && response.data) return response.data
     return response
@@ -30,4 +31,4 @@ publicClient.interceptors.response.use(
   }
 )
 
-export default publicClient
+export default privateClient

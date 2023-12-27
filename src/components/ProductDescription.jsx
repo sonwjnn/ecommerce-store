@@ -1,6 +1,6 @@
 // import parse from 'html-react-parser'
 import { useComponentSize } from '@/hooks/useComponentSize'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/helpers'
 import { useRef, useState } from 'react'
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md'
 import { Link } from 'react-router-dom'

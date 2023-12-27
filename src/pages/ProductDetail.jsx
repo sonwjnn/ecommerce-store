@@ -1,17 +1,16 @@
-import productApi from '@/apis/modules/product.api'
 import LikeButton from '@/components/LikeButton'
 import ProductDescription from '@/components/ProductDescription'
 import ProductInfo from '@/components/ProductInfo'
 import ReviewImages from '@/components/ReviewImages'
 import ReviewList from '@/components/ReviewList'
 import ShopPreview from '@/components/ShopPreview'
-import { Button } from '@/components/ui/button'
 import Container from '@/components/ui/container'
 import { Skeleton } from '@/components/ui/skeleton'
-import { socialNetworkLinks } from '@/utilities/constants'
+import productApi from '@/services/api/modules/product.api'
+import { socialNetworkLinks } from '@/utils/constants'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 const ProductDetail = () => {
@@ -23,6 +22,8 @@ const ProductDetail = () => {
   const [reviews, setReviews] = useState([])
   const [starCount, setStarCount] = useState([])
 
+  const [isFavorite, setIsFavorite] = useState(false)
+
   useEffect(() => {
     const getProduct = async () => {
       const { response, err } = await productApi.getDetail({
@@ -31,6 +32,7 @@ const ProductDetail = () => {
 
       if (response) {
         setProduct(response)
+        setIsFavorite(response.isFavorite)
         setReviews(response.reviews)
       }
 
@@ -88,7 +90,11 @@ const ProductDetail = () => {
                       </div>
 
                       <div className="flex items-center gap-x-2">
-                        <LikeButton product={product} />
+                        <LikeButton
+                          product={product}
+                          isFavorite={isFavorite}
+                          setIsFavorite={setIsFavorite}
+                        />
                         <span className="text-base capitalize">
                           đã thích ({favoriteCount})
                         </span>

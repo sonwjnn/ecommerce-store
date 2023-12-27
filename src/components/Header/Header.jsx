@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/helpers'
 import { useLocation, useParams } from 'react-router-dom'
 
 import HeaderContent from './HeaderContent/HeaderContent'

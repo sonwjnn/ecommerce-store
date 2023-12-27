@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/helpers'
 import * as React from 'react'
 
 const Input = React.forwardRef(({ className, type, ...props }, ref) => {

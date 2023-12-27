@@ -1,4 +1,3 @@
-import shopApi from '@/apis/modules/shop.api'
 import {
   Select,
   SelectContent,
@@ -6,8 +5,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { updateShop } from '@/redux/features/userSlice'
-import { districts, provinces } from '@/utilities/provinceCity'
+import shopApi from '@/services/api/modules/shop.api'
+import { updateShop } from '@/services/redux/features/userSlice'
+import { districts, provinces } from '@/utils/provinceCity'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -229,6 +229,37 @@ const ShopForm = ({ initialData }) => {
           </div>
         </form>
       </Form>
+
+      <select onChange={handleCityChange}>
+        <option value="">Chọn thành phố</option>
+        {provinces.map(province => (
+          <option key={province.code} value={province.name}>
+            {province.name}
+          </option>
+        ))}
+      </select>
+
+      {currentCity && (
+        <select onChange={handleDistrictChange}>
+          <option value="">Chọn quận huyện</option>
+          {currentCity.districts.map(district => (
+            <option key={district.code} value={district.name}>
+              {district.name}
+            </option>
+          ))}
+        </select>
+      )}
+
+      {currentDistrict && (
+        <select>
+          <option value="">Chọn xã</option>
+          {currentDistrict.wards.map(ward => (
+            <option key={ward.code} value={ward.name}>
+              {ward.name}
+            </option>
+          ))}
+        </select>
+      )}
     </>
   )
 }

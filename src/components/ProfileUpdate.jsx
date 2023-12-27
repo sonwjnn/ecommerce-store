@@ -1,4 +1,3 @@
-import userApi from '@/apis/modules/user.api'
 import {
   Select,
   SelectContent,
@@ -6,9 +5,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { cn } from '@/lib/utils'
-import { updateUser } from '@/redux/features/userSlice'
-import { districts, provinces } from '@/utilities/provinceCity'
+import userApi from '@/services/api/modules/user.api'
+import { updateUser } from '@/services/redux/features/userSlice'
+import { cn } from '@/utils/helpers'
+import { districts, provinces } from '@/utils/provinceCity'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { format } from 'date-fns'
 import { useEffect, useState } from 'react'

@@ -1,16 +1,16 @@
-import cartApi from '@/apis/modules/cart.api'
-import favoriteApi from '@/apis/modules/favorite.api'
-import shopApi from '@/apis/modules/shop.api'
-import userApi from '@/apis/modules/user.api'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header/Header'
 import NavigateMobile from '@/components/NavigateMobile'
+import cartApi from '@/services/api/modules/cart.api'
+import favoriteApi from '@/services/api/modules/favorite.api'
+import shopApi from '@/services/api/modules/shop.api'
+import userApi from '@/services/api/modules/user.api'
 import {
   setListCarts,
   setListFavorites,
   setShop,
   setUser,
-} from '@/redux/features/userSlice'
+} from '@/services/redux/features/userSlice'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Outlet } from 'react-router-dom'

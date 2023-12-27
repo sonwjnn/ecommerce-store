@@ -1,4 +1,4 @@
-import { socialNetworkLinks } from '@/utilities/constants'
+import { socialNetworkLinks } from '@/utils/constants'
 import { LuStore } from 'react-icons/lu'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'

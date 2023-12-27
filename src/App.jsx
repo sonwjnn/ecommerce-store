@@ -10,8 +10,8 @@ import ProductList from './components/ProductList'
 import CategoryLayout from './layouts/CategoryLayout'
 import MainLayout from './layouts/MainLayout'
 import ShopLayout from './layouts/ShopLayout'
-import { ToasterProvider } from './providers/ToasterProvider'
 import routes from './routes/routes'
+import { ToasterProvider } from './services/providers/ToasterProvider'
 import '/public/css/styles.css'
 
 const renderRoute = (route, index) => {

@@ -8,13 +8,11 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import Container from '@/components/ui/container'
 import { Heading } from '@/components/ui/heading'
-import { cn } from '@/lib/utils'
-import { useState } from 'react'
+import { cn } from '@/utils/helpers'
 import {
   LuBox,
   LuChevronDown,
   LuHeart,
-  LuStar,
   LuStore,
   LuUserCircle2,
 } from 'react-icons/lu'
@@ -23,10 +21,8 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 
 const AccountPage = () => {
   const { user, shop } = useSelector(state => state.user)
-  const [activeAccount, setActiveAccount] = useState(null)
   const navigate = useNavigate()
   const { accountType, authCate } = useParams()
-  console.log(authCate, accountType)
 
   const actionsAccount = [
     ['profile', 'hồ sơ'],
@@ -86,7 +82,6 @@ const AccountPage = () => {
                       'active underline': accountType === action[0],
                     }
                   )}
-                  onClick={() => setActiveAccount(index)}
                 >
                   {action[1]}
                 </Link>

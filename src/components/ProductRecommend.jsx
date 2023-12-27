@@ -1,4 +1,4 @@
-import productApi from '@/apis/modules/product.api'
+import productApi from '@/services/api/modules/product.api'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { useDispatch } from 'react-redux'

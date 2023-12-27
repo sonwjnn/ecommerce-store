@@ -1,7 +1,7 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/helpers'
 import { SwiperSlide } from 'swiper/react'
 
-import SwiperProvider from '../providers/SwiperProvider'
+import SwiperProvider from '../services/providers/SwiperProvider'
 
 const HomeSlider = () => {
   const images = ['banner_3.jpg', 'banner_4.jpg']

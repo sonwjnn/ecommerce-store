@@ -1,5 +1,5 @@
-import userApi from '@/apis/modules/user.api'
-import { setUser } from '@/redux/features/userSlice'
+import userApi from '@/services/api/modules/user.api'
+import { setUser } from '@/services/redux/features/userSlice'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'

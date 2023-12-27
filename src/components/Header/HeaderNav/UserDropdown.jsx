@@ -7,7 +7,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { setUser } from '@/redux/features/userSlice'
+import { setUser } from '@/services/redux/features/userSlice'
 import { LuBox, LuHeart, LuLogOut, LuMenu, LuUserCircle2 } from 'react-icons/lu'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -41,22 +41,25 @@ const UserDropdown = () => {
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        className="w-50"
+        className="min-w-[280px] max-w-[280px]"
         align="end"
         alignOffset={11}
         forceMount
       >
         <div className=" flex min-w-0 items-center gap-x-2 p-2">
-          <div className="rounded-md p-1">
-            <Avatar className="size-8">
+          <div className="rounded-md ">
+            <Avatar className="size-10">
               <AvatarImage src={user?.imageUrl} />
               <AvatarFallback>
-                <UserIcon size={32} />
+                <UserIcon size={50} />
               </AvatarFallback>
             </Avatar>
           </div>
-          <span className="line-clamp-1 text-pretty text-start font-medium">
-            {user?.name}
+          <span className="text-pretty text-start font-medium">
+            <p className="line-clamp-1 ">{user?.name}</p>
+            <p className="line-clamp-1 text-xs">
+              ID: <span className="font-normal">{user?.id}</span>
+            </p>
           </span>
         </div>
         <DropdownMenuSeparator />

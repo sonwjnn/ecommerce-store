@@ -1,5 +1,5 @@
-import reviewApi from '@/apis/modules/review.api'
-import { cn } from '@/lib/utils'
+import reviewApi from '@/services/api/modules/review.api'
+import { cn } from '@/utils/helpers'
 import { useEffect, useRef, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { BsFillSendFill } from 'react-icons/bs'

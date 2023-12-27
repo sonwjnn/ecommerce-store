@@ -1,4 +1,4 @@
-import { formatPriceToVND } from '@/utilities/constants'
+import { formatPriceToVND } from '@/utils/formatting'
 
 import { Alert } from './alert'
 

@@ -1,4 +1,4 @@
-import { setAppState } from '@/redux/features/appStateSlice.js'
+import { setAppState } from '@/services/redux/features/appStateSlice.js'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 

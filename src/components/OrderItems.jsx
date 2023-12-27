@@ -1,5 +1,5 @@
-import orderApi from '@/apis/modules/order.api'
-import { formatPriceToVND } from '@/utilities/constants'
+import orderApi from '@/services/api/modules/order.api'
+import { formatPriceToVND } from '@/utils/formatting'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { LuTrash } from 'react-icons/lu'

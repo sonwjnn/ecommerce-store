@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/helpers'
 import { cva } from 'class-variance-authority'
 import { LuLoader2 } from 'react-icons/lu'
 

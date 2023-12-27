@@ -1,6 +1,6 @@
-import { cn } from '@/lib/utils'
-import { formatPriceToVND } from '@/utilities/constants'
-import favoriteUtils from '@/utilities/favorite.utils'
+import { formatPriceToVND } from '@/utils/formatting'
+import { cn } from '@/utils/helpers'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { twMerge } from 'tailwind-merge'
@@ -12,14 +12,21 @@ import { LazyImage } from './ui/lazy-image'
 const ProductCard = ({ product, className }) => {
   const navigate = useNavigate()
   const { listFavorites } = useSelector(state => state.user)
-  const isFavorite = favoriteUtils.check({
-    listFavorites,
-    productId: product?.id,
-  })
+  const [isFavorite, setIsFavorite] = useState(false)
 
   const handleClick = () => {
     return navigate(`/products/detail/${product?.id}`)
   }
+
+  useEffect(() => {
+    if (listFavorites.length) {
+      const isFavorite = listFavorites.some(
+        e => e.productId?._id === product?.id
+      )
+
+      setIsFavorite(isFavorite)
+    }
+  }, [listFavorites])
 
   return (
     <div
@@ -62,6 +69,8 @@ const ProductCard = ({ product, className }) => {
             'opacity-100': isFavorite,
           })}
           product={{ ...product, isFavorite }}
+          setIsFavorite={setIsFavorite}
+          isFavorite={isFavorite}
         />
       </div>
     </div>

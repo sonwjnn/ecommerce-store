@@ -1,17 +1,13 @@
-import orderApi from '@/apis/modules/order.api'
 import { Spinner } from '@/components/spinner'
 import { Button } from '@/components/ui/button'
 import Container from '@/components/ui/container'
 import { Heading } from '@/components/ui/heading'
-import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Separator } from '@/components/ui/seperator'
-import { clearCheckedCarts } from '@/redux/features/userSlice'
-import {
-  PAYMENTS,
-  SHIPPING_PRICE,
-  formatPriceToVND,
-} from '@/utilities/constants'
+import orderApi from '@/services/api/modules/order.api'
+import { clearCheckedCarts } from '@/services/redux/features/userSlice'
+import { PAYMENTS, SHIPPING_PRICE } from '@/utils/constants'
+import { formatPriceToVND } from '@/utils/formatting'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -94,7 +90,11 @@ const CheckoutPage = () => {
           : await orderApi.add(body)
 
       if (response) {
-        navigate(`/checkout?orderId=${response?.id}&success=1`)
+        if (values.payment === 'COD') {
+          navigate(`/checkout?orderId=${response?.id}&success=1`)
+        } else {
+          window.location.href = response?.url
+        }
       }
     } catch (error) {
       toast.error(error.message)

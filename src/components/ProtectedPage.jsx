@@ -1,4 +1,4 @@
-import { setAuthModalOpen } from '@/redux/features/authModelSlice'
+import { setAuthModalOpen } from '@/services/redux/features/authModelSlice'
 import { useEffect } from 'react'
 import toast from 'react-hot-toast'
 import { useDispatch, useSelector } from 'react-redux'

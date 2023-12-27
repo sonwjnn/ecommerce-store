@@ -1,4 +1,4 @@
-import reviewApi from '@/apis/modules/review.api'
+import reviewApi from '@/services/api/modules/review.api'
 import { format } from 'date-fns'
 import { useState } from 'react'
 import { LuTrash } from 'react-icons/lu'

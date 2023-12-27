@@ -1,6 +1,6 @@
 'use client'
 
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/helpers'
 import * as SelectPrimitive from '@radix-ui/react-select'
 import * as React from 'react'
 import { LuChevronDown } from 'react-icons/lu'

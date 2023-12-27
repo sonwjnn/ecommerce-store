@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/helpers'
 
 const CheckIcon = ({ className, size = 16 }) => {
   return (

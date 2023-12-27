@@ -1,7 +1,9 @@
-import favoriteApi from '@/apis/modules/favorite.api'
-import { cn } from '@/lib/utils'
-import { addFavorite, removeFavorite } from '@/redux/features/userSlice'
-import favoriteUtils from '@/utilities/favorite.utils'
+import favoriteApi from '@/services/api/modules/favorite.api'
+import {
+  addFavorite,
+  removeFavorite,
+} from '@/services/redux/features/userSlice'
+import { cn } from '@/utils/helpers'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { useDispatch, useSelector } from 'react-redux'
@@ -10,16 +12,9 @@ import { useNavigate } from 'react-router-dom'
 import { HeartIcon } from './Icon'
 import { CheckboxHeart } from './ui/checkbox-heart'
 
-const LikeButton = ({ product, className }) => {
+const LikeButton = ({ product, className, isFavorite, setIsFavorite }) => {
   const { user, listFavorites } = useSelector(state => state.user)
-  const isFavoriteInit = favoriteUtils.check({
-    listFavorites,
-    productId: product?.id,
-  })
 
-  const [isFavorite, setIsFavorite] = useState(
-    product?.isFavorite || isFavoriteInit
-  )
   const [onRequest, setOnRequest] = useState(false)
   const dispatch = useDispatch()
   const navigate = useNavigate()

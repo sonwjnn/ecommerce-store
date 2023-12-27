@@ -1,4 +1,4 @@
-import { socialNetworkLinks } from '@/utilities/constants'
+import { socialNetworkLinks } from '@/utils/constants'
 import { useEffect, useState } from 'react'
 import { MdArrowUpward } from 'react-icons/md'
 

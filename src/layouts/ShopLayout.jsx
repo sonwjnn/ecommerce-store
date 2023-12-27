@@ -1,7 +1,7 @@
-import shopApi from '@/apis/modules/shop.api'
 import ShopDetail from '@/components/ShopDetail'
 import ShopSidebar from '@/components/ShopSidebar'
 import Container from '@/components/ui/container'
+import shopApi from '@/services/api/modules/shop.api'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useDispatch } from 'react-redux'

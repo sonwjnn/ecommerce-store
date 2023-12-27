@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/helpers'
 import { Link } from 'react-router-dom'
 
 const HeaderLogo = ({ className }) => {

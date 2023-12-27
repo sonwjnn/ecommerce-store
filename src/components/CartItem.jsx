@@ -1,7 +1,10 @@
-import cartApi from '@/apis/modules/cart.api'
-import productApi from '@/apis/modules/product.api'
-import { removeCart, updateQuantityCart } from '@/redux/features/userSlice'
-import { formatPriceToVND } from '@/utilities/constants'
+import cartApi from '@/services/api/modules/cart.api'
+import productApi from '@/services/api/modules/product.api'
+import {
+  removeCart,
+  updateQuantityCart,
+} from '@/services/redux/features/userSlice'
+import { formatPriceToVND } from '@/utils/formatting'
 import { useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 import { LuMinus, LuPlus, LuTrash } from 'react-icons/lu'

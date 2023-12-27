@@ -190,7 +190,6 @@
   transform-origin: 0 0 0;
   transition: 1.5s transform 0.3s;
 }
-
 @keyframes animateCircle {
     40% {
       transform: scale(10);
@@ -257,3 +256,15 @@
       transform: scale(1);
     }
   }
+  
+
+.controls::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: #999999;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
