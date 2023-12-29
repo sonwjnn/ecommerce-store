@@ -15,7 +15,7 @@ import { toast } from 'react-hot-toast'
 import { useDispatch, useSelector } from 'react-redux'
 import * as z from 'zod'
 
-import { Spinner } from './spinner'
+import { Spinner } from './common/spinner'
 import { Button } from './ui/button'
 import {
   Form,
@@ -229,37 +229,6 @@ const ShopForm = ({ initialData }) => {
           </div>
         </form>
       </Form>
-
-      <select onChange={handleCityChange}>
-        <option value="">Chọn thành phố</option>
-        {provinces.map(province => (
-          <option key={province.code} value={province.name}>
-            {province.name}
-          </option>
-        ))}
-      </select>
-
-      {currentCity && (
-        <select onChange={handleDistrictChange}>
-          <option value="">Chọn quận huyện</option>
-          {currentCity.districts.map(district => (
-            <option key={district.code} value={district.name}>
-              {district.name}
-            </option>
-          ))}
-        </select>
-      )}
-
-      {currentDistrict && (
-        <select>
-          <option value="">Chọn xã</option>
-          {currentDistrict.wards.map(ward => (
-            <option key={ward.code} value={ward.name}>
-              {ward.name}
-            </option>
-          ))}
-        </select>
-      )}
     </>
   )
 }

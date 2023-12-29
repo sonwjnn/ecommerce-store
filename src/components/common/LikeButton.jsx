@@ -9,8 +9,8 @@ import toast from 'react-hot-toast'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
+import { CheckboxHeart } from '../ui/checkbox-heart'
 import { HeartIcon } from './Icon'
-import { CheckboxHeart } from './ui/checkbox-heart'
 
 const LikeButton = ({ product, className, isFavorite, setIsFavorite }) => {
   const { user, listFavorites } = useSelector(state => state.user)

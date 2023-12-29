@@ -10,7 +10,7 @@ export default defineConfig({
     port: '3000',
   },
   optimizeDeps: {
-    exclude: ['react-spinners', 'swiper', 'swiper-react'],
+    exclude: ['swiper', 'swiper-react'],
   },
   build: {
     cssCodeSplit: true,

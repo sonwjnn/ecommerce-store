@@ -3,11 +3,10 @@ import { formatPriceToVND } from '@/utils/formatting'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { LuTrash } from 'react-icons/lu'
-import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import NotFound from './NotFound'
-import { Spinner } from './spinner'
+import { Alert } from './common/alert'
+import { Spinner } from './common/spinner'
 import { Button } from './ui/button'
 import { Heading } from './ui/heading'
 import { Separator } from './ui/seperator'
@@ -150,7 +149,10 @@ const OrderList = () => {
                 </>
               ) : (
                 <div className="flex flex-col items-center justify-center gap-y-4">
-                  <NotFound text={'Bạn chưa có đơn hàng nào'} />
+                  <Alert
+                    className="min-h-[60vh]"
+                    text={'Bạn chưa có đơn hàng nào'}
+                  />
                 </div>
               )}
             </>

@@ -2,7 +2,7 @@ import { socialNetworkLinks } from '@/utils/constants'
 import { useEffect, useState } from 'react'
 import { MdArrowUpward } from 'react-icons/md'
 
-import { Button } from './ui/button'
+import { Button } from '../ui/button'
 
 const Footer = () => {
   const [isVisible, setIsVisible] = useState(false)

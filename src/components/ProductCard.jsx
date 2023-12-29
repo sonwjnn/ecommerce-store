@@ -5,8 +5,8 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { twMerge } from 'tailwind-merge'
 
-import LikeButton from './LikeButton'
-import Star from './Star'
+import LikeButton from './common/LikeButton'
+import Star from './common/Star'
 import { LazyImage } from './ui/lazy-image'
 
 const ProductCard = ({ product, className }) => {

@@ -1,12 +1,14 @@
 import React from 'react'
+import { ErrorBoundary } from 'react-error-boundary'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
-import PageNotFound from './components/PageNotFound'
-import PageWrapper from './components/PageWrapper'
 import ProductList from './components/ProductList'
+import ErrorBoundaryFallback from './components/common/ErrorBoundaryFallback'
+import PageWrapper from './components/common/PageWrapper'
+import { Alert } from './components/common/alert'
 import CategoryLayout from './layouts/CategoryLayout'
 import MainLayout from './layouts/MainLayout'
 import ShopLayout from './layouts/ShopLayout'
@@ -54,14 +56,19 @@ const App = () => (
   <>
     <ToasterProvider />
 
-    <Router>
-      <Routes>
-        <Route path="/" element={<MainLayout />}>
-          {routes.map(renderRoute)}
-          <Route path="*" element={<PageNotFound />} />
-        </Route>
-      </Routes>
-    </Router>
+    <ErrorBoundary
+      FallbackComponent={ErrorBoundaryFallback}
+      onError={error => console.log(error)}
+    >
+      <Router>
+        <Routes>
+          <Route path="/" element={<MainLayout />}>
+            {routes.map(renderRoute)}
+            <Route path="*" element={<Alert type="notfound" />} />
+          </Route>
+        </Routes>
+      </Router>
+    </ErrorBoundary>
   </>
 )
 

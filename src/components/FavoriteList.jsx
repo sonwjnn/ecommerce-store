@@ -1,22 +1,20 @@
 import favoriteApi from '@/services/api/modules/favorite.api'
-import productApi from '@/services/api/modules/product.api'
 import { removeFavorite } from '@/services/redux/features/userSlice'
 import { formatPriceToVND } from '@/utils/formatting'
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { LuTrash } from 'react-icons/lu'
-import { SlEmotsmile } from 'react-icons/sl'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import NotFound from './NotFound'
-import { Spinner } from './spinner'
+import { Alert } from './common/alert'
+import { Spinner } from './common/spinner'
 import { Button } from './ui/button'
 import { Heading } from './ui/heading'
 import { Separator } from './ui/seperator'
 
 const FavoriteItem = props => {
-  const { title, productImage, type, id, price, onRemoved, productId } = props
+  const { title, productImage, id, price, onRemoved, productId } = props
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -184,7 +182,10 @@ const FavoriteList = () => {
           ))
         ) : (
           <div className="flex flex-col items-center justify-center gap-y-4">
-            <NotFound text={'Bạn chưa có sản phẩm yêu thích nào!'} />
+            <Alert
+              className="min-h-[60vh]"
+              text={'Bạn chưa có sản phẩm yêu thích nào!'}
+            />
           </div>
         )}
       </div>

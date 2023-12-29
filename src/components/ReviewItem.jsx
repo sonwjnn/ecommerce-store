@@ -4,9 +4,9 @@ import { useState } from 'react'
 import { LuTrash } from 'react-icons/lu'
 import { useSelector } from 'react-redux'
 
-import { UserIcon } from './Icon'
-import Star from './Star'
-import { Spinner } from './spinner'
+import { UserIcon } from './common/Icon'
+import Star from './common/Star'
+import { Spinner } from './common/spinner'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { Button } from './ui/button'
 

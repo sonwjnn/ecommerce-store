@@ -1,4 +1,8 @@
-import { FacebookIcon, GithubIcon, InstagramIcon } from '../components/Icon'
+import {
+  FacebookIcon,
+  GithubIcon,
+  InstagramIcon,
+} from '../components/common/Icon'
 
 export const socialNetworkLinks = [
   {

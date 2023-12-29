@@ -2,7 +2,7 @@ import { format } from 'date-fns'
 import { LuStore } from 'react-icons/lu'
 import { useNavigate } from 'react-router-dom'
 
-import { UserIcon } from './Icon'
+import { UserIcon } from './common/Icon'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { Button } from './ui/button'
 import { Skeleton } from './ui/skeleton'

@@ -1,6 +1,6 @@
 import { formatPriceToVND } from '@/utils/formatting'
 
-import { Alert } from './alert'
+import { Alert } from './common/alert'
 
 const CartPreview = ({ cart }) => {
   if (!cart) return <Alert type="wrong" />

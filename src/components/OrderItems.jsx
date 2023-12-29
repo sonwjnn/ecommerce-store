@@ -4,8 +4,8 @@ import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { LuTrash } from 'react-icons/lu'
 
+import { Spinner } from './common/spinner'
 import { ConfirmModal } from './modals/confirm-modal'
-import { Spinner } from './spinner'
 import { Button } from './ui/button'
 
 const OrderItem = ({ item }) => {

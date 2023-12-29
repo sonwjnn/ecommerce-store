@@ -1,5 +1,5 @@
 import PasswordUpdate from '@/components/PasswordUpdate'
-import ProtectedPage from '@/components/ProtectedPage'
+import ProtectedPage from '@/components/common/ProtectedPage'
 import AccountPage from '@/pages/AccountPage'
 import AuthPage from '@/pages/AuthPage'
 import CartList from '@/pages/CartList'

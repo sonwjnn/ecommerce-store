@@ -1,6 +1,6 @@
 import BoardBar from '@/components/BoardBar'
-import Pagination from '@/components/Pagination'
 import ProductGrid from '@/components/ProductGrid'
+import Pagination from '@/components/common/Pagination'
 import Container from '@/components/ui/container'
 import productApi from '@/services/api/modules/product.api'
 import { useEffect, useState } from 'react'

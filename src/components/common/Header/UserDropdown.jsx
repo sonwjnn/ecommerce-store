@@ -1,4 +1,4 @@
-import { UserIcon } from '@/components/Icon'
+import { UserIcon } from '@/components/common/Icon'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
   DropdownMenu,

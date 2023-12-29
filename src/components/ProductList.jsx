@@ -7,8 +7,8 @@ import { useDispatch } from 'react-redux'
 import { useParams, useSearchParams } from 'react-router-dom'
 
 import BoardBar from './BoardBar'
-import Pagination from './Pagination'
 import ProductGrid from './ProductGrid'
+import Pagination from './common/Pagination'
 
 const ProductList = ({ type = 'product', skip = 15 }) => {
   const dispatch = useDispatch()
@@ -34,7 +34,9 @@ const ProductList = ({ type = 'product', skip = 15 }) => {
     }
 
     const getProductsByShopId = async () => {
-      const { response, err } = await productApi.getProductsByShopId({ shopId })
+      const { response, err } = await productApi.getProductsByShopId({
+        shopId,
+      })
 
       if (err) toast.error(err.message)
       if (response) {

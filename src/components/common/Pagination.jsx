@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { LuArrowLeft, LuArrowRight } from 'react-icons/lu'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 
-import { Button } from './ui/button'
+import { Button } from '../ui/button'
 
 const Pagination = props => {
   const { pageLimits, currentPage, typeName, cateName, type } = props

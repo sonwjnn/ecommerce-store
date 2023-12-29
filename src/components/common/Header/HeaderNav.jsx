@@ -1,9 +1,9 @@
+import { Button } from '@/components/ui/button'
 import { socialNetworkLinks } from '@/utils/constants'
 import { LuStore } from 'react-icons/lu'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { Button } from '../../ui/button'
 import UserDropdown from './UserDropdown'
 
 const HeaderNav = () => {

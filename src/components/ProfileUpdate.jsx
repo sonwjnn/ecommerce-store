@@ -18,7 +18,7 @@ import { LuCalendar } from 'react-icons/lu'
 import { useDispatch } from 'react-redux'
 import * as z from 'zod'
 
-import { Spinner } from './spinner'
+import { Spinner } from './common/spinner'
 import { Button } from './ui/button'
 import { Calendar } from './ui/calendar'
 import {

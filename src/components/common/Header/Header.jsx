@@ -1,8 +1,8 @@
 import { cn } from '@/utils/helpers'
 import { useLocation, useParams } from 'react-router-dom'
 
-import HeaderContent from './HeaderContent/HeaderContent'
-import HeaderNav from './HeaderNav/HeaderNav'
+import HeaderContent from './HeaderContent'
+import HeaderNav from './HeaderNav'
 
 const Header = () => {
   const location = useLocation()

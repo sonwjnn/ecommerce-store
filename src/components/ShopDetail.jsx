@@ -1,7 +1,7 @@
 import { format } from 'date-fns'
 
-import { UserIcon } from './Icon'
-import Star from './Star'
+import { UserIcon } from './common/Icon'
+import Star from './common/Star'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { Skeleton } from './ui/skeleton'
 

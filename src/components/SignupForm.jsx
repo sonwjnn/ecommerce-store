@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import * as z from 'zod'
 
-import { Spinner } from './spinner'
+import { Spinner } from './common/spinner'
 import { Button } from './ui/button'
 import {
   Form,
