@@ -5,6 +5,7 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
+import ProductFilter from './components/ProductFilter'
 import ProductList from './components/ProductList'
 import ErrorBoundaryFallback from './components/common/ErrorBoundaryFallback'
 import PageWrapper from './components/common/PageWrapper'
@@ -30,7 +31,7 @@ const renderRoute = (route, index) => {
         <Route
           key={`products_/products/:cateSlug/:typeSlug`}
           path={`/products/:cateSlug/:typeSlug`}
-          element={<ProductList type="product" />}
+          element={<ProductFilter />}
         />
       </Route>
 

@@ -1,13 +1,19 @@
-import { formatPriceToVND } from '@/utils/formatting'
+import productApi from '@/services/api/modules/product.api'
+import {
+  clearProductsStore,
+  setProductsStore,
+} from '@/services/redux/features/productSlice'
 import { provinces } from '@/utils/provinceCity'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { BiSolidStar } from 'react-icons/bi'
-import { LuFilter } from 'react-icons/lu'
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 import * as z from 'zod'
 
+import { Spinner } from './common/spinner'
 import { Button } from './ui/button'
 import {
   Form,
@@ -31,16 +37,21 @@ import { Slider } from './ui/slider'
 const formSchema = z.object({
   city: z.string().trim().min(1, 'city is required'),
   price: z.array(z.number().min(0).max(1000000000)),
-  rating: z.array(z.number().min(1).max(5)),
+  rating: z.array(z.number().min(0).max(5)),
 })
 
 const ProductSidebar = () => {
+  const { advancedFilters } = useSelector(state => state.products)
+  const { cateSlug } = useParams()
+  const dispatch = useDispatch()
+
   const [loading, setLoading] = useState(false)
+  const [lastSubmittedValues, setLastSubmittedValues] = useState(null)
 
   const defaultValues = {
-    city: 'TP. Hồ Chí Minh',
-    price: [0, 20000000],
-    rating: [4, 5],
+    city: advancedFilters.city,
+    price: advancedFilters.price,
+    rating: advancedFilters.rating,
   }
 
   const form = useForm({
@@ -48,19 +59,32 @@ const ProductSidebar = () => {
     defaultValues,
   })
 
-  // const { setValue } = form()
-
   const price = form.watch('price')
 
   const onSubmit = async values => {
     try {
       if (loading) return
 
+      if (JSON.stringify(values) === JSON.stringify(lastSubmittedValues)) {
+        return
+      }
+
       if (values.price[0] > values.price[1]) {
         values.price = [values.price[1], values.price[0]]
       }
-
       setLoading(true)
+      setLastSubmittedValues(values)
+      dispatch(clearProductsStore())
+
+      const { error, newPayload } = await productApi.getListByCategory(
+        'category',
+        cateSlug,
+        { ...advancedFilters, ...values }
+      )
+
+      if (newPayload) {
+        dispatch(setProductsStore(newPayload.products))
+      }
     } catch (error) {
       toast.error(error.message)
     } finally {
@@ -68,10 +92,25 @@ const ProductSidebar = () => {
     }
   }
 
+  useEffect(() => {
+    const getProductsInit = async () => {
+      const { response, err } = await productApi.getProductsOfCateBySlug({
+        cateSlug,
+      })
+
+      if (err) toast.error(err.message)
+      if (response) {
+        dispatch(setProductsStore(response))
+      }
+    }
+
+    dispatch(clearProductsStore())
+    getProductsInit()
+  }, [])
+
   return (
     <div className="w-[230px] rounded-md bg-white p-4 ">
-      <header className="pointer-events-none flex select-none items-center py-3 text-xl font-medium ">
-        <LuFilter className="mr-2 text-lg" />
+      <header className="pointer-events-none flex select-none items-center px-2 py-3 text-xl font-medium ">
         Lọc sản phẩm
       </header>
       <Separator />
@@ -102,6 +141,7 @@ const ProductSidebar = () => {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent className="max-h-[16rem] overflow-y-auto">
+                    <SelectItem value="all">Tất cả</SelectItem>
                     {provinces.map((province, index) => (
                       <SelectItem key={index} value={province}>
                         {province}
@@ -122,14 +162,14 @@ const ProductSidebar = () => {
                 <FormLabel>Đánh giá</FormLabel>
                 <FormControl>
                   <Slider
-                    defaultValue={[4, 5]}
+                    defaultValue={defaultValues.rating}
                     max={5}
-                    min={1}
+                    min={0}
                     step={1}
                     value={field.value}
                     onValueChange={field.onChange}
                     formatLabel={value => (
-                      <div className="flex translate-x-[-1rem] translate-y-1 items-center  rounded-md bg-white  px-2 font-medium shadow-md">
+                      <div className="flex translate-x-[-1rem] translate-y-1 items-center px-1 font-medium ">
                         <span>{value}</span>
                         <BiSolidStar className="mt-[-4px] text-yellow-500" />
                       </div>
@@ -149,7 +189,7 @@ const ProductSidebar = () => {
                 <FormControl>
                   <div className="flex flex-col">
                     <Slider
-                      defaultValue={[0, 20000000]}
+                      defaultValue={defaultValues.price}
                       max={100000000}
                       min={0}
                       step={100000}

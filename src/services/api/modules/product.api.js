@@ -1,3 +1,7 @@
+import { productsFilterOrganizer } from '@/utils/filters'
+import { getSortOrder } from '@/utils/sorts'
+import { useSelector } from 'react-redux'
+
 import privateClient from '../client/private.client'
 
 const productEndpoints = {
@@ -8,6 +12,7 @@ const productEndpoints = {
   productsOfCateBySlug: ({ cateSlug }) => `products/list/slug/${cateSlug}`,
   getImage: ({ imageName }) => `products/image/${imageName}`,
   productsByShopId: ({ shopId }) => `products/list/shop/${shopId}`,
+  getListCategory: `products/list/category`,
 }
 
 const productApi = {
@@ -69,6 +74,32 @@ const productApi = {
       )
       return { response }
     } catch (error) {
+      return { error }
+    }
+  },
+  getListByCategory: async (n, v, advancedFilters) => {
+    try {
+      let payload = productsFilterOrganizer(n, v, advancedFilters)
+      const sortOrder = getSortOrder(payload.order)
+      payload = { ...payload, sortOrder }
+
+      const response = await privateClient.post(
+        productEndpoints.getListCategory,
+        payload
+      )
+      const { products, totalPages, currentPage, count } = response
+
+      const newPayload = {
+        ...payload,
+        products,
+        totalPages,
+        currentPage,
+        count,
+      }
+
+      return { newPayload }
+    } catch (error) {
+      console.log(error)
       return { error }
     }
   },

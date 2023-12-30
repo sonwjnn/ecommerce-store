@@ -59,7 +59,7 @@ const ProductCard = ({ product, className }) => {
             </span>
           </span>
           <div className="text-right text-xs text-[#242424]">
-            {product?.shopId?.city}
+            {product?.shopId?.city || product?.shop?.city}
           </div>
         </div>
       </div>

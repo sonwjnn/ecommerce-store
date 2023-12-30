@@ -5,3 +5,23 @@ export const mapOrder = (arr, order, key) => {
   })
   return arr
 }
+
+export const getSortOrder = value => {
+  let sortOrder = {}
+  switch (value) {
+    case 0:
+      sortOrder._id = -1
+      break
+    case 1:
+      sortOrder.price = -1
+      break
+    case 2:
+      sortOrder.price = 1
+      break
+
+    default:
+      break
+  }
+
+  return sortOrder
+}
