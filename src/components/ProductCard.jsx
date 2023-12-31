@@ -15,7 +15,7 @@ const ProductCard = ({ product, className }) => {
   const [isFavorite, setIsFavorite] = useState(false)
 
   const handleClick = () => {
-    return navigate(`/products/detail/${product?.id}`)
+    return navigate(`/products/detail/${product?.id || product?._id}`)
   }
 
   useEffect(() => {

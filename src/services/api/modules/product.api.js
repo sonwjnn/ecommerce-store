@@ -79,6 +79,7 @@ const productApi = {
   },
   getListByCategory: async (n, v, advancedFilters) => {
     try {
+      // console.log(n, v, advancedFilters)
       let payload = productsFilterOrganizer(n, v, advancedFilters)
       const sortOrder = getSortOrder(payload.order)
       payload = { ...payload, sortOrder }

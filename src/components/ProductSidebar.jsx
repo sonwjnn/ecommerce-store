@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { BiSolidStar } from 'react-icons/bi'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import * as z from 'zod'
 
@@ -38,10 +38,14 @@ const formSchema = z.object({
   city: z.string().trim().min(1, 'city is required'),
   price: z.array(z.number().min(0).max(1000000000)),
   rating: z.array(z.number().min(0).max(5)),
+  order: z.number().min(0).max(2),
+  totalPages: z.number().min(1),
+  currentPage: z.number().min(1),
+  count: z.number().min(0),
+  limit: z.number().min(1),
 })
 
 const ProductSidebar = () => {
-  const { advancedFilters } = useSelector(state => state.products)
   const { cateSlug } = useParams()
   const dispatch = useDispatch()
 
@@ -49,9 +53,14 @@ const ProductSidebar = () => {
   const [lastSubmittedValues, setLastSubmittedValues] = useState(null)
 
   const defaultValues = {
-    city: advancedFilters.city,
-    price: advancedFilters.price,
-    rating: advancedFilters.rating,
+    city: 'all',
+    price: [0, 50000000],
+    rating: [0, 5],
+    order: 0,
+    totalPages: 1,
+    currentPage: 1,
+    count: 0,
+    limit: 18,
   }
 
   const form = useForm({
@@ -76,10 +85,10 @@ const ProductSidebar = () => {
       setLastSubmittedValues(values)
       dispatch(clearProductsStore())
 
-      const { error, newPayload } = await productApi.getListByCategory(
+      const { newPayload } = await productApi.getListByCategory(
         'category',
         cateSlug,
-        { ...advancedFilters, ...values }
+        { ...values }
       )
 
       if (newPayload) {

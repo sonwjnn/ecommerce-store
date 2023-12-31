@@ -13,10 +13,10 @@ export const getSortOrder = value => {
       sortOrder._id = -1
       break
     case 1:
-      sortOrder.price = -1
+      sortOrder.discountPrice = -1
       break
     case 2:
-      sortOrder.price = 1
+      sortOrder.discountPrice = 1
       break
 
     default:
