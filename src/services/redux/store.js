@@ -14,7 +14,9 @@ import storage from 'redux-persist/lib/storage'
 import appStateSlice from './features/appStateSlice'
 import authModalSlice from './features/authModelSlice'
 import cateSlice from './features/cateSlice'
+import categorySheetSlice from './features/categorySheetSlice'
 import productSlice from './features/productSlice'
+import shopCategorySheetSlice from './features/shopCategorySheetSlice'
 import signStateSlice from './features/signStateSlice'
 import typeSlice from './features/typeSlice'
 import userSlice from './features/userSlice'
@@ -32,6 +34,8 @@ const rootReducer = combineReducers({
   products: productSlice,
   cates: cateSlice,
   types: typeSlice,
+  categorySheet: categorySheetSlice,
+  shopCategorySheet: shopCategorySheetSlice,
 })
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 

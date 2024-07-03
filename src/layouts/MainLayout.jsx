@@ -5,6 +5,7 @@ import cartApi from '@/services/api/modules/cart.api'
 import favoriteApi from '@/services/api/modules/favorite.api'
 import shopApi from '@/services/api/modules/shop.api'
 import userApi from '@/services/api/modules/user.api'
+import SheetProvider from '@/services/providers/SheetProvider'
 import {
   setListCarts,
   setListFavorites,
@@ -69,6 +70,8 @@ const MainLayout = () => {
 
   return (
     <>
+      <SheetProvider />
+
       <div className="flex flex-col bg-accent bg-[url('/images/background.png')] font-be">
         {/* header */}
         <Header />

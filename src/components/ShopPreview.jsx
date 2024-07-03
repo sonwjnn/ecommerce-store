@@ -1,11 +1,10 @@
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Button } from '@/components/ui/button'
+import { Skeleton } from '@/components/ui/skeleton'
 import { format } from 'date-fns'
+import { AiFillShop } from 'react-icons/ai'
 import { LuStore } from 'react-icons/lu'
 import { useNavigate } from 'react-router-dom'
-
-import { UserIcon } from './common/Icon'
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
-import { Button } from './ui/button'
-import { Skeleton } from './ui/skeleton'
 
 const ShopPreview = ({ product }) => {
   const navigate = useNavigate()
@@ -20,7 +19,7 @@ const ShopPreview = ({ product }) => {
             <Avatar className="size-16">
               <AvatarImage src={product?.shopId?.imageUrl} />
               <AvatarFallback>
-                <UserIcon size={80} />
+                <AiFillShop size={28} />
               </AvatarFallback>
             </Avatar>
           ) : (

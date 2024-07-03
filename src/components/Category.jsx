@@ -1,5 +1,6 @@
 import categoryApi from '@/services/api/modules/category.api'
 import { setCates } from '@/services/redux/features/cateSlice'
+import { cn } from '@/utils/helpers'
 import { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -8,7 +9,7 @@ import CategoryItem from './CategoryItem'
 import { Separator } from './ui/seperator'
 import { Skeleton } from './ui/skeleton'
 
-const Category = () => {
+const Category = ({ className }) => {
   const [categories, setCategories] = useState([])
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -29,7 +30,7 @@ const Category = () => {
   }, [categories])
 
   return (
-    <div className="relative w-[230px] p-2 ">
+    <div className={cn('relative w-[230px] p-2', className)}>
       <div className="px-4 py-3 text-xl font-medium text-[#020817]">
         Danh mục
       </div>

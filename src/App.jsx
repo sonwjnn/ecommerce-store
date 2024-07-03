@@ -14,6 +14,7 @@ import CategoryLayout from './layouts/CategoryLayout'
 import MainLayout from './layouts/MainLayout'
 import ShopLayout from './layouts/ShopLayout'
 import routes from './routes/routes'
+import SheetProvider from './services/providers/SheetProvider'
 import { ToasterProvider } from './services/providers/ToasterProvider'
 import '/public/css/styles.css'
 
@@ -56,7 +57,6 @@ const renderRoute = (route, index) => {
 const App = () => (
   <>
     <ToasterProvider />
-
     <ErrorBoundary
       FallbackComponent={ErrorBoundaryFallback}
       onError={error => console.log(error)}

@@ -1,3 +1,4 @@
+import MobileToggle from '@/components/MobileToggle'
 import { cn } from '@/utils/helpers'
 import { useLocation, useParams } from 'react-router-dom'
 
@@ -12,7 +13,7 @@ const Header = () => {
     <>
       <div
         className={cn(
-          `inset-x-0 z-[51] h-[150px] w-full  md:h-[120px] 
+          `inset-x-0 z-10 h-[150px] w-full  md:h-[120px] 
         `,
           !sign && !productId ? 'fixed' : '',
           productId ||

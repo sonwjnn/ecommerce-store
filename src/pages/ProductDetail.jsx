@@ -62,8 +62,8 @@ const ProductDetail = () => {
     <Container className="mt-8">
       <div className="h-full space-y-6">
         <div className="h-full w-full  rounded-md ">
-          <div className="flex flex-col gap-x-6 md:flex-row">
-            <div className=" flex w-[20%] flex-col gap-y-6 lg:w-[33%] ">
+          <div className="flex flex-col gap-x-6 gap-y-3 md:flex-row md:gap-y-0">
+            <div className=" flex w-full flex-col gap-y-6 md:w-[20%] lg:w-[33%] ">
               <div className="w-full  rounded-md bg-white p-4">
                 <ReviewImages images={product?.images || []} />
 

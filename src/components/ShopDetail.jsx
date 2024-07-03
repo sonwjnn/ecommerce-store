@@ -1,6 +1,6 @@
 import { format } from 'date-fns'
+import { AiFillShop } from 'react-icons/ai'
 
-import { UserIcon } from './common/Icon'
 import Star from './common/Star'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { Skeleton } from './ui/skeleton'
@@ -15,7 +15,7 @@ const ShopInfo = ({ shop }) => {
               <Avatar className="size-[80px]">
                 <AvatarImage src={shop?.imageUrl} />
                 <AvatarFallback>
-                  <UserIcon size={100} />
+                  <AiFillShop size={28} />
                 </AvatarFallback>
               </Avatar>
             ) : (

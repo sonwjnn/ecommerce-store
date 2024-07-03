@@ -4,13 +4,12 @@ import { cn } from '@/utils/helpers'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { BiCategory } from 'react-icons/bi'
-import { LuFilter } from 'react-icons/lu'
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
 import { Skeleton } from './ui/skeleton'
 
-const ShopSidebar = () => {
+const ShopSidebar = ({ className }) => {
   const { shopId, typeSlug } = useParams()
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -28,14 +27,14 @@ const ShopSidebar = () => {
     }
 
     getProductTypes()
-  }, [dispatch])
+  }, [])
 
   useEffect(() => {
     dispatch(setTypes(productTypes))
   }, [productTypes])
 
   return (
-    <div className="flex w-[230px] flex-col gap-y-4 ">
+    <div className={cn('flex w-[230px] flex-col gap-y-4 ', className)}>
       <div className="rounded-md bg-white">
         <header className="pointer-events-none flex select-none items-center p-3  text-base font-medium ">
           <BiCategory className="mr-2 text-lg" />

@@ -1,3 +1,4 @@
+import MobileToggle from '@/components/MobileToggle'
 import { Input } from '@/components/ui/input'
 import { useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
@@ -52,7 +53,7 @@ const HeaderContent = () => {
         </Link>
       </div>
       <div className="flex w-full items-center justify-around gap-x-3">
-        <div className={'flex h-full w-[200px] p-2 md:block'}>
+        <div className={'hidden h-full w-[200px] p-2 md:flex'}>
           <Link to="/" className="block h-full w-full">
             <div
               className=" mx-auto h-[50px] w-[150px] bg-center bg-no-repeat"
@@ -62,7 +63,7 @@ const HeaderContent = () => {
             ></div>
           </Link>
         </div>
-        <div
+        {/* <div
           className={`ml-2 flex items-center justify-start md:hidden ${
             location.pathname === '/' ? 'hidden' : 'block'
           }`}
@@ -71,7 +72,8 @@ const HeaderContent = () => {
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent  p-2 ">
             <IoMdArrowBack size={24} className="text-primary" />
           </div>
-        </div>
+        </div> */}
+        <MobileToggle />
 
         <div className="w-full max-w-[800px]">
           <form
