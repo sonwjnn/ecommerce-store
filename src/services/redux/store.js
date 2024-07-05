@@ -11,10 +11,12 @@ import {
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
+import accountSheetSlice from './features/accountSheetSlice'
 import appStateSlice from './features/appStateSlice'
 import authModalSlice from './features/authModelSlice'
 import cateSlice from './features/cateSlice'
 import categorySheetSlice from './features/categorySheetSlice'
+import filterSheetSlice from './features/filterSheetSlice'
 import productSlice from './features/productSlice'
 import shopCategorySheetSlice from './features/shopCategorySheetSlice'
 import signStateSlice from './features/signStateSlice'
@@ -35,7 +37,9 @@ const rootReducer = combineReducers({
   cates: cateSlice,
   types: typeSlice,
   categorySheet: categorySheetSlice,
+  filterSheet: filterSheetSlice,
   shopCategorySheet: shopCategorySheetSlice,
+  accountSheet: accountSheetSlice,
 })
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 

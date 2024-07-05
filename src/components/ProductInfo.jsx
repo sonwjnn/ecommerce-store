@@ -77,6 +77,11 @@ const ProductInfo = props => {
   }
 
   const onBuyClick = async () => {
+    if (!user) {
+      toast.error('You must login first!', { toastId: 'warning-login' })
+      navigate('/auth/signin')
+      return
+    }
     await onCartClick()
     navigate('/user/carts')
   }

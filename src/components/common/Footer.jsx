@@ -100,7 +100,7 @@ const Footer = () => {
         {isVisible ? (
           <Button
             variant="outline"
-            className="absolute right-0 top-4 hover:bg-primary hover:text-white active:bg-primary/75"
+            className="absolute right-2 top-12 hover:bg-primary hover:text-white active:bg-primary/75 md:right-0 md:top-4"
             size="icon"
             onClick={scrollToTop}
           >

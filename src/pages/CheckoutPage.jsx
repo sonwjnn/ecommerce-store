@@ -1,6 +1,14 @@
 import { Spinner } from '@/components/common/spinner'
 import { Button } from '@/components/ui/button'
 import Container from '@/components/ui/container'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form'
 import { Heading } from '@/components/ui/heading'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Separator } from '@/components/ui/seperator'
@@ -16,15 +24,6 @@ import { FaCircleCheck } from 'react-icons/fa6'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import * as z from 'zod'
-
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '../components/ui/form'
 
 const formSchema = z.object({
   shipping: z.coerce.number().min(0),

@@ -3,6 +3,7 @@ import {
   clearProductsStore,
   setProductsStore,
 } from '@/services/redux/features/productSlice'
+import { cn } from '@/utils/helpers'
 import { provinces } from '@/utils/provinceCity'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect, useState } from 'react'
@@ -45,7 +46,7 @@ const formSchema = z.object({
   limit: z.number().min(1),
 })
 
-const ProductSidebar = () => {
+const ProductSidebar = ({ className }) => {
   const { cateSlug } = useParams()
   const dispatch = useDispatch()
 
@@ -118,7 +119,7 @@ const ProductSidebar = () => {
   }, [])
 
   return (
-    <div className="w-[230px] rounded-md bg-white p-4 ">
+    <div className={cn('w-[230px] rounded-md bg-white p-4 ', className)}>
       <header className="pointer-events-none flex select-none items-center px-2 py-3 text-xl font-medium ">
         Lọc sản phẩm
       </header>

@@ -66,9 +66,9 @@ const ShopPreview = ({ product }) => {
                   </p>
                 </>
               ) : (
-                <div className="flex w-full flex-col gap-y-1">
-                  <Skeleton className="h-[20px] w-full md:w-[200px]" />
-                  <Skeleton className="h-[18px] w-full md:w-[100px]" />
+                <div className="flex flex-col gap-y-1">
+                  <Skeleton className="h-[20px] w-full " />
+                  <Skeleton className="h-[18px] w-full " />
                 </div>
               )}
             </div>

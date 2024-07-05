@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const categorySheetSlice = createSlice({
-  name: 'CategorySheetSlice',
+const filterSheetSlice = createSlice({
+  name: 'FilterSheetSlice',
   initialState: {
     isOpen: false,
   },
@@ -15,6 +15,6 @@ const categorySheetSlice = createSlice({
   },
 })
 
-export const { onOpen, onClose } = categorySheetSlice.actions
+export const { onOpen, onClose } = filterSheetSlice.actions
 
-export default categorySheetSlice.reducer
+export default filterSheetSlice.reducer

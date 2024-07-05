@@ -44,14 +44,14 @@ const ProductDescription = ({ product }) => {
                 </Link>
                 {'>'}
                 <Link
-                  to={`/products/${product?.cateId?.name}/Tất cả sản phẩm`}
+                  to={`/products/${product?.cateId?.slug}/all`}
                   className="font-normal text-blue-600"
                 >
                   {product?.cateId?.name}
                 </Link>
                 {'>'}
                 <Link
-                  to={`/products/${product?.cateId?.name}/${product?.typeId?.name}`}
+                  to={`/products/${product?.cateId?.slug}/${product?.typeId?.slug}`}
                   className="font-normal text-blue-600"
                 >
                   {product?.typeId?.name}
