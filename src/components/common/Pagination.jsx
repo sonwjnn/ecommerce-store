@@ -22,6 +22,8 @@ const Pagination = props => {
   )
 
   const handleNavigate = number => {
+    scrollToTop()
+
     if (type === 'shop') {
       if (!typeName) {
         return `/shops/${shopId}/all?page=${number}`
@@ -47,6 +49,13 @@ const Pagination = props => {
     if (activePage < pageLimits - 1) {
       navigate(handleNavigate(activePage + 2))
     }
+  }
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
   }
   return (
     <div className="mt-12">
